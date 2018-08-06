@@ -119,8 +119,10 @@ $(function() {
 					success:function(data){
 						if (data.state == "1") {
 							mui.toast("发送成功")
-							$('.news_secondComment_input').val("")
-							window.location.reload()
+							$('.news_secondComment_input').val("");
+							$('.news_post_secondcommentContents').children().empty();
+							page=0;
+							up();
 						} else{
 							mui.toast("失败")
 						}
@@ -157,6 +159,7 @@ function up(){
 					var portrait;
 					for (var i = 0; i < com.length; i++) {
 						var ifHidden = com[i].targetUserNickName || "hidden";	
+						
 						if(com[i].portrait==0||com[i].portrait==null){
 							portrait="../../Public/image/morentouxiang.png";
 					    }else{

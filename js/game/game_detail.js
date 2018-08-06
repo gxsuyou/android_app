@@ -69,13 +69,21 @@ $(function() {
 					$('.gameScore').text(g.grade)
 					if(g.tagList) {
 						var t = g.tagList.split(',');
-						for(var i = 0; i < t.length - 1; i++) {
-							var sp = "<span class='color_green'>" + t[i] + "  |</span>"
+						var sp="";
+						if(t.length>2){
+							
+						
+						for(var i = 0; i < 2; i++) {
+							 sp += "<span class='color_green signs_box'>" + t[i] + " </span>"
 
 						}
+						}else{
+							for(var i = 0; i < t.length; i++) {
+							 sp += "<span class='color_green signs_box' >" + t[i] + " </span>"
+
+						  }
+						}
 						$('.game_signs').append(sp)
-						var spLast = "<span class='color_green'>" + t[t.length - 1] + "</span>"
-						$('.game_signs').append(spLast)
 
 					}
 					$('.game_simpleIntro_content').html(g.game_detail)
@@ -190,7 +198,6 @@ $(function() {
 						
 						div +=
 							"<div class='news_post_commentContent ofh'>" +
-
 							"<div class='ofh'>" +
 							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
 							"<div class='comment_user font_12 font_bold fl'>" + com[i].nick_name + "</div>" +

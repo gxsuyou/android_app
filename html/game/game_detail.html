@@ -598,10 +598,9 @@
 
 		</div>
 		
+
 		<script type="text/javascript">
 			var page = 1,pageIndex="detail";
-		</script>
-		<script type="text/javascript">
 			mui.init({
 				pullRefresh: {
 					container: "#game_detailContent", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -624,7 +623,7 @@
 				}
 
 			});
-
+            
 			function up() {			
 				if(!commentModule) {
 					mui('#game_detailContent').pullRefresh().endPullupToRefresh(true);

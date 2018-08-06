@@ -33,7 +33,6 @@
 .border{
 	width: 2.9375rem;
 	height: 1.5rem;
-
 	position: absolute;
 	border: 2px solid white;
 	right: 1.25rem;
@@ -66,12 +65,19 @@
 .game_infoImg{
 	width: 4.375rem;
 	height: 4.375rem;
-	/*background-color: red;*/
 	margin-top: 1.125rem;
 	border-radius: 5px;
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
+}
+.signs_box{
+	font-size:12px;
+	display: inline-block;
+	min-width:2.4rem;
+	height:1.3rem;
+	border:1px solid #8ed8ed;border-radius:30px;
+	text-align:center;
 }
 .game_infoArt{
 	margin-left: 0.75rem;
@@ -278,10 +284,7 @@
 	padding-left: 3.6rem;
 }
 .comment_info{
-/*	margin-top: 0.6rem;
-	padding-left: 3.6rem;*/
-	/*width:100%;
-    background:red;*/
+   padding-left: 3.6rem;
 }
 .thumb{
 	width: 1.0625rem;
@@ -357,7 +360,8 @@
 
 .game_comment_content{
 	padding: 0 0.625rem;
-	margin-top:0.5rem;
+	margin-top:-1rem;
+	/*margin-top:0.5rem;*/
 }
 .game_similarContents{
 	overflow: scroll;
@@ -471,7 +475,7 @@
 	width: 100%;
 	border-top: 1px solid #E7EAEC;
 	margin-bottom: 0.4rem;
-	
+	min-height:6rem;
 }
 .strategy_indent{
 /*	text-indent: 2em;*/

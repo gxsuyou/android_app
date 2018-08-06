@@ -65,7 +65,7 @@ body{
 	margin-bottom: 0;
 }
 .mui-checkbox input[type=checkbox]:before, .mui-radio input[type=radio]:before{
-	font-size:38px;
+	font-size:24px;
 }
 .mui-checkbox label, .mui-radio label{
 	margin-top: 0.4rem;

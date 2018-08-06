@@ -94,12 +94,14 @@
          * 更新分享服务  
          */  
         function updateSerivces(){  
-            plus.share.getServices( function(s){  
+            plus.share.getServices(function(s){  
                 shares={};  
+//              alert(JSON.stringify(s));
                 for(var i in s){  
                     var t=s[i];  
                     shares[t.id]=t;  
                 }  
+                alert(JSON.stringify(shares))
             }, function(e){  
                 outSet("获取分享服务列表失败："+e.message );  
             } );  
@@ -173,8 +175,28 @@
             ss&&ss.nativeClient&&(shareBts.push({title:'微信朋友圈',s:ss,x:'WXSceneTimeline'}),  
             shareBts.push({title:'微信好友',s:ss,x:'WXSceneSession'}));  
             ss=shares['qq'];  
-            ss&&ss.nativeClient&&shareBts.push({title:'QQ',s:ss});          
+//          alert(JSON.stringify(ss))
+//          
+            
+//           if (ss.authenticated) {
+//              outSet("---已授权---");
+//              shareMessage(s, ex);
+//          } else {
+////              outSet("---未授权---");
+//              ss.authorize(function() {
+//                  shareMessage(ss, ex);
+//              }, function(e) {
+//                  outLine("认证授权失败");
+//              });
+//          }
+//          
+//          return false;
+            
+            ss&&ss.nativeClient&&shareBts.push({title:'QQ',s:ss});    
+             alert(JSON.stringify(shareBts[index]));
+            return false;
             shareAction(shareBts[index],true);  
+            
         }  
         mui.back = function() {  
             var sourcePage = plus.webview.getWebviewById(pageSourceId);  
@@ -182,7 +204,7 @@
                 sourcePage.evalJS("closeMask()");  
             }  
         }   
-        function closeShare() {  
+        function closeShare(){  
             console.log("e:" + event.target.name);  
         }           
         </script>  

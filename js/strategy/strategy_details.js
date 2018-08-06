@@ -358,8 +358,10 @@ $(function() {
 			})
 		})
 
+
 		//取消收藏结束
 		function up() {
+	
 			page++;
 			if(sort == "comment_num") {
 				$.ajax({
@@ -420,7 +422,6 @@ $(function() {
 								}else{
 								    portrait=com[i].portrait;
 								}
-								
 								div +=
 									"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 									"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
@@ -626,9 +627,7 @@ function detail() {
 				} else {
 					$('.news_collect').attr('data-collect', 0)
 				}
-			} else {
-
-			}
+			} 
 		}
 	});
 }
