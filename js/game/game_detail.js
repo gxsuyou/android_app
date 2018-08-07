@@ -70,9 +70,7 @@ $(function() {
 					if(g.tagList) {
 						var t = g.tagList.split(',');
 						var sp="";
-						if(t.length>2){
-							
-						
+						if(t.length>2){					
 						for(var i = 0; i < 2; i++) {
 							 sp += "<span class='color_green signs_box'>" + t[i] + " </span>"
 
@@ -83,8 +81,7 @@ $(function() {
 
 						  }
 						}
-						$('.game_signs').append(sp)
-
+						$('.game_signs').append(sp);
 					}
 					$('.game_simpleIntro_content').html(g.game_detail)
 					$('.game_particular_value').children().eq(0).text(g.game_download_num + "次下载")
@@ -779,7 +776,7 @@ function detail_strategy(){
 								}
 								
 								div +=
-									"<div class='news_post_commentContent strategy_indent ofh' >" +
+									"<div class='news_post_commentContent strategy_indent ofh' data-id='" + str[i].id + "'  >" +
 									"<div class='ofh'>" +
 									  "<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
 									   "<div  class='timeName'>"+
@@ -787,7 +784,7 @@ function detail_strategy(){
 									     "<div class='font_12 color_9e9e9e fl'>" + str[i].add_time + "</div>" +
 									   "</div>"+
 									"</div>" +
-									"<div class='game_comment_content'>" +									
+									"<div class='game_strategy_content' >" +									
 									"<div class='font_14 overflow_two color_7a7a7a simHei'>" 
 									+ 
 									 "<img data-id='" + str[i].id + "'  style='width:100%;display:"+imgToggle+"' src="+imgSrc+">"+
@@ -799,8 +796,8 @@ function detail_strategy(){
 									//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
 									"<div class='comment_info'>" +									
 									"<div class='fr color_9e9e9e comment_imgs'>" +
-									 "<div class='thumb'></div>" +
-									 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
+//									 "<div class='thumb'></div>" +
+//									 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
 									 "<div data-id='" + str[i].id + "'   class='comment_img'></div>" +
 									 "<div  class='comment_num'>" + str[i].comment_num + "</div>" +
 									"</div>" +
@@ -822,8 +819,7 @@ function detail_strategy(){
 				}
 			});
 			//		获取游戏攻略结束
-
-			$('.news_post_commentContentstra').on('click','.game_comment_content img,.comment_img', function() {
+			$('.news_post_commentContentstra').on('click','.news_post_commentContent,.game_strategy_content img', function() {
 				var strategyId = $(this).attr("data-id");
 				mui.openWindow({
 					url: "../strategy/strategy_details.html",

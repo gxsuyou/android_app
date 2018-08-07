@@ -14,7 +14,7 @@ $(function() {
 		}
 	});
 
-	$('body').on('click', '.delete_img', function() {
+	$('body').on('tap', '.delete_img', function() {
 		$(this).parent().parent('.show_imgcontent').remove()
 
 	})
@@ -126,7 +126,6 @@ function galleryImgs() {
 				"<div class='show_imgcontent' data-src = '" + path + "'>" +
 				"<div class='img_box'>" +
 				"<img class='show_img'  data-preview-group='2' data-preview-src='' src='" + path + "'>" +
-
 				"</img>" +
 				"<div class='delete_img'></div>" +
 				"</div>" +
