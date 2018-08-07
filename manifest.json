@@ -113,8 +113,8 @@
 		"distribute": {"plugins":{
 			"share":{
 				"weixin":{
-					"appid":"H5C62934A",
-					"appsecret":"6bb4455d150f0b2cff16c9ea4ce42547",
+					"appid":"wxf14a568196301aa2",
+					"appsecret":"eb2341d2397f0baf58fb6ef805103b34",
 					"description":"可选，微信分享"}
 					,
 				"qq":{

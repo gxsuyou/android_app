@@ -266,8 +266,6 @@
 	margin-left: 0.625rem;
 	margin-right: 0.625rem;
 	border-radius: 50%;
-	/*background-image: url("../../Public/image/yishoucang.png");*/
-	/*background-color: green;*/
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
@@ -308,9 +306,7 @@
 	vertical-align: middle;
 	background-position: center;
 	background-repeat:no-repeat;
-	background-size: contain;
-	
-	
+	background-size: contain;	
 }
 
 .comment_img{
@@ -377,8 +373,6 @@
 .game_similarContentimg{
 	width: 6.1875rem;
 	height: 6.1875rem;
-	/*background-image: url("../../Public/image/liuyan.png");*/
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
