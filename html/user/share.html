@@ -101,7 +101,7 @@
                     var t=s[i];  
                     shares[t.id]=t;  
                 }  
-                alert(JSON.stringify(shares))
+//              alert(JSON.stringify(shares))
             }, function(e){  
                 outSet("获取分享服务列表失败："+e.message );  
             } );  
@@ -193,8 +193,8 @@
 //          return false;
             
             ss&&ss.nativeClient&&shareBts.push({title:'QQ',s:ss});    
-             alert(JSON.stringify(shareBts[index]));
-            return false;
+//           alert(JSON.stringify(shareBts[index]));
+//          return false;
             shareAction(shareBts[index],true);  
             
         }  
