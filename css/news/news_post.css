@@ -24,6 +24,11 @@ a{
 	background-repeat:no-repeat;
 	background-size: contain;
 }
+
+.detail p{
+	color:#282828;
+}
+
 .news_post_list{
 	top: 45px;
 	width: 100%;

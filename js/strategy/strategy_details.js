@@ -596,8 +596,7 @@ function detail() {
                 	nickName=str.nike_name;
                 }else{
                 	nickName=str.nick_name;
-                }              
-                
+                }                           
 				$('.news_reviewNum').text(comment_num);
 				$('h4').text(str.title);
 				$('.news_userInfo_img').css("background-image", "url(" + encodeURI(portrait) + ")");

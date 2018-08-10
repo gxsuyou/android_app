@@ -13,8 +13,7 @@ $(function() {
 		$('.header_box').next().css("margin-top", 0 + "px");
 		$('.backImg').css("top", total_height - 36.5 + "px");
 		var self = plus.webview.currentWebview();
-		gameId = self.gameId;
-		
+		gameId = self.gameId;	
 		$.ajax({
 			type: "get",
 			url: config.data + "game/getGameById",
@@ -374,10 +373,9 @@ $(function() {
 		});
 	
 
-		//		评论页结束		
+		//评论页结束		
 
-		//		攻略页开始
-
+		//攻略页开始
 		$('.game_detail_strategy').click(function() {				    
 			 detail_strategy();
 		});
@@ -492,7 +490,7 @@ $(function() {
 		}	
 	});
 
-	$('body').on('tap', '.comment_content,.comment_img', function() {
+	$('body').on('tap','.comment_content', function() {
 		if(userId) {
 			mui.openWindow({
 				url: "game_allComments.html",
@@ -579,7 +577,6 @@ $(function() {
 })
 
 function createDownload(name, src) {
-
 	$.ajax({
 		type: "get",
 		url: config.data + "game/addDownloadNum",

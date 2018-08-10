@@ -58,7 +58,7 @@ $(function() {
 					$('.comment_user').text(com.nick_name)
 					$('.comment_content').text(com.content)
 					if(com.img) {
-						$('.allCom_img').attr('src', config.img + encodeURI(com.target_img))
+						$('.allCom_img').attr('src', config.img+encodeURI(com.img))
 					} else {
 						$('.allCom_img').addClass('hidden')
 					}
