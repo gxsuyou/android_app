@@ -125,7 +125,7 @@ function galleryImgs() {
     plus.zip.compressImage({
 			src:e.files[0],
 			dst:rename,
-			quality:50
+			quality:40
 		},
 		function(k) {
 			    

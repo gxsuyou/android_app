@@ -13,8 +13,7 @@ $(function() {
 		$('.header_box').next().css("margin-top", 0 + "px");
 		$('.backImg').css("top", total_height - 36.5 + "px");
 		var self = plus.webview.currentWebview();
-		gameId = self.gameId;
-		
+		gameId = self.gameId;	
 		$.ajax({
 			type: "get",
 			url: config.data + "game/getGameById",
@@ -70,9 +69,7 @@ $(function() {
 					if(g.tagList) {
 						var t = g.tagList.split(',');
 						var sp="";
-						if(t.length>2){
-							
-						
+						if(t.length>2){					
 						for(var i = 0; i < 2; i++) {
 							 sp += "<span class='color_green signs_box'>" + t[i] + " </span>"
 
@@ -83,8 +80,7 @@ $(function() {
 
 						  }
 						}
-						$('.game_signs').append(sp)
-
+						$('.game_signs').append(sp);
 					}
 					$('.game_simpleIntro_content').html(g.game_detail)
 					$('.game_particular_value').children().eq(0).text(g.game_download_num + "次下载")
@@ -166,64 +162,7 @@ $(function() {
 		//		相关资讯结束
 
 		//		游戏热评部分
-		$.ajax({
-			type: "get",
-			url: config.data + "game/getGameHotComment",
-			async: true,
-			data: {
-				gameId: gameId
-			},
-			success: function(data) {
-
-				if(data.state) {
-
-					var com = data.comment,portrait;
-					var div = '';
-
-					for(var i = 0; i < com.length; i++) {
-						if(com[i].state) {
-							var ifGood = "good";
-						} else {
-							var ifGood = "noGood";
-						}
-						
-						
-				        if(com[i].portrait==0||com[i].portrait==null){
-						    portrait="../../Public/image/morentouxiang.png";
-					    }else{
-						    portrait=com[i].portrait;
-						}
-								
-						
-						
-						div +=
-							"<div class='news_post_commentContent ofh'>" +
-							"<div class='ofh'>" +
-							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
-							"<div class='comment_user font_12 font_bold fl'>" + com[i].nick_name + "</div>" +
-
-							"</div>" +
-							"<div class='game_comment_content'>" +
-							"<div class='comment_content font_14' data-id='" + com[i].id + "'>" + com[i].content + "</div>" +
-							"<div class='comment_info ofh'>" +
-							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
-							"<div class='fr color_9e9e9e comment_imgs'>" +
-							"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "'></span>" +
-							"<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
-							"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
-							"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
-							"</div>" +
-							"</div>" +
-							"</div>" +
-
-							"</div>"
-					}
-					$('.news_post_commentContentshot').append(div)
-				} else {
-
-				}
-			}
-		});
+		indexCommit();
 
 		//		游戏热评部分结束
 
@@ -377,10 +316,9 @@ $(function() {
 		});
 	
 
-		//		评论页结束		
+		//评论页结束		
 
-		//		攻略页开始
-
+		//攻略页开始
 		$('.game_detail_strategy').click(function() {				    
 			 detail_strategy();
 		});
@@ -495,7 +433,7 @@ $(function() {
 		}	
 	});
 
-	$('body').on('tap', '.comment_content,.comment_img', function() {
+	$('body').on('tap','.comment_content,.comment_img', function() {
 		if(userId) {
 			mui.openWindow({
 				url: "game_allComments.html",
@@ -506,7 +444,8 @@ $(function() {
 					gameId: gameId,
 					uid: $(this).attr('data-uid'),
 					game_name:gameName,
-					game_icon:gameImg
+					game_icon:gameImg,
+					pageIndex:pageIndex
 				}
 			})
 		} else {
@@ -520,8 +459,8 @@ $(function() {
 	})
 
 	//	游戏点赞
-
-	$('body').on('click', '.thumb,.thumb_num', function() {
+	$('body').on('click', '.thumb,.thumb_num', function(e) {
+		e.stopPropagation();
 		if(userId) {
 			var ts = $(this);
 			if(ts.attr('data-state') !== 'null' && ts.attr('data-state')) {
@@ -582,7 +521,6 @@ $(function() {
 })
 
 function createDownload(name, src) {
-
 	$.ajax({
 		type: "get",
 		url: config.data + "game/addDownloadNum",
@@ -779,7 +717,7 @@ function detail_strategy(){
 								}
 								
 								div +=
-									"<div class='news_post_commentContent strategy_indent ofh' >" +
+									"<div class='news_post_commentContent strategy_indent ofh' data-id='" + str[i].id + "'  >" +
 									"<div class='ofh'>" +
 									  "<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
 									   "<div  class='timeName'>"+
@@ -787,7 +725,7 @@ function detail_strategy(){
 									     "<div class='font_12 color_9e9e9e fl'>" + str[i].add_time + "</div>" +
 									   "</div>"+
 									"</div>" +
-									"<div class='game_comment_content'>" +									
+									"<div class='game_strategy_content' >" +									
 									"<div class='font_14 overflow_two color_7a7a7a simHei'>" 
 									+ 
 									 "<img data-id='" + str[i].id + "'  style='width:100%;display:"+imgToggle+"' src="+imgSrc+">"+
@@ -799,8 +737,8 @@ function detail_strategy(){
 									//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
 									"<div class='comment_info'>" +									
 									"<div class='fr color_9e9e9e comment_imgs'>" +
-									 "<div class='thumb'></div>" +
-									 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
+//									 "<div class='thumb'></div>" +
+//									 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
 									 "<div data-id='" + str[i].id + "'   class='comment_img'></div>" +
 									 "<div  class='comment_num'>" + str[i].comment_num + "</div>" +
 									"</div>" +
@@ -822,8 +760,7 @@ function detail_strategy(){
 				}
 			});
 			//		获取游戏攻略结束
-
-			$('.news_post_commentContentstra').on('click','.game_comment_content img,.comment_img', function() {
+			$('.news_post_commentContentstra').on('click','.news_post_commentContent,.game_strategy_content img', function() {
 				var strategyId = $(this).attr("data-id");
 				mui.openWindow({
 					url: "../strategy/strategy_details.html",
@@ -855,6 +792,66 @@ function detail_strategy(){
 		    
         	}
         }
+    
+    
+      
+      function indexCommit(){
+      	$.ajax({
+			type: "get",
+			url: config.data + "game/getGameHotComment",
+			async: true,
+			data: {
+				gameId:gameId,
+				userId:userId
+			},
+			success: function(data) {
+//              alert(JSON.stringify(data))
+				if(data.state) {
+
+					var com = data.comment,portrait;
+					var div = '';
+
+					for(var i = 0; i < com.length; i++) {
+						if(com[i].state) {
+							var ifGood = "good";
+						} else {
+							var ifGood = "noGood";
+						}
+						
+						
+				        if(com[i].portrait==0||com[i].portrait==null){
+						    portrait="../../Public/image/morentouxiang.png";
+					    }else{
+						    portrait=com[i].portrait;
+						}
+								
+						
+						
+						div +=
+							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
+							"<div class='ofh' >" +
+							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
+							"<div class='comment_user font_12 font_bold fl'>" + com[i].nick_name + "</div>" +
+							"</div>" +
+							"<div class='game_comment_content'>" +
+							"<div class='comment_content font_14' data-id='" + com[i].id + "'>" + com[i].content + "</div>" +
+							"<div class='comment_info ofh'>" +
+							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+							"<div class='fr color_9e9e9e comment_imgs'>" +
+							"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "'></span>" +
+							"<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
+							"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
+							"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
+							"</div>" +
+							"</div>" +
+							"</div>" +
+							"</div>"
+					}
+					$('.news_post_commentContentshot').empty().append(div)
+				}
+			}
+		});
+      }
     
     
 	
@@ -942,7 +939,8 @@ function detail_strategy(){
 					async: true,
 					data: {
 						gameId: gameId,
-						page: 1,
+						page:1,
+						userId:userId
 					},
 					success: function(data) {
 						if(data.state) {
@@ -961,7 +959,8 @@ function detail_strategy(){
 								  	portrait=com[i].portrait;
 								  }
 								div +=
-									"<div class='news_post_commentContent ofh'>" +
+								
+									"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 
 									"<div class='ofh'>" +
 									"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +

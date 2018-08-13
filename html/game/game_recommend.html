@@ -130,10 +130,10 @@
 					<div class="ui_flex_wide " data-sort="sort" data-name='remen'>
 						<div class="backgroundColor_white border_green color_green">热 门</div>
 					</div>
-					<div class="ui_flex_wide" data-sort="sort2" data-name='xiazai'>
+					<div class="ui_flex_wide" data-sort="game_download_num" data-name='xiazai'>
 						<div>下 载</div>
 					</div>
-					<div class="ui_flex_wide" data-sort="game_download_num" data-name='ONE'>
+					<div class="ui_flex_wide" data-sort="sort2" data-name='ONE'>
 						<div>ONE</div>
 					</div>
 				</div>
@@ -359,8 +359,8 @@
 			var page = 1;
 			var up3 = 1;
 			var up2 = 1;
+			var sort="sort";
 			activeBell()//激活头部bell回复
-
 			mui.init({
 			     subpages:[{
                     url:'game_recommend.html',
@@ -396,20 +396,16 @@
 
 			}
 
-			function down() {
-				
+			function down() {		
 				switch(up3) {
-					case 1:
-						
+					case 1:					
 						window.location.reload();
 						break;
 					case 2:
-
 						mui('.nav_cls_contains').pullRefresh().refresh(true);
 						page = 1;
 						$('.game_lists').children().remove()
 						getRank(sort);
-
 						break;
 					case 3:
 						$('.game_classify_names').children().remove();

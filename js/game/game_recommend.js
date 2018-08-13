@@ -1,4 +1,5 @@
-$(function() {    
+var rankToggle=false;
+$(function() {
 	mui.plusReady(function() {
 		total_height = plus.navigator.getStatusbarHeight() + 45;
 		$('.header_box').next().css("margin-top", total_height + 43 + "px");
@@ -151,7 +152,6 @@ $(function() {
 	});
 
 	$('.game_topicBox,.game_topicBoxbot').click(function() {
-
 		mui.openWindow({
 			url: 'game_topic.html',
 			id: 'game_topic.html',
@@ -409,18 +409,8 @@ $(function() {
 	$('.game_rank').children().eq(0).children().css('background-color', 'white')
 	sort = "sort";
 	getRank(sort);
-	$('.game_rank').children().click(function() {
-		mui('.nav_cls_contains').pullRefresh().refresh(true);
-		page = 1;
-		sort = $(this).attr('data-sort')
-		var name = $(this).attr('data-name')
-		$(this).children().addClass('border_green color_green').css('background-color', 'white')
-		$(this).siblings().children().removeClass('backgroundColor_white border_green color_green').css('background-color', '#E7EAEC')
-		$('.hot_rank').css('background-image', 'url(../../Public/image/' + name + '.png)')
-		$('.game_lists').children().remove()
-		$('.first_three').css("display","none")
-		getRank(sort);
-	})
+	
+
 	$('.game_rank').children().eq(0).click(function() {
 		up2 = 1;
 
@@ -572,12 +562,6 @@ $(function() {
 			scrollTop: 0
 		}, 'normal');
 	})
-	//		$('.game_shows > div').click(function() {
-	//			mui.openWindow({
-	//				url: "game_detail.html",
-	//				id: "game_detail.html"
-	//			})
-	//		})
 
 	$('.game_detail_contents > div').click(function() {
 		mui.openWindow({
@@ -588,7 +572,41 @@ $(function() {
 
 })
 
+
+
+$('.game_rank').children().click(function() {
+		if(rankToggle){
+			return false;
+		}
+		$('.comingsoon').remove();
+		mui('.nav_cls_contains').pullRefresh().enablePullupToRefresh();
+		mui('.nav_cls_contains').pullRefresh().refresh(true);	
+		$(".hot_rank").css("display","block");
+		page = 1;
+		sort = $(this).attr('data-sort')
+		var name = $(this).attr('data-name')
+		$(this).children().addClass('border_green color_green').css('background-color', 'white')
+		$(this).siblings().children().removeClass('backgroundColor_white border_green color_green').css('background-color', '#E7EAEC')
+		$('.hot_rank').css('background-image', 'url(../../Public/image/' + name + '.png)')
+		$('.game_lists').children().remove();
+	    $(".first_three").css("display","none");	
+		getRank(sort);
+		
+})
+
+
 function getRank(sort) {
+    rankToggle=true;
+     /*阻挡掉one模块*/
+	if(sort=="sort2"){
+		$('.comingsoon').remove();
+		$(".hot_rank").css("display","none");
+		$('.comingsoon').css("display","block");
+		mui('.nav_cls_contains').pullRefresh().disablePullupToRefresh();
+		$('.game_ranks').append("<img class='comingsoon' src='../../Public/image/comingsoon.png' style='width:10rem;display:block;margin:0 auto;margin-top:1rem;' />");
+        rankToggle=false;
+		return false;		
+	}
   mui.plusReady(function(){
 	$.ajax({
 		type: "get",
@@ -619,10 +637,7 @@ function getRank(sort) {
 						$('.third  .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[2].icon) + ')')
 						$('.third  .y_listName').text(g[2].game_name)
 						$('.third  .game_recommend_starScore').text(g[2].grade)	
-//						var downloadToggle=plus.runtime.isApplicationExist({pname:g[i].game_packagename,action: ''});
-//						if(downloadToggle){
-//							$(`.y_listDownload:eq(${i})`).text("打开")
-//						}
+
 						setTimeout(function(){
 							$('.first_three').css("display","flex")
 						})
@@ -696,15 +711,15 @@ function getRank(sort) {
 						$(this).children('.game_recommend_star').eq(starFinal).prevAll('.game_recommend_star').addClass('game_list_star_active')
 						$(this).children('.game_recommend_star').eq(starFinal).addClass('game_list_star_half')
 					}
-				})
-			} else {
-
+				});
 			}
+			  rankToggle=false;
 		},
 		error:function(){
 		    $(".nav_cls_contains").css("display","none");
 			var errorHTML="<div style='margin-top:14rem'><img style='width:138px;height:180px;display:block;margin:0 auto;' src='../../Public/image/notonline.png' /></div>";
        	    $('.error').html(errorHTML);
+       	      rankToggle=false;
 		}
 	});
   });

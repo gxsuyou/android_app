@@ -2,11 +2,9 @@ var news = 1;
 $(function(){
 	$('.me_collectionNav > span').click(function(){
 		var t =$(this)
-		t.css('border-bottom','4px solid #7fcadf').addClass('color_green').siblings('span').css('border-bottom','1px solid #E6EBEC').removeClass('color_green')
-		
+		t.css('border-bottom','4px solid #7fcadf').addClass('color_green').siblings('span').css('border-bottom','1px solid #E6EBEC').removeClass('color_green')	
 		$("."+t.attr("data-class")).removeClass('hidden')
-		$("."+t.siblings('span').attr("data-class")).addClass('hidden')
-		
+		$("."+t.siblings('span').attr("data-class")).addClass('hidden')		
 	})
 	$('.me_collectionNav').children('span').eq(0).click(function(){
 		$('.news_art_list').removeClass('hidden')
@@ -25,10 +23,10 @@ $(function(){
 		up();		
 	})
 	
-	$('body').on('click','.news_art',function(){
+	$('body').on('tap','.news_art',function(){
 		mui.openWindow({
 			url:"../news/news_post.html",
-			id:"../news/news_post.html",
+			id:"news_post.html",
 			extras:{
 				newsId:$(this).attr('data-id'),
 				gameId:$(this).attr('data-gameId')
@@ -36,7 +34,7 @@ $(function(){
 		})
 	})
 	
-	$('body').on('click','.strategy_content',function(){
+	$('body').on('tap','.strategy_content',function(){
 		mui.openWindow({
 			url:"../strategy/strategy_details.html",
 			id:"strategy_details.html",
@@ -104,8 +102,4 @@ $(function(){
 			}
 		});
 	})
-	
-	
-	
-	
 })

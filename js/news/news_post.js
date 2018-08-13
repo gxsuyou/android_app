@@ -45,21 +45,16 @@ $(function() {
 		swipeBack: true, //启用右滑关闭功能
 		gestureConfig: {
 			tap: true, //默认为true
-			doubletap: true, //默认为false
 		    longtap: true, //默认为false
-		    swipe: true, //默认为true
-			drag: true, //默认为true
-			hold: false, //默认为false，不监听
-			release: false //默认为false，不监听
 		},
-		pullRefresh: {
+		pullRefresh:{
 			container: ".new_post_contents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 			up: {
 				height: 50, //可选.默认50.触发上拉加载拖动距离
-				auto: false, //可选,默认false.自动上拉加载一次
+				auto: true, //可选,默认false.自动上拉加载一次
 				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
 				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-				callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+				callback:up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 			},
 			down: {
 				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
@@ -70,16 +65,13 @@ $(function() {
 				auto: false, //可选,默认false.首次加载自动上拉刷新一次
 				callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 			}
-
 		}
-
 	})
 	mui.plusReady(function() {
 		total_height = plus.navigator.getStatusbarHeight() + 45;
 		var self = plus.webview.currentWebview();
 		newsId = self.newsId;
 		gameId = self.gameId;
-		up();
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getNewsByID",
@@ -156,7 +148,7 @@ $(function() {
 			}
 
 		})
-
+         //点击热门
 		$('body').on('tap', '.hot', function() {
 
 			$('.news_post_commentContents').children().remove();
@@ -168,8 +160,8 @@ $(function() {
 			up()
 
 		})
+		//点击时间
 		$('body').on('tap', '.time', function() {
-
 			$('.news_post_commentContents').children().remove();
 			mui('.new_post_contents').pullRefresh().refresh(true);
 			type = 'time';
@@ -319,7 +311,7 @@ $(function() {
 		   saveImg(picurl);
 		});
 		
-		
+		//点击头部保存图片
 		$('body').on('tap','.mui-preview-header',function(){
           let num=$(".mui-preview-indicator").text();        
           num=num.substring(0,1)-1;
@@ -353,7 +345,6 @@ $(function() {
 	         var dtask = plus.downloader.createDownload(picurl, {}, function(d, status) {
 		// 下载完成
 		         if(status == 200) {
-			//			alert("Download success: " + d.filename);
 			     plus.gallery.save(d.filename, function() {
 				   mui.toast('保存成功');
 			     }, function() {
@@ -409,12 +400,10 @@ $(function() {
 
 			})
 		})
-		$('body').on('click', '.publish', function(event) {
+		$('body').on('tap', '.publish', function(event) {
 			event.preventDefault();
 			if(userId) {
 				var content = $(this).prev().val();
-//			    alert(content);
-//				return false;
 				if(content){
 					$.ajax({
 					   type: "get",
@@ -433,8 +422,12 @@ $(function() {
 						 if(data.state == "1") {
 							
 							$('.news_secondComment_input').val("");
-			       //不刷新										
-						 getComment();
+			       //不刷新	
+			             mui('.new_post_contents').pullRefresh().refresh(true);
+			             $(".news_post_commentContents").empty();			             
+			             page=0;
+						 up();
+						
 						 mui.toast("发送成功");					
 						} else {
 							mui.toast("发送失败，请重试")
@@ -462,109 +455,6 @@ $(function() {
 
 	})
 })
-
-function getComment(){
-	$.ajax({
-			type: "get",
-			url: config.data + "news/getHotNewsCommentByPage",
-			async: true,
-			data: {
-				"commentParentId": newsId,
-				"page": 0,
-				"userId": userId
-			},
-			success: function(data) {
-				if(data.state) {
-					page=0;
-					var com = data.comment;
-					var comment = "";
-					var towLen,portrait;
-					for(var i = 0; i < com.length; i++) {
-						var tow = com[i].towCommentList;
-						var secondCom = "";
-						if(com[i].state) {
-							var ifGood = "good";
-						} else {
-							var ifGood = "noGood";
-						}
-						
-						if(com[i].portrait==0||com[i].portrait==null){
-							portrait="../../Public/image/morentouxiang.png";
-						}else{
-							portrait=com[i].portrait;
-						}
-						
-						
-						for(var j = 0; j < tow.length; j++) {
-							var ifHide = tow[j].targetUserNickName || "hidden";
-							secondCom +=
-								"<div class='comment_secondComment '>" +
-								"<span class='color_green'>" + tow[j].selfNickName + "</span>" +
-								"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
-								"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
-								"<span class='color_282828'>：" + tow[j].content + "</span>" +
-								"</div>";
-						}
-
-						if(tow.length >= 2) {
-							var secondComs =
-								"<div class='comment_secondComments font_14 ofh'>" + secondCom +
-								"<div class='more_secondComment color_green fr " + towLen + "' data-id='" + com[i].id + "' data-userId='" + com[i].user_id + "'>" +
-								"全部回复" +
-								"</div>" +
-
-								"</div>";
-						} else {
-							var secondComs = "<div class='comment_secondComments font_14 ofh'>" + secondCom + "</div>";
-						}
-
-						comment +=
-							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
-							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
-							"<div class='news_post_commentContent_content fl'>" +
-							"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
-							"<div class='comment_content font_14'>" + com[i].content + "</div>" +
-							"<div class='comment_info ofh'>" +
-							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
-							"<div class='fr color_9e9e9e comment_imgs'>" +
-							"<div class='thumbs fl'>" +
-							"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "' data-commentId='" + com[i].id + "'></span>" +
-							"<span  class='thumb_num font_14'>" + com[i].agree + "</span>" +
-							"</div>" +
-							"<div class='comment_nums fl'>" +
-							"<span class='comment_img' data-id='" + com[i].id + "' data-userId='" + com[i].user_id + "'></span>" +
-							"<span class='comment_num font_14'>" + com[i].comment + "</span>" +
-							"</div>" +
-							"</div>" +
-							"</div>" +
-							secondComs +
-							"</div>" +
-							"</div>"
-					};
-
-					$('.news_post_commentContents').empty().append(comment)
-
-					if($('.thumb').attr('data-state')) {
-						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
-					}
-					if(com.length < 5) {
-
-						mui('.new_post_contents').pullRefresh().endPullupToRefresh(true);
-
-					} else {
-
-						mui('.new_post_contents').pullRefresh().endPullupToRefresh(false);
-
-					}
-
-				} else {
-
-				}
-			}
-		});
-		
-}
-
 
 
 function up(){

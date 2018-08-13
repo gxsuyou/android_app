@@ -72,12 +72,12 @@ $(function() {
 			},
 			pullRefresh: {
 				container: ".strategy_details", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-				up: {
+				up:{
 					height: 50, //可选.默认50.触发上拉加载拖动距离
 					auto: true, //可选,默认false.自动上拉加载一次
 					contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
 					contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-					callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					callback:up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 				},
 				down: {
 					style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
@@ -358,10 +358,15 @@ $(function() {
 			})
 		})
 
-
 		//取消收藏结束
-		function up() {
+		
 	
+
+	})
+})
+
+
+	function up(){
 			page++;
 			if(sort == "comment_num") {
 				$.ajax({
@@ -428,11 +433,11 @@ $(function() {
 									"<div class='news_post_commentContent_content fl'>" +
 									"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
 									"<div class='comment_content font_14'>" + com[i].content + "</div>" +
-									"<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' width='100%' />" +
+									"<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "'  style='width:100%' />" +
 									"<div class='comment_info ofh'>" +
 									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
 									"<div class='fr color_9e9e9e comment_imgs'>" +
-									"<span class='thumb" + ifLike + "'></span>" +
+									"<span class='thumb " + ifLike + "'></span>" +
 									"<span class='thumb_num font_14'>" + com[i].agree_num + "</span>" +
 									"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
 									"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
@@ -445,8 +450,13 @@ $(function() {
 									"</div>";
 
 							}
-
 							$('.news_post_commentContents').append(div);
+							
+							for(var n = 0; n < com.length;n++) {
+							  if($(".img").eq(n).width()<$(".imgFirst").width()){
+								$(".img").eq(n).css("width","auto");
+							  }
+							}
 
 							if(com.length < 5) {
 								mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
@@ -527,7 +537,7 @@ $(function() {
 									"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
 									"<div class='comment_content font_14'>" + com[i].content + "</div>" +
 									"<div  class='imgFirst'>"+
-									 "<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' width='100%' />" +
+									 "<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' style='width:100%' />" +
 									"</div>"+
 									"<div class='comment_info ofh'>" +
 									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
@@ -546,7 +556,12 @@ $(function() {
 							}
 							
 							
-							$('.news_post_commentContents').append(div)
+							$('.news_post_commentContents').append(div);
+							 for(var n = 0; n < com.length;n++) {
+							  if($(".img").eq(n).width()<$(".imgFirst").width()){
+								$(".img").eq(n).css("width","auto");
+							  }
+							}
 
 							if(com.length < 5) {
 								mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
@@ -562,8 +577,7 @@ $(function() {
 
 		}
 
-	})
-})
+
 
 //获取详情ajax
 
@@ -596,8 +610,7 @@ function detail() {
                 	nickName=str.nike_name;
                 }else{
                 	nickName=str.nick_name;
-                }              
-                
+                }                           
 				$('.news_reviewNum').text(comment_num);
 				$('h4').text(str.title);
 				$('.news_userInfo_img').css("background-image", "url(" + encodeURI(portrait) + ")");
