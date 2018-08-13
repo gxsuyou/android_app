@@ -179,7 +179,7 @@ $(function() {
 
 					var com = data.comment,portrait;
 					var div = '';
-
+					alert(com)
 					for(var i = 0; i < com.length; i++) {
 						if(com[i].state) {
 							var ifGood = "good";
