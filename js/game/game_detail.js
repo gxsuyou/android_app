@@ -162,64 +162,7 @@ $(function() {
 		//		相关资讯结束
 
 		//		游戏热评部分
-		$.ajax({
-			type: "get",
-			url: config.data + "game/getGameHotComment",
-			async: true,
-			data: {
-				gameId: gameId
-			},
-			success: function(data) {
-
-				if(data.state) {
-
-					var com = data.comment,portrait;
-					var div = '';
-
-					for(var i = 0; i < com.length; i++) {
-						if(com[i].state) {
-							var ifGood = "good";
-						} else {
-							var ifGood = "noGood";
-						}
-						
-						
-				        if(com[i].portrait==0||com[i].portrait==null){
-						    portrait="../../Public/image/morentouxiang.png";
-					    }else{
-						    portrait=com[i].portrait;
-						}
-								
-						
-						
-						div +=
-							"<div class='news_post_commentContent ofh'>" +
-							"<div class='ofh'>" +
-							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
-							"<div class='comment_user font_12 font_bold fl'>" + com[i].nick_name + "</div>" +
-
-							"</div>" +
-							"<div class='game_comment_content'>" +
-							"<div class='comment_content font_14' data-id='" + com[i].id + "'>" + com[i].content + "</div>" +
-							"<div class='comment_info ofh'>" +
-							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
-							"<div class='fr color_9e9e9e comment_imgs'>" +
-							"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "'></span>" +
-							"<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
-							"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
-							"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
-							"</div>" +
-							"</div>" +
-							"</div>" +
-
-							"</div>"
-					}
-					$('.news_post_commentContentshot').append(div)
-				} else {
-
-				}
-			}
-		});
+		indexCommit();
 
 		//		游戏热评部分结束
 
@@ -490,7 +433,7 @@ $(function() {
 		}	
 	});
 
-	$('body').on('tap','.comment_content', function() {
+	$('body').on('tap','.comment_content,.comment_img', function() {
 		if(userId) {
 			mui.openWindow({
 				url: "game_allComments.html",
@@ -501,7 +444,8 @@ $(function() {
 					gameId: gameId,
 					uid: $(this).attr('data-uid'),
 					game_name:gameName,
-					game_icon:gameImg
+					game_icon:gameImg,
+					pageIndex:pageIndex
 				}
 			})
 		} else {
@@ -515,8 +459,8 @@ $(function() {
 	})
 
 	//	游戏点赞
-
-	$('body').on('click', '.thumb,.thumb_num', function() {
+	$('body').on('click', '.thumb,.thumb_num', function(e) {
+		e.stopPropagation();
 		if(userId) {
 			var ts = $(this);
 			if(ts.attr('data-state') !== 'null' && ts.attr('data-state')) {
@@ -850,6 +794,66 @@ function detail_strategy(){
         }
     
     
+      
+      function indexCommit(){
+      	$.ajax({
+			type: "get",
+			url: config.data + "game/getGameHotComment",
+			async: true,
+			data: {
+				gameId:gameId,
+				userId:userId
+			},
+			success: function(data) {
+//              alert(JSON.stringify(data))
+				if(data.state) {
+
+					var com = data.comment,portrait;
+					var div = '';
+
+					for(var i = 0; i < com.length; i++) {
+						if(com[i].state) {
+							var ifGood = "good";
+						} else {
+							var ifGood = "noGood";
+						}
+						
+						
+				        if(com[i].portrait==0||com[i].portrait==null){
+						    portrait="../../Public/image/morentouxiang.png";
+					    }else{
+						    portrait=com[i].portrait;
+						}
+								
+						
+						
+						div +=
+							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
+							"<div class='ofh' >" +
+							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
+							"<div class='comment_user font_12 font_bold fl'>" + com[i].nick_name + "</div>" +
+							"</div>" +
+							"<div class='game_comment_content'>" +
+							"<div class='comment_content font_14' data-id='" + com[i].id + "'>" + com[i].content + "</div>" +
+							"<div class='comment_info ofh'>" +
+							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+							"<div class='fr color_9e9e9e comment_imgs'>" +
+							"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "'></span>" +
+							"<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
+							"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
+							"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
+							"</div>" +
+							"</div>" +
+							"</div>" +
+							"</div>"
+					}
+					$('.news_post_commentContentshot').empty().append(div)
+				}
+			}
+		});
+      }
+    
+    
 	
 		function detail_assess(){	
 			check_assess();
@@ -935,7 +939,8 @@ function detail_strategy(){
 					async: true,
 					data: {
 						gameId: gameId,
-						page: 1,
+						page:1,
+						userId:userId
 					},
 					success: function(data) {
 						if(data.state) {
@@ -954,7 +959,8 @@ function detail_strategy(){
 								  	portrait=com[i].portrait;
 								  }
 								div +=
-									"<div class='news_post_commentContent ofh'>" +
+								
+									"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 
 									"<div class='ofh'>" +
 									"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +

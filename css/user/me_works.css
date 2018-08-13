@@ -27,7 +27,6 @@ body{
 .search{
 	right: 1rem;
 	background-image:url(../../Public/image/sousuo1.png);
-	
 }
 .strategy_head{
 	height: 5.1875rem;
@@ -36,7 +35,6 @@ body{
 	margin-left: 0.625rem;
 }
 .strategy_head > ul > li{
-	
 	margin-right: 1.5rem;
 }
 .strategy_headImg{
@@ -46,8 +44,7 @@ body{
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
-	border-radius: 50%;
-	
+	border-radius: 50%;	
 }
 .strategy_nav{
 	border-top: 1px solid #E7EAEC;
@@ -61,7 +58,7 @@ body{
 .strategy_content_headImg{
 	width: 2.0625rem;
 	height: 2.0625rem;
-	
+	box-shadow:0px 2px 2px 1px rgba(0,0,0,0.1);
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;

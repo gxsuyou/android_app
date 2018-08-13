@@ -294,14 +294,15 @@
 			<!--定位结束-->
 		</div>		
 	</body>
-	<!--<script type="text/javascript">
-		var page = 0;
-		var sort = "comment_num";
-	</script>-->
 	<script src="../../js/strategy/strategy_details.js" type="text/javascript" charset="utf-8"></script>
 	<script src="../../js/mui.zoom.js"></script>
 	<script src="../../js/mui.previewimage.js"></script>
 	<script>
 		mui.previewImage();
+		window.addEventListener('refresh',function(event){
+			$('.news_post_commentContents').empty();
+              page = 0
+              up();
+		});
 	</script>
 </html>

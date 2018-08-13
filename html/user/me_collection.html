@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -12,7 +11,6 @@
 		<script src="../../js/mui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 	</head>
-
 	<body>
 		<div class="header_box">
 			<div class="before_header"></div>
@@ -168,11 +166,12 @@
 		</div>
 		
 		<script>
-			var page = 0;
-			var pageHash="news";
+			
 		</script>
 		
 		<script type="text/javascript" charset="utf-8">
+		   var page = 0;
+		   var pageHash="news";
 			mui.init({
 				swipeBack: true,
 				gestureConfig:{
@@ -344,10 +343,8 @@
 													"<span class='icon_read'></span>"+
 													"<span class='font_12 color_7a7a7a' style='vertical-align: middle;margin-left: 0.4rem;'>"+ str[i].browse_num +"</span>"+
 												"</div>"+
-											"</div>"+
-										
-											"<div class='strategy_content_img "+ src +"' style='background-image: url(" + config.img + encodeURI(str[i].src) + ");'></div>"+
-																						
+											"</div>"+			
+											"<div class='strategy_content_img"+ src +"' style='background-image: url(" + config.img + encodeURI(str[i].src) + ");'></div>"+																					
 											"<div class='strategy_content_art font_14 color_7a7a7a'>"+
 												"<img class='str_img' style='width:100%;display:"+imgToggle+"' src="+imgSrc+">"+
 												"<div class='strategy_content_titles'>"+
