@@ -71,10 +71,8 @@ $(function() {
 	
 
 	//		点击发布
-	$('.publish').click(function() {
-		
+	$('.publish').click(function() {		
 		var content = $(this).prev().val();
-	
 		if(content) {
 			$.ajax({
 				type: "get",

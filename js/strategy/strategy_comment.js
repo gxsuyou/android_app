@@ -18,7 +18,16 @@ $(function() {
 		$(this).parent().parent('.show_imgcontent').remove()
 
 	})
+	
+    
+      
+      
 	mui.plusReady(function() {
+
+      $('body').on('focus',"#strategy_textarea",function(){
+
+//    	$('.choose_img').css("bottom",'-500px')
+      });
 		var self = plus.webview.currentWebview();
 		var strategyId = self.strategyId;
 		var proId = self.proId;
@@ -62,6 +71,8 @@ $(function() {
 				})
 			}
 		}, false);
+
+
 
 		$('.publish').click(function() {
 			mui.toast("正在发送，请稍候")

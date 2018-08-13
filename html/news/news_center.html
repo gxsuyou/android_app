@@ -176,6 +176,7 @@
 								var t = data.tip;
                                 var portrait;
 								var div = '';
+//								alert(JSON.stringify(data))
 								for(var i = 0; i < t.length; i++) {
 									if(t[i].series == 1) {
 										var commentId = t[i].id
@@ -193,9 +194,9 @@
 								    }else{
 									   portrait=t[i].portrait;
 								    }
-
+//                                   alert(t[i].game_id);
 									div +=
-										"<div class='notice_list ofh' data-id='" + commentId + "' data-type='" + t[i].type + "'>" +
+										"<div class='notice_list ofh' data-game='"+t[i].game_id+"' data-id='" + commentId + "' data-type='" + t[i].type + "'>" +
 										"<span class='notice_listImg fl' style='background-image: url(" + encodeURI(portrait) + ");'></span>" +
 										"<div class='fl' style='width: 86%;margin-left: 0.625rem;'>" +
 										"<div class='ofh'>" +
