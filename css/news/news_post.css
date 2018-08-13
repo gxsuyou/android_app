@@ -11,6 +11,9 @@ a{
 	margin-left: -1rem;
 	font-size: 18px;
 }
+.detail p{
+	color:#282828;
+}
 .share{	
 	position: absolute;
 	right: 1rem;
