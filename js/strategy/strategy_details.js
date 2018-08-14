@@ -452,11 +452,6 @@ $(function() {
 							}
 							$('.news_post_commentContents').append(div);
 							
-							for(var n = 0; n < com.length;n++) {
-							  if($(".img").eq(n).width()<$(".imgFirst").width()){
-								$(".img").eq(n).css("width","auto");
-							  }
-							}
 
 							if(com.length < 5) {
 								mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
@@ -537,7 +532,7 @@ $(function() {
 									"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
 									"<div class='comment_content font_14'>" + com[i].content + "</div>" +
 									"<div  class='imgFirst'>"+
-									 "<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "' style='width:100%' />" +
+									 "<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "'  style='width:100%' />" +
 									"</div>"+
 									"<div class='comment_info ofh'>" +
 									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
@@ -557,11 +552,7 @@ $(function() {
 							
 							
 							$('.news_post_commentContents').append(div);
-							 for(var n = 0; n < com.length;n++) {
-							  if($(".img").eq(n).width()<$(".imgFirst").width()){
-								$(".img").eq(n).css("width","auto");
-							  }
-							}
+
 
 							if(com.length < 5) {
 								mui('.strategy_details').pullRefresh().endPullupToRefresh(true);

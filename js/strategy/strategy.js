@@ -161,7 +161,7 @@ $(function(){
 							"</div>"+
 						"</li>"
 				}
-				$('.strategy_headImgs').append(li);
+				$('.strategy_headImgs').empty().append(li);
 			    } else{
 				
 			    }

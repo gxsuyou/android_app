@@ -101,18 +101,12 @@ $(function() {
 		} else {
 			mui.toast("发送内容不能为空")
 		}
-
 	})
-
-	//		点击发布结束
-
-	
-
+	//点击发布结束
 })
 
 function up() {
-	//		获取二级评论
-	
+	//获取二级评论	
 	page++;
 	$.ajax({
 		type: "get",

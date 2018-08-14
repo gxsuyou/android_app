@@ -94,17 +94,15 @@ $(function() {
 					firstImg = n.img
 					title = n.title
 					$('.detail').html(n.detail);
-
                     $(".detail img").attr("data-preview-src","");
-                    $(".detail img").attr("data-preview-group","1");
-                    
+                    $(".detail img").attr("data-preview-group","1");                    
 					$('.news_post_content').attr("data-id", n.id)
 					$('.news_post_listImg').css("background-image", "url(" + config.img + encodeURI(n.icon) + ")")
 					$('h4').text(n.title)
 					$('.news_post_listName').text(n.game_name)
 					$('.news_userInfo_name').text(add_user)
 					$('.news_userInfo_date').text(n.add_time)
-//					$('.news_reviewNum').text(n.comment)
+					$('.news_reviewNum').text(n.comment)
 					$(".news_post_list").removeClass("hidden")
 					if(n.game_id) {
 						$('.news_post_list').css("top", total_height + "px")
@@ -113,15 +111,12 @@ $(function() {
 						$('.news_post_list').addClass('hidden')
 					}
 					if(n.collect) {
-						$('.news_collect').attr('data-collect', '1')
+						$('.news_collect').attr('data-collect','1')
 						$('.news_collect').css("background-image", "url(../../Public/image/yishoucang.png)")
 					} else {
 						$('.news_collect').attr('data-collect', '')
 						$('.news_collect').css("background-image", "url(../../Public/image/shoucang.png)")
 					}
-
-				} else {
-
 				}
 			}
 		});
@@ -150,7 +145,6 @@ $(function() {
 		})
          //点击热门
 		$('body').on('tap', '.hot', function() {
-
 			$('.news_post_commentContents').children().remove();
 			mui('.new_post_contents').pullRefresh().refresh(true);
 			type = 'hot';
@@ -400,7 +394,8 @@ $(function() {
 
 			})
 		})
-		$('body').on('tap', '.publish', function(event) {
+		$('body').on('tap', '.publish', function(event){
+			
 			event.preventDefault();
 			if(userId) {
 				var content = $(this).prev().val();
@@ -421,8 +416,18 @@ $(function() {
 					   success: function(data) {
 						 if(data.state == "1") {
 							
-							$('.news_secondComment_input').val("");
-			       //不刷新	
+						$('.news_secondComment_input').val("");//不刷新	
+			            
+			            
+			            var reviewNum=$('.news_reviewNum').text()
+			            reviewNum=Number(reviewNum)
+			            if(reviewNum>99){
+			            	reviewNum=reviewNum;
+			            }else{
+			            	reviewNum=reviewNum+1;
+			            }                      
+			            $('.news_reviewNum').text(reviewNum);
+			            
 			             mui('.new_post_contents').pullRefresh().refresh(true);
 			             $(".news_post_commentContents").empty();			             
 			             page=0;
@@ -538,11 +543,6 @@ function up(){
 					};
 
 					$('.news_post_commentContents').append(comment);
-					var reviewNum=$('.news_post_commentContent').length;	
-					if(reviewNum > 99) {
-						reviewNum = 99
-					}
-					$(".news_reviewNum").text(reviewNum);
 					
 
 					if($('.thumb').attr('data-state')) {
@@ -637,11 +637,7 @@ function up(){
 					};
 
 					$('.news_post_commentContents').append(comment);
-					var reviewNum=$('.news_post_commentContent').length;	
-					if(reviewNum > 99) {
-						reviewNum = 99
-					}
-					$(".news_reviewNum").text(reviewNum);
+
 					
 
 					if($('.thumb').attr('data-state')) {

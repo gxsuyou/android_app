@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <title></title>
     <meta name="viewport"
-          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
-    <!--<link href="../../css/mui.min.css" rel="stylesheet" />-->
+         content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <link rel="stylesheet" type="text/css" href="../../css/mui.min.css"/>
     <link rel="stylesheet" type="text/css" href="../../Public/css/public.css"/>
 
@@ -130,7 +129,6 @@
 
     function up() {
         page++;
-        //alert(1)
         $.ajax({
             type: "get",
             url: config.data + "game/getGameByCls",
@@ -167,6 +165,7 @@
                         
                        
                         var downloadToggle=plus.runtime.isApplicationExist({pname:g[i].game_packagename,action: ''});
+                        console.log(g[i].game_packagename,downloadToggle)
                         if(downloadToggle){
 						    var buttonDown="打开";
 					     }else{
