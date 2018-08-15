@@ -29,21 +29,22 @@ $(function(){
 		});
 		$('body').on('tap','.notice_list',function(){
 			var commentId = $(this).attr("data-id");
+			var gameId=$(this).attr('data-game');
 			var url;
 			if (sort == 1) {
 				url = "news_allComments.html";
 			}
 			else if(sort == 2){
 				url = "../strategy/strategy_allComments.html";
-			}
-			else{
+			}else{
 				url = "../game/game_allComments.html";		
 			}
 			mui.openWindow({
 				url:url,
 				id:url,
 				extras:{
-					commentId:commentId
+					commentId:commentId,
+					gameId:gameId
 				}
 			})
 		})

@@ -2,8 +2,6 @@ var page = 1;
 var tagId;
 var tagName;
 $(function(){
-	
-	
 	mui.plusReady(function(){
 		var self = plus.webview.currentWebview();
 		tagId = self.tagId;

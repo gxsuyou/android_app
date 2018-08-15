@@ -3,9 +3,6 @@ $(function() {
 	mui.plusReady(function() {
 		var self = plus.webview.currentWebview();
 		subjectId = self.subjectId;
-		
-		
-
 		$.ajax({
 			type: "get",
 			url: config.data + "game/getSubjectById",
@@ -21,7 +18,7 @@ $(function() {
 					$('.game_topicsHeadimg').css('background-image', 'url(' + config.img + encodeURI(sub.img) + ')')
 					
 					
-					$('.game_topicsHeadart').text(sub.detail)
+//					$('.game_topicsHeadart').text(sub.detail)
 					
 					
 				} else {

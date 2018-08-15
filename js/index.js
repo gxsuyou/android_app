@@ -7,9 +7,9 @@ var activeTab = subpages[Index];
 //选项卡点击事件
 var self;
 var dbQuit=0;//用于记录点击次数
+
 mui.plusReady(function () {
     var wgtVer = null;
-
     function plusReady() {
         // ......
         // 获取本地应用资源版本号
@@ -214,22 +214,6 @@ mui.plusReady(function () {
     });
 
     mui.back = function () {
-        //首次按键，提示‘再按一次退出应用’
-        //  var first;
-        //  if(!first){
-        //
-        //      first = new Date().getTime();
-        //      mui.toast('再按一次退出应用');
-        //      setTimeout(function(){
-        //          first = null;
-        //      },1000);
-        //  }else{
-        //      if(new Date().getTime()-first<1000){
-        //         plus.runtime.quit();
-        //     }
-        //}
-        //  alert(e.keyType+"\n"+e.keyCode);
-//      plus.runtime.quit();
        dbQuit++
        if(dbQuit==1){
        	  mui.toast("再按一次退出")

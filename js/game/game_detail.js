@@ -14,192 +14,7 @@ $(function() {
 		$('.backImg').css("top", total_height - 36.5 + "px");
 		var self = plus.webview.currentWebview();
 		gameId = self.gameId;	
-		$.ajax({
-			type: "get",
-			url: config.data + "game/getGameById",
-			async: true,
-			data: {
-				gameId:gameId,
-				sys:2
-			},
-			success: function(data) {
-				if(data.state) {
-					game = data.gameDetail;
-					var g = data.gameDetail;
-					var icon_img = g.game_title_img;
-					icon = icon_img;
-					var game_name = g.game_name;
-					gameName = game_name;
-					$("#game_detail_download").attr("src", g.game_download_andriod);
-					var fileName = '_downloads/' + game.game_name + '.apk';
-					if(plus.runtime.isApplicationExist({
-							pname: game.game_packagename,
-							action: ''
-					})) {
-
-						$("#game_detail_download").find(".download_btn_text").text("打开");
-					} else {
-						plus.downloader.enumerate(function(tasks) {
-							var state = false;
-							for(var i = 0; i < tasks.length; i++) {
-								if(tasks[i].filename == fileName) {
-									$(".download_btn_text").text("取消");
-									tasks[i].addEventListener("statechanged", onStateChanged, false);
-									state = true;
-								}
-							}
-							if(!state) {
-								plus.io.resolveLocalFileSystemURL('_downloads/' + game.game_name + '.apk', function(entry) {
-									$("#game_detail_download").find(".download_btn_text").text("安装");
-									//	可通过entry对象操作文件 
-								}, function(e) {
-									//console.log("文件不存在 " + e.message);
-								});
-							}
-						});
-					}
-					gameImg = g.icon;
-					$('.game_detailTopimg').css('background-image', 'url(' + config.img + encodeURI(g.game_title_img) + ')');
-					$('.game_infoImg').css('background-image', 'url(' + config.img + encodeURI(g.icon) + ')');
-					$('.game_call').text(g.game_name);
-					$('.game_nameHeader').text(g.game_name);
-					$('.game_company').text(g.game_company);
-					$('.game_infoScore').text(g.grade + "分");
-					$('.gameScore').text(g.grade)
-					if(g.tagList) {
-						var t = g.tagList.split(',');
-						var sp="";
-						if(t.length>2){					
-						for(var i = 0; i < 2; i++) {
-							 sp += "<span class='color_green signs_box'>" + t[i] + " </span>"
-
-						}
-						}else{
-							for(var i = 0; i < t.length; i++) {
-							 sp += "<span class='color_green signs_box' >" + t[i] + " </span>"
-
-						  }
-						}
-						$('.game_signs').append(sp);
-					}
-					$('.game_simpleIntro_content').html(g.game_detail)
-					$('.game_particular_value').children().eq(0).text(g.game_download_num + "次下载")
-					$('.game_particular_value').children().eq(1).text(g.game_version)
-					$('.game_particular_value').children().eq(2).text(g.game_size + "MB")
-					$('.game_particular_value').children().eq(3).text(g.game_update_date)
-					$('.game_particular_value').children().eq(4).text(g.game_company)
-					//$('.game_particular_value').children().eq(5).text(g.game_company)
-					$.ajax({
-						type: "get",
-						url: config.data + "game/getGameImgListById",
-						async: true,
-						data: {
-							gameId: gameId
-						},
-						success: function(data) {
-							if(data.state) {
-								var gl = data.gameList
-								var div = ''
-								for(var i = 0; i < gl.length; i++) {
-									div +=
-										"<div style='margin:0.625rem 0.625rem;margin-left: 0;margin-top: 0.125rem;flex-shrink:0;'>" +
-										"<img class='game_detail_content' src='" + config.img + encodeURI(gl[i].img_src) + "' data-preview-src='' data-preview-group='2' />" +
-										//										"<img class='game_detail_content' style='background-image: url(" + config.img + encodeURI(gl[i].img_src) + ");'></img>" +
-										"</div>"
-								}
-								$('.game_detail_contents').append(div);
-							} else {
-
-							}
-						}
-					});
-				} else {
-
-				}
-			}
-
-		});
-
-		//		相关资讯
-		$.ajax({
-			type: "get",
-			url: config.data + "game/getNewsByGameId",
-			async: true,
-			data: {
-				gameId: gameId
-			},
-			success: function(data) {
-				if(data.state) {
-					var nl = data.newsList;
-					var div = '';
-					for(var i = 0; i < nl.length; i++) {
-						div +=
-							"<div class='game_relatedInfocontent' data-id='" + nl[i].id + "'>" +
-							"<div class='game_relatedInfocontentImg' style='background-image: url(" + config.img + encodeURI(nl[i].img) + ");'></div>" +
-							"<div class='game_relatedInfocontentArt font_14 simHei color_282828'>" + nl[i].title + "</div>" +
-							"<div class='game_relatedInfocontentTime font_12 simHei color_9e9e9e'>" + nl[i].add_time + "</div>" +
-							"</div>"
-					}
-					$('.game_relatedInfocontents').append(div)
-
-				} else {
-
-				}
-			}
-		});
-
-		$('body').on('tap', '.game_relatedInfocontent', function() {
-			mui.openWindow({
-				url: "../news/news_post.html",
-				id: "../news/news_post.html",
-				extras: {
-					newsId: $(this).attr('data-id'),
-					gameId: gameId
-				}
-			})
-		})
-
-		//		相关资讯结束
-
-		//		游戏热评部分
-		indexCommit();
-
-		//		游戏热评部分结束
-
-		//		相关游戏
-
-		$.ajax({
-			type: "get",
-			url: config.data + "game/getGameLikeTag",
-			async: true,
-			data: {
-				gameId: gameId
-			},
-			success: function(data) {
-				if(data.state) {
-					var gl = data.gameList;
-					var div = '';
-					for(var i = 0; i < gl.length; i++) {
-						div +=
-							"<div>" +
-							"<div class='game_similarContent backgroundColor_white ofh' data-id='" + gl[i].id + "'>" +
-							"<div class='game_similarContentimg' style='background-image: url(" + config.img + encodeURI(gl[i].icon) + ");' ></div>" +
-							"<div class='game_similarContentname font_12 font_bold color_282828'>" + gl[i].game_name + "</div>" +
-							"<div class='game_similarContentinfo ofh'>" +
-							"<div class='font_12 color_7a7a7a fl' style='margin-left: 0.4375rem;'>" + gl[i].tagList + "</div>" +
-							"<div class='fr font_12 color_7a7a7a' style='margin-right: 0.5rem;'>" + gl[i].grade + "分</div>" +
-							"<div class='game_star fr'></div>" +
-							"</div>" +
-							"</div>" +
-							"</div>"
-					}
-					$('.game_similarContents').append(div)
-				} else {
-
-				}
-			}
-		});
-
+        detail_main();
 
 
     $('body').on('longtap', 'img', function() {
@@ -294,35 +109,33 @@ $(function() {
 		})
 
 		
+		/* 切换开始 */
 		
-		
-		//详情页
-
-		$('.game_detail_detail').click(function() {
+		//详情页切换开始
+		$('.game_detail_detail').click(function() {			
 			pageIndex="detail";
 			commentModule = false;
 			mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
 			$(this).addClass('game_detail_detail_active').removeClass('color_c9c9').siblings('div').addClass('color_c9c9').removeClass('game_detail_assess_active').removeClass('game_detail_strategy_active')
 			$('.game_detail_details').removeClass('hidden').siblings('div').addClass('hidden');
-
+			detail_main();
 		})
+		//详情页结束
+		
 
-		//		详情页结束
-
-		//		评论页开始
-
+		//评论页开始
 		$('.game_detail_assess').click(function() {		
 		    detail_assess();
 		});
-	
-
 		//评论页结束		
+
+
 
 		//攻略页开始
 		$('.game_detail_strategy').click(function() {				    
 			 detail_strategy();
 		});
-       
+        //攻略页结束
 	   
 		
 		
@@ -597,9 +410,6 @@ function createDownload(name, src) {
 }
 
 function onStateChanged(download, status) {
-	//	if(download.state==5){
-	//		console.log(download.state)
-	//	}
 
 	downloding(download)
 	if(download.state == 4 && status == 200) {
@@ -794,6 +604,192 @@ function detail_strategy(){
         }
     
     
+    // 首页详情开始
+    function detail_main(){
+    	
+    		$.ajax({
+			type: "get",
+			url: config.data + "game/getGameById",
+			async: true,
+			data: {
+				gameId:gameId,
+				sys:2
+			},
+			success: function(data) {
+				if(data.state) {
+					game = data.gameDetail;
+					var g = data.gameDetail;
+					var icon_img = g.game_title_img;
+					icon = icon_img;
+					var game_name = g.game_name;
+					gameName = game_name;
+					$("#game_detail_download").attr("src", g.game_download_andriod);
+					var fileName = '_downloads/' + game.game_name + '.apk';
+					if(plus.runtime.isApplicationExist({
+							pname: game.game_packagename,
+							action: ''
+					})) {
+
+						$("#game_detail_download").find(".download_btn_text").text("打开");
+					} else {
+						plus.downloader.enumerate(function(tasks) {
+							var state = false;
+							for(var i = 0; i < tasks.length; i++) {
+								if(tasks[i].filename == fileName) {
+									$(".download_btn_text").text("取消");
+									tasks[i].addEventListener("statechanged", onStateChanged, false);
+									state = true;
+								}
+							}
+							if(!state) {
+								plus.io.resolveLocalFileSystemURL('_downloads/' + game.game_name + '.apk', function(entry) {
+									$("#game_detail_download").find(".download_btn_text").text("安装");
+									//	可通过entry对象操作文件 
+								}, function(e) {
+									//console.log("文件不存在 " + e.message);
+								});
+							}
+						});
+					}
+					gameImg = g.icon;
+					$('.game_detailTopimg').css('background-image', 'url(' + config.img + encodeURI(g.game_title_img) + ')');
+					$('.game_infoImg').css('background-image', 'url(' + config.img + encodeURI(g.icon) + ')');
+					$('.game_call').text(g.game_name);
+					$('.game_nameHeader').text(g.game_name);
+					$('.game_company').text(g.game_company);
+					$('.game_infoScore').text(g.grade + "分");
+					$('.gameScore').text(g.grade)
+					if(g.tagList) {
+						var t = g.tagList.split(',');
+						var sp="";
+						if(t.length>2){					
+						for(var i = 0; i < 2; i++) {
+							 sp += "<span class='color_green signs_box'>" + t[i] + " </span>"
+
+						}
+						}else{
+							for(var i = 0; i < t.length; i++) {
+							 sp += "<span class='color_green signs_box' >" + t[i] + " </span>"
+
+						  }
+						}
+						$('.game_signs').empty().append(sp);
+					}
+					$('.game_simpleIntro_content').html(g.game_detail)
+					$('.game_particular_value').children().eq(0).text(g.game_download_num + "次下载")
+					$('.game_particular_value').children().eq(1).text(g.game_version)
+					$('.game_particular_value').children().eq(2).text(g.game_size + "MB")
+					$('.game_particular_value').children().eq(3).text(g.game_update_date)
+					$('.game_particular_value').children().eq(4).text(g.game_company)
+					//$('.game_particular_value').children().eq(5).text(g.game_company)
+					$.ajax({
+						type: "get",
+						url: config.data + "game/getGameImgListById",
+						async: true,
+						data: {
+							gameId: gameId
+						},
+						success: function(data) {
+							if(data.state) {
+								var gl = data.gameList
+								var div = ''
+								for(var i = 0; i < gl.length; i++) {
+									div +=
+										"<div style='margin:0.625rem 0.625rem;margin-left: 0;margin-top: 0.125rem;flex-shrink:0;'>" +
+										"<img class='game_detail_content' src='" + config.img + encodeURI(gl[i].img_src) + "' data-preview-src='' data-preview-group='2' />" +
+										//										"<img class='game_detail_content' style='background-image: url(" + config.img + encodeURI(gl[i].img_src) + ");'></img>" +
+										"</div>"
+								}
+								$('.game_detail_contents').append(div);
+							} else {
+
+							}
+						}
+					});
+				} else {
+
+				}
+			}
+
+		});
+
+		//相关资讯
+		$.ajax({
+			type: "get",
+			url: config.data + "game/getNewsByGameId",
+			async: true,
+			data: {
+				gameId: gameId
+			},
+			success: function(data) {
+				if(data.state) {
+					var nl = data.newsList;
+					var div = '';
+					for(var i = 0; i < nl.length; i++) {
+						div +=
+							"<div class='game_relatedInfocontent' data-id='" + nl[i].id + "'>" +
+							"<div class='game_relatedInfocontentImg' style='background-image: url(" + config.img + encodeURI(nl[i].img) + ");'></div>" +
+							"<div class='game_relatedInfocontentArt font_14 simHei color_282828'>" + nl[i].title + "</div>" +
+							"<div class='game_relatedInfocontentTime font_12 simHei color_9e9e9e'>" + nl[i].add_time + "</div>" +
+							"</div>"
+					}
+					$('.game_relatedInfocontents').append(div)
+
+				} else {
+
+				}
+			}
+		});
+
+		$('body').on('tap', '.game_relatedInfocontent', function() {
+			mui.openWindow({
+				url: "../news/news_post.html",
+				id: "../news/news_post.html",
+				extras: {
+					newsId: $(this).attr('data-id'),
+					gameId: gameId
+				}
+			})
+		})
+		//		相关资讯结束
+		//		游戏热评部分
+		indexCommit();
+		//游戏热评部分结束
+		//	相关游戏
+		$.ajax({
+			type: "get",
+			url: config.data + "game/getGameLikeTag",
+			async: true,
+			data: {
+				gameId: gameId
+			},
+			success: function(data) {
+				if(data.state) {
+					var gl = data.gameList;
+					var div = '';
+					for(var i = 0; i < gl.length; i++) {
+						div +=
+							"<div>" +
+							"<div class='game_similarContent backgroundColor_white ofh' data-id='" + gl[i].id + "'>" +
+							"<div class='game_similarContentimg' style='background-image: url(" + config.img + encodeURI(gl[i].icon) + ");' ></div>" +
+							"<div class='game_similarContentname font_12 font_bold color_282828'>" + gl[i].game_name + "</div>" +
+							"<div class='game_similarContentinfo ofh'>" +
+							"<div class='font_12 color_7a7a7a fl' style='margin-left: 0.4375rem;'>" + gl[i].tagList + "</div>" +
+							"<div class='fr font_12 color_7a7a7a' style='margin-right: 0.5rem;'>" + gl[i].grade + "分</div>" +
+							"<div class='game_star fr'></div>" +
+							"</div>" +
+							"</div>" +
+							"</div>"
+					}
+					$('.game_similarContents').append(div)
+				} else {
+
+				}
+			}
+		});
+
+    }
+    // 首页详情解释
       
       function indexCommit(){
       	$.ajax({
@@ -805,7 +801,6 @@ function detail_strategy(){
 				userId:userId
 			},
 			success: function(data) {
-//              alert(JSON.stringify(data))
 				if(data.state) {
 
 					var com = data.comment,portrait;

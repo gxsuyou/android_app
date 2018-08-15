@@ -18,7 +18,7 @@ $(function() {
 
 		mui.openWindow({
 			url: "../strategy/strategy_details.html",
-			id: "../strategy/strategy_details.html",
+			id: "strategy_details.html",
 			extras: {
 				strategyId: strategyId,
 				anchor: true

@@ -8,6 +8,9 @@ a{
 	margin-left: -1rem;
 	font-size: 18px;
 }
+.news_post_content_detail p{
+	color:#282828;
+}
 .share{	
 	position: absolute;
 	right: 1rem;
