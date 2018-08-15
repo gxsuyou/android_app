@@ -77,6 +77,7 @@
 	min-width:2.4rem;
 	height:1.3rem;
 	border:1px solid #8ed8ed;border-radius:30px;
+	padding:0 0.3rem;
 	text-align:center;
 }
 .game_infoArt{
@@ -149,39 +150,30 @@
 	background-image: url(../../Public/image/gonglue01.png);
 }
 .game_detail_contents{
-	/*height: 16.8125rem;*/
-	
 	overflow: scroll;
-	
 	margin-left: 0.625rem;
 }
 .game_detail_content{
-	display: block;
-	
+	display: block;	
 	height: 15.5625rem;
-	/*background-image: url("../../Public/image/yishoucang.png");*/
-	/*background-color: yellow;*/
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: cover;
-	
 }
+
 .game_introduce{
 	border-bottom: 0.625rem solid #E7EAEC;
 }
 .game_simpleIntro{
 	display: inline-block;
-	
 	border-left: 4px solid #7fddde;
 	margin-left: 0.625rem;
 	margin-top: 0.6rem;
 	padding-left: 0.4rem;
 }
-.game_simpleIntro_content{
-	
+.game_simpleIntro_content{	
 	margin:0.75rem 1.1875rem;
-	margin-bottom: 1.25rem;
-	
+	margin-bottom: 1.25rem;	
 }
 .game_particular_key{
 	width: 5.8125rem;
@@ -224,9 +216,8 @@
 .game_relatedInfocontentImg{
 	width: 11.125rem;
 	height: 5rem;
-	/*background-color: green;*/
 	border-radius: 5px;
-	background-position: center;
+	background-position:center;
 	background-repeat:no-repeat;
 	background-size: cover;
 }
@@ -259,7 +250,7 @@
 	margin-bottom: 0.9rem;
 	
 }
-.news_post_commentContent_head{
+/*.news_post_commentContent_head{
 	width: 1.6875rem;
 	height: 1.6875rem;
 	margin-top: 0.625rem;
@@ -269,7 +260,8 @@
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
-}
+	box-shadow:0px 2px 2px 1px rgba(0,0,0,0.15);
+}*/
 .comment_user{
 	margin-top: 1.3rem;
 	text-align:left;
@@ -282,7 +274,7 @@
 	padding-left: 3.6rem;
 }
 .comment_info{
-   padding-left: 3.6rem;
+   padding-left:3.6rem;
 }
 .thumb{
 	width: 1.0625rem;
@@ -357,7 +349,10 @@
 .game_comment_content{
 	padding: 0 0.625rem;
 	margin-top:-1rem;
-	/*margin-top:0.5rem;*/
+}
+.game_strategy_content{
+	padding: 0 0.625rem;
+   margin-top:0.2rem;
 }
 .game_similarContents{
 	overflow: scroll;
@@ -481,9 +476,9 @@
 	margin-left: 0.625rem;
 	margin-right: 0.75rem;
 	border-radius: 50%;
-	/*background-image: url("../../Public/image/yishoucang.png");*/
-	background-color: green;
-	background-position: center;
+	box-shadow:0px 2px 2px 1px rgba(0,0,0,0.15);
+	background-size:2.9375rem  2.9375rem;
+	background-position:center;
 	background-repeat:no-repeat;
 	background-size: contain;
 }
