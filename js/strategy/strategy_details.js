@@ -49,9 +49,7 @@ $(function() {
 		var self = plus.webview.currentWebview();
 		strategyId = self.strategyId;
 		var anchor = self.anchor;
-
 		total_height = plus.navigator.getStatusbarHeight() + 45 + "px";
-
 		window.addEventListener('reload', function() {
 			// mui.fire()传过来的额外的参数，在event.detail中；
 			window.location.reload();
