@@ -236,6 +236,7 @@ $(function() {
 
 })
 
+/* 顶部的头图 */
 function getHeaderimg() {
 	$.ajax({
 		type: "get",
@@ -244,8 +245,17 @@ function getHeaderimg() {
 		success: function(data) {
 			var g = data.game;
 			if(data.state) {
-				$('.game').css("background-image", "url(" + config.img + encodeURI(g.img) + ")")
+				var img =new Image;				
+				img.onload=function(){
+					$('.game').css("background-image","url(" + img.src + ")")
+				}
+				
+				img.src=config.img +g.img
+				
 				$('.game_header').css("background-image", "url(" + config.img + encodeURI(g.icon) + ")")
+				
+				
+				
 				$('.game_name').text(g.game_name)
 				$('.game_datail').text(g.game_recommend)
 				$('.new_score').text(g.grade)
