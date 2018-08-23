@@ -598,7 +598,7 @@ $('.game_rank').children().click(function() {
 function getRank(sort) {
     rankToggle=true;
      /*阻挡掉one模块*/
-	if(sort=="sort2"){
+	if(sort=="game_download_num"){
 		$('.comingsoon').remove();
 		$(".hot_rank").css("display","none");
 		$('.comingsoon').css("display","block");
@@ -615,8 +615,8 @@ function getRank(sort) {
 		data: {
 			sys: 2,
 			page: 1,
-			type: '',
-			sort: sort,
+			type:'',
+			sort:sort,
 		},
 		success: function(data) {
 			var g = data.game;

@@ -1,13 +1,11 @@
+var newArray=[];
 $(function() {
-
 	mui.plusReady(function() {
 		$('.header_box').next().css("margin-top", 0);
 		$('.bell').css("top", total_height - 40 + "px");
 		$('.search').css("top", total_height - 40 + "px");
 		$('.one').css("top", total_height - 34 + "px");
-
 	})
-
 	getHeaderimg();
 	$.ajax({
 		type: "get",
@@ -29,7 +27,15 @@ $(function() {
 					$('.news_artAlone > .news_art .news_img_content .news_img_header').addClass('hidden')
 				}
 				$('.news_artAlone > .news_art').attr("data-id", n[0].id)
-				$('.news_artAlone > .news_art > .news_img').css("background-image", "url(" + config.img + encodeURI(n[0].img) + ")")
+				
+				var news_img_1=new Image();			
+				news_img_1.onload=function(){		
+					$('.news_artAlone > .news_art > .news_img').css("background-image", "url(" + config.img + encodeURI(n[0].img) + ")")
+				}				
+				news_img_1.src=config.img + encodeURI(n[0].img)
+				
+				//$('.news_artAlone > .news_art > .news_img').css("background-image", "url(" + config.img + encodeURI(n[0].img) + ")")
+				
 				$('.news_artAlone > .news_art  .news_img_header').css("background-image", "url(" + config.img + encodeURI(n[0].icon) + ")")
 				$('.news_artAlone > .news_art  .news_art_viewNum').text(n[0].browse)
 				$('.news_artAlone > .news_art  .news_art_praisePoint').text(n[0].agree)
@@ -45,7 +51,12 @@ $(function() {
 					$('.news_art2 > .news_art .news_img_content').addClass('hidden')
 				}
 				$('.news_art2').attr('data-id', n[1].id)
-				$('.news_art2 > .news_img').css("background-image", "url(" + config.img + encodeURI(n[1].img) + ")")
+				//$('.news_art2 > .news_img').css("background-image", "url(" + config.img + encodeURI(n[1].img) + ")")
+				var news_img_2=new Image()
+				news_img_2.onload=function(){
+				  $('.news_art2 > .news_img').css("background-image", "url(" + config.img + encodeURI(n[1].img) + ")")
+				}
+				news_img_2.src=config.img + encodeURI(n[1].img)
 				$('.news_art2  .news_img_header').css("background-image", "url(" + config.img + encodeURI(n[1].icon) + ")")
 				$('.news_art2  .news_art_viewNum').text(n[1].browse)
 				$('.news_art2  .news_art_praisePoint').text(n[1].agree)
@@ -55,11 +66,11 @@ $(function() {
 
 				var div = "";
 				for(var i = 2; i < n.length; i++) {
-						//alert(n[i].add_time);
+					newArray.push({src:config.img+encodeURI(n[i].img),img:new Image()});
 					if(n[i].game_id) {
 						div +=
 							"<div class='news_art ofh' style='margin-top: 0.75rem;margin-bottom: 0.2rem;' data-id = '" + n[i].id + "' data-gameId = '" + n[i].game_id + "'>" +
-							"<div class='news_img' style='background-image:url(" + config.img + encodeURI(n[i].img) + ")'>" +
+							"<div class='news_img' >" +
 							"<div class='news_img_content color_white'>" +
 							"<div class='news_img_header fl' style='background-image:url(" + config.img + encodeURI(n[i].icon) + ")'></div>" +
 							"<div class='fl  new_art_name font_14 overflow'>" + n[i].game_name + "</div>" +
@@ -85,7 +96,7 @@ $(function() {
 					} else {
 						div +=
 										"<div class='news_art ofh' style='margin-top: 0.75rem;margin-bottom: 0.2rem;' data-id = '"+ n[i].id +"' data-gameId = '"+ n[i].game_id +"'>"+
-											"<div class='news_img' style='background-image:url("+config.img + encodeURI(n[i].img)+")'>"+
+											"<div class='news_img' >"+
 												"<div class='news_img_content color_white'>"+
 													"<div class='news_img_header fl' style='background-image:url("+config.img + encodeURI(n[i].icon)+")'></div>"+
 													"<div class='fr font_12' style='margin-top: 1.75rem;'>"+
@@ -114,7 +125,12 @@ $(function() {
 
 				}
 				$('.news_art_list').append(div)
-
+                newArray.forEach(function(item,value){
+					item.img.onload=function(){
+						$('.news_art_list .news_img').eq(value).css('background-image',"url("+item.src+"");
+					}
+					item.img.src=item.src
+				})
 			} else {
 
 			}
@@ -245,7 +261,7 @@ function getHeaderimg() {
 		success: function(data) {
 			var g = data.game;
 			if(data.state) {
-				var img =new Image;				
+				var img =new Image();				
 				img.onload=function(){
 					$('.game').css("background-image","url(" + img.src + ")")
 				}

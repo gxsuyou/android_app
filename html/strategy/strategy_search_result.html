@@ -129,11 +129,9 @@
 				</div>
 			</div>
 	</body>
-	<script>
-		var page = 0;
-		var sort = 'comment_num';
-	</script>
 	<script type="text/javascript">
+		    var page = 0;
+		    var sort = 'comment_num';
 			mui.init({
 				swipeBack: true,
 				pullRefresh: {
@@ -219,7 +217,7 @@
 												  "<div class='strategy_content_titles'>"+
 													"<div class='strategy_content_title color_282828'>" + str[i].title + "</div>"+								
 												"</div>"+
-												 "<div class='strategy_content'>"+detail+"</div>"+
+												 "<div class='strategy_contentz'>"+detail+"</div>"+
 												"</div>"+
 												"<div class='strategy_content_classifys ofh'>"+
 													"<div class='backgroundColor_gray border_radius_twenty strategy_content_classify tac font_14 color_7a7a7a fl overflow'>"+ str[i].game_name +"</div>"+
@@ -227,10 +225,8 @@
 												    "<span class='comment_img' data-id='"+ str[i].id +"' data-userId='"+ str[i].user_id +"'></span>"+
 												    "<span class='comment_num font_14'>"+ str[i].comment_num +"</span>"+
 													"</div>"+
-												"</div>"+
-												
-												"<div class='cut_line backgroundColor_gray'></div>"+
-												
+												"</div>"+												
+												"<div class='cut_line backgroundColor_gray'></div>"+												
 											"</div>"
 											
 								}

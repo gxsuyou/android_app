@@ -112,7 +112,7 @@
 					回帖
 				</div>
 				<div class="news_review"></div>
-				<div class="news_reviewNum backgroundColor_green tac color_white">2</div>
+				<div class="news_reviewNum backgroundColor_green tac color_white">0</div>
 				<div class="news_collect"></div>
 			</div>		
 			<!--定位-->
@@ -130,9 +130,10 @@
 	<script>
 		mui.previewImage();
 		window.addEventListener('refresh',function(event){
-			$('.news_post_commentContents').empty()
-              page = 0
-              up()
+            page = 0
+            $('.news_post_commentContents').empty()
+            getNum()          
+            up()
 		});
 	</script>
 </html>

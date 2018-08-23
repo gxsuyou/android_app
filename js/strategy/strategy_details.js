@@ -629,17 +629,34 @@ function detail() {
 	});
 }
 
+//获得评论数
+
+function getNum(){
+	$.ajax({
+		type:"get",
+		url:config.data+"strategy/getStrategyNum",
+		async:true,
+		data:{
+			strategyId:strategyId
+		},
+		success:function(data){
+			$('.news_reviewNum').text(data.strategy.comment_num);
+		}
+	})
+}
+
+
+
+
 //收藏
 function collect(strategyId) {
-
 	$('.news_collect').addClass("collected")
-
 	$.ajax({
 		type: "get",
 		url: config.data + "strategy/collect",
 		async: true,
 		data: {
-			targetId: strategyId,
+			targetId:strategyId,
 			userId: userId,
 			type: 2,
 			sys: 2
