@@ -174,7 +174,7 @@ mui.plusReady(function () {
     mui('.mui-bar-tab').on('tap', 'a', function (e) {
 
         var index = $(this).index();
-
+        
         //获取目标子页的id
         var h = plus.webview.getWebviewById(subpages[index])
 
@@ -184,13 +184,12 @@ mui.plusReady(function () {
         document.getElementsByClassName("mui-icon")[3].classList.remove('play_active');
         document.getElementsByClassName("mui-icon")[4].classList.remove('me_active');
         this.children[0].classList.add(this.getAttribute('data-img'));
-        //			console.log(this.getAttribute('data-img'))
         var targetTab = this.getAttribute('data-href');
-        //		console.log(targetTab);
         if (targetTab == activeTab) {
 
             return;
         }
+        console.log(subpages[index])
         if (!h) {
             var sub = plus.webview.create(
                 subpages[index], //子页url
