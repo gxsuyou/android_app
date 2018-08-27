@@ -1,5 +1,4 @@
 var subpages = ['html/news/news.html', 'html/game/game_recommend.html', 'html/strategy/strategy.html', 'html/play/play.html', 'html/user/me.html'];
-
 var Index = 0;
 var newVer;
 //把子页的路径写在数组里面
@@ -7,7 +6,6 @@ var activeTab = subpages[Index];
 //选项卡点击事件
 var self;
 var dbQuit=0;//用于记录点击次数
-
 mui.plusReady(function () {
     var wgtVer = null;
     function plusReady() {
@@ -18,7 +16,6 @@ mui.plusReady(function () {
 
             console.log("当前应用版本：" + wgtVer);
             //	检测更新
-
             $.ajax({
                 type: "get",
                 url: "http://www.oneyouxi.com.cn:8877/H5/update",

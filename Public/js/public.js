@@ -47,12 +47,11 @@ function activeBell(){
                "userId": userId
 	       },
 	       success:function(data){
-	       	   if(data.state==1){
+	       	   if(data.state==1){       	   	
 	       	   	  $(".bell").addClass("bell_active");
 	       	   }else{
 	       	   	  $(".bell").removeClass("bell_active");
-	       	   }
-              
+	       	   }             
 	    }
       });
 	}

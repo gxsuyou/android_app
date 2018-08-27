@@ -40,10 +40,17 @@ $(function () {
                             //						window.localStorage.setItem("userName", userName);
                             window.localStorage.setItem("userInfo", userInfo);
                             window.localStorage.setItem("userId", userId);
-                            plus.webview.close(plus.webview.getWebviewById("H5C62934A"), "none");
+                            //plus.webview.close(plus.webview.getWebviewById("H5C62934A"), "none");
 //							plus.webview.close(plus.webview.getWebviewById("HBuilder"),"none");
 
 
+                           plus.webview.close("html/user/me.html");
+                           plus.webview.close("html/news/news.html");
+                           plus.webview.close("html/game/game_recommend.html");
+                           plus.webview.close("html/strategy/strategy.html");
+                           plus.webview.close("html/play/play.html");
+
+                          
                             mui.openWindow({
                                 url: '../../index.html',
                                 id: 'H5C62934A',

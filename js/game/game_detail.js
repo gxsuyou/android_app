@@ -873,7 +873,6 @@ function detail_strategy(){
 						for(var i = 0; i < s.length; i++) {
 							num_total += s[i].num;
 						}
-                        //alert(num_total)
 						for(var j = 0; j < s.length; j++) {	
 							if(s[j].score==10){
                                 var lan=10/num_total;         
@@ -909,13 +908,11 @@ function detail_strategy(){
 											
 						}
 
-                        var total=(total_10+total_8+total_6+total_4+total_2)/num_total;                    
+                        var total=(total_10+total_8+total_6+total_4+total_2)/num_total;                   
                         if(!Object.is(total,NaN)){
-                        	$(".gameScore,.game_infoScore").text(total.toFixed(1)+'分');
+                        	$(".game_infoScore").text(total.toFixed(1)+'分')
+                        	$(".gameScore").text(total.toFixed(1))
                         }
-						
-							
-                        
 
 					} else {
 

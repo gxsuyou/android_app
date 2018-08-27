@@ -78,15 +78,17 @@ body{
 .game_shows{
 	display: flex;
 	padding: 0.9375rem 0;
-	justify-content:space-around;	
+	justify-content:center;	
 }
 .game_shows > div{
 	width: 6.0625rem;
 	height: 8.875rem;
-	background-position: center;
+	background-position:center;
 	background-repeat:no-repeat;
-	background-size: cover;
-	
+	background-size:cover;	
+}
+.game_shows > div:nth-child(2){
+	margin:0 7%;
 }
 .game_recommend_topicImg{
 	width: 100%;
