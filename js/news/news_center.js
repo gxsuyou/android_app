@@ -8,11 +8,6 @@ $(function(){
 				userId: userId
 			},
 			success: function(data) {
-				if(data.state) {
-		
-				} else {
-		
-				}
 			}
 		});
 		

@@ -678,7 +678,7 @@ function detail_strategy(){
 					$('.game_simpleIntro_content').html(g.game_detail)
 					$('.game_particular_value').children().eq(0).text(g.game_download_num + "次下载")
 					$('.game_particular_value').children().eq(1).text(g.game_version)
-					$('.game_particular_value').children().eq(2).text(g.game_size + "MB")
+					$('.game_particular_value').children().eq(2).text(g.game_size)
 					$('.game_particular_value').children().eq(3).text(g.game_update_date)
 					$('.game_particular_value').children().eq(4).text(g.game_company)
 					//$('.game_particular_value').children().eq(5).text(g.game_company)
@@ -733,8 +733,7 @@ function detail_strategy(){
 							"<div class='game_relatedInfocontentTime font_12 simHei color_9e9e9e'>" + nl[i].add_time + "</div>" +
 							"</div>"
 					}
-					$('.game_relatedInfocontents').append(div)
-
+					$('.game_relatedInfocontents').empty().append(div)
 				} else {
 
 				}
@@ -874,7 +873,6 @@ function detail_strategy(){
 						for(var i = 0; i < s.length; i++) {
 							num_total += s[i].num;
 						}
-                        //alert(num_total)
 						for(var j = 0; j < s.length; j++) {	
 							if(s[j].score==10){
                                 var lan=10/num_total;         
@@ -910,13 +908,11 @@ function detail_strategy(){
 											
 						}
 
-                        var total=(total_10+total_8+total_6+total_4+total_2)/num_total;                    
+                        var total=(total_10+total_8+total_6+total_4+total_2)/num_total;                   
                         if(!Object.is(total,NaN)){
-                        	$(".gameScore,.game_infoScore").text(total.toFixed(1));
+                        	$(".game_infoScore").text(total.toFixed(1)+'分')
+                        	$(".gameScore").text(total.toFixed(1))
                         }
-						
-							
-                        
 
 					} else {
 

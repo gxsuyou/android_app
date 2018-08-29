@@ -182,10 +182,8 @@
             ss&&(shareBts.push({title:'微信朋友圈',s:ss,x:'WXSceneTimeline'}), 
             shareBts.push({title:'微信好友',s:ss,x:'WXSceneSession'}));
             ss=shares['qq'];  
-            ss&&shareBts.push({title:'QQ',s:ss});          
-
-//          console.log(JSON.stringify(shareBts))
-            shareAction(shareBts[index],true);       
+            ss&&shareBts.push({title:'QQ',s:ss})          
+            shareAction(shareBts[index],true)      
         }  
         mui.back = function() {  
             var sourcePage = plus.webview.getWebviewById(pageSourceId);  

@@ -16,10 +16,6 @@ body{
 	border-bottom: 4px solid #7FCADF;
 }
 
-.strategy_content_art{
-	padding: 0 0.9375rem;
-	margin-bottom: 0.9375rem;
-} 
 .strategy_content_headImg{
 	width: 2.0625rem;
 	height: 2.0625rem;
@@ -38,7 +34,6 @@ body{
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
-	
 }
 .notice{
 	position: absolute;
@@ -71,22 +66,24 @@ body{
 	margin-top: 0.1rem;
 }
 .strategy_content_art{
-	padding: 0 0.9375rem;
-	margin-bottom: 0.9375rem;
+   padding: 0 0.9375rem;
+   margin-bottom:0.5rem;
 }
 
-
 .strategy_content{
-	overflow: hidden; /** 隐藏超出的内容 **/
-  background-color: #FFFFFF;
+  background-color:#fff;
+}
+.strategy_content_detail{
+  overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
+
+
 .strategy_content_classify{
-	/*width: 4rem;*/
-	max-width: 8rem;
+/*	max-width: 8rem;*/
 	padding: 0 0.4rem;
 	height: 1.25rem;
 	line-height: 1.25rem;
@@ -96,12 +93,10 @@ body{
 	   height: 2rem;
 	   margin-right: 0.9375rem;	  
 }
-.comment_img{
-	
+.comment_img{	
 	width: 1.0625rem;
 	height: 1.0625rem;
 	background-image: url("../../Public/image/liuyan.png");
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
@@ -140,7 +135,7 @@ body{
 .pen{
 	width: 3.375rem;
 	height: 3.375rem;
-	background-color: deepskyblue;
+	background-color:deepskyblue;
 	border-radius: 50%;
 	position: fixed;
 	top: 30rem;
@@ -207,7 +202,7 @@ body{
 .news_art_content{
 	width: 100%;
 	height: 3.75rem;
-	background-color: white;
+	background-color:#fff;
 	border-radius:0 0 5px 5px;
 	
 }
@@ -219,14 +214,12 @@ body{
 	max-height: 2.6rem;
 	font-weight:bold;
 	font-size:14px;
-	/*white-space:nowrap;*/
 	 word-break: break-all;
     text-overflow: ellipsis;
     display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
     -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
     -webkit-line-clamp: 2; /** 显示的行数 **/
-    overflow: hidden;  /** 隐藏超出的内容 **/
-	
+    overflow: hidden;  /** 隐藏超出的内容 **/	
 }
 .official{
 	display: inline-block;

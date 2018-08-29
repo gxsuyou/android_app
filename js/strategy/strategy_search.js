@@ -19,11 +19,11 @@ $(function() {
 						for(var i = 0; i < gn.length; i++) {
 							div +=
 								"<div class='search_list' data-id='"+gn[i].id+"'>" 
-								+"<div class='fl' style='margin:0 0.5rem 0 1rem;'>"+gn[i].game_name+" :"+"</div>"+
-								"<div class='fl searchTitle' >" + gn[i].title + "</div>" +
+								+"<div  style='margin:0 0.5rem 0 0.5rem;'>"+gn[i].game_name+" :"+"</div>"+
+								"<div class='searchTitle'>" + gn[i].title + "</div>" +
 								"</div>"
 						}
-						$('.search_lists').append(div)
+						$('.search_lists').empty().append(div)
 					} else {
                         var no_content = "<div class='no_content tac'>没有搜到任何内容</div>"
 						$('.search_lists').empty().append(no_content)

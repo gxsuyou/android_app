@@ -1,5 +1,4 @@
 var subpages = ['html/news/news.html', 'html/game/game_recommend.html', 'html/strategy/strategy.html', 'html/play/play.html', 'html/user/me.html'];
-
 var Index = 0;
 var newVer;
 //把子页的路径写在数组里面
@@ -7,7 +6,6 @@ var activeTab = subpages[Index];
 //选项卡点击事件
 var self;
 var dbQuit=0;//用于记录点击次数
-
 mui.plusReady(function () {
     var wgtVer = null;
     function plusReady() {
@@ -18,7 +16,6 @@ mui.plusReady(function () {
 
             console.log("当前应用版本：" + wgtVer);
             //	检测更新
-
             $.ajax({
                 type: "get",
                 url: "http://www.oneyouxi.com.cn:8877/H5/update",
@@ -174,7 +171,7 @@ mui.plusReady(function () {
     mui('.mui-bar-tab').on('tap', 'a', function (e) {
 
         var index = $(this).index();
-
+        
         //获取目标子页的id
         var h = plus.webview.getWebviewById(subpages[index])
 
@@ -184,13 +181,12 @@ mui.plusReady(function () {
         document.getElementsByClassName("mui-icon")[3].classList.remove('play_active');
         document.getElementsByClassName("mui-icon")[4].classList.remove('me_active');
         this.children[0].classList.add(this.getAttribute('data-img'));
-        //			console.log(this.getAttribute('data-img'))
         var targetTab = this.getAttribute('data-href');
-        //		console.log(targetTab);
         if (targetTab == activeTab) {
 
             return;
         }
+        console.log(subpages[index])
         if (!h) {
             var sub = plus.webview.create(
                 subpages[index], //子页url

@@ -1,10 +1,6 @@
 var msg;
 $(function(){
-//	$('body').click(function(){
-//		mui.openWindow({
-//			url:"strategy_add.html"
-//		})
-//	})
+
 	mui.plusReady(function() {
 		var self = plus.webview.currentWebview();
 		msg = self.msg; 

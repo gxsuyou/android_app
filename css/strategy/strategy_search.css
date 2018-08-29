@@ -10,12 +10,7 @@ input[type=text]{
 .search_lists{
 	margin-top:  2.375rem;;
 }
-.searchTitle{
-	width:15rem;
-	white-space:nowrap;
-	text-overflow: ellipsis;
-	overflow: hidden;
-}
+
 .no_content{
 	color: #9E9E9E;
 	margin-top: 8.5rem;	
@@ -48,4 +43,11 @@ input[type=text]{
 	line-height: 4rem;
 	background-color: white;
 	border-bottom: 1px solid #e7eaec;
+	font-size:14px;
+	display:flex;
+}
+.searchTitle{
+	white-space:nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }

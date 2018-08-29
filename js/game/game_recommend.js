@@ -133,8 +133,7 @@ $(function() {
 		},
 		success: function(data) {
 			if(data.state) {
-
-				var sub = data.subject;
+     			var sub = data.subject;
 				$('.game_topicBox').attr('data-id', sub[0].id);
 				$('.game_topicBox').find('.game_recommend_topicImg').css('background-image', 'url(' + config.img + encodeURI(sub[0].img) + ')');
 
@@ -187,11 +186,10 @@ $(function() {
 						var bb = 2 * j + 1;
 						content +=
 
-							"<div style='padding-right: 1.0625rem;'>" +
+							"<div style='padding-right:1.0625rem;flex-shrink:0;'>" +
 							"<div class='game_detail_content'>" +
 							"<div class='game_signTop' data-gameId='" + act[i][aa].gameId + "'>" +
 							"<div class='game_signTopimg' style='background-image: url(" + config.img + encodeURI(act[i][aa].game_title_img) + ");'>" +
-
 							"</div>" +
 							"<div class='game_signTopart'>" +
 							"<div class='fl font_14 overflow'>" + act[i][aa].game_name + "</div>" +
@@ -598,7 +596,7 @@ $('.game_rank').children().click(function() {
 function getRank(sort) {
     rankToggle=true;
      /*阻挡掉one模块*/
-	if(sort=="sort2"){
+	if(sort=="game_download_num"){
 		$('.comingsoon').remove();
 		$(".hot_rank").css("display","none");
 		$('.comingsoon').css("display","block");
@@ -615,8 +613,8 @@ function getRank(sort) {
 		data: {
 			sys: 2,
 			page: 1,
-			type: '',
-			sort: sort,
+			type:'',
+			sort:sort,
 		},
 		success: function(data) {
 			var g = data.game;

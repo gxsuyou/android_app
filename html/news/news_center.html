@@ -42,7 +42,6 @@
 				</div>-->
 			</div>
 		</div>
-
 		<div class="nav tac font_14 color_282828">
 			<div class="active" data-sort="1">资讯</div>
 			<div data-sort="2">攻略</div>
@@ -55,12 +54,12 @@
 			mui.init({
 				swipeBack: true,
 				beforeback:function(){
-					var list = plus.webview.getWebviewById("main.html");//触发父页面的自定义事件(refresh),从而进行刷新	
+					var list = plus.webview.getWebviewById("html/news/news.html");//触发父页面的自定义事件(refresh),从而进行刷新	
 					mui.fire(list, 'reload');
-					var strategy = plus.webview.getWebviewById("strategy.html");//触发父页面的自定义事件(refresh),从而进行刷新
-					mui.fire(strategy, 'reload');
-					var game_recommend = plus.webview.getWebviewById("game_recommend.html");//触发父页面的自定义事件(refresh),从而进行刷新
+					var game_recommend = plus.webview.getWebviewById("html/game/game_recommend.html");//触发父页面的自定义事件(refresh),从而进行刷新
 					mui.fire(game_recommend, 'reload');
+					var strategy = plus.webview.getWebviewById("html/strategy/strategy.html");//触发父页面的自定义事件(refresh),从而进行刷新
+					mui.fire(strategy, 'reload');				
 					return true;//返回true,继续页面关闭逻辑
 				},
 				pullRefresh: {
@@ -176,7 +175,6 @@
 								var t = data.tip;
                                 var portrait;
 								var div = '';
-//								alert(JSON.stringify(data))
 								for(var i = 0; i < t.length; i++) {
 									if(t[i].series == 1) {
 										var commentId = t[i].id
@@ -194,7 +192,6 @@
 								    }else{
 									   portrait=t[i].portrait;
 								    }
-//                                   alert(t[i].game_id);
 									div +=
 										"<div class='notice_list ofh' data-game='"+t[i].game_id+"' data-id='" + commentId + "' data-type='" + t[i].type + "'>" +
 										"<span class='notice_listImg fl' style='background-image: url(" + encodeURI(portrait) + ");'></span>" +
