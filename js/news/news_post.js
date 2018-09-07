@@ -7,7 +7,7 @@ var type = 'hot';
 var firstImg;
 var title;
 $(function() {
-	$('body').on('tap','a',function(event){
+	$('body').on('tap', 'a', function(event) {
 		event.preventDefault();
 		var url = $(this).attr('href');
 		mui.openWindow({
@@ -39,22 +39,21 @@ $(function() {
 			}
 		})
 	})
-	
-	
+
 	mui.init({
 		swipeBack: true, //启用右滑关闭功能
 		gestureConfig: {
 			tap: true, //默认为true
-		    longtap: true, //默认为false
+			longtap: true, //默认为false
 		},
-		pullRefresh:{
+		pullRefresh: {
 			container: ".new_post_contents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 			up: {
 				height: 50, //可选.默认50.触发上拉加载拖动距离
 				auto: true, //可选,默认false.自动上拉加载一次
 				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
 				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-				callback:up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+				callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 			},
 			down: {
 				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
@@ -94,8 +93,8 @@ $(function() {
 					firstImg = n.img
 					title = n.title
 					$('.detail').html(n.detail);
-                    $(".detail img").attr("data-preview-src","");
-                    $(".detail img").attr("data-preview-group","1");                    
+					$(".detail img").attr("data-preview-src", "");
+					$(".detail img").attr("data-preview-group", "1");
 					$('.news_post_content').attr("data-id", n.id)
 					$('.news_post_listImg').css("background-image", "url(" + config.img + encodeURI(n.icon) + ")")
 					$('.news_post_content>h4').text(n.title)
@@ -111,7 +110,7 @@ $(function() {
 						$('.news_post_list').addClass('hidden')
 					}
 					if(n.collect) {
-						$('.news_collect').attr('data-collect','1')
+						$('.news_collect').attr('data-collect', '1')
 						$('.news_collect').css("background-image", "url(../../Public/image/yishoucang.png)")
 					} else {
 						$('.news_collect').attr('data-collect', '')
@@ -126,13 +125,13 @@ $(function() {
 				mui.openWindow({
 					url: "news_allComments.html",
 					id: "news_allComments.html",
-					createNew: true,  
+					createNew: true,
 					extras: {
 						newsId: newsId,
 						commentId: commentId,
 						targetUserId: $(this).attr('data-userId'),
-						firstImg:firstImg,
-						title:title,						
+						firstImg: firstImg,
+						title: title,
 					}
 				})
 			} else {
@@ -143,7 +142,7 @@ $(function() {
 			}
 
 		})
-         //点击热门
+		//点击热门
 		$('body').on('tap', '.hot', function() {
 			$('.news_post_commentContents').children().remove();
 			mui('.new_post_contents').pullRefresh().refresh(true);
@@ -298,27 +297,26 @@ $(function() {
 		})
 
 		//  点赞部分结束
-		
+
 		//保存图片开始
 		$('body').on('longtap', 'img', function() {
 			var picurl = $(this).attr("src");
-		   saveImg(picurl);
+			saveImg(picurl);
 		});
-		
+
 		//点击头部保存图片
-		$('body').on('tap','.mui-preview-header',function(){
-          let num=$(".mui-preview-indicator").text();        
-          num=num.substring(0,1)-1;
-          let url=$(".mui-preview-image img:eq("+num+")").attr("src");
-          saveImg(url);
+		$('body').on('tap', '.mui-preview-header', function() {
+			let num = $(".mui-preview-indicator").text();
+			num = num.substring(0, 1) - 1;
+			let url = $(".mui-preview-image img:eq(" + num + ")").attr("src");
+			saveImg(url);
 		})
-		
-			
-		function saveImg(picurl){
+
+		function saveImg(picurl) {
 			var picname;
 			var btnArray = ['否', '是'];
 			mui.confirm('是否保存该图片？', 'ONE', btnArray, function(e) {
-				if(e.index == 1){
+				if(e.index == 1) {
 
 					if(picurl.indexOf("/") > 0) //如果包含有"/"号 从最后一个"/"号+1的位置开始截取字符串
 					{
@@ -329,31 +327,29 @@ $(function() {
 					savePicture(picurl, picname)
 				}
 			});
-			
+
 		}
-		
 
-// 保存图片到相册中 
-        function savePicture(picurl, picname) {
-	         // 创建下载任务
-	         var dtask = plus.downloader.createDownload(picurl, {}, function(d, status) {
-		// 下载完成
-		         if(status == 200) {
-			     plus.gallery.save(d.filename, function() {
-				   mui.toast('保存成功');
-			     }, function() {
-				  mui.toast('保存失败，请重试！');
-			     });
-		     } else {
-			    alert("Download failed: " + status);
-		    }
+		// 保存图片到相册中 
+		function savePicture(picurl, picname) {
+			// 创建下载任务
+			var dtask = plus.downloader.createDownload(picurl, {}, function(d, status) {
+				// 下载完成
+				if(status == 200) {
+					plus.gallery.save(d.filename, function() {
+						mui.toast('保存成功');
+					}, function() {
+						mui.toast('保存失败，请重试！');
+					});
+				} else {
+					alert("Download failed: " + status);
+				}
 
-	    });
-	      //dtask.addEventListener( "statechanged", onStateChanged, false );
-	       dtask.start();
+			});
+			//dtask.addEventListener( "statechanged", onStateChanged, false );
+			dtask.start();
 
-        }
-
+		}
 
 		//	滚动隐藏
 		function scroll(fn) {
@@ -370,7 +366,7 @@ $(function() {
 		}
 
 		scroll(function(direction) {
-			
+
 			if(direction == "down") {
 				$('.news_userInfo_reply').addClass('hidden')
 			} else {
@@ -394,55 +390,52 @@ $(function() {
 
 			})
 		})
-		$('body').on('tap', '.publish', function(event){
-			
-			event.preventDefault();
+		$('body').on('tap', '.publish', function(e) {
+
+			e.preventDefault();
 			if(userId) {
 				var content = $(this).prev().val();
-				if(content){
+				if(content) {
 					$.ajax({
-					   type: "get",
-					   url: config.data + "news/comment",
-					   async: true,
-					   data: {
-						  "targetCommentId": newsId,
-						   "userId": userId,
-						"series": 1,
-						"content": content,
-						"news_img": firstImg,
-						"newsid": newsId,
-						"news_title": title
-					   },
-					   success: function(data) {
-						 if(data.state == "1") {
-							
-						$('.news_secondComment_input').val("");//不刷新	
-			            
-			            
-			            var reviewNum=$('.news_reviewNum').text()
-			            reviewNum=Number(reviewNum)
-			            if(reviewNum>99){
-			            	reviewNum=reviewNum;
-			            }else{
-			            	reviewNum=reviewNum+1;
-			            }                      
-			            $('.news_reviewNum').text(reviewNum);
-			            
-			             mui('.new_post_contents').pullRefresh().refresh(true);
-			             $(".news_post_commentContents").empty();			             
-			             page=0;
-						 up();
-						
-						 mui.toast("发送成功");					
-						} else {
-							mui.toast("发送失败，请重试")
+						type: "get",
+						url: config.data + "news/comment",
+						async: true,
+						data: {
+							"targetCommentId": newsId,
+							"userId": userId,
+							"series": 1,
+							"content": content,
+							"news_img": firstImg,
+							"newsid": newsId,
+							"news_title": title
+						},
+						success: function(data) {
+							if(data.state == "1") {
+                                mui.toast("评论成功")
+								$('.news_secondComment_input').val(""); //不刷新	
+
+								var reviewNum = $('.news_reviewNum').text()
+								reviewNum = Number(reviewNum)
+								if(reviewNum > 99) {
+									reviewNum = reviewNum;
+								} else {
+									reviewNum = reviewNum + 1;
+								}
+								$('.news_reviewNum').text(reviewNum);
+
+								mui('.new_post_contents').pullRefresh().refresh(true);
+								$(".news_post_commentContents").empty();
+								page = 0;
+								up();						
+							} else {
+								mui.toast("发送失败，请重试")
+							}
 						}
-					   }
-				    });
-				}else{
+					});
+				} else {
 					mui.toast("请填写内容");
 				}
-				
+
 			} else {
 				mui.openWindow({
 					url: "../user/login.html",
@@ -461,8 +454,7 @@ $(function() {
 	})
 })
 
-
-function up(){
+function up() {
 	page++;
 	if(type == "hot") {
 		$.ajax({
@@ -478,7 +470,7 @@ function up(){
 				if(data.state) {
 					var com = data.comment;
 					var comment = "";
-					var towLen,portrait;
+					var towLen, portrait;
 					for(var i = 0; i < com.length; i++) {
 						var tow = com[i].towCommentList;
 						var secondCom = "";
@@ -487,14 +479,13 @@ function up(){
 						} else {
 							var ifGood = "noGood";
 						}
-						
-						if(com[i].portrait==0||com[i].portrait==null){
-							portrait="../../Public/image/morentouxiang.png";
-						}else{
-							portrait=com[i].portrait;
+
+						if(com[i].portrait == 0 || com[i].portrait == null) {
+							portrait = "../../Public/image/morentouxiang.png";
+						} else {
+							portrait = com[i].portrait;
 						}
-						
-						
+
 						for(var j = 0; j < tow.length; j++) {
 							var ifHide = tow[j].targetUserNickName || "hidden";
 							secondCom +=
@@ -543,7 +534,6 @@ function up(){
 					};
 
 					$('.news_post_commentContents').append(comment);
-					
 
 					if($('.thumb').attr('data-state')) {
 						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")
@@ -564,7 +554,7 @@ function up(){
 			}
 		});
 	} else {
-		
+
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getCommentByPage",
@@ -610,7 +600,7 @@ function up(){
 						} else {
 							var secondComs = "<div class='comment_secondComments font_14 ofh'>" + secondCom + "</div>";
 						}
-          
+
 						comment +=
 							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(com[i].portrait) + ");'></div>" +
@@ -637,8 +627,6 @@ function up(){
 					};
 
 					$('.news_post_commentContents').append(comment);
-
-					
 
 					if($('.thumb').attr('data-state')) {
 						$(this).css("background-image", "url(../../Public/image/diangoodone.png)")

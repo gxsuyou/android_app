@@ -3,6 +3,8 @@ var firstUserid;
 var target_img;
 var target_title;
 var strategyId;
+var page = 0;
+mui.previewImage();
 $(function() {
 	mui.plusReady(function() {
 		var self = plus.webview.currentWebview();
@@ -64,6 +66,8 @@ $(function() {
 					$('.comment_content').text(com.content)
 					if(com.img) {
 						$('.allCom_img').attr('src', config.img+encodeURI(com.img))
+						$(".allCom_img").attr("data-preview-src", "")
+						$(".allCom_img").attr("data-preview-group", "1")
 					} else {
 						$('.allCom_img').addClass('hidden')
 					}
@@ -113,7 +117,7 @@ $(function() {
 					},
 					success: function(data) {
 						if(data.state) {
-							mui.toast("发送成功");
+							mui.toast("评论成功")
 							window.location.reload();
 						} else {
 							mui.toast("发送失败，请重试")

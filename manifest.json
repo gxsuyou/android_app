@@ -409,7 +409,8 @@
 			"html/user/register.html": {
 				"resources": [],
 				"refer": [
-					"html/user/personal_data.html"
+					"html/user/personal_data.html",
+					"html/user/agreement.html"
 				],
 				"priority": 0
 			},

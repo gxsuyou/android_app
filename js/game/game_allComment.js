@@ -90,7 +90,7 @@ $(function() {
 				},
 				success: function(data) {
 					if(data.state == "1") {
-						mui.toast("发送成功")
+						mui.toast("评论成功")
 						$('.news_secondComment_input').val("")
 						window.location.reload()
 					} else {
