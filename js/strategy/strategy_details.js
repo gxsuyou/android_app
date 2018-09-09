@@ -5,9 +5,9 @@ var page = 0;
 var sort = "add_time";
 var target_img;
 var target_title;
-
+var lord_id;
 $(function() {
-	$('body').on('click','a',function(event){
+	$('body').on('click', 'a', function(event) {
 		event.preventDefault();
 		var url = $(this).attr('href');
 		mui.openWindow({
@@ -39,7 +39,7 @@ $(function() {
 			}
 		})
 	})
-	
+
 	$('.news_review').click(function() {
 		$('html, body').animate({
 			scrollTop: $('#recommend').offset().top - parseInt(total_height + 36) + "px"
@@ -61,12 +61,12 @@ $(function() {
 			},
 			pullRefresh: {
 				container: ".strategy_details", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-				up:{
+				up: {
 					height: 50, //可选.默认50.触发上拉加载拖动距离
 					auto: true, //可选,默认false.自动上拉加载一次
 					contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
 					contentnomore: '没有更多数据了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-					callback:up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
 				},
 				down: {
 					style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
@@ -102,23 +102,21 @@ $(function() {
 		//		长按保存图片
 		$('body').on('longtap', 'img', function() {
 			var picurl = $(this).attr("src");
-		   saveImg(picurl);
+			saveImg(picurl);
 		});
-		
-		
-		$('body').on('tap','.mui-preview-header',function(){
-          let num=$(".mui-preview-indicator").text();        
-          num=num.substring(0,1)-1;
-          let url=$(".mui-preview-image img:eq("+num+")").attr("src");
-          saveImg(url);
+
+		$('body').on('tap', '.mui-preview-header', function() {
+			let num = $(".mui-preview-indicator").text();
+			num = num.substring(0, 1) - 1;
+			let url = $(".mui-preview-image img:eq(" + num + ")").attr("src");
+			saveImg(url);
 		})
-		
-			
-		function saveImg(picurl){
+
+		function saveImg(picurl) {
 			var picname;
 			var btnArray = ['否', '是'];
 			mui.confirm('是否保存该图片？', 'ONE', btnArray, function(e) {
-				if(e.index == 1){
+				if(e.index == 1) {
 
 					if(picurl.indexOf("/") > 0) //如果包含有"/"号 从最后一个"/"号+1的位置开始截取字符串
 					{
@@ -129,9 +127,9 @@ $(function() {
 					savePicture(picurl, picname)
 				}
 			});
-			
+
 		}
-		
+
 		//		长按保存图片结束
 
 		//	切换评论排序
@@ -264,12 +262,12 @@ $(function() {
 		$('body').on('click', '.more_secondComment,.comment_img', function(event) {
 
 			event.stopPropagation();
-			if(userId == 0){
+			if(userId == 0) {
 				mui.toast("请先登录");
 				return false;
 			}
-			
-			var commentId = $(this).attr('data-id');	
+
+			var commentId = $(this).attr('data-id');
 			mui.openWindow({
 				url: "strategy_allComments.html",
 				id: "strategy_allComments.html",
@@ -328,8 +326,38 @@ $(function() {
 
 		})
 
-		$('body').on('click', '.news_post_commentContent', function() {
-            if(userId == 0){
+		$("body").on("tap", ".comment_dele", function(e) {
+			e.stopPropagation()
+			var id = $(this).attr("data-id")
+			plus.nativeUI.confirm("删除评论", function(e) {
+				if(e.index == 0) {
+					$.ajax({
+						type: "get",
+						url: config.data + "strategy/delMyComment",
+						async: true,
+						data: {
+							uid: userId,
+							id: id
+						},
+						success: function(data) {
+							if(data.state == 1) {
+								mui.toast("删除成功")
+								page = 0
+								$('.news_post_commentContents').empty()
+								getNum()
+								up()
+							} else {
+								mui.toast("删除失败")
+							}
+						}
+					})
+				}
+			})
+
+		})
+
+		$('body').on('tap', '.news_post_commentContent', function() {
+			if(userId == 0) {
 				mui.toast("请先登录");
 				return false;
 			}
@@ -347,221 +375,221 @@ $(function() {
 		})
 
 		//取消收藏结束
-		
-	
 
 	})
 })
 
+function up() {
+	page++;
+	if(sort == "comment_num") {
+		$.ajax({
+			type: "get",
+			url: config.data + "strategy/getStrategyCommentByPageUser",
+			async: true,
+			data: {
+				page: page,
+				userId: userId,
+				targetId: proId,
+				strategyId: strategyId
+			},
+			success: function(data) {
+				if(data.state) {
+					var com = data.comment;
+					var div = "",
+						portrait;
 
-	function up(){
-			page++;
-			if(sort == "comment_num") {
-				$.ajax({
-					type: "get",
-					url: config.data + "strategy/getStrategyCommentByPageUser",
-					async: true,
-					data: {
-						page: page,
-						userId: userId,
-						targetId: proId,
-						strategyId: strategyId
-					},
-					success: function(data) {
-						if(data.state) {
-							var com = data.comment;
-							var div = "",
-								portrait;
-
-							for(var i = 0; i < com.length; i++) {
-								if(com[i].img) {
-									var img = "img"
-								} else {
-									var img = "hidden"
-								}
-								var sec = "";
-								
-
-								
-								
-								if(com[i].towCommentList.length > 0) {
-									for(var j = 0; j < com[i].towCommentList.length; j++) {
-										if(com[i].towCommentList[j].targetUserNickName) {
-											ifHide = "ifHide"
-										} else {
-											ifHide = "hidden"
-										}
-										sec +=
-											"<div class='comment_secondComment'>" +
-											"<span class='color_green'>" + com[i].towCommentList[j].selfNickName + "</span>" +
-											"<span class='" + ifHide + "'>回复</span>" +
-											"<span class='color_green " + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
-											"<span class='color_282828'>: &nbsp; " + com[i].towCommentList[j].content + "</span>" +
-											"</div>"
-									}
-
-									sec += "<div class='more_secondComment color_green fr' data-id='" + com[i].id + "'>全部回复</div>"
-
-								}
-
-								if(com[i].state !== 1) {
-									var ifLike = "unLike"
-
-								} else {
-									var ifLike = "liked"
-								}
-
-								
-								if(com[i].portrait==0||com[i].portrait==null){
-									portrait="../../Public/image/morentouxiang.png";
-								}else{
-								    portrait=com[i].portrait;
-								}
-								div +=
-									"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
-									"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
-									"<div class='news_post_commentContent_content fl'>" +
-									"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
-									"<div class='comment_content font_14'>" + com[i].content + "</div>" +
-									"<div  class='imgFirst'>"+
-									"<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "'  style='max-height:10rem;' />" +
-									"</div>"+
-									"<div class='comment_info ofh'>" +
-									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
-									"<div class='fr color_9e9e9e comment_imgs'>" +
-									"<span class='thumb " + ifLike + "'></span>" +
-									"<span class='thumb_num font_14'>" + com[i].agree_num + "</span>" +
-									"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
-									"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
-									"</div>" +
-									"</div>" +
-									"<div class='comment_secondComments font_14 ofh'>" +
-									sec +
-									"</div>" +
-									"</div>" +
-									"</div>";
-
-							}
-							$('.news_post_commentContents').append(div);
-							
-
-							if(com.length < 5) {
-								mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
-							} else {
-								mui('.strategy_details').pullRefresh().endPullupToRefresh(false);
-							}
+					for(var i = 0; i < com.length; i++) {
+						if(com[i].img) {
+							var img = "img"
 						} else {
-
+							var img = "hidden"
 						}
-					}
-				});
-			} else {
-				$.ajax({
-					type: "get",
-					url: config.data + "strategy/getStrategyCommentByPage",
-					async: true,
-					data: {
-						strategyId: strategyId,
-						page: page,
-						userId: userId,
-						sort: sort
-					},
-					success: function(data) {
-						if(data.state) {
-							var com = data.comment;
-							var div = ""
-						    
-							for(var i = 0; i < com.length; i++) {
-								if(com[i].img) {
-									var img = "img"
+						var sec = "";
+
+						if(com[i].towCommentList.length > 0) {
+							for(var j = 0; j < com[i].towCommentList.length; j++) {
+								if(com[i].towCommentList[j].targetUserNickName) {
+									ifHide = "ifHide"
 								} else {
-									var img = "hidden"
+									ifHide = "hidden"
 								}
-								var sec = "",portrait;
-                                
-																
-								if(com[i].towCommentList.length > 0) {
-									for(var j = 0; j < com[i].towCommentList.length; j++) {
-										if(com[i].towCommentList[j].targetUserNickName) {
-											ifHide = "ifHide"
-										} else {
-											ifHide = "hidden"
-										}
-										sec +=
-											"<div class='comment_secondComment'>" +
-											"<span class='color_green'>" + com[i].towCommentList[j].selfNickName + "</span>" +
-											"<span class='" + ifHide + "'>回复</span>" +
-											"<span class='color_green " + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
-											"<span class='color_282828'>: &nbsp; " + com[i].towCommentList[j].content + "</span>" +
-											"</div>"
-									}
-
-									sec += "<div class='more_secondComment color_green fr' data-id='" + com[i].id + "'>全部回复</div>"
-
-								}
-
-								if(com[i].state !== 1) {
-									var ifLike = "unLike"
-
-								} else {
-									var ifLike = "liked"
-
-								}
-								if(com[i].portrait==0||com[i].portrait==null){
-									portrait="../../Public/image/morentouxiang.png";
-								}else{
-									portrait=com[i].portrait;
-								}
-								
-							   
-								div +=
-									"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
-									"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
-									"<div class='news_post_commentContent_content fl'>" +
-									"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
-									"<div class='comment_content font_14'>" + com[i].content + "</div>" +
-									"<div  class='imgFirst'>"+
-									"<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "'  style='max-height:10rem;' />" +
-									"</div>"+
-									"<div class='comment_info ofh'>" +
-									"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
-									"<div class='fr color_9e9e9e comment_imgs'>" +
-									"<span class='thumb "+ ifLike +"'></span>" +
-									"<span class='thumb_num font_14'>" + com[i].agree_num + "</span>" +
-									"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
-									"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
-									"</div>" +
-									"</div>" +
-									"<div class='comment_secondComments font_14 ofh'>" +
-									sec +
-									"</div>" +
-									"</div>" +
+								sec +=
+									"<div class='comment_secondComment'>" +
+									"<span class='color_green'>" + com[i].towCommentList[j].selfNickName + "</span>" +
+									//											"<span class='" + ifHide + "'>回复</span>" +
+									//											"<span class='color_green " + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
+									"<span class='color_282828'>: &nbsp; " + com[i].towCommentList[j].content + "</span>" +
 									"</div>"
 							}
 
-						   $('.news_post_commentContents').append(div);
-						   
-						
-                          
-							if(com.length < 5) {
-								mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
-							} else {
-								mui('.strategy_details').pullRefresh().endPullupToRefresh(false);
-							}
-						} else {
+							sec += "<div class='more_secondComment color_green fr' data-id='" + com[i].id + "'>全部回复</div>"
 
 						}
+
+						if(com[i].state !== 1) {
+							var ifLike = "unLike"
+
+						} else {
+							var ifLike = "liked"
+						}
+
+						if(com[i].portrait == 0 || com[i].portrait == null) {
+							portrait = "../../Public/image/morentouxiang.png";
+						} else {
+							portrait = com[i].portrait;
+						}
+						div +=
+							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
+							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
+							"<div class='news_post_commentContent_content fl'>" +
+							"<img class='fl lord_image' src='../../Public/image/lord.png' >" +
+							"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
+							"<div class='comment_content font_14'>" + com[i].content + "</div>" +
+							"<div  class='imgFirst'>" +
+							"<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "'  style='max-height:10rem;' />" +
+							"</div>" +
+							"<div class='comment_info ofh'>" +
+							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+							"<div class='fr color_9e9e9e comment_imgs'>" +
+							"<span class='thumb " + ifLike + "'></span>" +
+							"<span class='thumb_num font_14'>" + com[i].agree_num + "</span>" +
+							"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
+							"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
+							"</div>" +
+							"</div>" +
+							"<div class='comment_secondComments font_14 ofh'>" +
+							sec +
+							"</div>" +
+							"</div>" +
+							"</div>";
+
 					}
-				});
+					$('.news_post_commentContents').append(div);
+
+					if(com.length < 5) {
+						mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
+					} else {
+						mui('.strategy_details').pullRefresh().endPullupToRefresh(false);
+					}
+				} else {
+
+				}
 			}
-			
-           /* UP结束 */
-			
-			
-		
-		}
+		});
+	} else {
+		$.ajax({
+			type: "get",
+			url: config.data + "strategy/getStrategyCommentByPage",
+			async: true,
+			data: {
+				strategyId: strategyId,
+				page: page,
+				userId: userId,
+				sort: sort
+			},
+			success: function(data) {
+				if(data.state) {
+					var com = data.comment;
+					var div = "";
+					for(var i = 0; i < com.length; i++) {
+						if(com[i].img) {
+							var img = "img"
+						} else {
+							var img = "hidden"
+						}
+						var sec = "",
+							portrait;
 
+						if(com[i].towCommentList.length > 0) {
+							for(var j = 0; j < com[i].towCommentList.length; j++) {
+								if(com[i].towCommentList[j].targetUserNickName) {
+									ifHide = "ifHide"
+								} else {
+									ifHide = "hidden"
+								}
+								sec +=
+									"<div class='comment_secondComment'>" +
+									"<span >" + com[i].towCommentList[j].selfNickName + "</span>" +
+									//									"<span class='" + ifHide + "'>回复</span>" +
+									//									"<span class='color_green " + ifHide + "'>" + com[i].towCommentList[j].targetUserNickName + "</span>" +
+									"<span class='color_282828'>: &nbsp; " + com[i].towCommentList[j].content + "</span>" +
+									"</div>"
+							}
 
+							sec += "<div class='more_secondComment color_green fr' data-id='" + com[i].id + "'>全部回复</div>"
+
+						}
+
+						if(com[i].state !== 1) {
+							var ifLike = "unLike"
+
+						} else {
+							var ifLike = "liked"
+
+						}
+						if(com[i].portrait == 0 || com[i].portrait == null) {
+							portrait = "../../Public/image/morentouxiang.png";
+						} else {
+							portrait = com[i].portrait;
+						}
+
+						if(com[i].user_id == lord_id) {
+							var lord_image = "<img class='fl lord_image' src='../../Public/image/lord.png' >"
+
+						} else {
+							var lord_image = "<img class='fl lord_image hidden'  src='../../Public/image/lord.png' >"
+						}
+
+						if(com[i].user_id == userId) {
+							var comment_dele = "<div class='font_12 fl color_7fcadf comment_dele' data-id='" + com[i].id + "'>删除</div>"
+						} else {
+							var comment_dele = "&nbsp;"
+						}
+
+						div +=
+							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
+							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
+							"<div class='news_post_commentContent_content fl'>" +
+							lord_image +
+							"<div class='comment_user font_12'>" + com[i].nick_name + "</div>" +
+							"<div class='comment_content font_14'>" + com[i].content + "</div>" +
+							"<div  class='imgFirst'>" +
+							"<img class='" + img + "' src='" + config.img + encodeURI(com[i].img) + "'  style='max-height:10rem;' />" +
+							"</div>" +
+							"<div class='comment_info ofh'>" +
+							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+							comment_dele +
+							"<div class='fr color_9e9e9e comment_imgs'>" +
+							"<span class='thumb " + ifLike + "'></span>" +
+							"<span class='thumb_num font_14'>" + com[i].agree_num + "</span>" +
+							"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
+							"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
+							"</div>" +
+							"</div>" +
+							"<div class='comment_secondComments font_14 ofh'>" +
+							sec +
+							"</div>" +
+							"</div>" +
+							"</div>"
+					}
+
+					$('.news_post_commentContents').append(div);
+
+					if(com.length < 5) {
+						mui('.strategy_details').pullRefresh().endPullupToRefresh(true);
+					} else {
+						mui('.strategy_details').pullRefresh().endPullupToRefresh(false);
+					}
+				} else {
+
+				}
+			}
+		});
+	}
+
+	/* UP结束 */
+
+}
 
 //获取详情ajax
 
@@ -577,8 +605,8 @@ function detail() {
 		success: function(data) {
 			if(data.state) {
 				var str = data.strategy,
-					portrait,nickName;
-
+					portrait, nickName;
+				lord_id = str.user_id;
 				if(str.comment_num > 99) {
 					var comment_num = 99
 				} else {
@@ -590,19 +618,19 @@ function detail() {
 					portrait = str.portrait;
 				}
 
-                if(str.admin){
-                	nickName=str.nike_name;
-                }else{
-                	nickName=str.nick_name;
-                }                           
+				if(str.admin) {
+					nickName = str.nike_name;
+				} else {
+					nickName = str.nick_name;
+				}
 				$('.news_reviewNum').text(comment_num);
 				$('h4').text(str.title);
 				$('.news_userInfo_img').css("background-image", "url(" + encodeURI(portrait) + ")");
 				$('.news_userInfo_name').text(nickName);
 				$('.news_userInfo_date').text(str.add_time);
 				$('.news_post_content_detail').html(str.detail);
-				$(".news_post_content_detail img").attr("data-preview-src","");
-                $(".news_post_content_detail img").attr("data-preview-group","1");
+				$(".news_post_content_detail img").attr("data-preview-src", "");
+				$(".news_post_content_detail img").attr("data-preview-group", "1");
 				$('.news_post_content_detail img').css("max-width", "100%");
 				target_img = str.top_img_src;
 				target_title = str.title;
@@ -624,29 +652,26 @@ function detail() {
 				} else {
 					$('.news_collect').attr('data-collect', 0)
 				}
-			} 
+			}
 		}
 	});
 }
 
 //获得评论数
 
-function getNum(){
+function getNum() {
 	$.ajax({
-		type:"get",
-		url:config.data+"strategy/getStrategyNum",
-		async:true,
-		data:{
-			strategyId:strategyId
+		type: "get",
+		url: config.data + "strategy/getStrategyNum",
+		async: true,
+		data: {
+			strategyId: strategyId
 		},
-		success:function(data){
+		success: function(data) {
 			$('.news_reviewNum').text(data.strategy.comment_num);
 		}
 	})
 }
-
-
-
 
 //收藏
 function collect(strategyId) {
@@ -656,7 +681,7 @@ function collect(strategyId) {
 		url: config.data + "strategy/collect",
 		async: true,
 		data: {
-			targetId:strategyId,
+			targetId: strategyId,
 			userId: userId,
 			type: 2,
 			sys: 2

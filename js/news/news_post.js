@@ -7,6 +7,210 @@ var type = 'hot';
 var firstImg;
 var title;
 $(function() {
+	toface()
+
+	function toface() {
+		var face = [{
+				src: "a_what.png",
+				id: "<好奇怪>"
+			}, {
+				src: "alas.png",
+				id: "<哎呀>"
+			}, {
+				src: "angry.png",
+				id: "<怒>"
+			},
+			{
+				src: "ass.png",
+				id: "<屎>"
+			}, {
+				src: "bad_smile.png",
+				id: "<坏笑>"
+			}, {
+				src: "beer_brown.png",
+				id: "<棕啤>"
+			}, {
+				src: "beer_yellow.png",
+				id: "<黄啤>"
+			},
+			{
+				src: "black.png",
+				id: "<黑头>"
+			}, {
+				src: "but.png",
+				id: "<无奈>"
+			}, {
+				src: "butcry.png",
+				id: "<无奈哭>"
+			}, {
+				src: "bye.png",
+				id: "<再见>"
+			}, {
+				src: "cool.png",
+				id: "<酷>"
+			}, {
+				src: "cry.png",
+				id: "<哭>"
+			}, {
+				src: "cry_hand.png",
+				id: "<手扶脸>"
+			}, {
+				src: "cry_smile.png",
+				id: "<哭笑>"
+			}, {
+				src: "cut.png",
+				id: "<可爱>"
+			},
+			{
+				src: "dog.png",
+				id: "<狗>"
+			}, {
+				src: "doughnut.png",
+				id: "<甜甜圈>"
+			}, {
+				src: "duck.png",
+				id: "<鸭子>"
+			}, {
+				src: "eat_wat.png",
+				id: "<吃西瓜>"
+			}, {
+				src: "eee.png",
+				id: "<额>"
+			}, {
+				src: "halo.png",
+				id: "<晕>"
+			}, {
+				src: "heart.png",
+				id: "<心>"
+			}, {
+				src: "heart_break.png",
+				id: "<心碎>"
+			}, {
+				src: "impatine.png",
+				id: "<不耐烦>"
+			}, {
+				src: "kiss.png",
+				id: "<亲亲>"
+			}, {
+				src: "laugl.png",
+				id: "<偷笑>"
+			}, {
+				src: "leaf.png",
+				id: "<树叶>"
+			}, {
+				src: "lemon.png",
+				id: "<柠檬>"
+			}, {
+				src: "notsobad.png",
+				id: "<好无奈>"
+			}, {
+				src: "ooo.png",
+				id: "<噢噢>"
+			}, {
+				src: "pig.png",
+				id: "<猪>"
+			}, {
+				src: "punch_face.png",
+				id: "<打脸>"
+			}, {
+				src: "rigid.png",
+				id: "<僵硬>"
+			}, {
+				src: "see_smile.png",
+				id: "<看坏笑>"
+			}, {
+				src: "she.png",
+				id: "<喜欢>"
+			},
+			{
+				src: "shine.png",
+				id: "<闪耀>"
+			}, {
+				src: "shock.png",
+				id: "<惊呆>"
+			}, {
+				src: "shutup.png",
+				id: "<闭嘴>"
+			}, {
+				src: "shy.png",
+				id: "<害羞>"
+			}, {
+				src: "sleep.png",
+				id: "<睡觉>"
+			}, {
+				src: "slience.png",
+				id: "<沉默>"
+			}, {
+				src: "split.png",
+				id: "<吐>"
+			}, {
+				src: "strange.png",
+				id: "<奇怪>"
+			}, {
+				src: "smile_big.png",
+				id: "<大笑>"
+			}, {
+				src: "smile_little.png",
+				id: "<害羞无奈>"
+			}, {
+				src: "soangry.png",
+				id: "<超生气>"
+			}, {
+				src: "surprised.png",
+				id: "<惊讶>"
+			}, {
+				src: "unhappy.png",
+				id: "<不高兴>"
+			}, {
+				src: "wa.png",
+				id: "<青蛙>"
+			}, {
+				src: "watermelon.png",
+				id: "<西瓜>"
+			}, {
+				src: "what.png",
+				id: "<啥>"
+			}, {
+				src: "wired.png",
+				id: "<奇怪咯>"
+			}, {
+				src: "yes.png",
+				id: "<好的>"
+			}
+		]
+		var faceContent = ""
+		face.forEach(function(item) {
+			faceContent += "<img src='" + "../../Public/image/face/" + item.src + "' data-id='" + item.id + "' />"
+		})
+		$(".faceContent").append(faceContent)
+	}
+	var face_to = 1
+	$("body").on("tap", ".face", function() {
+//		$(".news_secondComment_input").blur()
+		setTimeout(function() {
+			$(".news_secondComment").css("display", "block")
+			$(".news_userInfo_reply").css("display", "none")
+			if(face_to == 1) {
+				face_to = 0
+				$(".faceContent").css("display", "block")
+			} else {
+				face_to = 1
+				$(".faceContent").css("display", "none")
+			}
+		}, 300)
+
+	})
+	$("body").on("tap", ".faceContent>img", function(e) {
+		var str = $(this).attr("data-id")
+		var tc = document.querySelector(".news_secondComment_input")
+		var tclen = tc.value.length;
+        tc.focus();
+		if(typeof document.selection != "undefined") {
+			document.selection.createRange().text = str;			
+		} else {
+			tc.value = tc.value.substr(0, tc.selectionStart) + str + tc.value.substring(tc.selectionStart, tclen);
+		}
+	})
 	$('body').on('tap', 'a', function(event) {
 		event.preventDefault();
 		var url = $(this).attr('href');
@@ -46,6 +250,13 @@ $(function() {
 			tap: true, //默认为true
 			longtap: true, //默认为false
 		},
+		beforeback: function() {
+			var input_val = $(".news_secondComment_input").val();
+			if(input_val != "") {
+				var id = "strategy_title_" + newsId
+				window.localStorage.setItem(id, input_val)
+			}
+		},
 		pullRefresh: {
 			container: ".new_post_contents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 			up: {
@@ -70,7 +281,12 @@ $(function() {
 		total_height = plus.navigator.getStatusbarHeight() + 45;
 		var self = plus.webview.currentWebview();
 		newsId = self.newsId;
-		gameId = self.gameId;
+		gameId = self.gameId
+		var id = "strategy_title_" + newsId;
+		var input_val = localStorage.getItem(id);
+		if(input_val) {
+			$(".news_secondComment_input").val(input_val)
+		}
 		$.ajax({
 			type: "get",
 			url: config.data + "news/getNewsByID",
@@ -377,24 +593,27 @@ $(function() {
 
 		//滚动隐藏结束
 
-		$('.news_userInfo_replyInput').click(function() {
-			$('.news_userInfo_reply').addClass('hidden')
-			$('.news_secondComment').removeClass('hidden')
-			$('.news_secondComment_input').focus()
+		$("body").on('tap', '.news_userInfo_replyInput', function() {
+			$('.news_userInfo_reply').css("display", "none")
+			$('.news_secondComment').css("display", "block")
 
-			$('.news_secondComment_input').blur(function() {
-				setTimeout(function() {
-					$('.news_secondComment').addClass('hidden')
-					$('.news_userInfo_reply').removeClass('hidden')
-				}, 250)
+			$('.news_secondComment_input').focus();
 
-			})
+//			$('.news_secondComment_input').blur(function() {
+//			
+//				setTimeout(function() {
+//					$('.news_secondComment').css("display", "none");
+//					$('.news_userInfo_reply').css("display", "block");
+//					$(".faceContent").css("display", "none")
+//				}, 250)
+//			})
 		})
+
 		$('body').on('tap', '.publish', function(e) {
 
 			e.preventDefault();
 			if(userId) {
-				var content = $(this).prev().val();
+				var content = $(this).prev().prev().val();
 				if(content) {
 					$.ajax({
 						type: "get",
@@ -411,7 +630,7 @@ $(function() {
 						},
 						success: function(data) {
 							if(data.state == "1") {
-                                mui.toast("评论成功")
+								mui.toast("评论成功")
 								$('.news_secondComment_input').val(""); //不刷新	
 
 								var reviewNum = $('.news_reviewNum').text()
@@ -426,7 +645,7 @@ $(function() {
 								mui('.new_post_contents').pullRefresh().refresh(true);
 								$(".news_post_commentContents").empty();
 								page = 0;
-								up();						
+								up();
 							} else {
 								mui.toast("发送失败，请重试")
 							}

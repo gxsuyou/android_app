@@ -11,38 +11,38 @@ mui.plusReady(function () {
     function plusReady() {
         // ......
         // 获取本地应用资源版本号
-        plus.runtime.getProperty(plus.runtime.appid, function (inf) {
-            wgtVer = inf.version;
-
-            console.log("当前应用版本：" + wgtVer);
-            //	检测更新
-            $.ajax({
-                type: "get",
-                url: "http://www.oneyouxi.com.cn:8877/H5/update",
-                async: true,
-                success: function (data) {
-                    if (data.state) {
-                        newVer = data.mark;
-                        console.log(newVer);
-                        if (wgtVer && newVer && (wgtVer != newVer)) {
-                            downWgt(); // 下载升级包
-                        } else {
-                            //plus.nativeUI.alert("无新版本可更新！");
-                        }
-                    } else {
-                        console.log("检测更新失败！");
-                        plus.nativeUI.alert("检测更新失败！");
-                    }
-                }
-            });
-        });
+//      plus.runtime.getProperty(plus.runtime.appid, function (inf) {
+//          wgtVer = inf.version;
+//
+//          console.log("当前应用版本：" + wgtVer);
+//          //	检测更新
+//          $.ajax({
+//              type: "get",
+//              url: "http://www.oneyouxi.com.cn:8877/H5/update",
+//              async: true,
+//              success: function (data) {
+//                  if (data.state) {
+//                      newVer = data.mark;
+//                      console.log(newVer);
+//                      if (wgtVer && newVer && (wgtVer != newVer)) {
+//                          downWgt(); // 下载升级包
+//                      } else {
+//                          //plus.nativeUI.alert("无新版本可更新！");
+//                      }
+//                  } else {
+//                      console.log("检测更新失败！");
+//                      plus.nativeUI.alert("检测更新失败！");
+//                  }
+//              }
+//          });
+//      });
     }
 
-    if (window.plus) {
-        plusReady();
-    } else {
-        document.addEventListener('plusready', plusReady, false);
-    }
+//  if (window.plus) {
+//      plusReady();
+//  } else {
+//      document.addEventListener('plusready', plusReady, false);
+//  }
 
     // 检测更新
 //		checkUpdate();
@@ -71,23 +71,23 @@ mui.plusReady(function () {
 
     // 下载wgt文件
 //	var wgtUrl = "https://182.61.26.179:8878/www/APK/H5C62934A.wgt";
-    var wgtUrl = "https://admin.oneyouxi.com.cn/www/APK/H5C62934A.wgt";
-
-    function downWgt() {
-        plus.nativeUI.showWaiting("正在更新中");
-        plus.downloader.createDownload(wgtUrl, {
-            filename: "_doc/update/"
-        }, function (d, status) {
-            if (status == 200) {
-                console.log("下载wgt成功：" + d.filename);
-                installWgt(d.filename); // 安装wgt包
-            } else {
-                console.log("下载wgt失败！");
-                plus.nativeUI.alert("下载wgt失败！");
-            }
-            plus.nativeUI.closeWaiting();
-        }).start();
-    }
+//  var wgtUrl = "https://admin.oneyouxi.com.cn/www/APK/H5C62934A.wgt";
+//
+//  function downWgt() {
+//      plus.nativeUI.showWaiting("正在更新中");
+//      plus.downloader.createDownload(wgtUrl, {
+//          filename: "_doc/update/"
+//      }, function (d, status) {
+//          if (status == 200) {
+//              console.log("下载wgt成功：" + d.filename);
+//              installWgt(d.filename); // 安装wgt包
+//          } else {
+//              console.log("下载wgt失败！");
+//              plus.nativeUI.alert("下载wgt失败！");
+//          }
+//          plus.nativeUI.closeWaiting();
+//      }).start();
+//  }
 
     //	var h1 = plus.webview.getLaunchWebview()
     //
@@ -229,17 +229,17 @@ mui.plusReady(function () {
 });
 
 // 更新应用资源
-function installWgt(path) {
-    plus.nativeUI.showWaiting("安装wgt文件...");
-    plus.runtime.install(path, {}, function () {
-        plus.nativeUI.closeWaiting();
-        console.log("安装wgt文件成功！");
-        plus.nativeUI.alert("应用资源更新完成！", function () {
-            plus.runtime.restart();
-        });
-    }, function (e) {
-        plus.nativeUI.closeWaiting();
-        console.log("安装wgt文件失败[" + e.code + "]：" + e.message);
-        plus.nativeUI.alert("安装wgt文件失败[" + e.code + "]：" + e.message);
-    });
-}
+//function installWgt(path) {
+//  plus.nativeUI.showWaiting("安装wgt文件...");
+//  plus.runtime.install(path, {}, function () {
+//      plus.nativeUI.closeWaiting();
+//      console.log("安装wgt文件成功！");
+//      plus.nativeUI.alert("应用资源更新完成！", function () {
+//          plus.runtime.restart();
+//      });
+//  }, function (e) {
+//      plus.nativeUI.closeWaiting();
+//      console.log("安装wgt文件失败[" + e.code + "]：" + e.message);
+//      plus.nativeUI.alert("安装wgt文件失败[" + e.code + "]：" + e.message);
+//  });
+//}

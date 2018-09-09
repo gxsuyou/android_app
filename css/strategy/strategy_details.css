@@ -8,6 +8,20 @@ a{
 	margin-left: -1rem;
 	font-size: 18px;
 }
+.comment_dele{
+	margin-left:0.3rem;
+	
+}
+.comment_content img,.comment_secondComment img{
+	width: 1.8rem;
+	margin: 0 0.2rem;
+}
+.lord_image{
+	width:2rem;
+	height:auto;
+	margin-top:0.15rem;
+	margin-right:0.1rem;
+}
 .news_post_content_detail p{
 	color:#282828;
 }

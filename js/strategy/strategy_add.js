@@ -51,16 +51,30 @@ $(function() {
 		}
 	}, false);
 
+	getStrategy()
+
+	function getStrategy() {
+		var strategy_title = window.localStorage.getItem("strategy_title");
+		var strategy_game = window.localStorage.getItem("strategy_game");
+		var strategy_content = window.localStorage.getItem("strategy_content");
+		console.log(strategy_title, strategy_game, strategy_content);
+
+		if(strategy_title != "" || strategy_game != "", strategy_content != "") {
+			$(".strategy_title").val(strategy_title)
+			$(".choose_game").val(strategy_game)
+			$("#strategy_textarea").html(strategy_content)
+		}
+	}
+
 	/*返回查询是否保存攻略*/
 	$("body").on("tap", ".strategy-back", function() {
 		var title = $(".strategy_title").val()
 		var game = $(".choose_game").val()
 		var content = $("#strategy_textarea").html()
 
-		if(content == '<div>&nbsp;</div><span class="insertNode1" style="-webkit-user-select:text"></span>') {
+		if(content == '<div>&nbsp;</div>') {
 			content = ""
 		}
-
 		if(title != "" || game != "" || content != "") {
 
 			plus.nativeUI.confirm("保存攻略", function(e) {

@@ -18,34 +18,36 @@ $(function() {
 		$(this).parent().parent('.show_imgcontent').remove()
 
 	})
-	
-    
-      
-      
+	/* 退出保存数据 */
+	$("body").on("tap", ".mui-back", function() {
+
+		var val = $("#strategy_textarea").val()
+		localStorage.setItem("strategyVal", val)
+		if(plus.webview.getWebviewById("strategy_details.html")) {
+			var wobj = plus.webview.getWebviewById("strategy_details.html");
+		} else {
+			var wobj = plus.webview.getWebviewById("me_works.html");
+		}
+
+		mui.fire(wobj, 'reload', {});
+		mui.back()
+	})
+
 	mui.plusReady(function() {
 
-      $('body').on('focus',"#strategy_textarea",function(){
+		$('body').on('focus', "#strategy_textarea", function() {
 
-//    	$('.choose_img').css("bottom",'-500px')
-      });
+			//    	$('.choose_img').css("bottom",'-500px')
+		});
 		var self = plus.webview.currentWebview();
 		var strategyId = self.strategyId;
 		var proId = self.proId;
-		var old_back = mui.back;
 		var target_img = self.target_img;
 		var target_title = self.target_title;
-		mui.back = function() {
-			if(plus.webview.getWebviewById("strategy_details.html")) {
-				var wobj = plus.webview.getWebviewById("strategy_details.html");
-			} else {
-				var wobj = plus.webview.getWebviewById("me_works.html");
-			}
+		var strategyVal = localStorage.getItem("strategyVal")
+		$("#strategy_textarea").val(strategyVal)
 
-			mui.fire(wobj,'reload',{});
-			old_back();
-		}
-
-		document.getElementById('choose_img').addEventListener('tap', function() {
+		$("body").on("tap", ".choose", function() {
 			if(mui.os.plus) {
 				var buttonTit = [
 
@@ -70,9 +72,211 @@ $(function() {
 					}
 				})
 			}
-		}, false);
+		})
 
+		toface()
 
+		function toface() {
+			var face = [{
+					src: "a_what.png",
+					id: "<好奇怪>"
+				}, {
+					src: "alas.png",
+					id: "<哎呀>"
+				}, {
+					src: "angry.png",
+					id: "<怒>"
+				},
+				{
+					src: "ass.png",
+					id: "<屎>"
+				}, {
+					src: "bad_smile.png",
+					id: "<坏笑>"
+				}, {
+					src: "beer_brown.png",
+					id: "<棕啤>"
+				}, {
+					src: "beer_yellow.png",
+					id: "<黄啤>"
+				},
+				{
+					src: "black.png",
+					id: "<黑头>"
+				}, {
+					src: "but.png",
+					id: "<无奈>"
+				}, {
+					src: "butcry.png",
+					id: "<无奈哭>"
+				}, {
+					src: "bye.png",
+					id: "<再见>"
+				}, {
+					src: "cool.png",
+					id: "<酷>"
+				}, {
+					src: "cry.png",
+					id: "<哭>"
+				}, {
+					src: "cry_hand.png",
+					id: "<手扶脸>"
+				}, {
+					src: "cry_smile.png",
+					id: "<哭笑>"
+				}, {
+					src: "cut.png",
+					id: "<可爱>"
+				},
+				{
+					src: "dog.png",
+					id: "<狗>"
+				}, {
+					src: "doughnut.png",
+					id: "<甜甜圈>"
+				}, {
+					src: "duck.png",
+					id: "<鸭子>"
+				}, {
+					src: "eat_wat.png",
+					id: "<吃西瓜>"
+				}, {
+					src: "eee.png",
+					id: "<额>"
+				}, {
+					src: "halo.png",
+					id: "<晕>"
+				}, {
+					src: "heart.png",
+					id: "<心>"
+				}, {
+					src: "heart_break.png",
+					id: "<心碎>"
+				}, {
+					src: "impatine.png",
+					id: "<不耐烦>"
+				}, {
+					src: "kiss.png",
+					id: "<亲亲>"
+				}, {
+					src: "laugl.png",
+					id: "<偷笑>"
+				}, {
+					src: "leaf.png",
+					id: "<树叶>"
+				}, {
+					src: "lemon.png",
+					id: "<柠檬>"
+				}, {
+					src: "notsobad.png",
+					id: "<好无奈>"
+				}, {
+					src: "ooo.png",
+					id: "<噢噢>"
+				}, {
+					src: "pig.png",
+					id: "<猪>"
+				}, {
+					src: "punch_face.png",
+					id: "<打脸>"
+				}, {
+					src: "rigid.png",
+					id: "<僵硬>"
+				}, {
+					src: "see_smile.png",
+					id: "<看坏笑>"
+				}, {
+					src: "she.png",
+					id: "<喜欢>"
+				},
+				{
+					src: "shine.png",
+					id: "<闪耀>"
+				}, {
+					src: "shock.png",
+					id: "<惊呆>"
+				}, {
+					src: "shutup.png",
+					id: "<闭嘴>"
+				}, {
+					src: "shy.png",
+					id: "<害羞>"
+				}, {
+					src: "sleep.png",
+					id: "<睡觉>"
+				}, {
+					src: "slience.png",
+					id: "<沉默>"
+				}, {
+					src: "split.png",
+					id: "<吐>"
+				}, {
+					src: "strange.png",
+					id: "<奇怪>"
+				}, {
+					src: "smile_big.png",
+					id: "<大笑>"
+				}, {
+					src: "smile_little.png",
+					id: "<害羞无奈>"
+				}, {
+					src: "soangry.png",
+					id: "<超生气>"
+				}, {
+					src: "surprised.png",
+					id: "<惊讶>"
+				}, {
+					src: "unhappy.png",
+					id: "<不高兴>"
+				}, {
+					src: "wa.png",
+					id: "<青蛙>"
+				}, {
+					src: "watermelon.png",
+					id: "<西瓜>"
+				}, {
+					src: "what.png",
+					id: "<啥>"
+				}, {
+					src: "wired.png",
+					id: "<奇怪咯>"
+				}, {
+					src: "yes.png",
+					id: "<好的>"
+				}
+			]
+			var faceContent = ""
+			face.forEach(function(item) {
+				faceContent += "<img src='" + "../../Public/image/face/" + item.src + "' data-id='" + item.id + "' />"
+			})
+			$(".faceContent").append(faceContent)
+		}
+
+		var face_t = 1;
+		$("body").on("tap", ".face", function() {
+			if(face_t == 1) {
+				face_t = 0;
+				$(".faceContent").css("display", "block")
+				$(".show_imgs").css("display", "none")
+				$(".choose_img").css("bottom", "2.425rem")
+			} else {
+				face_t = 1;
+				$(".faceContent").css("display", "none")
+				$(".show_imgs").css("display", "none")
+			}
+		})
+		/* 插入图片 */
+		$("body").on("tap", ".faceContent>img", function() {
+			var str = $(this).attr("data-id")
+			var tc = document.querySelector("#strategy_textarea")
+			var tclen = tc.value.length;
+			tc.focus();
+			if(typeof document.selection != "undefined") {
+				document.selection.createRange().text = str;
+			} else {
+				tc.value = tc.value.substr(0, tc.selectionStart) + str + tc.value.substring(tc.selectionStart, tclen);
+			}
+		})
 
 		$('.publish').click(function() {
 			mui.toast("正在发送，请稍候")
@@ -88,13 +292,13 @@ $(function() {
 						targetCommentId: strategyId,
 						targetUserId: proId,
 						series: 1,
-						target_img:target_img,
-						targetid:strategyId,
-						target_title:target_title
+						target_img: target_img,
+						targetid: strategyId,
+						target_title: target_title
 					},
 					success: function(data) {
 						if(data.state) {
-                            mui.toast("评论成功")
+							mui.toast("评论成功")
 							var commentId = data.commentId;
 							if($('.show_imgs').find('.show_imgcontent').length >= 1) {
 
