@@ -1,15 +1,4 @@
 
-//$(function() {
-//	mui.plusReady(function() {
-//		total_height = plus.navigator.getStatusbarHeight() + 45;
-//		$('.before_header').css({
-//			"height": total_height - 45 + "px",
-//			"width": "100%"
-//		});
-//		$('.header_box').next().css("margin-top", total_height + "px");
-//	})
-//});
-
 //测试环境
 var config = {
 	img: "http://img.oneyouxi.com.cn/",
@@ -75,7 +64,7 @@ $(function() {
 		function onPlusReady(){
 			checkAppid()
 		}
-//		checkAppid()
+		checkAppid()
 		function checkAppid() {
 			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
 				wgtVer = inf.version;
@@ -91,7 +80,7 @@ $(function() {
 							newVer = data.mark;
 //&& (wgtVer != newVer)
 							if(wgtVer && newVer) {
-		
+		                       alert(1)
 								showUpload() //展示
 								downWgt(); // 下载升级包
 							} else {
@@ -108,6 +97,7 @@ $(function() {
 
 		function showUpload() {
 			$(".upload-layer").removeClass("hidden")
+//			$(".upload-layer").css("display","flex !important")
 		}
 		
 		function hiddenUpload() {
@@ -160,11 +150,11 @@ $(function() {
 		}
 
 		function onStateChanged(download, status) {
-			//			console.log(JSON.stringify(download))
 			downloding(download)
 		}
 
 		function downloding(download) {
+			console.log(JSON.stringify(download))
 			switch(download.state) {
 				case 0:
 					//			$(".ldownload_btn_text").text('等待');
@@ -176,8 +166,9 @@ $(function() {
 					//			$(".ldownload_btn_text").text('等待');
 					break;
 				case 3:
+				
 					//				loading((download.downloadedSize / download.totalSize * 100).toFixed(0))
-					loading((download.downloadedSize / 17097536 * 100).toFixed(0))
+					loading((download.downloadedSize / 13247781 * 100).toFixed(0))
 
 					break;
 				case 4:
