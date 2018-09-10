@@ -125,41 +125,37 @@ $(function() {
 
 		//		攻略页结束
 
-		$("#game_detail_download").click(function(ev) {
+		$("#game_detail_download,.border").click(function(ev) {
 			event = ev || window.event;
 			event.stopPropagation();
-			var t = $(this);
+			var text = $(this).prev().text() || $(this).find(".download_btn_text").text()
 			var isFile = false;
-			$(this).addClass("hidden")
-
-			$(".con").removeClass("hidden")
 			var fileName = '_downloads/' + game.game_name + '.apk';
-			switch($(this).find(".download_btn_text").text()) {
+			switch(text) {
 				case "下载":
+					$("#game_detail_download").addClass("hidden")
+					$(".con").removeClass("hidden")
+					$(".download,.border").addClass("hidden")
 					createDownload(game.game_name, game.game_download_andriod)
-					//				t.text('暂停');
 					break;
 				case "打开":
 					launchApp(game.game_packagename);
-					//launchApp(myApp[1].packageName);
 					break;
-					//				t.launchApp();
 				case "取消":
-					//				console.log(1)
-					plus.downloader.enumerate(function(tasks) {
-						//		var state;
-						for(var i = 0; i < tasks.length; i++) {
-							if(tasks[i].filename == fileName) {
-								tasks[i].abort();
-							}
-						}
-					});
-					setTimeout(function() {
-						$(".download_btn_text").text("下载");
-						$("#game_detail_download").removeClass("download_btn_active");
-						$("#loading").css("width", 0 + "%");
-						mui.toast('下载任务已取消');
-					}, 300)
+					//					plus.downloader.enumerate(function(tasks) {
+					//						//		var state;
+					//						for(var i = 0; i < tasks.length; i++) {
+					//							if(tasks[i].filename == fileName) {
+					//								tasks[i].abort();
+					//							}
+					//						}
+					//					});
+					//					setTimeout(function() {
+					//						$(".download_btn_text").text("下载");
+					//						$("#game_detail_download").removeClass("download_btn_active");
+					////						$("#loading").css("width", 0 + "%");
+					//						mui.toast('下载任务已取消');
+					//					}, 300)
 
 					break;
 				case "安装":
@@ -169,6 +165,8 @@ $(function() {
 		})
 
 	})
+
+
 
 	$('.backImg').click(function() {
 		mui.back()
@@ -184,7 +182,7 @@ $(function() {
 	$(window).scroll(function() {
 		var $body = $('body');
 		var windowWidth = $(window).width();
-		var imgHeight = (0.66 * windowWidth - total_height);
+		var imgHeight = (1.4 * windowWidth - total_height);
 		var setCoverOpacity = function() {
 			$body.find('#header').css({
 				opacity: ((($body.scrollTop() / imgHeight) > 1) ? 1 : ($body.scrollTop() / imgHeight))
@@ -193,16 +191,14 @@ $(function() {
 				opacity: ((($body.scrollTop() / imgHeight) > 1) ? 1 : ($body.scrollTop() / imgHeight))
 			})
 		}
-
 		//初始化设置背景透明度 
 		setCoverOpacity();
 		//监听滚动条事件，改变透明度 
 		$(window).scroll(function() {
 			setCoverOpacity();
-		});
+		})
 		if($body.scrollTop() >= imgHeight + 106) {
-			$('.download').removeClass('hidden')
-			$('.border').removeClass('hidden')
+
 			$('.game_detail_nav').css({
 				"position": "fixed",
 				"top": total_height,
@@ -210,8 +206,6 @@ $(function() {
 			});
 
 		} else {
-			$('.download').addClass('hidden')
-			$('.border').addClass('hidden')
 			$('.game_detail_nav').css({
 				"position": "static",
 				"border-bottom": "0.5rem solid #E7EAEC"
@@ -318,6 +312,7 @@ $(function() {
 
 })
 
+var dtask_app=null;
 function createDownload(name, src) {
 	$.ajax({
 		type: "get",
@@ -332,6 +327,7 @@ function createDownload(name, src) {
 			}
 		}
 	});
+	
 	plus.downloader.enumerate(function(tasks) {
 		for(var i = 0; i < tasks.length; i++) {
 
@@ -343,10 +339,9 @@ function createDownload(name, src) {
 			}
 
 		}
-
 		mui.toast("开始下载")
 		$(".download_btn_text").text("取消");
-		var dtask = plus.downloader.createDownload("http://apk.oneyouxi.com.cn/" + encodeURI(src), {
+		dtask_app = plus.downloader.createDownload("http://apk.oneyouxi.com.cn/" + encodeURI(src), {
 			method: 'GET',
 			data: '',
 			filename: '_downloads/' + name + '.apk',
@@ -378,7 +373,7 @@ function createDownload(name, src) {
 				}
 				//				添加到我的游戏结束
 
-				plus.runtime.install(dtask.filename, {}, function(widgetInfo) {
+				plus.runtime.install(dtask_app.filename, {}, function(widgetInfo) {
 					$(".download_btn_text").text("打开");
 				}, function(error) {
 					console.log(error)
@@ -386,20 +381,46 @@ function createDownload(name, src) {
 
 			} else {
 				mui.toast("下载失败: " + status);
+				$(".con").addClass("hidden")
+				$("#game_detail_download").removeClass("hidden")
 				$("#game_detail_download").removeClass("download_btn_active");
 			}
 		});
-		dtask.addEventListener("statechanged", onStateChanged, false);
-		dtask.start();
+		dtask_app.addEventListener("statechanged", onStateChanged, false);
+		dtask_app.start();
 	});
 }
+
+   var downloader_toggle=1
+	$("body").on("tap", ".con", function() {
+		if(downloader_toggle==1){
+			dtask_app.pause();
+			mui.toast("已经暂停下载");
+			downloader_toggle=0
+		}else{
+			dtask_app.resume();
+			mui.toast("已经恢复下载");
+			downloader_toggle=1
+		}
+		
+	})
+
+
+
+
+
+
 
 function onStateChanged(download, status) {
 
 	downloding(download)
 	if(download.state == 4 && status == 200) {
 		// 下载完成 
+		$(".con").addClass("hidden")
+		$(".download,.border").removeClass("hidden")
+		$("#game_detail_download").removeClass("hidden")
 		$("#game_detail_download").removeClass("download_btn_active");
+		$(".download,.border").css("display", "block")
 		$(".download_btn_text").text("安装");
 		console.log("Download success: " + download.filename);
 
@@ -430,14 +451,12 @@ function downloding(download) {
 var angle = 0;
 
 function loading(num) {
-//	console.log("哈哈" + num * 3.6)
 	angle = num * 3.6;
-	//	$(".download_loading").css("width", num + "%");
 	if(angle > 180) {
-		$(".left-content").css("transform","rotate(" + (angle - 180) + "deg)")
+		$(".left-content").css("transform", "rotate(" + (angle - 180) + "deg)")
 		//leftContent.setAttribute('style', 'transform: rotate(' + (angle - 180) + 'deg)');
 	} else {
-		$(".right-content").css("transform","rotate(" + angle + "deg)")
+		$(".right-content").css("transform", "rotate(" + angle + "deg)")
 		//rightContent.setAttribute('style', 'transform: rotate(' + angle + 'deg)');
 	}
 
@@ -612,6 +631,7 @@ function detail_main() {
 				icon = icon_img;
 				var game_name = g.game_name;
 				gameName = game_name;
+
 				$("#game_detail_download").attr("src", g.game_download_andriod);
 				var fileName = '_downloads/' + game.game_name + '.apk';
 				if(plus.runtime.isApplicationExist({
@@ -619,20 +639,29 @@ function detail_main() {
 						action: ''
 					})) {
 
-					$("#game_detail_download").find(".download_btn_text").text("打开");
+					$("#game_detail_download").find(".download_btn_text").text("打开")
+					$(".download").text("打开")
 				} else {
 					plus.downloader.enumerate(function(tasks) {
+
 						var state = false;
+						
 						for(var i = 0; i < tasks.length; i++) {
+							
 							if(tasks[i].filename == fileName) {
+								dtask_app=tasks[i];
+								$("#game_detail_download").addClass("hidden")
+								$(".download,.border").addClass("hidden")
+								$(".con").removeClass("hidden")
 								$(".download_btn_text").text("取消");
-								tasks[i].addEventListener("statechanged", onStateChanged, false);
+								dtask_app.addEventListener("statechanged", onStateChanged, false);
 								state = true;
 							}
 						}
 						if(!state) {
 							plus.io.resolveLocalFileSystemURL('_downloads/' + game.game_name + '.apk', function(entry) {
 								$("#game_detail_download").find(".download_btn_text").text("安装");
+								$(".download").text("安装")
 								//	可通过entry对象操作文件 
 							}, function(e) {
 								//console.log("文件不存在 " + e.message);
@@ -670,7 +699,6 @@ function detail_main() {
 				$('.game_particular_value').children().eq(2).text(g.game_size)
 				$('.game_particular_value').children().eq(3).text(g.game_update_date)
 				$('.game_particular_value').children().eq(4).text(g.game_company)
-				//$('.game_particular_value').children().eq(5).text(g.game_company)
 				$.ajax({
 					type: "get",
 					url: config.data + "game/getGameImgListById",
