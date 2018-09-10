@@ -79,8 +79,7 @@ $(function() {
 						if(data.state) {
 							newVer = data.mark;
 //&& (wgtVer != newVer)
-							if(wgtVer && newVer) {
-		                       alert(1)
+							if(wgtVer && newVer&& (wgtVer != newVer)) {
 								showUpload() //展示
 								downWgt(); // 下载升级包
 							} else {
@@ -117,13 +116,14 @@ $(function() {
 				retry: 0,
 				retryInterval: 0
 			}, function(d, status) {
+				hiddenUpload()
 				if(status == 200) {
 					console.log("下载wgt成功：" + d.filename);
 					installWgt(d.filename); // 安装wgt包
 				} else {
 					console.log("下载wgt失败！");
 					plus.nativeUI.alert("下载wgt失败！");
-					hiddenUpload()
+					
 				}
 				plus.nativeUI.closeWaiting();
 			})
@@ -133,6 +133,7 @@ $(function() {
 
 		// 更新应用资源
 		function installWgt(path) {
+			hiddenUpload()
 			//			plus.nativeUI.showWaiting("安装wgt文件...");
 			plus.runtime.install(path, {}, function() {
 				plus.nativeUI.closeWaiting();
@@ -154,7 +155,7 @@ $(function() {
 		}
 
 		function downloding(download) {
-			console.log(JSON.stringify(download))
+//			console.log(JSON.stringify(download))
 			switch(download.state) {
 				case 0:
 					//			$(".ldownload_btn_text").text('等待');
@@ -179,10 +180,6 @@ $(function() {
 		}
 
 		function loading(num) {
-			if(num == 100) {
-				$(".progress-move").css("border-radius", "1rem")
-				hiddenUpload()
-			}
 			$(".progress-move").css("width", num + "%")
 			$(".progress-num").text("正在更新 " + num + "%")
 

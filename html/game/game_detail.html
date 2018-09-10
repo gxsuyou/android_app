@@ -465,6 +465,12 @@
 			});
 
 			mui.init({
+				beforeback:function(){
+					if(dtask_app){
+						dtask_app.resume();
+					}
+					
+				},
 				pullRefresh: {
 					container: "#game_detailContent", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 					up: {

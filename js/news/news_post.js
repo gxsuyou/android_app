@@ -599,14 +599,6 @@ $(function() {
 
 			$('.news_secondComment_input').focus();
 
-//			$('.news_secondComment_input').blur(function() {
-//			
-//				setTimeout(function() {
-//					$('.news_secondComment').css("display", "none");
-//					$('.news_userInfo_reply').css("display", "block");
-//					$(".faceContent").css("display", "none")
-//				}, 250)
-//			})
 		})
 
 		$('body').on('tap', '.publish', function(e) {
@@ -709,9 +701,9 @@ function up() {
 							var ifHide = tow[j].targetUserNickName || "hidden";
 							secondCom +=
 								"<div class='comment_secondComment '>" +
-								"<span class='color_green'>" + tow[j].selfNickName + "</span>" +
-								"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
-								"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
+								"<span >" + tow[j].selfNickName + "</span>" +
+//								"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
+//								"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
 								"<span class='color_282828'>：" + tow[j].content + "</span>" +
 								"</div>";
 						}
@@ -801,9 +793,9 @@ function up() {
 							var ifHide = tow[j].targetUserNickName || "hidden";
 							secondCom +=
 								"<div class='comment_secondComment '>" +
-								"<span class='color_green'>" + tow[j].selfNickName + "</span>" +
-								"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
-								"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
+								"<span >" + tow[j].selfNickName + "</span>" +
+//								"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
+//								"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
 								"<span class='color_282828'>：" + tow[j].content + "</span>" +
 								"</div>"
 						}

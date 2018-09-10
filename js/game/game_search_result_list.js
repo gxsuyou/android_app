@@ -6,7 +6,7 @@ mui.plusReady(function() {
 		url: config.data + "game/searchGameByMsg",
 		async: true,
 		data: {
-			sys: 1,
+			sys: 2,
 			msg: val,
 			sort: "sort",
 			page: 1
