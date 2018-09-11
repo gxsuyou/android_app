@@ -13,6 +13,18 @@
 .color_7fcadf{
 	color:#7fcadf;
 }
+.move:before{
+   content:"";
+   position:absolute;
+   z-index:9999;
+   width:30%;
+   height:30%;
+   border-radius: 50%;
+   top:30%;
+   right:30%;
+   background:#fff;
+   box-shadow:0px 0px 0.6rem 0.5rem #fff;
+}
 .no_content{
 	color: #9E9E9E;
 	margin-top: 8.5rem;

@@ -5,7 +5,17 @@ $(function() {
 	//			url:"strategy_add.html"
 	//		})
 	//	})
-
+    $('body').on('tap', '.strategy_content_classify', function(e) {
+		e.stopPropagation()
+		var msg = $(this).text();
+		mui.openWindow({
+			url: "../strategy/strategy_search_result.html",
+			id: "strategy_search_result.html",
+			extras: {
+				msg: msg
+			}
+		})
+	})
 	window.addEventListener('reload', function() {
 		// mui.fire()传过来的额外的参数，在event.detail中；
 		window.location.reload();
@@ -13,9 +23,8 @@ $(function() {
 		// 执行相应的ajax或者操作DOM等操作
 	});
 
-	$('body').on('click', '.strategy_content', function() {
+	$('body').on('tap', '.strategy_content', function() {
 		var strategyId = $(this).attr('data-id');
-
 		mui.openWindow({
 			url: "../strategy/strategy_details.html",
 			id: "strategy_details.html",

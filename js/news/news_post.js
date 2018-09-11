@@ -186,7 +186,6 @@ $(function() {
 	}
 	var face_to = 1
 	$("body").on("tap", ".face", function() {
-//		$(".news_secondComment_input").blur()
 		setTimeout(function() {
 			$(".news_secondComment").css("display", "block")
 			$(".news_userInfo_reply").css("display", "none")
@@ -204,9 +203,9 @@ $(function() {
 		var str = $(this).attr("data-id")
 		var tc = document.querySelector(".news_secondComment_input")
 		var tclen = tc.value.length;
-        tc.focus();
+		tc.focus();
 		if(typeof document.selection != "undefined") {
-			document.selection.createRange().text = str;			
+			document.selection.createRange().text = str;
 		} else {
 			tc.value = tc.value.substr(0, tc.selectionStart) + str + tc.value.substring(tc.selectionStart, tclen);
 		}
@@ -656,6 +655,35 @@ $(function() {
 
 		})
 
+		$("body").on("tap", ".news_dele_com", function() {
+			var id = $(this).attr("data-id")
+			plus.nativeUI.confirm("删除评论", function(e) {
+				if(e.index == 0) {
+					$.ajax({
+						type: "get",
+						url: config.data + "news/delMyComment",
+						async: true,
+						data: {
+							uid: userId,
+							id: id
+						},
+						success: function(data) {
+							if(data.state == 1) {
+								mui.toast("删除成功")
+								$(".bottomInfo").text("正在加载 ...");
+								closeAjax = false;
+								$(".news_post_commentContents").empty();
+								page = 0;
+								up();
+							} else {
+								mui.toast("删除失败")
+							}
+						}
+					})
+				}
+			})
+		})
+
 		$('.news_review').click(function() {
 			$('html, body').animate({
 				scrollTop: $('#recommend').offset().top - (total_height + 36) + "px"
@@ -702,8 +730,8 @@ function up() {
 							secondCom +=
 								"<div class='comment_secondComment '>" +
 								"<span >" + tow[j].selfNickName + "</span>" +
-//								"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
-//								"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
+								//								"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
+								//								"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
 								"<span class='color_282828'>：" + tow[j].content + "</span>" +
 								"</div>";
 						}
@@ -714,10 +742,15 @@ function up() {
 								"<div class='more_secondComment color_green fr " + towLen + "' data-id='" + com[i].id + "' data-userId='" + com[i].user_id + "'>" +
 								"全部回复" +
 								"</div>" +
-
 								"</div>";
 						} else {
 							var secondComs = "<div class='comment_secondComments font_14 ofh'>" + secondCom + "</div>";
+						}
+
+						if(com[i].user_id == userId) {
+							var comment_dele = "<div class='font_12 fl color_7fcadf news_dele_com' data-id='" + com[i].id + "'>删除</div>"
+						} else {
+							var comment_dele = "&nbsp;"
 						}
 
 						comment +=
@@ -728,6 +761,7 @@ function up() {
 							"<div class='comment_content font_14'>" + com[i].content + "</div>" +
 							"<div class='comment_info ofh'>" +
 							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+							comment_dele +
 							"<div class='fr color_9e9e9e comment_imgs'>" +
 							"<div class='thumbs fl'>" +
 							"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "' data-commentId='" + com[i].id + "'></span>" +
@@ -794,8 +828,8 @@ function up() {
 							secondCom +=
 								"<div class='comment_secondComment '>" +
 								"<span >" + tow[j].selfNickName + "</span>" +
-//								"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
-//								"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
+								//								"<span class='" + ifHide + "' style='margin:0 0.4rem;'>回复</span>" +
+								//								"<span class='color_green " + ifHide + "'>" + ifHide + "</span>" +
 								"<span class='color_282828'>：" + tow[j].content + "</span>" +
 								"</div>"
 						}
@@ -812,6 +846,12 @@ function up() {
 							var secondComs = "<div class='comment_secondComments font_14 ofh'>" + secondCom + "</div>";
 						}
 
+						if(com[i].user_id == userId) {
+							var comment_dele = "<div class='font_12 fl color_7fcadf news_dele_com' data-id='" + com[i].id + "'>删除</div>"
+						} else {
+							var comment_dele = "&nbsp;"
+						}
+
 						comment +=
 							"<div class='news_post_commentContent ofh' data-id='" + com[i].id + "'>" +
 							"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(com[i].portrait) + ");'></div>" +
@@ -820,6 +860,7 @@ function up() {
 							"<div class='comment_content font_14'>" + com[i].content + "</div>" +
 							"<div class='comment_info ofh'>" +
 							"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+							comment_dele +
 							"<div class='fr color_9e9e9e comment_imgs'>" +
 							"<div class='thumbs fl'>" +
 							"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "' data-commentId='" + com[i].id + "'></span>" +

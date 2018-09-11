@@ -7,6 +7,11 @@ a {
 	width: 100%;
 }
 
+.news_dele_com{
+	margin-left:0.4rem;
+}
+
+
 .notice {
 	position: absolute;
 	left: 50%;

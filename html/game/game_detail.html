@@ -51,11 +51,6 @@
 					<div class="game_infoArt fl">
 						<div class="simHei color_282828 game_call overflow">游戏名称</div>
 						<div style="width:9em;" class="font_12 simHei color_9e9e9e game_company overflow">游戏厂商</div>
-						<div class="simHei color_7a7a7a font_14 game_signs">
-							<!--<span>标签 |</span>
-						   <span>标签 |</span>
-						   <span>标签</span>-->
-						</div>
 					</div>
 					<div class="fr game_infoScores">
 						<div class="ofh">
@@ -84,6 +79,11 @@
 							<!--圈圈结束-->
 						</div>
 					</div>
+					<div class="simHei color_7a7a7a font_14 game_signs">
+						<!--<span>标签 |</span>
+						<span>标签 |</span>
+						<span>标签</span>-->
+					</div>
 				</div>
 			</div>
 			<div id="game_detail_navBox">
@@ -96,7 +96,6 @@
 			<div class="game_detail_navContents">
 				<!--单页面的父盒子0-->
 				<div class="game_detail_details ">
-
 					<!--游戏详情的详情页面-->
 					<div class="game_detail_contents ui_flex_wrapper ui_flex_h mui-content-padded">
 
@@ -387,7 +386,6 @@
 				<!--单页面父盒子2-->
 				<div class="game_detail_walkThroughs hidden">
 					<div class="game_comments simHei">
-
 						<div class="news_post_commentContentstra ofh backgroundColor_white">
 
 							<!--<div class="news_post_commentContent ofh">
@@ -452,6 +450,7 @@
 		<script type="text/javascript">
 			var page = 1,
 				pageIndex = "detail";
+			strategyPage = 1;
 			window.addEventListener('indexRefresh', function(event) {
 				indexCommit();
 			});
@@ -465,11 +464,10 @@
 			});
 
 			mui.init({
-				beforeback:function(){
-					if(dtask_app){
+				beforeback: function() {
+					if(dtask_app) {
 						dtask_app.resume();
 					}
-					
 				},
 				pullRefresh: {
 					container: "#game_detailContent", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -494,6 +492,94 @@
 			});
 
 			function up() {
+				if(pageIndex == "assess") {
+					assess_up()
+				} else {
+					strategy_up()
+				}
+			}
+
+			function strategy_up() {
+				strategyPage++
+				$.ajax({
+					type: "get",
+					url: config.data + "game/getStrategyByGameName",
+					async: true,
+					data: {
+						gameName: gameName,
+						page: strategyPage
+					},
+					success: function(data) {
+						if(data.state) {
+							var str = data.strategy;
+							var div = '';
+							for(var i = 0; i < str.length; i++) {
+								if(str[i].src) {
+									var src = "src"
+								} else {
+									var src = "hidden"
+								}
+
+								if(str[i].top_img_src == "" || str[i].top_img_src == null) {
+									imgSrc = "";
+									imgToggle = "none";
+								} else {
+									imgSrc = str[i].top_img_src;
+									imgToggle = "block";
+								}
+								var detail = $(str[i].detail).text();
+								portrait = "../../Public/image/morentouxiang.png";
+								if(str[i].portrait == 0 || str[i].portrait == null) {
+
+								} else {
+									portrait = str[i].portrait;
+								}
+								div +=
+									"<div class='strategy_indent ofh'  data-id='" + str[i].id + "'>" +
+									"<div class='ofh'>" +
+									"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");' ></div>" +
+									"<div  class='timeName'>" +
+									"<div class='comment_user font_14 font_bold fl'>" + str[i].nick_name + "</div>" +
+									"<div class='font_12 color_9e9e9e fl'>" + str[i].add_time + "</div>" +
+									"</div>" +
+									"</div>" +
+									"<div class='game_comment_content'style='margin-top:0.4rem;' >" +
+									"<div class='font_14 overflow_two color_7a7a7a simHei'>" +
+									"<img data-id='" + str[i].id + "'  style='width:100%;display:" + imgToggle + "' src=" + imgSrc + ">" +
+									"<div class='font_bold color_282828' style='font-size:16px;margin-top:0.625rem;padding-left:0.5rem'>" +
+									"<span>" + str[i].title + "</span>" +
+									"</div>" +
+									"<div  class='strategy_content'>" + detail + "</div>" +
+									"</div>" +
+									//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
+									"<div class='comment_info'>" +
+									"<div  style='margin:0.2rem 0rem;' class='fr color_9e9e9e comment_imgs'>" +
+									//									 "<div class='thumb'></div>" +
+									//									 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
+									"<div data-id='" + str[i].id + "'   class='comment_img'></div>" +
+									"<div  class='comment_num' style='margin-right:0.8rem;'>" + str[i].comment_num + "</div>" +
+									"</div>" +
+									"</div>" +
+									"</div>" +
+									"</div>"
+
+							}
+							$('.news_post_commentContentstra').append(div);
+							if(str.length < 6) {
+								mui('#game_detailContent').pullRefresh().endPullupToRefresh(true);
+							} else {
+								mui('#game_detailContent').pullRefresh().endPullupToRefresh(false);
+							}
+
+						} else {
+							mui('#game_detailContent').pullRefresh().disablePullupToRefresh();
+							$('.news_post_commentContentstra').append("<div class='no_strategy'></div>")
+						}
+					}
+				});
+			}
+
+			function assess_up() {
 				if(!commentModule) {
 					mui('#game_detailContent').pullRefresh().endPullupToRefresh(true);
 				} else {
@@ -511,15 +597,12 @@
 
 								var com = data.comment;
 								var div = '';
-
 								for(var i = 0; i < com.length; i++) {
 									div +=
 										"<div class='news_post_commentContent ofh'>" +
-
 										"<div class='ofh'>" +
 										"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(com[i].portrait) + ");' ></div>" +
 										"<div class='comment_user font_12 font_bold fl'>" + com[i].nick_name + "</div>" +
-
 										"</div>" +
 										"<div class='game_comment_content'>" +
 										"<div class='comment_content font_14' data-id='" + com[i].id + "'>" + com[i].content + "</div>" +
@@ -545,13 +628,10 @@
 									mui('#game_detailContent').pullRefresh().endPullupToRefresh(false);
 
 								}
-							} else {
-
 							}
 						}
 					});
 				}
-
 			}
 
 			function down() {
