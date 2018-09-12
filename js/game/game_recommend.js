@@ -596,15 +596,6 @@ $('.game_rank').children().click(function() {
 function getRank(sort) {
 	rankToggle = true;
 	/*阻挡掉one模块*/
-	if(sort == "game_download_num") {
-		$('.comingsoon').remove();
-		$(".hot_rank").css("display", "none");
-		$('.comingsoon').css("display", "block");
-		mui('.nav_cls_contains').pullRefresh().disablePullupToRefresh();
-		$('.game_ranks').append("<img class='comingsoon' src='../../Public/image/comingsoon.png' style='width:10rem;display:block;margin:0 auto;margin-top:1rem;' />");
-		rankToggle = false;
-		return false;
-	}
 	mui.plusReady(function() {
 		$.ajax({
 			type: "get",

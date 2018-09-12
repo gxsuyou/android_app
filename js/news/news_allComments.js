@@ -202,7 +202,8 @@ $(function() {
 		]
 		var faceContent = ""
 		face.forEach(function(item) {
-			faceContent += "<img src='" + "../../Public/image/face/" + item.src + "' data-id='" + item.id + "' />"
+			//faceContent += "<img src='" + "../../Public/image/face/" + item.src + "' data-id='" + item.id + "' />"
+			faceContent += "<div  data-id='" + item.id + "' style='background-image:url(../../Public/image/face/" + item.src + ")'></div>"
 		})
 		$(".faceContent").append(faceContent)
 	}
@@ -216,7 +217,7 @@ $(function() {
 			$(".faceContent").css("display", "none")
 		}
 	})
-	$("body").on("tap", ".faceContent>img", function(e) {
+	$("body").on("tap", ".faceContent>div", function(e) {
 		e.stopPropagation()
 		var str = $(this).attr("data-id")
 		var tc = document.querySelector(".news_secondComment_input")
@@ -272,7 +273,7 @@ $(function() {
 			}
 		});
 
-		$('body').on('click', '.comment_summary', function() {
+		$('body').on('tap', '.comment_summary', function() {
 			var newsId = $(this).attr('data-id');
 			mui.openWindow({
 				url: "news_post.html",
@@ -393,61 +394,6 @@ function up() {
 	//		获取二级评论结束
 }
 
-o();
-
-function o() {
-	return false
-	//	alert(commentId)
-	$.ajax({
-		type: "get",
-		url: config.data + "news/getNewsCommentTowByPage",
-		async: true,
-		data: {
-			"parentId": commentId,
-			"page": page
-		},
-		success: function(data) {
-			alert(1);
-			if(data.state) {
-				var com = data.comment;
-				var div = "";
-				for(var i = 0; i < com.length; i++) {
-					var ifHidden = com[i].targetUserNickName || "hidden";
-					div +=
-						"<div class='news_post_commentContent ofh' style='border-top: 1px solid #e6ebec;margin-top: 0;border-bottom: 0;' data-id='" + com[i].id + "' data-userId='" + com[i].selfUserId + "' >" +
-						"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(com[i].portrait) + ");'></div>" +
-						"<div class='news_post_commentContent_content fl'>" +
-						"<div class='comment_user font_12'>" +
-						"<span>" + com[i].selfNickName + "</span>" +
-						"<span style='color: #7A7A7A;' class='" + ifHidden + "'>回复</span>" +
-						"<span class='" + ifHidden + "'>" + ifHidden + "</span>" +
-						"</div>" +
-						"<div class='comment_content font_14'>" + com[i].content + "</div>" +
-						"<div class='comment_info ofh'>" +
-						"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
-						"</div>" +
-
-						"</div>" +
-						"</div>"
-				}
-				$('.news_post_secondcommentContents').append(div);
-
-				if(com.length < 10) {
-
-					mui('.news_allComments').pullRefresh().endPullupToRefresh(true);
-
-				} else {
-
-					mui('.news_allComments').pullRefresh().endPullupToRefresh(false);
-
-				}
-			} else {
-
-			}
-		}
-	});
-
-}
 
 function down() {
 	window.location.reload();

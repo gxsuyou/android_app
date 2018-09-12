@@ -24,9 +24,9 @@ $(function() {
 				$('.personal_name').val(u.nick_name);
 				$('.sexArt').text(sex_art);
 				$('.personal_bir').val(u.birthday);
-				if(u.portrait!=0){
-					$('.profile_header').css('background-image', 'url('+ u.portrait + ')')
-				}else{
+				if(u.portrait != 0) {
+					$('.profile_header').css('background-image', 'url(' + u.portrait + ')')
+				} else {
 					$('.profile_header').css('background-image', 'url(../../Public/image/morentouxiang.png)')
 				}
 			} else {
@@ -114,11 +114,15 @@ $(function() {
 	})
 
 	$('.publish').click(function() {
+		$(this).addClass("move")
+		setTimeout(function() {
+			$("..publish").removeClass("move")
+		}, 400)
 		var name = $('.personal_name').val().trim()
 		var bir = $('.personal_bir').val()
 		var nick_state = 1;
-		var mask=mui.createMask();//遮罩层
-		
+		var mask = mui.createMask(); //遮罩层
+
 		/* 先验证昵称 */
 		$.ajax({
 			type: "get",
@@ -129,16 +133,16 @@ $(function() {
 				nickName: name
 			},
 			beforeSend: function() {
-		        plus.nativeUI.showWaiting("正在保存...",'2000');
-		        mask.show();//显示遮罩层
-		    },
-		    complete: function() {
-		        plus.nativeUI.closeWaiting();
-		        mask.close();//关闭遮罩层
-		    },
+				plus.nativeUI.showWaiting("正在保存...", '2000');
+				mask.show(); //显示遮罩层
+			},
+			complete: function() {
+				plus.nativeUI.closeWaiting();
+				mask.close(); //关闭遮罩层
+			},
 			success: function(data) {
 				if(data.state) {
-					
+
 					/* 修改生日  */
 					$.ajax({
 						type: "get",
@@ -150,46 +154,46 @@ $(function() {
 						},
 						success: function(data) {
 							if(data.state) {
-					
+
 							} else {
-					
+
 							}
 						}
 					});
-										
-					if (dataURLup){
-			           uploadHead(id, dataURLup,function(){
-				           mui.back()			
-			            });
-		            } else{		
-			            mui.back()
-		            }	
+
+					if(dataURLup) {
+						uploadHead(id, dataURLup, function() {
+							mui.back()
+						});
+					} else {
+						mui.back()
+					}
 				} else {
-				   mui.toast('昵称不能重名');
-                   return false;
+					mui.toast('昵称不能重名');
+					return false;
 				}
 			}
-		});			
+		});
 	})
 
 })
 
-function uploadHead(id, dataURL,callBack) {
+function uploadHead(id, dataURL, callBack) {
 	$.ajax({
-		type:"post",
-		url:config.data + "users/updateHead",
-		async:true,
-		data:{
-			head:dataURL,
-			id:id
+		type: "post",
+		url: config.data + "users/updateHead",
+		async: true,
+		data: {
+			head: dataURL,
+			id: id
 		},
-		success:function(data){
-			if (data.state) {
+		success: function(data) {
+			if(data.state) {
 				return callBack()
-			} else{
-				
+			} else {
+
 			}
 		}
 	});
-	
+
 }

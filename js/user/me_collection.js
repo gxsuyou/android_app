@@ -14,6 +14,18 @@ $(function(){
 		mui('.me_collections').pullRefresh().refresh(true);
 		up()
 	})
+	
+	$('body').on('tap', '.strategy_content_classify', function(e) {
+		e.stopPropagation()
+		var msg = $(this).text();
+		mui.openWindow({
+			url: "../strategy/strategy_search_result.html",
+			id: "strategy_search_result.html",
+			extras: {
+				msg: msg
+			}
+		})
+	})
 	$('.me_collectionNav').children('span').eq(1).click(function(){		
 		$('.strategy_contents').removeClass('hidden')
 		$('.news_art_list').addClass('hidden').children().remove();

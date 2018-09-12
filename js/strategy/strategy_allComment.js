@@ -309,7 +309,7 @@ $(function() {
 		]
 		var faceContent = ""
 		face.forEach(function(item) {
-			faceContent += "<img src='" + "../../Public/image/face/" + item.src + "' data-id='" + item.id + "' />"
+			faceContent += "<div  data-id='" + item.id + "' style='background-image:url(../../Public/image/face/" + item.src + ")'></div>"
 		})
 		$(".faceContent").append(faceContent)
 	}
@@ -324,7 +324,7 @@ $(function() {
 			$(".faceContent").css("display", "none")
 		}
 	})
-	$("body").on("tap", ".faceContent>img", function(e) {
+	$("body").on("tap", ".faceContent>div", function(e) {
 		e.stopPropagation()
 		var str = $(this).attr("data-id")
 		var tc = document.querySelector(".news_secondComment_input")

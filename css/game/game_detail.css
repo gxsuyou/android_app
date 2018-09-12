@@ -52,13 +52,22 @@
 	background-size: cover;
 }
 
+.game_signs {
+	clear: both;
+	margin: 1rem 0;
+	padding-top: 1rem;
+	height: 1.3rem;
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
 .game_signs>span {
 	margin-right: 0.2rem;
 }
 
 .game_detailTopinfo {
 	width: 100%;
-	height: 6.625rem;
 	padding: 0 1.25rem;
 	border-top: 1px solid #E6EBEC;
 	border-bottom: 1px solid #E6EBEC;
@@ -279,13 +288,6 @@
 	background-color: #E7EAEC;
 }
 
-.news_post_commentContent {
-	width: 100%;
-	/*height: 8.75rem;*/
-	border-top: 1px solid #E7EAEC;
-	margin-bottom: 0.9rem;
-}
-
 
 /*.news_post_commentContent_head{
 	width: 1.6875rem;
@@ -316,6 +318,8 @@
 
 .comment_info {
 	padding-left: 3.6rem;
+	padding-top: 0.2rem;
+	padding-bottom: 0.2rem;
 }
 
 .thumb {
@@ -326,7 +330,6 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 	vertical-align: middle;
-	/*	margin-top: -0.2rem;*/
 }
 
 .no_strategy {
@@ -352,7 +355,10 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 	vertical-align: middle;
-	/*margin-top: -0.2rem;*/
+}
+
+.game_dele_com {
+	margin-left: 0.2rem;
 }
 
 .thumb_num,
@@ -369,8 +375,8 @@
 	margin-top: 0.3rem;
 	padding-left: 0.5rem;
 	overflow: hidden;
-	/** 隐藏超出的内容 **/
 	text-overflow: ellipsis;
+	/** 隐藏超出的内容 **/
 	display: -webkit-box;
 	-webkit-line-clamp: 2;
 	-webkit-box-orient: vertical;
@@ -381,15 +387,10 @@
 	align-content: center;
 }
 
-.comment_imgs>div {
-	/*	float:left;*/
-	/*display: inline-block;
-	margin-left: 0.1rem;*/
-}
-
 .game_comment_content {
 	padding: 0 0.625rem;
-	margin-top: -1rem;
+	margin-top: -0.2rem;
+	clear:both;
 }
 
 .game_strategy_content {
@@ -519,7 +520,12 @@
 }
 
 .strategy_indent {
-	/*	text-indent: 2em;*/
+	background: #fff;
+	margin-bottom: 0.9375rem;
+}
+
+.news_post_commentContentstra {
+	background: #efeff4;
 }
 
 .news_post_commentContent_head {
@@ -595,14 +601,14 @@
 	margin: 0 auto;
 }
 
-.con{
+.con {
 	position: absolute;
 	right: 1.0em;
 	top: 0.5rem;
 	height: 1.8rem;
 	width: 1.8rem;
-	border:0.12rem solid #7fcadf;
-	border-radius:100%;
+	border: 0.12rem solid #7fcadf;
+	border-radius: 100%;
 }
 
 .percent-circle {
@@ -662,4 +668,20 @@
 	width: 0.4rem;
 	height: 0.4rem;
 	background: #7fcadf;
+}
+
+
+
+/*评论星星*/
+.game_list_star_active {
+	background-image: url("../../Public/image/xing1.png")!important;
+}
+.stars>div {
+	float: left;
+	width: 0.9rem;
+	height: 0.9rem;
+	background-image: url("../../Public/image/xing2.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: contain;
 }
