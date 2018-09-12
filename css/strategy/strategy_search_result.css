@@ -1,162 +1,183 @@
-body{
+body {
 	background-color: white;
 }
-.header_title{
+
+.header_title {
 	color: white;
 	margin: 0 auto;
 }
-.bell,.search{
+
+.bell,
+.search {
 	position: absolute;
 	top: 5px;
 	width: 35px;
 	height: 35px;
 	background-position: center;
-	background-repeat:no-repeat;
-	background-size: contain;	
+	background-repeat: no-repeat;
+	background-size: contain;
 }
-.bell{
+
+.bell {
 	right: 67px;
 	background-image: url(../../Public/image/xioaxi1.png);
 }
-.search{
+
+.search {
 	right: 1rem;
-	background-image:url(../../Public/image/sousuo1.png);
-	
+	background-image: url(../../Public/image/sousuo1.png);
 }
-.strategy_head{
+
+.strategy_head {
 	position: relative;
 	height: 5.1875rem;
 	margin-top: 45px;
 	padding-top: 0.4375rem;
 	margin-left: 0.625rem;
 }
-.strategy_head > ul > li{
+
+.strategy_head>ul>li {
 	margin-right: 1.5rem;
 }
 
-.strategy_nav{
+.strategy_nav {
 	border-top: 1px solid #E7EAEC;
 	border-bottom: 1px solid #E7EAEC;
 	width: 100%;
 }
-.strategy_content_head{
+
+.strategy_content_head {
 	margin: 0.5rem 0.9375rem;
 	height: 2.9375rem;
 }
-.strategy_content_headImg{
+
+.strategy_content_headImg {
 	width: 2.0625rem;
 	height: 2.0625rem;
-	background-position:center;
-	background-repeat:no-repeat;
+	background-position: center;
+	background-repeat: no-repeat;
 	background-size: contain;
 	border-radius: 50%;
 	margin-top: 0.4375rem;
-	box-shadow:0px 2px 2px 1px rgba(0,0,0,0.1);
+	box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.1);
 }
-.icon_read{
+
+.icon_read {
 	width: 0.9rem;
 	height: 0.9rem;
 	background-image: url(../../Public/image/39D9371F-FB20-48E6-8801-EEBF4765BF46.png);
 	background-position: center;
-	background-repeat:no-repeat;
-	background-size:cover;
+	background-repeat: no-repeat;
+	background-size: cover;
 }
 
-.strategy_content_img{
+.strategy_content_img {
 	height: 11rem;
 	width: 22rem;
 	margin: 0 auto;
 	background-position: center;
-	background-repeat:no-repeat;
+	background-repeat: no-repeat;
 	background-size: contain;
 }
-.strategy_content_titles{
-	margin:0.5rem 0;
-	font-size:14px;
+
+.strategy_content_titles {
+	margin: 0.5rem 0;
+	font-size: 14px;
 	font-weight: bold;
 }
-.strategy_content_sign{
+
+.strategy_content_sign {
 	display: inline-block;
 	width: 2.2rem;
 	height: 1rem;
 	line-height: 1rem;
 	margin-top: 0.1rem;
 }
-.strategy_content_art{
+
+.strategy_content_art {
 	padding: 0 0.9375rem;
 	margin-bottom: 0.6375rem;
 }
-.strategy_content_classify{
-	max-width: 8rem;
-	padding: 0 0.4rem;
+
+.strategy_content_classify {
 	height: 1.25rem;
 	line-height: 1.25rem;
 	margin-left: 0.9375rem;
 }
-.comment_imgs{ 
-	   height: 2rem;
-	   margin-right: 0.9375rem;  
+
+.comment_imgs {
+	height: 2rem;
+	margin-right: 0.9375rem;
 }
-.comment_img{
+
+.comment_img {
 	width: 1.0625rem;
 	height: 1.0625rem;
 	background-image: url("../../Public/image/liuyan.png");
 	background-position: center;
-	background-repeat:no-repeat;
+	background-repeat: no-repeat;
 	background-size: contain;
 	vertical-align: middle;
 }
 
-
-.thumb_num,.comment_num{
+.thumb_num,
+.comment_num {
 	width: 1.8rem;
 }
-.comment_imgs > span{
+
+.comment_imgs>span {
 	display: inline-block;
 	margin-left: 0.2rem;
 }
-.thumb{
+
+.thumb {
 	width: 1.0625rem;
 	height: 1.0625rem;
 	background-image: url("../../Public/image/good.png");
 	background-position: center;
-	background-repeat:no-repeat;
+	background-repeat: no-repeat;
 	background-size: contain;
 	vertical-align: middle
 }
-.cut_line{
+
+.cut_line {
 	width: 100%;
 	height: 0.75rem;
 }
-.pen{
+
+.pen {
 	width: 3.375rem;
 	height: 3.375rem;
 	/*background-color: deepskyblue;*/
 	background-image: url(../../Public/image/fatie.png);
 	background-position: center;
-	background-repeat:no-repeat;
+	background-repeat: no-repeat;
 	background-size: contain;
 	border-radius: 50%;
 	position: fixed;
 	top: 30rem;
 	right: 0.9375rem;
 }
-.strategy_headImgart{
-	width:4em;
-    white-space:nowrap;
-    text-overflow:ellipsis;
-    -o-text-overflow:ellipsis;
-    overflow: hidden;
+
+.strategy_headImgart {
+	width: 4em;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
 }
-.border_bottom{
+
+.border_bottom {
 	border-bottom: 1px solid #7fcadf;
 }
-.no_content{
+
+.no_content {
 	height: 21.5625rem;
 	width: 100%;
 	position: relative;
 }
-.no_contentImg{
+
+.no_contentImg {
 	width: 8rem;
 	height: 8rem;
 	position: absolute;
@@ -166,18 +187,16 @@ body{
 	margin-left: -4rem;
 	background-image: url(../../Public/image/wuneirong.png);
 	background-position: center;
-	background-repeat:no-repeat;
+	background-repeat: no-repeat;
 	background-size: contain;
 }
 
-.strategy_contentz{
-	/*margin-top:0.5rem;*//** 隐藏超出的内容 **/
-	overflow: hidden;  
+.strategy_contentz {
+	/*margin-top:0.5rem;*/
+	/** 隐藏超出的内容 **/
+	overflow: hidden;
 	text-overflow: ellipsis;
-    display: -webkit-box;
-   -webkit-line-clamp: 2;
-   -webkit-box-orient: vertical;
-}
-.strategy_content_classifys{
-	/*margin-top:1.025em;*/
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
 }

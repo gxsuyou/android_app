@@ -1,18 +1,23 @@
 $(function() {
 
-	//	document.getElementById("register-back").addEventListener('tap',function(){
-	//		mui.openWindow({
-	//			url:'html/user/login.html'
-	//		})
-	//	}) 
 	var checked;
 	$('#agree').change(function(){
 		
 		checked = this.checked
 	})
 
-	$('#register-get').click(function () {
-		
+$('body').on("tap",".protocol",function(){
+		mui.openWindow({
+			url:'agreement.html',
+			id:'agreement.html'
+		})
+	})
+
+
+
+
+
+	$('#register-get').click(function () {	
 		var username = $.trim($('#register-phone').val());
 		var code = $('#register-code').val();
 		var password = $('#register-password').val();

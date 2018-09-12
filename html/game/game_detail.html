@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>游戏详情页</title>
@@ -12,6 +13,7 @@
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 	</head>
+
 	<body>
 		<!--重写back-->
 		<div class="backImg"></div>
@@ -22,9 +24,22 @@
 	
 				</div>-->
 				<div class="game_nameHeader overflow">游戏名称</div>
-				<div class="download font_12 hidden">下载</div>
-				<div class="border hidden"></div>
-       
+				<div class="download font_12">下载</div>
+				<div class="border"></div>
+				<div class="con hidden" style="right:1.7rem;border:0.12rem solid #fff;">
+					<div class="percent-circle percent-circle-left" style="background:#fff;">
+						<div class="left-content" style="background:#7fcadf;"></div>
+					</div>
+					<div class="percent-circle percent-circle-right" style="background:#fff;">
+						<div class="right-content" style="background:#7fcadf;"></div>
+					</div>
+					<div class="text-circle" style="background:#7fcadf;">
+						<div class="k" style="background:#fff;">
+
+						</div>
+					</div>
+				</div>
+				<!--圈圈结束-->
 			</header>
 		</div>
 		<div class="game_detailContent " id="game_detailContent">
@@ -37,7 +52,7 @@
 						<div class="simHei color_282828 game_call overflow">游戏名称</div>
 						<div style="width:9em;" class="font_12 simHei color_9e9e9e game_company overflow">游戏厂商</div>
 						<div class="simHei color_7a7a7a font_14 game_signs">
-						   <!--<span>标签 |</span>
+							<!--<span>标签 |</span>
 						   <span>标签 |</span>
 						   <span>标签</span>-->
 						</div>
@@ -48,12 +63,26 @@
 							<div class="fl game_infoScore"></div>
 						</div>
 						<!--<div class="download_button color_white tac backgroundColor_green font_12 fr">下载</div>-->
-						<div style="">
-			    			<div class="download_btn download_button color_white tac  font_12 fr" id="game_detail_download">
-									<div class="download_loading" id="loading"></div>
-									<div class="download_btn_text " >下载</div>
-							</div>	
-		    			</div>
+						<div style="position: relative;">
+							<div class="download_btn download_button color_white tac  font_12 fr" id="game_detail_download">
+								<div class="download_loading" id="loading"></div>
+								<div class="download_btn_text ">下载</div>
+							</div>
+							<div class="con hidden">
+								<div class="percent-circle percent-circle-left">
+									<div class="left-content"></div>
+								</div>
+								<div class="percent-circle percent-circle-right">
+									<div class="right-content"></div>
+								</div>
+								<div class="text-circle">
+									<div class="k">
+
+									</div>
+								</div>
+							</div>
+							<!--圈圈结束-->
+						</div>
 					</div>
 				</div>
 			</div>
@@ -70,7 +99,7 @@
 
 					<!--游戏详情的详情页面-->
 					<div class="game_detail_contents ui_flex_wrapper ui_flex_h mui-content-padded">
-						
+
 						<!--<div style="margin:0.625rem 0.625rem;margin-left: 0;margin-top: 0.125rem;">
 							<div class="game_detail_content"></div>
 						</div>
@@ -132,7 +161,7 @@
 					</div>
 
 					<div class="line_cut"></div>
-				
+
 					<div class="game_comments simHei">
 						<span class="game_simpleIntro  simHei color_282828 ofh" style="margin-bottom: 0.4rem;">评论</span>
 						<div class="news_post_commentContentshot ofh backgroundColor_white">
@@ -181,9 +210,9 @@
 						</div>-->
 						</div>
 					</div>
-					
+
 					<div class="line_cut"></div>
-					
+
 					<div class="game_similar simHei">
 						<span class="game_simpleIntro  simHei color_282828 ofh" style="margin-bottom: 0.4rem;">相似游戏</span>
 						<div class="game_similarContents  ui_flex_wrapper ui_flex_h">
@@ -358,10 +387,9 @@
 				<!--单页面父盒子2-->
 				<div class="game_detail_walkThroughs hidden">
 					<div class="game_comments simHei">
-						
-						
+
 						<div class="news_post_commentContentstra ofh backgroundColor_white">
-							
+
 							<!--<div class="news_post_commentContent ofh">
 
 								<div class="ofh">
@@ -422,20 +450,27 @@
 
 		</div>
 		<script type="text/javascript">
-			var page = 1,pageIndex="detail";
-			window.addEventListener('indexRefresh',function(event){
-			    indexCommit();
-		    });
-		    /*评论出来更新*/
-		    window.addEventListener('accessRefresh',function(){
-		    	detail_assess();
-		    });
-		    
-		    window.addEventListener('assess',function(event){        
-             detail_assess();
-            });
-		    	
+			var page = 1,
+				pageIndex = "detail";
+			window.addEventListener('indexRefresh', function(event) {
+				indexCommit();
+			});
+			/*评论出来更新*/
+			window.addEventListener('accessRefresh', function() {
+				detail_assess();
+			});
+
+			window.addEventListener('assess', function(event) {
+				detail_assess();
+			});
+
 			mui.init({
+				beforeback:function(){
+					if(dtask_app){
+						dtask_app.resume();
+					}
+					
+				},
 				pullRefresh: {
 					container: "#game_detailContent", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 					up: {
@@ -457,8 +492,8 @@
 				}
 
 			});
-            
-			function up() {			
+
+			function up() {
 				if(!commentModule) {
 					mui('#game_detailContent').pullRefresh().endPullupToRefresh(true);
 				} else {
@@ -518,24 +553,23 @@
 				}
 
 			}
+
 			function down() {
-				switch (pageIndex){
-	              case "detail":
-	                  detail_main()
-					break;
+				switch(pageIndex) {
+					case "detail":
+						detail_main()
+						break;
 					case "assess":
-					 detail_assess();
-					break;
+						detail_assess();
+						break;
 					case "strategy":
-					 detail_strategy();
-					break;
-				}				
+						detail_strategy();
+						break;
+				}
 				setTimeout(function() {
 					mui('#game_detailContent').pullRefresh().endPulldown(true);
 				}, 1000);
 			}
-
-          
 		</script>
 		<script src="../../js/game/game_detail.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../js/mui.zoom.js"></script>

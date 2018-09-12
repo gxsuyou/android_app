@@ -3,26 +3,25 @@
 	margin-top: 45px;
 	padding-top: 2rem;
 }
+.commentContent img{
+	width:1.8rem;
+	margin:0 0.1rem;
+}
+
 .notice{
-	position: absolute;
-	left: 50%;
-	margin-left: -1rem;
-	font-size: 18px;
+	margin:0 auto;
 }
 .notice_list{
 	position: relative;
-	padding: 0.625rem;
-	
+	padding: 0.625rem;	
 	background-color: white;
 	border-bottom: 4px solid #E7EAEC;
 }
 .notice_listImg{
-	
+	box-shadow:0px 2px 2px 1px rgba(0,0,0,0.1);
 	display: inline-block;
 	width: 2rem;
 	height: 2rem;
-/*	background-image: url("../../Public/image/star.png");*/
-	
 	border-radius: 50%;
 	background-position: center;
 	background-repeat:no-repeat;
@@ -42,7 +41,6 @@
 	right: 0.875rem;
 	width: 3.75rem;
 	height: 3.75rem;
-	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: cover;
@@ -65,4 +63,66 @@
 }
 .nav > div{
 	flex: 1;
+	display:flex;
+	justify-content:center;
+	align-items:center;
+}
+.sign_num{
+	background:red;
+	width:1rem;
+	height:1rem;
+	line-height:1rem;
+	color:#fff;
+	border-radius:100%;
+	margin-left: 0.15rem;
+	font-size: 12px;
+	text-align: center;
+}
+
+.center_icon{
+	width:3.75rem;
+	height:3.75rem;
+	border-radius:50%;
+	background-size:100% 100%;
+}
+
+.centerInfo{
+	background:#fff;
+	display:flex;
+	height:5.4rem;
+	align-items:center;
+	padding:0 0.83rem;
+	font-size:14px;
+	position:relative;
+	margin-bottom:0.2rem;
+}
+.center_info{
+	margin-left:1rem;	
+}
+.center_info>div:last-child{
+	width:12.5rem;
+	color:#7a7a7a;
+	word-break:keep-all;      /* 不换行 */
+    white-space:nowrap;       /* 不换行 */
+    overflow:hidden;          /* 内容超出宽度时隐藏超出部分的内容 */
+    text-overflow:ellipsis;   
+}
+.center_time{
+	height:3.375rem;
+	color:#7a7a7a;
+}
+.center_time>div:last-child{
+	margin-top:0.2rem;
+	margin-left:2.2rem;
+}
+.center_info{
+	height:3.3rem;
+}
+.center_time{
+	height:3.3rem;
+	position:absolute;
+	top:1rem;
+	right:1.5rem;
+	color:#7a7a7a;
+	font-size:12px;
 }

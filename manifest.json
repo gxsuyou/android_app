@@ -321,7 +321,8 @@
 					"html/news/news_search.html",
 					"html/game/game_classify_list.html",
 					"html/game/game_search.html",
-					"html/user/login.html"
+					"html/user/login.html",
+					"html/game/game_one_rank.html"
 				],
 				"priority": 0
 			},
@@ -409,7 +410,8 @@
 			"html/user/register.html": {
 				"resources": [],
 				"refer": [
-					"html/user/personal_data.html"
+					"html/user/personal_data.html",
+					"html/user/agreement.html"
 				],
 				"priority": 0
 			},
@@ -423,7 +425,8 @@
 			"html/news/news_search.html": {
 				"resources": [],
 				"refer": [
-					"html/news/news_post.html"
+					"html/news/news_post.html",
+					"html/news/new_search_result_list.html"
 				],
 				"priority": 0
 			},
@@ -438,7 +441,8 @@
 			"html/game/game_search.html": {
 				"resources": [],
 				"refer": [
-					"html/game/game_detail.html"
+					"html/game/game_detail.html",
+					"html/game/game_search_result_list.html"
 				],
 				"priority": 0
 			},
@@ -470,7 +474,8 @@
 				"refer": [
 					"html/news/news_allComments.html",
 					"html/strategy/strategy_allComments.html",
-					"html/game/game_allComments.html"
+					"html/game/game_allComments.html",
+					"html/news/new_center_info.html"
 				],
 				"priority": 0
 			},
@@ -528,6 +533,21 @@
 				"resources": [],
 				"refer": [
 					"html/strategy/strategy_details.html"
+				],
+				"priority": 0
+			},
+			"html/game/game_search_result_list.html": {
+				"resources": [],
+				"refer": [
+					"html/game/game_detail.html"
+				],
+				"priority": 0
+			},
+			"html/game/game_one_rank.html": {
+				"resources": [],
+				"refer": [
+					"html/game/game_classify_list.html",
+					"html/game/game_detail.html"
 				],
 				"priority": 0
 			}
