@@ -1,5 +1,6 @@
-body {
+html,body {
 	background-color: white;
+	height:100%
 }
 
 .mui-back {
@@ -39,19 +40,19 @@ textarea {
 	overflow: scroll;
 }
 
-#strategy_textarea {
+/*#strategy_textarea {
 	margin-top: 45px;
 	height: 12rem;
 	position: fixed;
-}
+}*/
 
 .choose_img {
-	/*height: 2.625rem;*/
 	width: 100%;
 	border-top: 1px solid #E7EAEC;
 	border-bottom: 1px solid #E7EAEC;
 	position: fixed;
 	bottom: 10.625rem;
+	background-color:#fff;
 }
 .chooseContent{
 	display: flex;
@@ -81,6 +82,11 @@ textarea {
 	overflow: scroll;
 	width: 100%;
 }
+.img_box {
+	position:relative;
+	width: 6.25rem;
+}
+
 
 .show_img {
 	display: block;
@@ -94,7 +100,7 @@ textarea {
 }
 
 .delete_img {
-	position: absolute;
+	position:absolute;
 	width: 1.4rem;
 	height: 1.4rem;
 	background-image: url(../../Public/image/16FA1BF1-80EC-4EE0-878C-514B5E507970.png);
@@ -102,9 +108,10 @@ textarea {
 	background-repeat: no-repeat;
 	background-size: contain;
 	border-radius: 50%;
-	right: 1rem;
-	top: 0.4rem;
+	right: -0.5rem;
+	top: -0.4rem;
 }
+
 
 .add_img {
 	width: 6.25rem;
@@ -145,4 +152,14 @@ textarea {
 .faceContent img{
 	width: 1.8rem;
 	margin: 0 0.3rem;
+}
+.faceContent div{
+	float: left;
+	height:1.8rem;
+	width:1.8rem;
+	margin:0 0.8rem;
+	margin-bottom:0.2rem;
+	background-size:contain;
+	background-position: center;
+	background-repeat: no-repeat;
 }

@@ -122,7 +122,6 @@ $(function() {
 					sys: 2,
 				},
 				success: function(data) {
-					alert(JSON.stringify(data))
 					if(data.length != 0) {
 						if(data.length < 6 || val == "all") {
 							data.forEach(function(item) {

@@ -259,9 +259,11 @@ $(function() {
 
 		//		点赞与取消点赞结束
 
-		$('body').on('click', '.more_secondComment,.comment_img', function(event) {
+		$('body').on('tap', '.more_secondComment,.comment_img', function(event) {
 
 			event.stopPropagation();
+			
+			
 			if(userId == 0) {
 				mui.toast("请先登录");
 				return false;
