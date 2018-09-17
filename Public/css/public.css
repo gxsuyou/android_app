@@ -4,6 +4,19 @@
     margin: 0;
     padding: 0;
 }
+.faceContent div{
+	float: left;
+	height:1.8rem;
+	width:1.8rem;
+	margin:0 0.8rem;
+	margin-bottom:0.2rem;
+	background-size:contain;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+.comment_dele,.game_allComm_dele_com{
+	margin-left:0.2rem;
+}
 .errorContent{
 	display:flex;
 	align-items:center;

@@ -180,26 +180,30 @@ $(function() {
 		]
 		var faceContent = ""
 		face.forEach(function(item) {
-			faceContent += "<img src='" + "../../Public/image/face/" + item.src + "' data-id='" + item.id + "' />"
+			faceContent += "<div  data-id='" + item.id + "' style='background-image:url(../../Public/image/face/" + item.src + ")'></div>"
 		})
 		$(".faceContent").append(faceContent)
 	}
 	var face_to = 1
-	$("body").on("tap", ".face", function() {
-		setTimeout(function() {
-			$(".news_secondComment").css("display", "block")
-			$(".news_userInfo_reply").css("display", "none")
-			if(face_to == 1) {
-				face_to = 0
+	$("body").on("mousedown", ".face", function(e) {
+		e.preventDefault()
+		setTimeout(function(){
+				$(".news_secondComment").css("display", "block")
+				$(".news_userInfo_reply").css("display", "none")
+			 if(face_to == 1) {
+			 	face_to = 0				
+			 	$(".new_post_contents").css("padding-bottom","8.2rem")
 				$(".faceContent").css("display", "block")
-			} else {
-				face_to = 1
-				$(".faceContent").css("display", "none")
-			}
-		}, 300)
+			  }else{
+			  	face_to = 1
+			  	$(".new_post_contents").css("padding-bottom","0rem")
+			  	$(".faceContent").css("display", "none")
+			  }
+			}, 300)
 
 	})
-	$("body").on("tap", ".faceContent>img", function(e) {
+	$("body").on("mousedown", ".faceContent div", function(e) {
+		e.preventDefault()
 		var str = $(this).attr("data-id")
 		var tc = document.querySelector(".news_secondComment_input")
 		var tclen = tc.value.length;
@@ -242,19 +246,22 @@ $(function() {
 			}
 		})
 	})
-
+	
 	mui.init({
-		swipeBack: true, //启用右滑关闭功能
+		//swipeBack: true, //启用右滑关闭功能
 		gestureConfig: {
 			tap: true, //默认为true
 			longtap: true, //默认为false
 		},
 		beforeback: function() {
+			
 			var input_val = $(".news_secondComment_input").val();
 			if(input_val != "") {
 				var id = "strategy_title_" + newsId
 				window.localStorage.setItem(id, input_val)
 			}
+			var list = plus.webview.getWebviewById("html/news/news.html");//触发父页面的自定义事件(refresh),从而进行刷新	
+			mui.fire(list, 'reload');	
 		},
 		pullRefresh: {
 			container: ".new_post_contents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -472,8 +479,6 @@ $(function() {
 								t.siblings('.thumb_num').text(parseInt(t.siblings('.thumb_num').text()) - 1);
 								mui.toast("取消点赞")
 
-							} else {
-
 							}
 						}
 					});
@@ -631,10 +636,14 @@ $(function() {
 								} else {
 									reviewNum = reviewNum + 1;
 								}
-								$('.news_reviewNum').text(reviewNum);
-
-								mui('.new_post_contents').pullRefresh().refresh(true);
-								$(".news_post_commentContents").empty();
+								/* 收回 */
+								$(".news_secondComment,.faceContent").css("display","none")
+								$(".news_userInfo_reply").css("display","block")
+								$(".new_post_contents").css("padding-bottom","0rem")							
+								$('.news_reviewNum').text(reviewNum);							
+//								mui('.new_post_contents').pullRefresh().enablePullupToRefresh();
+								$(".news_post_commentContents").empty()
+							    mui('.new_post_contents').pullRefresh().refresh(true);
 								page = 0;
 								up();
 							} else {
@@ -670,9 +679,13 @@ $(function() {
 						success: function(data) {
 							if(data.state == 1) {
 								mui.toast("删除成功")
-								$(".bottomInfo").text("正在加载 ...");
-								closeAjax = false;
-								$(".news_post_commentContents").empty();
+//								$(".bottomInfo").text("正在加载 ...");
+//								closeAjax = false;
+//								$(".news_post_commentContents").empty();
+//								page = 0;
+//								up();
+	                            $(".news_post_commentContents").empty()
+							    mui('.new_post_contents').pullRefresh().refresh(true);
 								page = 0;
 								up();
 							} else {

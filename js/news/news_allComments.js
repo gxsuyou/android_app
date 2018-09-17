@@ -202,23 +202,25 @@ $(function() {
 		]
 		var faceContent = ""
 		face.forEach(function(item) {
-			//faceContent += "<img src='" + "../../Public/image/face/" + item.src + "' data-id='" + item.id + "' />"
 			faceContent += "<div  data-id='" + item.id + "' style='background-image:url(../../Public/image/face/" + item.src + ")'></div>"
 		})
 		$(".faceContent").append(faceContent)
 	}
 	var face_to = 1;
-	$("body").on("tap", ".face", function() {
+	$("body").on("mousedown", ".face", function(e) {
+		e.preventDefault()
 		if(face_to == 1) {
 			face_to = 0
 			$(".faceContent").css("display", "block")
+			$(".news_post_commentContents").css("padding-bottom", "8.2rem")
 		} else {
 			face_to = 1
 			$(".faceContent").css("display", "none")
+			$(".news_post_commentContents").css("padding-bottom", "0rem")
 		}
 	})
-	$("body").on("tap", ".faceContent>div", function(e) {
-		e.stopPropagation()
+	$("body").on("mousedown", ".faceContent>div", function(e) {
+		e.preventDefault()
 		var str = $(this).attr("data-id")
 		var tc = document.querySelector(".news_secondComment_input")
 		var tclen = tc.value.length;
@@ -289,8 +291,33 @@ $(function() {
 
 		$('body').on('tap', '.news_post_commentContent', function() {
 			$('.news_secondComment_input').focus();
-			//			targetCommentId = $(this).attr("data-id");
 			targetUserId = $(this).attr("data-userId")
+		})
+
+		/* 删除二级评论  */
+		$("body").on("tap", ".comment_dele", function() {
+			var id = $(this).attr("data-id")
+			plus.nativeUI.confirm("删除评论", function(e) {
+				if(e.index == 0) {
+					$.ajax({
+						type: "get",
+						url: config.data + "news/delMyComment",
+						async: true,
+						data: {
+							uid: userId,
+							id: id
+						},
+						success: function(data) {
+							if(data.state == 1) {
+								mui.toast("删除成功")
+								window.location.reload()
+							} else {
+								mui.toast("删除失败")
+							}
+						}
+					})
+				}
+			})
 		})
 
 		//		点击发布
@@ -316,12 +343,13 @@ $(function() {
 							mui.toast("评论成功")
 							$('.news_secondComment_input').val("");
 							$('.news_post_secondcommentContents').children().empty();
+							$(".news_post_commentContents").css("padding-bottom", "0rem")
 							page = 0;
 							up();
 						} else {
 							mui.toast("失败")
 						}
-						$(".faceContent").css("display","none")
+						$(".faceContent").css("display", "none")
 					}
 				});
 			} else {
@@ -359,6 +387,13 @@ function up() {
 					} else {
 						portrait = com[i].portrait;
 					}
+
+					if(com[i].user_id == userId) {
+						var comment_dele = "<div class='font_12 fl color_7fcadf comment_dele' data-id='" + com[i].id + "'>删除</div>"
+					} else {
+						var comment_dele = "&nbsp;"
+					}
+
 					div +=
 						"<div class='news_post_commentContent ofh' style='border-top: 1px solid #e6ebec;margin-top: 0;border-bottom: 0;' data-id='" + com[i].id + "' data-userId='" + com[i].selfUserId + "' >" +
 						"<div class='news_post_commentContent_head fl' style='background-image: url(" + encodeURI(portrait) + ");'></div>" +
@@ -371,6 +406,7 @@ function up() {
 						"<div class='comment_content font_14'>" + com[i].content + "</div>" +
 						"<div class='comment_info ofh'>" +
 						"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+						comment_dele +
 						"</div>" +
 						"</div>" +
 						"</div>"
@@ -394,12 +430,9 @@ function up() {
 	//		获取二级评论结束
 }
 
-
 function down() {
 	window.location.reload();
 	setTimeout(function() {
 		mui('.news_allComments').pullRefresh().endPulldown(true);
-	}, 1000);
-
-	//				 mui('#news_content').pullRefresh().endPulldown(true);
+	}, 1000)
 }

@@ -7,7 +7,7 @@
 	"id": "H5C62934A",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "ONE游戏",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.30",/*应用版本名称*/
+		"name": "1.0.31",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -262,7 +262,9 @@
 					"Public/image/haowan2.png",
 					"Public/image/youxi2.png",
 					"Public/image/wode2.png",
-					"js/mui.min.js"
+					"js/mui.min.js",
+					"Public/js/public.js",
+					"Public/js/jquery-3.2.1.min.js"
 				],
 				"refer": [
 					"html/strategy/strategy.html"
@@ -273,7 +275,13 @@
 				"resources": [
 					"css/mui.min.css",
 					"css/news/news.css",
-					"js/news/news.js"
+					"js/news/news.js",
+					"Public/image/whiteEye.png",
+					"Public/image/xioaxi1.png",
+					"Public/image/xing1.png",
+					"Public/js/public.js",
+					"Public/image/sousuo1.png",
+					"Public/js/jquery-3.2.1.min.js"
 				],
 				"refer": [
 					"html/news/news_search.html",
@@ -285,7 +293,24 @@
 				"priority": 0
 			},
 			"html/news/news_post.html": {
-				"resources": [],
+				"resources": [
+					"Public/image/shoucang.png",
+					"Public/image/good.png",
+					"Public/image/face/bad_smile.png",
+					"Public/image/face/black.png",
+					"fonts/mui.ttf",
+					"Public/image/face/dog.png",
+					"Public/image/face/cry_hand.png",
+					"Public/image/diangoodone.png",
+					"Public/image/face/leaf.png",
+					"Public/image/face/but.png",
+					"Public/image/face/butcry.png",
+					"Public/image/face/eat_wat.png",
+					"Public/image/face/ass.png",
+					"Public/image/face/alas.png",
+					"Public/image/face/beer_yellow.png",
+					"Public/image/face/angry.png"
+				],
 				"refer": [
 					"html/news/news_allComments.html",
 					"html/game/game_detail.html",
@@ -574,11 +599,9 @@
 		"idle": {
 			"resources": [
 				"Public/image/haowan1.png",
-				"Public/image/xing1.png",
 				"Public/css/vssver2.scc",
 				"Public/image/lingdang2.png",
 				"Public/image/wode1.png",
-				"fonts/mui.ttf",
 				"Public/image/shou.png",
 				"Public/image/lingdang.png",
 				"Public/image/starActive.png"

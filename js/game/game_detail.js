@@ -348,11 +348,12 @@ function createDownload(name, src) {
 			retry: 0,
 			retryInterval: 0
 		}, function(d, status) {
-			// 下载完成
-			$("#game_detail_download").removeClass("hidden")
-			$(".con").addClass("hidden")
-			$(".download,.border").removeClass("hidden")
+			
 			if(status == 200) {
+				// 下载完成
+			  $("#game_detail_download").removeClass("hidden")
+			  $(".con").addClass("hidden")
+			  $(".download,.border").removeClass("hidden")
 
 				//添加到我的游戏
 				if(userId) {
@@ -374,7 +375,7 @@ function createDownload(name, src) {
 						}
 					});
 				}
-				//				添加到我的游戏结束
+				//添加到我的游戏结束
 
 				plus.runtime.install(dtask_app.filename, {}, function(widgetInfo) {
 					$(".download_btn_text").text("打开");
@@ -453,10 +454,8 @@ function loading(num) {
 	if(angle > 180) {
 		$(".right-content").css("transform", "rotate(" + "180" + "deg)")
 		$(".left-content").css("transform", "rotate(" + (angle - 180) + "deg)")
-		//leftContent.setAttribute('style', 'transform: rotate(' + (angle - 180) + 'deg)');
 	} else {
 		$(".right-content").css("transform", "rotate(" + angle + "deg)")
-		//rightContent.setAttribute('style', 'transform: rotate(' + angle + 'deg)');
 	}
 
 }
@@ -465,7 +464,8 @@ function installApp(filename) {
 	$("#game_detail_download").removeClass("hidden")
 	$(".con").addClass("hidden")
 	$(".download,.border").removeClass("hidden")
-	plus.runtime.install(filename, {}, function(widgetInfo) {
+	console.log(filename)
+	plus.runtime.install(filename,{},function(widgetInfo) {
 
 		console.log(widgetInfo)
 

@@ -85,6 +85,8 @@ $(function() {
 					}else{
 							mui.toast("发送成功")
 							setTimeout(function(){
+								
+								
 								mui.back()
 							},1500)
 							

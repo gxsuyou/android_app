@@ -1,48 +1,61 @@
-
+var ENV = "dev";
 //测试环境
-var config = {
-	img: "http://img.oneyouxi.com.cn/",
-	apk: "http://apk.oneyouxi.com.cn/",
-//	data: "http://192.168.2.156:8877/",
-//	data:"http://192.168.2.108:8877/",
-//  data:"http://192.168.2.117:8877/",
-//	data:"http://182.61.26.179:8877/",
-//	data:"http://192.168.0.207:8877/",
-//	data:"http://192.168.0.67:8877/",
-//	data:"http://192.168.0.207:8877/",
-    data:"http://onetest.oneyouxi.com.cn/",
-	base64: "http://base64.oneyouxi.com.cn/",
-//	url_upload:"http://182.61.26.179:8878/",
-	url_upload:"https://admin.oneyouxi.com.cn/",
-//	url_upload:"http://192.168.0.207:8878/",
+if(ENV == "dev") {
+   //发开模式
+	var config = {
+		img: "http://img.oneyouxi.com.cn/",
+		apk: "http://apk.oneyouxi.com.cn/",
+		//	data: "http://192.168.2.156:8877/",
+		//	data:"http://192.168.2.108:8877/",
+		//  data:"http://192.168.2.117:8877/",
+		//	data:"http://182.61.26.179:8877/",
+		//	data:"http://192.168.0.207:8877/",
+		//	data:"http://192.168.0.67:8877/",
+		//	data:"http://192.168.0.207:8877/",
+		data: "http://onetest.oneyouxi.com.cn/",
+		base64: "http://base64.oneyouxi.com.cn/",
+		//	url_upload:"http://182.61.26.179:8878/",
+		url_upload: "https://admin.oneyouxi.com.cn/",
+		//	url_upload:"http://192.168.0.207:8878/",
+		wgtUrl: "https://admin.oneyouxi.com.cn/www/test/APK/H5C62934A.wgt"
+	}
+}else{
+	//正式模式
+	var config = {
+		img: "http://img.oneyouxi.com.cn/",
+		apk: "http://apk.oneyouxi.com.cn/",
+		data: "http://182.61.26.179:8877/",
+		base64: "http://base64.oneyouxi.com.cn/",
+		url_upload: "https://admin.oneyouxi.com.cn/",
+		wgtUrl: "https://admin.oneyouxi.com.cn/www/APK/H5C62934A.wgt"
+	}
 }
 
-var userInfostr = window.localStorage.getItem("userInfo");
-var userInfojson = eval('(' + userInfostr + ')');
+var userInfostr = window.localStorage.getItem("userInfo")
+var userInfojson = eval('(' + userInfostr + ')')
 if(userInfojson) {
 	var userId = userInfojson.id
 } else {
 	var userId = 0
 }
 
-
-function activeBell(){
-	if(userId){
-	    $.ajax({
-	       type:"get",
-	       url:config.data+"news/getTip",
-	       async:true,
-	       data: {
-               "userId": userId
-	       },
-	       success:function(data){
-	       	   if(data.state==1){       	   	
-	       	   	  $(".bell").addClass("bell_active");
-	       	   }else{
-	       	   	  $(".bell").removeClass("bell_active");
-	       	   }             
-	    }
-      });
+function activeBell() {
+	if(userId) {
+		$.ajax({
+			type: "get",
+			url: config.data + "news/getTip",
+			async: true,
+			data: {
+				"userId": userId
+			},
+			success: function(data) {
+				if(data.state == 1) {
+					$(".bell").addClass("bell_active");
+				} else {
+					$(".bell").removeClass("bell_active");
+				}
+			}
+		});
 	}
 }
 var wgtVer = null;
@@ -61,25 +74,28 @@ $(function() {
 		document.addEventListener("plusready", onPlusReady, false);
 		var dtask = null;
 		// 扩展API加载完毕，现在可以正常调用扩展API 
-		function onPlusReady(){
+		function onPlusReady() {
 			checkAppid()
 		}
 		checkAppid()
+
 		function checkAppid() {
 			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
 				wgtVer = inf.version;
 				console.log("当前应用版本：" + wgtVer);
 				//	检测更新
-				
+
 				$.ajax({
 					type: "get",
-					url: "http://www.oneyouxi.com.cn:8877/H5/update",
+					url: config.data+"/H5/update",
 					async: true,
 					success: function(data) {
 						if(data.state) {
 							newVer = data.mark;
-//&& (wgtVer != newVer)
-							if(wgtVer && newVer&& (wgtVer != newVer)) {
+							//&& (wgtVer != newVer)
+							if(wgtVer && newVer && (wgtVer != newVer)) {
+	                        
+//	                        if(wgtVer && newVer) {
 								showUpload() //展示
 								downWgt(); // 下载升级包
 							} else {
@@ -96,22 +112,18 @@ $(function() {
 
 		function showUpload() {
 			$(".upload-layer").removeClass("hidden")
-//			$(".upload-layer").css("display","flex !important")
 		}
-		
+
 		function hiddenUpload() {
 			$(".upload-layer").addClass("hidden")
 		}
 
 		// 下载wgt文件
-		var wgtUrl = "https://admin.oneyouxi.com.cn/www/APK/H5C62934A.wgt";
-
 		function downWgt() {
-			//		plus.nativeUI.showWaiting("正在更新中");
-			var dtask = plus.downloader.createDownload(wgtUrl, {
+			var dtask = plus.downloader.createDownload(config.wgtUrl, {
 				method: 'GET',
-				data: '',
-				filename: "_doc/update/",
+				data: '',				
+				filename: "_downloads/",
 				timeout: '3000',
 				retry: 0,
 				retryInterval: 0
@@ -123,13 +135,45 @@ $(function() {
 				} else {
 					console.log("下载wgt失败！");
 					plus.nativeUI.alert("下载wgt失败！");
-					
+
 				}
 				plus.nativeUI.closeWaiting();
 			})
-			dtask.addEventListener("statechanged", onStateChanged, false);
-			dtask.start();
+			dtask.addEventListener("statechanged", onStateChanged, false)
+			dtask.start()
 		}
+		
+		
+		function onStateChanged(download, status) {
+			downloding(download)
+		}
+
+		function downloding(download) {
+			switch(download.state) {
+				case 0:
+					//			$(".ldownload_btn_text").text('等待');
+					break;
+				case 1:
+					//			$(".ldownload_btn_text").text('等待');
+					break;
+				case 2:
+					//			$(".ldownload_btn_text").text('等待');
+					break;
+				case 3:
+//                  console.log(download.totalSize)
+					//				loading((download.downloadedSize / download.totalSize * 100).toFixed(0))
+					loading((download.downloadedSize / 13247781 * 100).toFixed(0))
+
+					break;
+				case 4:
+					//			$(".ldownload_btn_text").text("打开");
+					loading(0)
+					break;
+			}
+		}
+		
+		
+		
 
 		// 更新应用资源
 		function installWgt(path) {
@@ -150,34 +194,7 @@ $(function() {
 			});
 		}
 
-		function onStateChanged(download, status) {
-			downloding(download)
-		}
-
-		function downloding(download) {
-//			console.log(JSON.stringify(download))
-			switch(download.state) {
-				case 0:
-					//			$(".ldownload_btn_text").text('等待');
-					break;
-				case 1:
-					//			$(".ldownload_btn_text").text('等待');
-					break;
-				case 2:
-					//			$(".ldownload_btn_text").text('等待');
-					break;
-				case 3:
-				
-					//				loading((download.downloadedSize / download.totalSize * 100).toFixed(0))
-					loading((download.downloadedSize / 13247781 * 100).toFixed(0))
-
-					break;
-				case 4:
-					//			$(".ldownload_btn_text").text("打开");
-					loading(0)
-					break;
-			}
-		}
+		
 
 		function loading(num) {
 			$(".progress-move").css("width", num + "%")

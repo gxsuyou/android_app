@@ -28,8 +28,8 @@ $(function() {
 		} else {
 			var wobj = plus.webview.getWebviewById("me_works.html");
 		}
-
-		mui.fire(wobj, 'reload', {});
+		mui.fire(wobj, 'reload', {})
+		
 		mui.back()
 	})
 
@@ -45,7 +45,7 @@ $(function() {
 		var target_img = self.target_img;
 		var target_title = self.target_title;
 		var strategyVal = localStorage.getItem("strategyVal_" + strategyId)
-
+        $("#strategy_textarea").css("height", "auto")
 		if(strategyVal) {
 			$("#strategy_textarea").val(strategyVal)
 		}
@@ -262,18 +262,8 @@ $(function() {
 			changeTextContent()
 		}
  
-         $("body").on("tap","body",function(){
-         	console.log(1)
-         	$("#strategy_textarea").focus()
-         })
-		function changeTextContent() {
-			
-			
+		function changeTextContent() {		
 			var _body = $("body").height()
-//			setTimeout(function(){
-//				console.log("haha"+_body)
-//			},500)
-//			console.log("xixi"+_body)
 			var _chooseC = $(".choose_img").height()
 			var _header = $(".header_box").height()
 
@@ -288,8 +278,6 @@ $(function() {
 			//console.log(_textarea) //text的高度
  
 			//如果剩余空间大于text的高度
-			console.log(_remain)
-			console.log(_textarea)
 			if(_remain < _textarea) {
 				//打开并聚焦修改高度
 				$("#strategy_textarea").css("height", _remain)
@@ -310,8 +298,6 @@ $(function() {
 			//小于600的高度则判断为聚焦否则失焦
 //			console.log( window.screen.availHeight)
 			_body < 600 ? isFocus = true : isFocus = false;
-			console.log("焦距" + isFocus)
-
 			if(face_t == 1) {
 				face_t = 0; //出现			
 				$(".faceContent").css("display", "block")

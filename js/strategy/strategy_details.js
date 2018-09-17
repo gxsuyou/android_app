@@ -54,6 +54,10 @@ $(function() {
 
 		mui.init({
 			swipeBack: true,
+			beforeback: function() {
+				var list = plus.webview.getWebviewById("html/strategy/strategy.html"); //触发父页面的自定义事件(refresh),从而进行刷新	
+				mui.fire(list, 'reload');
+			},
 			gestureConfig: {
 				tap: true, //默认为true
 				doubletap: true, //默认为false
