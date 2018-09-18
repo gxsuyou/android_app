@@ -228,6 +228,12 @@ mui.plusReady(function () {
     }
 });
 
+
+
+
+
+
+
 // 更新应用资源
 //function installWgt(path) {
 //  plus.nativeUI.showWaiting("安装wgt文件...");

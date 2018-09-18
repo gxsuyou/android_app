@@ -58,8 +58,19 @@ function activeBell() {
 		});
 	}
 }
+
+
+
+
+
+
+
 var wgtVer = null;
 var total_height;
+var totalSize;
+
+
+
 $(function() {
 	mui.plusReady(function() {
 		total_height = plus.navigator.getStatusbarHeight() + 45;
@@ -80,22 +91,25 @@ $(function() {
 		checkAppid()
 
 		function checkAppid() {
+		
 			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
 				wgtVer = inf.version;
 				console.log("当前应用版本：" + wgtVer);
 				//	检测更新
-
 				$.ajax({
 					type: "get",
 					url: config.data+"/H5/update",
 					async: true,
 					success: function(data) {
+//						alert(JSON.stringify(data))
 						if(data.state) {
-							newVer = data.mark;
-							//&& (wgtVer != newVer)
+							newVer = data.mark
+						    totalSize=data.totalSize
+							
 							if(wgtVer && newVer && (wgtVer != newVer)) {
 	                        
 //	                        if(wgtVer && newVer) {
+
 								showUpload() //展示
 								downWgt(); // 下载升级包
 							} else {
@@ -162,7 +176,8 @@ $(function() {
 				case 3:
 //                  console.log(download.totalSize)
 					//				loading((download.downloadedSize / download.totalSize * 100).toFixed(0))
-					loading((download.downloadedSize / 13247781 * 100).toFixed(0))
+//					console.log(1)
+					loading((download.downloadedSize / totalSize * 100).toFixed(0))
 
 					break;
 				case 4:

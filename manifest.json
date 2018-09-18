@@ -595,6 +595,16 @@
 					"html/game/game_classify_list.html"
 				],
 				"priority": 0
+			},
+			"html/user/share.html": {
+				"resources": [
+					"Public/image/wechat_share.png",
+					"Public/image/qrcode_share.png",
+					"Public/image/qq_share.png",
+					"Public/image/pengyouquan_share.png"
+				],
+				"refer": [],
+				"priority": 0
 			}
 		},
 		"idle": {

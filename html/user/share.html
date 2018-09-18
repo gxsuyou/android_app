@@ -217,23 +217,15 @@
 			})
 			shareAction(shareBts[index], true)
 		}
-//		mui.back = back()
 
 		function back() {
 
-//			var ws = plus.webview.currentWebview()
-//mui.createMask().show();
-//			alert(ws)
-//			ws.setStyle({
-//				mask: "none"
-//			});
-						var sourcePage = plus.webview.getWebviewById("share.html");
-						sourcePage.close();
-			//			alert(sourcePage)
-						if(sourcePage) {
-							alert(1)
-							sourcePage.evalJS("closeMask()");
-						}
+			var sourcePage = plus.webview.getWebviewById("html/user/me.html");
+
+			if(sourcePage) {
+				sourcePage.evalJS("closeMask()");
+				mui.fire(sourcePage, 'qrcode_share');
+			}
 		}
 
 		function closeShare() {

@@ -593,6 +593,19 @@ $('.game_rank').children().click(function() {
 
 })
 
+function getDownloadStatus(packagename) {
+	
+	var downloadToggle = plus.runtime.isApplicationExist({
+		pname:packagename,
+		action: ''
+	});
+	if(downloadToggle) {
+		return buttonDown = "打开";
+	} else {
+		return buttonDown = "下载";
+	}
+}
+
 function getRank(sort) {
 	rankToggle = true;
 	/*阻挡掉one模块*/
@@ -612,16 +625,39 @@ function getRank(sort) {
 				$(".nav_cls_contains").css("display", "block");
 				if(data.state) {
 					var list = '';
+					//						var downloadToggle = plus.runtime.isApplicationExist({
+					//								pname: g[i].game_packagename,
+					//								action: ''
+					//							});
+					//							if(downloadToggle) {
+					//								var buttonDown = "打开";
+					//							} else {
+					//								var buttonDown = "下载";
+					//							}
 					for(var i = 0; i < g.length; i++) {
 						if(i < 3) {
+
+                            var b1=getDownloadStatus(g[0].game_packagename)
+							$('.first .y_listDownload').text(b1)
 							$('.first').attr('data-id', g[0].id)
 							$('.first .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[0].icon) + ')')
 							$('.first .y_listName').text(g[0].game_name)
 							$('.first .game_recommend_starScore').text(g[0].grade)
+							
+							
+							
+							
+							
+							var b2=getDownloadStatus(g[1].game_packagename)
+							$('.second .y_listDownload').text(b2)
 							$('.second').attr('data-id', g[1].id)
 							$('.second .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[1].icon) + ')')
 							$('.second .y_listName').text(g[1].game_name)
 							$('.second .game_recommend_starScore').text(g[1].grade)
+							
+							
+							var b3=getDownloadStatus(g[2].game_packagename)
+							$('.third .y_listDownload').text(b3)
 							$('.third ').attr('data-id', g[2].id)
 							$('.third  .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[2].icon) + ')')
 							$('.third  .y_listName').text(g[2].game_name)
