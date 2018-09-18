@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>游戏详情页</title>
@@ -12,6 +13,7 @@
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 	</head>
+
 	<body>
 		<!--重写back-->
 		<div class="backImg"></div>
@@ -505,7 +507,8 @@
 					async: true,
 					data: {
 						gameName: gameName,
-						page: strategyPage
+						page: strategyPage,
+						user_id: userId
 					},
 					success: function(data) {
 						if(data.state) {
@@ -517,7 +520,16 @@
 								} else {
 									var src = "hidden"
 								}
-
+								if(str[i].strategy_id == null) {
+									var dianz = "<div class='thumb'></div>"
+								} else {
+									var dianz = "<div class='thumb' style='background-image:url('../../Public/image/diangoodone.png')'></div>"
+								}
+								if(str[i].essence == 1) {
+									var essence_image = "<img class='fl' style='width:2rem;margin-top:0.1rem;margin-right:0.15rem;' src='../../Public/image/essence.png'>"
+								} else {
+									var essence_image = "&nbsp;"
+								}
 								if(str[i].top_img_src == "" || str[i].top_img_src == null) {
 									imgSrc = "";
 									imgToggle = "none";
@@ -545,6 +557,7 @@
 									"<div class='font_14 overflow_two color_7a7a7a simHei'>" +
 									"<img data-id='" + str[i].id + "'  style='width:100%;display:" + imgToggle + "' src=" + imgSrc + ">" +
 									"<div class='font_bold color_282828' style='font-size:16px;margin-top:0.625rem;padding-left:0.5rem'>" +
+									essence_image +
 									"<span>" + str[i].title + "</span>" +
 									"</div>" +
 									"<div  class='strategy_content'>" + detail + "</div>" +
@@ -552,8 +565,9 @@
 									//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
 									"<div class='comment_info'>" +
 									"<div  style='margin:0.2rem 0rem;' class='fr color_9e9e9e comment_imgs'>" +
-									//									 "<div class='thumb'></div>" +
-									//									 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
+									dianz +
+									"<div class='thumb'></div>" +
+									"<div  class='thumb_num'>" + str[i].agree_num + "</div>" +
 									"<div data-id='" + str[i].id + "'   class='comment_img'></div>" +
 									"<div  class='comment_num' style='margin-right:0.8rem;'>" + str[i].comment_num + "</div>" +
 									"</div>" +
