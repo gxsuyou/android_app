@@ -679,15 +679,17 @@ $(function() {
 						success: function(data) {
 							if(data.state == 1) {
 								mui.toast("删除成功")
-//								$(".bottomInfo").text("正在加载 ...");
-//								closeAjax = false;
-//								$(".news_post_commentContents").empty();
-//								page = 0;
-//								up();
+
 	                            $(".news_post_commentContents").empty()
 							    mui('.new_post_contents').pullRefresh().refresh(true);
 								page = 0;
 								up();
+				
+							    var reviewNum = $('.news_reviewNum').text()
+							    reviewNum = Number(reviewNum)	
+							    reviewNum = reviewNum - 1;
+								$('.news_reviewNum').text(reviewNum);	
+								
 							} else {
 								mui.toast("删除失败")
 							}

@@ -88,7 +88,6 @@ $('body').on("tap",".protocol",function(){
 						"password": password
 					},
 					success: function(data) {
-
 						switch(data.state) {
 							case 0:
 								mui.toast("注册失败");
@@ -101,7 +100,7 @@ $('body').on("tap",".protocol",function(){
 									url: "personal_data.html",
 									id:"personal_data.html",
 									extras:{
-										id: data.id
+										userId: data.id
 									}
 									
 								})

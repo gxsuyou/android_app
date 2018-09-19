@@ -160,7 +160,7 @@ $(function() {
 
 		//		点赞与取消点赞
 
-		$('body').on('click', '.thumb,.thumb_num', function(event) {
+		$('body').on('tap', '.thumb,.thumb_num', function(event) {
 			event.stopPropagation();
 			var ts = $(this);
 			var commentId = ts.parents(".news_post_commentContent").attr('data-id');

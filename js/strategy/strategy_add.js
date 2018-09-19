@@ -107,7 +107,7 @@ $(function() {
 	})
 
 	$('.publish').click(function() {
-
+      
 		var content = "<div>" + $("#strategy_textarea").html() + "</div>";
 
 		var indexSrc = $("#strategy_textarea img:first").attr("src");
@@ -121,6 +121,11 @@ $(function() {
 		var title = str.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, "");
 		var gameName = $('.choose_game').val().replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, "");
 
+        if(gameName.length>8){
+        	mui.toast("游戏名不能超过8个字");
+        	return false;
+        }
+        
 		if(title && content && gameName) {
 			mui.toast("正在发布，请等待");
 			$.ajax({

@@ -58,8 +58,7 @@ $(function() {
 					alert("Download failed: " + status);
 				}
 
-			});
-			//dtask.addEventListener( "statechanged", onStateChanged, false );
+			})
 			dtask.start();
 		}
 
@@ -247,19 +246,31 @@ $(function() {
 			}
 		})
 	})
+	
+	$('body').on('tap', '.strategy_content_classify', function(e) {
+		e.stopPropagation()
+		var msg = $(this).text();
+		mui.openWindow({
+			url: "../strategy/strategy_search_result.html",
+			id: "strategy_search_result.html",
+			extras: {
+				msg: msg
+			}
+		})
+	})
+	
+	
+	
 
 	//	游戏点赞
 	$('body').on('click', '.thumb,.thumb_num', function(e) {
 		e.stopPropagation();
 		if(userId) {
 			var ts = $(this);
-//			alert(ts.attr('data-state'))
-//			return false;
 			if(ts.attr('data-state') !== 'null' && ts.attr('data-state')) {
 				ts.css('background-image', 'url("../../Public/image/good.png")')
 				ts.siblings('.thumb_num').text(parseInt(ts.siblings('.thumb_num').text()) - 1)
-				ts.attr('data-state', 'null');
-				alert("取消点赞")
+				ts.attr('data-state', 'null')
 				$.ajax({
 					type: "get",
 					url: config.data + "strategy/unLikeNum",
@@ -289,7 +300,6 @@ $(function() {
 						user_id:userId
 					},
 					success: function(data) {
-//                       alert(JSON.stringify(data))
 						if(data.state) {
 							mui.toast("点赞成功")
 
@@ -306,7 +316,6 @@ $(function() {
 
 			})
 		}
-
 	})
 
 	//	游戏点赞结束
@@ -498,6 +507,7 @@ function launchApp(pagename) {
 	}
 }
 
+
 function detail_strategy() {
 	strategyPage = 1;
 	$('.news_post_commentContentstra').children().remove();
@@ -518,7 +528,6 @@ function detail_strategy() {
 		},
 		success: function(data) {
 			mui('#game_detailContent').pullRefresh().endPulldown(true);
-			//			alert(JSON.stringify(data))
 			if(data.state) {
 				var str = data.strategy;
 				var div = '';
@@ -530,10 +539,7 @@ function detail_strategy() {
 						} else {
 							var src = "hidden"
 						}
-						//alert(str[i].strategy_id)
 
-						//ts.css('background-image', 'url("../../Public/image/diangoodone.png")')
-//						ts.attr('data-state', 'null');
 						if(str[i].strategy_id == null) {
 							var dianz = "<div class='thumb' data-state='null' data-id='" + str[i].id + "'></div>"
 						} else {
@@ -578,11 +584,11 @@ function detail_strategy() {
 							"</div>" +
 							"<div  class='strategy_content' data-id='" + str[i].id + "'>" + detail + "</div>" +
 							"</div>" +
-							//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
-							"<div class='comment_info'>" +
-							"<div class='fr color_9e9e9e comment_imgs' >" +
+//							"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
+                            "<div style='margin-top:0.3rem' class='backgroundColor_gray border_radius_twenty strategy_content_classify tac font_14 color_7a7a7a fl'>" + str[i].game_name + "</div>" +
+							"<div class='comment_info'>" +						
+							"<div class='fr color_9e9e9e comment_imgs' style='margin:0.2rem 0rem;'>" +
 							dianz +
-//							"<div class='thumb' ></div>"+
 							"<div  class='thumb_num' data-id='" + str[i].id + "'>" + str[i].agree_num + "</div>" +
 							"<div  class='comment_img_strategy'  data-id='" + str[i].id + "'   ></div>" +
 							"<div  class='comment_num'  style='margin-right:0.8rem;'>" + str[i].comment_num + "</div>" +
@@ -615,7 +621,7 @@ function detail_strategy() {
 		var strategyId = $(this).attr("data-id");
 		mui.openWindow({
 			url: "../strategy/strategy_details.html",
-			id: "../strategy/strategy_details.html",
+			id: "strategy_details.html",
 			extras: {
 				strategyId: strategyId
 			}
@@ -821,7 +827,8 @@ function detail_main() {
 							mui.toast("删除成功")
 							indexCommit()
 							getAccess()
-							check_assess()
+//							check_assess()
+							detail_assess()
 						} else {
 							mui.toast("删除失败")
 						}
