@@ -140,9 +140,10 @@
 
 			// 更新应用资源
 			function installWgt(path) {
-				hiddenUpload()
+//				hiddenUpload()
 				//			plus.nativeUI.showWaiting("安装wgt文件...");
 				plus.runtime.install(path, {}, function() {
+					alert(path)
 					plus.nativeUI.closeWaiting();
 					//				console.log("安装wgt文件成功！");
 					plus.runtime.restart();
@@ -153,7 +154,7 @@
 					plus.nativeUI.closeWaiting();
 					console.log("安装wgt文件失败[" + e.code + "]：" + e.message);
 					plus.nativeUI.alert("安装wgt文件失败[" + e.code + "]：" + e.message);
-					hiddenUpload()
+//					hiddenUpload()
 				});
 			}
 

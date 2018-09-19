@@ -524,7 +524,7 @@ function detail_strategy() {
 		data: {
 			gameName: gameName,
 			page: 1,
-			user_id: userId
+			user_id:userId
 		},
 		success: function(data) {
 			mui('#game_detailContent').pullRefresh().endPulldown(true);
@@ -539,7 +539,7 @@ function detail_strategy() {
 						} else {
 							var src = "hidden"
 						}
-
+                        
 						if(str[i].strategy_id == null) {
 							var dianz = "<div class='thumb' data-state='null' data-id='" + str[i].id + "'></div>"
 						} else {
@@ -642,6 +642,8 @@ function check_assess() {
 			success: function(data) {
 				if(data.state != 1) {
 					$(".goToscore").css("display", "none");
+				}else{
+					$(".goToscore").css("display", "block");
 				}
 			}
 		});
@@ -981,7 +983,8 @@ function detail_assess() {
 			gameId: gameId
 		},
 		success: function(data) {
-
+//          alert(JSON.stringify(data))
+	       $(".bar0,.bar1,.bar2,.bar3,.bar4").css('width',  "0rem");
 			mui('#game_detailContent').pullRefresh().endPulldown(true);
 			if(data.state) {
 				var s = data.scoreList;
