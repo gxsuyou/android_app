@@ -102,12 +102,41 @@ $(function() {
 				}
 			})
 		})
+
+   
+        /*删除评论*/
+       
+		$("body").on("tap", ".comment_dele", function() {
+			var id = $(this).attr("data-id")
+			plus.nativeUI.confirm("删除评论", function(e) {
+				if(e.index == 0) {
+					$.ajax({
+						type: "get",
+						url: config.data + "strategy/delMyComment",
+						async: true,
+						data: {
+							uid: userId,
+							id: id
+						},
+						success: function(data) {
+							if(data.state == 1) {
+								mui.toast("删除成功")
+								window.location.reload()
+							} else {
+								mui.toast("删除失败")
+							}
+						}
+					})
+				}
+			})
+		})
+
 		//发表评论
 		$('.publish').click(function() {
 			var content = $(this).siblings('.news_secondComment_input').val();
 			if(content) {
 				$.ajax({
-					type: "get",
+					type: "post",
 					url: config.data + "strategy/strategyComment",
 					async: true,
 					data: {
@@ -314,18 +343,20 @@ $(function() {
 		$(".faceContent").append(faceContent)
 	}
 	var face_to = 1;
-	$("body").on("tap", ".face", function(e) {
-		e.stopPropagation()
+	$("body").on("mousedown", ".face", function(e) {
+		e.preventDefault()
 		if(face_to == 1) {
 			face_to = 0
 			$(".faceContent").css("display", "block")
+			$(".strategy_all").css("padding-bottom", "13.2rem")
 		} else {
 			face_to = 1
 			$(".faceContent").css("display", "none")
+			$(".strategy_all").css("padding-bottom", "5rem")
 		}
 	})
-	$("body").on("tap", ".faceContent>div", function(e) {
-		e.stopPropagation()
+	$("body").on("mousedown", ".faceContent>div", function(e) {
+		e.preventDefault()
 		var str = $(this).attr("data-id")
 		var tc = document.querySelector(".news_secondComment_input")
 		var tclen = tc.value.length;
@@ -354,7 +385,6 @@ function up() {
 
 				var c = data.comment;
 				var div = '';
-				//alert(c.length);
 				for(var i = 0; i < c.length; i++) {
 
 					if(c[i].targetUserNickName) {
@@ -366,6 +396,12 @@ function up() {
 						portrait = "../../Public/image/morentouxiang.png";
 					} else {
 						portrait = c[i].portrait;
+					}
+
+					if(c[i].user_id == userId) {
+						var comment_dele = "<div class='font_12 fl color_7fcadf comment_dele' data-id='" + c[i].id + "'>删除</div>"
+					} else {
+						var comment_dele = "&nbsp;"
 					}
 
 					div +=
@@ -380,6 +416,7 @@ function up() {
 						"<div class='comment_content font_14'>" + c[i].content + "</div>" +
 						"<div class='comment_info ofh'>" +
 						"<div class='font_12 color_9e9e9e fl'>" + c[i].add_time + "</div>" +
+						comment_dele +
 						"</div>" +
 						"</div>" +
 						"</div>"

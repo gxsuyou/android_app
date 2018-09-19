@@ -103,6 +103,34 @@ $(function() {
 		}
 	})
 	//点击发布结束
+	
+	/* 删除攻略二级评论 */
+	$("body").on("tap",".game_allComm_dele_com",function(){
+		var id = $(this).attr("data-id")
+		plus.nativeUI.confirm("删除评论", function(e) {
+		if(e.index == 0) {
+			$.ajax({
+				type: "get",
+				url: config.data + "game/delMyComment",
+				async: true,
+				data: {
+					uid: userId,
+					id: id
+				},
+				success: function(data) {
+					if(data.state == 1) {
+						mui.toast("删除成功")
+						location.reload()
+					} else {
+						mui.toast("删除失败")
+					}
+				}
+			})
+		}
+	})
+	})
+	
+	
 })
 
 function up() {
@@ -125,7 +153,14 @@ function up() {
 				
 				for(var i = 0; i < com.length; i++) {
 					var ifHidden = com[i].targetNickName || "hidden";
-					//alert(com[i].portrait);
+					
+					if(com[i].user_id == userId) {
+						var comment_dele = "<div class='font_12 fl color_7fcadf game_allComm_dele_com' data-id='" + com[i].id + "'>删除</div>"
+					} else {
+						var comment_dele = "&nbsp;"
+					}
+					
+					
 					div +=
 						"<div class='news_post_commentContent ofh' style='border-top: 1px solid #e6ebec;margin-top: 0;border-bottom: 0;' data-id='" + com[i].id + "' data-userId='" + com[i].uid + "' >" +
 						"<div class='news_post_commentContent_head fl' style='background-image: url("+ com[i].portrait +");'></div>" +
@@ -139,8 +174,8 @@ function up() {
 						
 						"<div class='comment_info ofh'>" +
 						"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
+						comment_dele +
 						"</div>" +
-
 						"</div>" +
 						"</div>"
 				}

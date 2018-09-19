@@ -1,16 +1,6 @@
 $(function(){
 	mui.plusReady(function() {
 		getSigns()
-		$.ajax({
-			type: "get",
-			url: config.data + "news/cancelMessage",
-			async: true,
-			data: {
-				userId: userId
-			},
-			success: function(data) {
-			}
-		});
 		
 		$('.nav').css('top',total_height);
 		$('body').on("tap",".nav > div",function(){
@@ -124,6 +114,7 @@ function center_info() {
 		},
 		success: function(data) {
 			for(i = 0; i < data.length; i++) {
+				
 				if(data[i].num == 0) {
 					numContent = "&nbsp"
 				} else {

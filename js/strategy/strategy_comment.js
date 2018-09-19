@@ -1,3 +1,4 @@
+var strategyId;
 $(function() {
 
 	var h = $(window).height()
@@ -16,20 +17,19 @@ $(function() {
 
 	$('body').on('tap', '.delete_img', function() {
 		$(this).parent().parent('.show_imgcontent').remove()
-
 	})
 	/* 退出保存数据 */
 	$("body").on("tap", ".mui-back", function() {
 
 		var val = $("#strategy_textarea").val()
-		localStorage.setItem("strategyVal", val)
+		localStorage.setItem("strategyVal_" + strategyId, val)
 		if(plus.webview.getWebviewById("strategy_details.html")) {
 			var wobj = plus.webview.getWebviewById("strategy_details.html");
 		} else {
 			var wobj = plus.webview.getWebviewById("me_works.html");
 		}
-
-		mui.fire(wobj, 'reload', {});
+		mui.fire(wobj, 'reload', {})
+		
 		mui.back()
 	})
 
@@ -40,14 +40,20 @@ $(function() {
 			//    	$('.choose_img').css("bottom",'-500px')
 		});
 		var self = plus.webview.currentWebview();
-		var strategyId = self.strategyId;
+		 strategyId = self.strategyId;
 		var proId = self.proId;
 		var target_img = self.target_img;
 		var target_title = self.target_title;
-		var strategyVal = localStorage.getItem("strategyVal")
-		$("#strategy_textarea").val(strategyVal)
+		var strategyVal = localStorage.getItem("strategyVal_" + strategyId)
+        $("#strategy_textarea").css("height", "auto")
+		if(strategyVal) {
+			$("#strategy_textarea").val(strategyVal)
+		}
 
 		$("body").on("tap", ".choose", function() {
+			$(".faceContent").css("display", "none")
+			$(".show_imgs").css("display", "block")
+			$(".choose_img").css("bottom", "10.625rem")
 			if(mui.os.plus) {
 				var buttonTit = [
 
@@ -247,26 +253,83 @@ $(function() {
 			]
 			var faceContent = ""
 			face.forEach(function(item) {
-				faceContent += "<img src='" + "../../Public/image/face/" + item.src + "' data-id='" + item.id + "' />"
+				faceContent += "<div  data-id='" + item.id + "' style='background-image:url(../../Public/image/face/" + item.src + ")'></div>"
 			})
 			$(".faceContent").append(faceContent)
 		}
 
+		window.onresize = function() {
+			changeTextContent()
+		}
+ 
+		function changeTextContent() {		
+			var _body = $("body").height()
+			var _chooseC = $(".choose_img").height()
+			var _header = $(".header_box").height()
+
+			//		console.log("全局" + _body)
+			//		console.log("下部" + _chooseC)
+			//		console.log("头部" + _header)
+
+			var _remain = _body - _chooseC - _header
+
+			//console.log(_remain) //被减去剩余的空间
+			var _textarea = $("#strategy_textarea").height()
+			//console.log(_textarea) //text的高度
+ 
+			//如果剩余空间大于text的高度
+			if(_remain < _textarea) {
+				//打开并聚焦修改高度
+				$("#strategy_textarea").css("height", _remain)
+                 console.log("打开并聚焦修改高度")
+			} else {
+				//关闭不聚焦修改高度
+				$("#strategy_textarea").css("height", "auto")
+			}
+		}
+
 		var face_t = 1;
-		$("body").on("tap", ".face", function() {
+		$("body").on("mousedown", ".face", function(e) {
+			//var _body = $("body").height()
+			e.preventDefault();
+			var _body = $("body").height()
+			var isFocus
+			console.log(_body)
+			//小于600的高度则判断为聚焦否则失焦
+//			console.log( window.screen.availHeight)
+			_body < 600 ? isFocus = true : isFocus = false;
 			if(face_t == 1) {
-				face_t = 0;
+				face_t = 0; //出现			
 				$(".faceContent").css("display", "block")
 				$(".show_imgs").css("display", "none")
-				$(".choose_img").css("bottom", "2.425rem")
+				if(true == isFocus) {
+					$(".choose_img").css("bottom", "0rem")
+				} else {
+					$(".choose_img").css("bottom", "2.425rem")
+				}
+
 			} else {
-				face_t = 1;
+				face_t = 1; //消失			
 				$(".faceContent").css("display", "none")
 				$(".show_imgs").css("display", "none")
+				if(true == isFocus) {
+					$(".choose_img").css("bottom", "0rem")
+				} else {
+					$(".choose_img").css("bottom", "10.625rem")
+				}
+
 			}
+
+			changeTextContent()
 		})
 		/* 插入图片 */
-		$("body").on("tap", ".faceContent>img", function() {
+		$("body").on("mousedown", ".faceContent div", function(e) {
+			 e.preventDefault();
+			var textarea_num = $("#strategy_textarea").val().length
+			if(textarea_num >= 200) {
+				mui.toast("输入字符只能输入200个字")
+				return false;
+			}
 			var str = $(this).attr("data-id")
 			var tc = document.querySelector("#strategy_textarea")
 			var tclen = tc.value.length;
@@ -276,6 +339,7 @@ $(function() {
 			} else {
 				tc.value = tc.value.substr(0, tc.selectionStart) + str + tc.value.substring(tc.selectionStart, tclen);
 			}
+
 		})
 
 		$('.publish').click(function() {
@@ -283,7 +347,7 @@ $(function() {
 			var content = $('#strategy_textarea').val();
 			if(content) {
 				$.ajax({
-					type: "get",
+					type: "post",
 					url: config.data + "strategy/strategyComment",
 					async: true,
 					data: {
@@ -333,7 +397,6 @@ function galleryImgs() {
 	// 从相册中选择图片  
 	plus.gallery.pick(function(path) {
 
-		console.log(path)
 		var token;
 
 		if($('.show_imgs > .show_imgcontent').length < 1) {

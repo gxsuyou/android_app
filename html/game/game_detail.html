@@ -43,7 +43,6 @@
 			</header>
 		</div>
 		<div class="game_detailContent " id="game_detailContent">
-
 			<div class="game_detailTop ofh">
 				<div class="game_detailTopimg"></div>
 				<div class="game_detailTopinfo backgroundColor_white">
@@ -59,7 +58,7 @@
 						</div>
 						<!--<div class="download_button color_white tac backgroundColor_green font_12 fr">下载</div>-->
 						<div style="position: relative;">
-							<div class="download_btn download_button color_white tac  font_12 fr" id="game_detail_download">
+							<div class="download_btn download_button color_white tac font_12 fr " id="game_detail_download">
 								<div class="download_loading" id="loading"></div>
 								<div class="download_btn_text ">下载</div>
 							</div>
@@ -137,7 +136,6 @@
 							<div>发行商</div>
 						</div>
 					</div>
-
 					<div class="game_relatedInfo backgroundColor_white">
 						<span class="game_simpleIntro  simHei color_282828 ofh">相关资讯</span>
 						<div class="game_relatedInfocontents ui_flex_wrapper ui_flex_h">
@@ -468,6 +466,8 @@
 					if(dtask_app) {
 						dtask_app.resume();
 					}
+					var list = plus.webview.getWebviewById("html/game/game_recommend.html"); //触发父页面的自定义事件(refresh),从而进行刷新	
+					mui.fire(list, 'reload');
 				},
 				pullRefresh: {
 					container: "#game_detailContent", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -507,7 +507,8 @@
 					async: true,
 					data: {
 						gameName: gameName,
-						page: strategyPage
+						page: strategyPage,
+						user_id: userId
 					},
 					success: function(data) {
 						if(data.state) {
@@ -519,7 +520,16 @@
 								} else {
 									var src = "hidden"
 								}
-
+								if(str[i].strategy_id == null) {
+									var dianz = "<div class='thumb'></div>"
+								} else {
+									var dianz = "<div class='thumb' style='background-image:url('../../Public/image/diangoodone.png')'></div>"
+								}
+								if(str[i].essence == 1) {
+									var essence_image = "<img class='fl' style='width:2rem;margin-top:0.1rem;margin-right:0.15rem;' src='../../Public/image/essence.png'>"
+								} else {
+									var essence_image = "&nbsp;"
+								}
 								if(str[i].top_img_src == "" || str[i].top_img_src == null) {
 									imgSrc = "";
 									imgToggle = "none";
@@ -547,6 +557,7 @@
 									"<div class='font_14 overflow_two color_7a7a7a simHei'>" +
 									"<img data-id='" + str[i].id + "'  style='width:100%;display:" + imgToggle + "' src=" + imgSrc + ">" +
 									"<div class='font_bold color_282828' style='font-size:16px;margin-top:0.625rem;padding-left:0.5rem'>" +
+									essence_image +
 									"<span>" + str[i].title + "</span>" +
 									"</div>" +
 									"<div  class='strategy_content'>" + detail + "</div>" +
@@ -554,8 +565,9 @@
 									//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
 									"<div class='comment_info'>" +
 									"<div  style='margin:0.2rem 0rem;' class='fr color_9e9e9e comment_imgs'>" +
-									//									 "<div class='thumb'></div>" +
-									//									 "<div  class='thumb_num'>"+str[i].agree_num + "</div>" +
+									dianz +
+									"<div class='thumb'></div>" +
+									"<div  class='thumb_num'>" + str[i].agree_num + "</div>" +
 									"<div data-id='" + str[i].id + "'   class='comment_img'></div>" +
 									"<div  class='comment_num' style='margin-right:0.8rem;'>" + str[i].comment_num + "</div>" +
 									"</div>" +
