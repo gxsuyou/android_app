@@ -46,13 +46,51 @@
 				sourcePage.evalJS("closeMaskShare()");
 			}
 		}
-		function saveImg(e){
-			e.stopPropagation()
-		}
-		var content=document.querySelector(".content");
-		
-		content.addEventListener("tap",saveImg,false)
 
+		mui.plusReady(function() {
+			var content = document.querySelector(".content")
+			content.addEventListener("tap", saveImg, false)
+			//下载图片
+			function saveImg(e) {
+				e.stopPropagation()
+				var picurl = "https://admin.oneyouxi.com.cn/www/upload/qrcode/qrcode_img.jpg"
+				var picname;
+				var btnArray = ['否', '是'];
+				mui.confirm('是否保存该图片？', 'ONE', btnArray, function(e) {
+					if(e.index == 1) {
+
+						if(picurl.indexOf("/") > 0) //如果包含有"/"号 从最后一个"/"号+1的位置开始截取字符串
+						{
+							picname = picurl.substring(picurl.lastIndexOf("/") + 1, picurl.length);
+						} else {
+							picname = picurl;
+						}
+						savePicture(picurl, picname)
+					}
+				});
+
+			}
+
+			function savePicture(picurl, picname){
+				// 创建下载任务
+				var dtask = plus.downloader.createDownload(picurl, {}, function(d, status) {
+					// 下载完成
+					if(status == 200) {
+						plus.gallery.save(d.filename, function() {
+							mui.toast('保存成功');
+						}, function() {
+							mui.toast('保存失败，请重试！');
+						});
+					} else {
+						alert("Download failed: " + status);
+					}
+
+				});
+				dtask.start();
+
+			}
+
+		})
 	</script>
 
 </html>

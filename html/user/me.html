@@ -140,7 +140,7 @@
 					}
 				});
 				sharew.addEventListener("loaded", function() {
-					sharew.show('slide-in-bottom', 300);
+					sharew.show('fade-in', 0);
 				}, false);
 				// 显示遮罩层    
 				ws.setStyle({
@@ -152,7 +152,7 @@
 			}
 
 			function closeMask() {
-			
+
 				ws.setStyle({
 					mask: "none"
 				});
@@ -167,69 +167,65 @@
 				}
 			}
 
-			
-            var h; 
-            var qrcodeshare;
-			window.addEventListener('qrcode_share', function(event) {
 
-				
-				var ws = null;
-				/**  
-				 *分享窗口  
-				 */
-				//				function shareWebview() {
-				ws = plus.webview.currentWebview();
-				if(qrcodeshare) { // 避免快速多次点击创建多个窗口  
-					return;
-				}
-				var href = "qrcode.html";
-				qrcodeshare = plus.webview.create(href, "qrcode.html", {
-					width: '100%',
-					height: '100%',
-					top: 0,
-					zindex: 0,
-					opacity: 1,
-					background: 'transparent',
-					scrollIndicator: 'none',
-					scalable: false,
-					popGesture: 'none',
+
+
+				var qrcodeshare;
+				window.addEventListener('qrcode_share', function(event) {
+
+					var ws = null;
+					/**  
+					 *分享窗口  
+					 */
+					//				function shareWebview() {
+					ws = plus.webview.currentWebview();
+					if(qrcodeshare) { // 避免快速多次点击创建多个窗口  
+						return;
+					}
+					var href = "qrcode.html";
+					qrcodeshare = plus.webview.create(href, "qrcode.html", {
+						width: '100%',
+						height: '100%',
+						top: 0,
+						zindex: 0,
+						opacity: 1,
+						background: 'transparent',
+						scrollIndicator: 'none',
+						scalable: false,
+						popGesture: 'none',
+					});
+					qrcodeshare.addEventListener("loaded", function() {
+						qrcodeshare.show('slide-in-bottom', 300);
+					}, false);
+					// 显示遮罩层    
+
+
+					var	h = plus.webview.getLaunchWebview();
+					h.setStyle({
+						mask: "rgba(0,0,0,0.5)"
+					});
+
+					// 点击关闭遮罩层  
+					ws.addEventListener("maskClickShare", closeMaskShare, false);
+
 				});
-				qrcodeshare.addEventListener("loaded", function() {
-					qrcodeshare.show('slide-in-bottom', 300);
-				}, false);
-				// 显示遮罩层    
 
+				function closeMaskShare() {
+					plus.webview.getLaunchWebview().setStyle({
+						mask: "none"
+					});
+					//避免出现特殊情况，确保分享页面在初始化时关闭   
+					if(!qrcodeshare) {
+						qrcodeshare = plus.webview.getWebviewById("qrcode.html");
+					}
+					if(qrcodeshare) {
+						qrcodeshare.close();
+						qrcodeshare = null;
+					}
 
-				h = plus.webview.getLaunchWebview();
-				h.setStyle({
-					mask: "rgba(0,0,0,0.5)",
-					zindex: 9999,
-				});
-
-				// 点击关闭遮罩层  
-				ws.addEventListener("maskClickShare", closeMaskShare, false);
-
-			});
-			
-			function closeMaskShare(){
-				h.setStyle({
-					mask: "none"
-				});
-				//避免出现特殊情况，确保分享页面在初始化时关闭   
-				if(!qrcodeshare) {
-					qrcodeshare = plus.webview.getWebviewById("qrcode.html");
 				}
-				if(qrcodeshare) {
-					qrcodeshare.close();
-					qrcodeshare = null;
-				}
-				
-				
-			}
-			
-			
-			
-			
+
+
 		</script>
 	</body>
 

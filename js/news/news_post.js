@@ -606,8 +606,8 @@ $(function() {
 		})
 
 		$('body').on('tap', '.publish', function(e) {
-
 			e.preventDefault();
+			
 			if(userId) {
 				var content = $(this).prev().prev().val();
 				if(content) {
