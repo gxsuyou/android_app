@@ -627,6 +627,7 @@ $(function() {
 						success: function(data) {
 							if(data.state == "1") {
 								mui.toast("评论成功")
+								window.localStorage.setItem("strategy_title_" + newsId,"")
 								$('.news_secondComment_input').val(""); //不刷新	
 
 								var reviewNum = $('.news_reviewNum').text()
