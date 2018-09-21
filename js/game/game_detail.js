@@ -246,7 +246,7 @@ $(function() {
 			}
 		})
 	})
-	
+
 	$('body').on('tap', '.strategy_content_classify', function(e) {
 		e.stopPropagation()
 		var msg = $(this).text();
@@ -258,9 +258,6 @@ $(function() {
 			}
 		})
 	})
-	
-	
-	
 
 	//	游戏点赞
 	$('body').on('click', '.thumb,.thumb_num', function(e) {
@@ -276,7 +273,7 @@ $(function() {
 					url: config.data + "strategy/unLikeNum",
 					async: true,
 					data: {
-						strategyId:ts.attr('data-id'),
+						strategyId: ts.attr('data-id'),
 						user_id: userId
 					},
 					success: function(data) {
@@ -296,8 +293,8 @@ $(function() {
 					url: config.data + "strategy/addNum",
 					async: true,
 					data: {
-						strategyId:ts.attr('data-id'),
-						user_id:userId
+						strategyId: ts.attr('data-id'),
+						user_id: userId
 					},
 					success: function(data) {
 						if(data.state) {
@@ -450,6 +447,7 @@ function downloding(download) {
 			//			$(".ldownload_btn_text").text('等待');
 			break;
 		case 3:
+
 			loading((download.downloadedSize / download.totalSize * 100).toFixed(0))
 
 			break;
@@ -463,6 +461,7 @@ var angle = 0;
 
 function loading(num) {
 	angle = num * 3.6;
+	console.log(angle)
 	if(angle > 180) {
 		$(".right-content").css("transform", "rotate(180deg)")
 		$(".left-content").css("transform", "rotate(" + (angle - 180) + "deg)")
@@ -507,7 +506,6 @@ function launchApp(pagename) {
 	}
 }
 
-
 function detail_strategy() {
 	strategyPage = 1;
 	$('.news_post_commentContentstra').children().remove();
@@ -524,7 +522,7 @@ function detail_strategy() {
 		data: {
 			gameName: gameName,
 			page: 1,
-			user_id:userId
+			user_id: userId
 		},
 		success: function(data) {
 			mui('#game_detailContent').pullRefresh().endPulldown(true);
@@ -539,7 +537,7 @@ function detail_strategy() {
 						} else {
 							var src = "hidden"
 						}
-                        
+
 						if(str[i].strategy_id == null) {
 							var dianz = "<div class='thumb' data-state='null' data-id='" + str[i].id + "'></div>"
 						} else {
@@ -584,9 +582,9 @@ function detail_strategy() {
 							"</div>" +
 							"<div  class='strategy_content' data-id='" + str[i].id + "'>" + detail + "</div>" +
 							"</div>" +
-//							"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
-                            "<div style='margin-top:0.3rem' class='backgroundColor_gray border_radius_twenty strategy_content_classify tac font_14 color_7a7a7a fl'>" + str[i].game_name + "</div>" +
-							"<div class='comment_info'>" +						
+							//							"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
+							"<div style='margin-top:0.3rem' class='backgroundColor_gray border_radius_twenty strategy_content_classify tac font_14 color_7a7a7a fl'>" + str[i].game_name + "</div>" +
+							"<div class='comment_info'>" +
 							"<div class='fr color_9e9e9e comment_imgs' style='margin:0.2rem 0rem;'>" +
 							dianz +
 							"<div  class='thumb_num' data-id='" + str[i].id + "'>" + str[i].agree_num + "</div>" +
@@ -642,7 +640,7 @@ function check_assess() {
 			success: function(data) {
 				if(data.state != 1) {
 					$(".goToscore").css("display", "none");
-				}else{
+				} else {
 					$(".goToscore").css("display", "block");
 				}
 			}
@@ -829,7 +827,7 @@ function detail_main() {
 							mui.toast("删除成功")
 							indexCommit()
 							getAccess()
-//							check_assess()
+							//							check_assess()
 							detail_assess()
 						} else {
 							mui.toast("删除失败")
@@ -839,12 +837,9 @@ function detail_main() {
 			}
 		})
 	})
-	
-	
-	
-	
-		//	游戏攻略点赞
-	
+
+	//	游戏攻略点赞
+
 	$('body').on('tap', '.thumb_game,.thumb_num_game', function(e) {
 		e.stopPropagation();
 		if(userId) {
@@ -858,7 +853,7 @@ function detail_main() {
 					url: config.data + "game/unLikeComment",
 					async: true,
 					data: {
-						commentId:ts.siblings('.comment_img').attr('data-id'),
+						commentId: ts.siblings('.comment_img').attr('data-id'),
 						userId: userId
 					},
 					success: function(data) {
@@ -902,11 +897,6 @@ function detail_main() {
 	})
 
 	//	游戏点赞结束
-	
-	
-	
-	
-	
 
 	$('body').on('tap', '.game_relatedInfocontent', function() {
 		mui.openWindow({
@@ -1051,8 +1041,8 @@ function detail_assess() {
 			gameId: gameId
 		},
 		success: function(data) {
-//          alert(JSON.stringify(data))
-	       $(".bar0,.bar1,.bar2,.bar3,.bar4").css('width',  "0rem");
+			//          alert(JSON.stringify(data))
+			$(".bar0,.bar1,.bar2,.bar3,.bar4").css('width', "0rem");
 			mui('#game_detailContent').pullRefresh().endPulldown(true);
 			if(data.state) {
 				var s = data.scoreList;

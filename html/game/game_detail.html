@@ -508,12 +508,13 @@
 					data: {
 						gameName: gameName,
 						page: strategyPage,
-						user_id: userId
+						user_id:userId
 					},
 					success: function(data) {
 						if(data.state) {
 							var str = data.strategy;
 							var div = '';
+							
 							for(var i = 0; i < str.length; i++) {
 								if(str[i].src) {
 									var src = "src"
@@ -521,9 +522,9 @@
 									var src = "hidden"
 								}
 								if(str[i].strategy_id == null) {
-									var dianz = "<div class='thumb'></div>"
+									var dianz = "<div class='thumb' data-state='null' data-id='" + str[i].id + "'></div>"
 								} else {
-									var dianz = "<div class='thumb' style='background-image:url('../../Public/image/diangoodone.png')'></div>"
+									var dianz = "<div class='thumb' data-state='1'     data-id='" + str[i].id + "' style='background-image:url(../../Public/image/diangoodone.png)'></div>"
 								}
 								if(str[i].essence == 1) {
 									var essence_image = "<img class='fl' style='width:2rem;margin-top:0.1rem;margin-right:0.15rem;' src='../../Public/image/essence.png'>"
@@ -539,6 +540,7 @@
 								}
 								var detail = $(str[i].detail).text();
 								portrait = "../../Public/image/morentouxiang.png";
+
 								if(str[i].portrait == 0 || str[i].portrait == null) {
 
 								} else {
@@ -567,8 +569,7 @@
 									"<div class='comment_info'>" +
 									"<div  style='margin:0.2rem 0rem;' class='fr color_9e9e9e comment_imgs'>" +
 									dianz +
-									"<div class='thumb'></div>" +
-									"<div  class='thumb_num'>" + str[i].agree_num + "</div>" +
+									"<div  class='thumb_num' data-id='" + str[i].id + "'>" + str[i].agree_num + "</div>" +
 									"<div data-id='" + str[i].id + "'   class='comment_img'></div>" +
 									"<div  class='comment_num' style='margin-right:0.8rem;'>" + str[i].comment_num + "</div>" +
 									"</div>" +
