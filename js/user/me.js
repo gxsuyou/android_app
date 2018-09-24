@@ -97,6 +97,7 @@ $(function() {
 		})
 
 	}
+	//if结束
 	$('.me_share').click(function() {
 		$(this).addClass("move")
 		setTimeout(function() {
@@ -109,5 +110,27 @@ $(function() {
 		setTimeout(function() {
 			$(".me_headerset").removeClass("move")
 		}, 400)
+	})
+	
+
+	$('.me_voucher').click(function() {
+		if(userId){
+			mui.openWindow({
+				url: "me_voucher.html",
+				id: "me_voucher.html"
+			})
+		}else{
+				mui.toast("请登录")
+		}
+	})
+	$(".me_qiandao").click(function(){
+		var text=$(this).children("div:last-child").text()
+		if(userId&&text=="签到"){
+            $(this).children("div:last-child").text("已签到")
+            $(this).children("div:first-child").find("img").css("display","none")
+			$(this).children("div:first-child").append('<img src="../../Public/image/me_alrdao.png"/>')
+		}else{
+			mui.toast("请登录")
+		}
 	})
 })

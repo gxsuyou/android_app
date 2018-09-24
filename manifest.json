@@ -410,7 +410,8 @@
 					"html/user/personal_data.html",
 					"html/news/news_center.html",
 					"html/user/share.html",
-					"html/user/qrcode.html"
+					"html/user/qrcode.html",
+					"html/user/me_voucher.html"
 				],
 				"priority": 0
 			},

@@ -31,9 +31,7 @@
 							  【崩坏学园】
 							</span>充值满200元可返还50元
 						</div>
-						<div>
-							领取
-						</div>
+						<div>领取</div>
 					</div>
 				</li>
 				<li>
@@ -51,9 +49,7 @@
 							  【崩坏学园】
 							</span>充值满100元可返还20元
 						</div>
-						<div>
-							领取
-						</div>
+						<div>领取</div>
 					</div>
 				</li>
 				<li>
@@ -71,9 +67,7 @@
 							  【崩坏学园】
 							</span>充值满50元可返还9元
 						</div>
-						<div>
-							领取
-						</div>
+						<div>领取</div>
 					</div>
 				</li>
 				<li>
@@ -90,10 +84,9 @@
 							<span>
 							  【崩坏学园】
 							</span>充值满30元可返还5元
+							
 						</div>
-						<div>
-							领取
-						</div>
+						<div>领取</div>
 					</div>
 				</li>
 			</ul>
@@ -103,8 +96,6 @@
 	<script type="text/javascript">
 		mui.plusReady(function() {
 			var info = plus.webview.currentWebview().info;
-//			alert()
-			//document.querySelector().innerText()
 			$(".voucher_get>div>span").text("【"+info.gameName+"】")
 			var one_rank = plus.webview.getWebviewById("game_one_rank.html");
 			var getvoucher = plus.webview.currentWebview()
@@ -117,6 +108,17 @@
 				})
 				getvoucher.close()
 			}
+			$("body").on("tap",".voucher_get>div:last-child",function(){
+				var v=$(this).text()
+				if(v=="领取"){
+					$(this).parent().append("<img style='width:3rem;height:2.8rem;margin-left:0.5rem;' src='../../Public/image/voucher_alget.png' />")
+					$(this).css("display","none")
+					
+				}				
+			})
+			$("body").on("tap",".voucher_go",function(){
+//				alert(1)
+			})
 		})
 	</script>
 
