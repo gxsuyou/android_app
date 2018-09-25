@@ -38,6 +38,7 @@ $(function() {
 
 					$(".me_img").css("background-image", "url(" + img + ")")
 					$('.me_username').text(data.user.nick_name);
+					$("#username_box").append('<div class="me_level">LV.3</div>')
 				} else {
 
 				}
