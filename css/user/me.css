@@ -187,7 +187,9 @@ input{
 .me_getgold{
 	color:#e2e2e4;
 	font-weight:600;
-	width:4.5rem;
+	width:4rem;
+	margin-left:0.5rem;
+	text-align:left;
 	overflow: hidden;
 	word-wrap:nowrap;
 	text-overflow: ellipsis;

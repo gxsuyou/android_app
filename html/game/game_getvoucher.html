@@ -97,7 +97,7 @@
 		mui.plusReady(function() {
 			var info = plus.webview.currentWebview().info;
 			$(".voucher_get>div>span").text("【"+info.gameName+"】")
-			var one_rank = plus.webview.getWebviewById("game_one_rank.html");
+			var one_rank = plus.webview.getWebviewById("game_one_rank.html")
 			var getvoucher = plus.webview.currentWebview()
 			var body = document.querySelector(".voucher_close")
 			body.addEventListener("tap", close, false)
