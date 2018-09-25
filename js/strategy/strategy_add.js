@@ -59,7 +59,7 @@ $(function() {
 		var strategy_content = window.localStorage.getItem("strategy_content");
 		console.log(strategy_title, strategy_game, strategy_content);
 
-		if(strategy_title != "" || strategy_game != "", strategy_content != "") {
+		if(strategy_title != "" || strategy_game != "" || strategy_content != "") {
 			$(".strategy_title").val(strategy_title)
 			$(".choose_game").val(strategy_game)
 			$("#strategy_textarea").html(strategy_content)
@@ -75,6 +75,8 @@ $(function() {
 		if(content == '<div>&nbsp;</div>') {
 			content = ""
 		}
+
+
 		if(title != "" || game != "" || content != "") {
 
 			plus.nativeUI.confirm("保存攻略", function(e) {
@@ -96,6 +98,9 @@ $(function() {
 			})
 
 		} else {
+			window.localStorage.setItem("strategy_title", "")
+			window.localStorage.setItem("strategy_game", "")
+			window.localStorage.setItem("strategy_content", "")
 			mui.back()
 		}
 
@@ -120,6 +125,11 @@ $(function() {
 		var str = $('.strategy_title').val();
 		var title = str.replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, "");
 		var gameName = $('.choose_game').val().replace(/[\ |\~|\`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\-|\_|\+|\=|\||\\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?]/g, "");
+
+		if(gameName.length > 15) {
+			mui.toast("游戏名不能超过15个字");
+			return false;
+		}
 
 		if(title && content && gameName) {
 			mui.toast("正在发布，请等待");

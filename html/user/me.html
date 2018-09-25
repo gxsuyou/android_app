@@ -23,7 +23,14 @@
 				</div>
 				<div class="me_desc fl ofh">
 					<div class="me_name">
-						<div class="me_username  color_white"><strong></strong></div>
+						<div id="username_box" style='display:flex;align-items:center;'>
+							<div class="me_username  color_white"><strong></strong></div>
+							<div class="me_level">
+							LV.3
+						   </div>
+						</div>
+						
+						
 						<div class="color_white" style="margin-top: 0.6rem;">
 							<span class="onlyId"></span>
 						</div>
@@ -47,7 +54,35 @@
 				</div>
 			</div>
 		</div>
-
+        <div class="me_middlebox">
+        	<div class="me_gold">
+        		<div style='display:flex;align-items:center;'>
+        			<img src="../../Public/image/me_gold.png"/>
+        			<span class="me_getgold">
+        				1000000000
+        			</span>
+        		</div>
+        		<div >
+        		  金币
+        		</div>
+        	</div>
+        	<div class="me_voucher">
+        		<div >
+        			<img src="../../Public/image/me_voucher.png"/>
+        			
+        		</div>
+        		<div >
+        			折扣券
+        		</div>
+        	</div>
+        	<div class="me_qiandao">
+        		<div >
+        			<img src="../../Public/image/me_dao.png"/>
+        		</div>
+        		<div style='margin-left:0.25rem'>签到</div>
+        	</div>
+        </div>
+		
 		<ul class="mui-table-view me_newscenter">
 			<li class="mui-table-view-cell ">
 
@@ -140,7 +175,7 @@
 					}
 				});
 				sharew.addEventListener("loaded", function() {
-					sharew.show('slide-in-bottom', 300);
+					sharew.show('fade-in', 0);
 				}, false);
 				// 显示遮罩层    
 				ws.setStyle({
@@ -152,7 +187,7 @@
 			}
 
 			function closeMask() {
-			
+
 				ws.setStyle({
 					mask: "none"
 				});
@@ -167,69 +202,65 @@
 				}
 			}
 
-			
-            var h; 
-            var qrcodeshare;
-			window.addEventListener('qrcode_share', function(event) {
 
-				
-				var ws = null;
-				/**  
-				 *分享窗口  
-				 */
-				//				function shareWebview() {
-				ws = plus.webview.currentWebview();
-				if(qrcodeshare) { // 避免快速多次点击创建多个窗口  
-					return;
-				}
-				var href = "qrcode.html";
-				qrcodeshare = plus.webview.create(href, "qrcode.html", {
-					width: '100%',
-					height: '100%',
-					top: 0,
-					zindex: 0,
-					opacity: 1,
-					background: 'transparent',
-					scrollIndicator: 'none',
-					scalable: false,
-					popGesture: 'none',
+
+
+				var qrcodeshare;
+				window.addEventListener('qrcode_share', function(event) {
+
+					var ws = null;
+					/**  
+					 *分享窗口  
+					 */
+					//				function shareWebview() {
+					ws = plus.webview.currentWebview();
+					if(qrcodeshare) { // 避免快速多次点击创建多个窗口  
+						return;
+					}
+					var href = "qrcode.html";
+					qrcodeshare = plus.webview.create(href, "qrcode.html", {
+						width: '100%',
+						height: '100%',
+						top: 0,
+						zindex: 0,
+						opacity: 1,
+						background: 'transparent',
+						scrollIndicator: 'none',
+						scalable: false,
+						popGesture: 'none',
+					});
+					qrcodeshare.addEventListener("loaded", function() {
+						qrcodeshare.show('slide-in-bottom', 300);
+					}, false);
+					// 显示遮罩层    
+
+
+					var	h = plus.webview.getLaunchWebview();
+					h.setStyle({
+						mask: "rgba(0,0,0,0.5)"
+					});
+
+					// 点击关闭遮罩层  
+					ws.addEventListener("maskClickShare", closeMaskShare, false);
+
 				});
-				qrcodeshare.addEventListener("loaded", function() {
-					qrcodeshare.show('slide-in-bottom', 300);
-				}, false);
-				// 显示遮罩层    
 
+				function closeMaskShare() {
+					plus.webview.getLaunchWebview().setStyle({
+						mask: "none"
+					});
+					//避免出现特殊情况，确保分享页面在初始化时关闭   
+					if(!qrcodeshare) {
+						qrcodeshare = plus.webview.getWebviewById("qrcode.html");
+					}
+					if(qrcodeshare) {
+						qrcodeshare.close();
+						qrcodeshare = null;
+					}
 
-				h = plus.webview.getLaunchWebview();
-				h.setStyle({
-					mask: "rgba(0,0,0,0.5)",
-					zindex: 9999,
-				});
-
-				// 点击关闭遮罩层  
-				ws.addEventListener("maskClickShare", closeMaskShare, false);
-
-			});
-			
-			function closeMaskShare(){
-				h.setStyle({
-					mask: "none"
-				});
-				//避免出现特殊情况，确保分享页面在初始化时关闭   
-				if(!qrcodeshare) {
-					qrcodeshare = plus.webview.getWebviewById("qrcode.html");
 				}
-				if(qrcodeshare) {
-					qrcodeshare.close();
-					qrcodeshare = null;
-				}
-				
-				
-			}
-			
-			
-			
-			
+
+
 		</script>
 	</body>
 

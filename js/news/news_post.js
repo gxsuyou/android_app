@@ -606,8 +606,8 @@ $(function() {
 		})
 
 		$('body').on('tap', '.publish', function(e) {
-
 			e.preventDefault();
+			
 			if(userId) {
 				var content = $(this).prev().prev().val();
 				if(content) {
@@ -627,6 +627,7 @@ $(function() {
 						success: function(data) {
 							if(data.state == "1") {
 								mui.toast("评论成功")
+								window.localStorage.setItem("strategy_title_" + newsId,"")
 								$('.news_secondComment_input').val(""); //不刷新	
 
 								var reviewNum = $('.news_reviewNum').text()
@@ -679,15 +680,17 @@ $(function() {
 						success: function(data) {
 							if(data.state == 1) {
 								mui.toast("删除成功")
-//								$(".bottomInfo").text("正在加载 ...");
-//								closeAjax = false;
-//								$(".news_post_commentContents").empty();
-//								page = 0;
-//								up();
+
 	                            $(".news_post_commentContents").empty()
 							    mui('.new_post_contents').pullRefresh().refresh(true);
 								page = 0;
 								up();
+				
+							    var reviewNum = $('.news_reviewNum').text()
+							    reviewNum = Number(reviewNum)	
+							    reviewNum = reviewNum - 1;
+								$('.news_reviewNum').text(reviewNum);	
+								
 							} else {
 								mui.toast("删除失败")
 							}

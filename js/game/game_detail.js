@@ -58,8 +58,7 @@ $(function() {
 					alert("Download failed: " + status);
 				}
 
-			});
-			//dtask.addEventListener( "statechanged", onStateChanged, false );
+			})
 			dtask.start();
 		}
 
@@ -248,24 +247,33 @@ $(function() {
 		})
 	})
 
+	$('body').on('tap', '.strategy_content_classify', function(e) {
+		e.stopPropagation()
+		var msg = $(this).text();
+		mui.openWindow({
+			url: "../strategy/strategy_search_result.html",
+			id: "strategy_search_result.html",
+			extras: {
+				msg: msg
+			}
+		})
+	})
+
 	//	游戏点赞
 	$('body').on('click', '.thumb,.thumb_num', function(e) {
 		e.stopPropagation();
 		if(userId) {
 			var ts = $(this);
-//			alert(ts.attr('data-state'))
-//			return false;
 			if(ts.attr('data-state') !== 'null' && ts.attr('data-state')) {
 				ts.css('background-image', 'url("../../Public/image/good.png")')
 				ts.siblings('.thumb_num').text(parseInt(ts.siblings('.thumb_num').text()) - 1)
-				ts.attr('data-state', 'null');
-				alert("取消点赞")
+				ts.attr('data-state', 'null')
 				$.ajax({
 					type: "get",
 					url: config.data + "strategy/unLikeNum",
 					async: true,
 					data: {
-						strategyId:ts.attr('data-id'),
+						strategyId: ts.attr('data-id'),
 						user_id: userId
 					},
 					success: function(data) {
@@ -285,11 +293,10 @@ $(function() {
 					url: config.data + "strategy/addNum",
 					async: true,
 					data: {
-						strategyId:ts.attr('data-id'),
-						user_id:userId
+						strategyId: ts.attr('data-id'),
+						user_id: userId
 					},
 					success: function(data) {
-//                       alert(JSON.stringify(data))
 						if(data.state) {
 							mui.toast("点赞成功")
 
@@ -306,7 +313,6 @@ $(function() {
 
 			})
 		}
-
 	})
 
 	//	游戏点赞结束
@@ -441,6 +447,7 @@ function downloding(download) {
 			//			$(".ldownload_btn_text").text('等待');
 			break;
 		case 3:
+
 			loading((download.downloadedSize / download.totalSize * 100).toFixed(0))
 
 			break;
@@ -454,8 +461,9 @@ var angle = 0;
 
 function loading(num) {
 	angle = num * 3.6;
+	console.log(angle)
 	if(angle > 180) {
-		$(".right-content").css("transform", "rotate(" + "180" + "deg)")
+		$(".right-content").css("transform", "rotate(180deg)")
 		$(".left-content").css("transform", "rotate(" + (angle - 180) + "deg)")
 	} else {
 		$(".right-content").css("transform", "rotate(" + angle + "deg)")
@@ -518,7 +526,6 @@ function detail_strategy() {
 		},
 		success: function(data) {
 			mui('#game_detailContent').pullRefresh().endPulldown(true);
-			//			alert(JSON.stringify(data))
 			if(data.state) {
 				var str = data.strategy;
 				var div = '';
@@ -530,10 +537,7 @@ function detail_strategy() {
 						} else {
 							var src = "hidden"
 						}
-						//alert(str[i].strategy_id)
 
-						//ts.css('background-image', 'url("../../Public/image/diangoodone.png")')
-//						ts.attr('data-state', 'null');
 						if(str[i].strategy_id == null) {
 							var dianz = "<div class='thumb' data-state='null' data-id='" + str[i].id + "'></div>"
 						} else {
@@ -578,11 +582,11 @@ function detail_strategy() {
 							"</div>" +
 							"<div  class='strategy_content' data-id='" + str[i].id + "'>" + detail + "</div>" +
 							"</div>" +
-							//"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
+							//							"<img class='game_strategyImg " + src + "' src='" + config.img + str[i].src + "'/>" +
+							"<div style='margin-top:0.3rem' class='backgroundColor_gray border_radius_twenty strategy_content_classify tac font_14 color_7a7a7a fl'>" + str[i].game_name + "</div>" +
 							"<div class='comment_info'>" +
-							"<div class='fr color_9e9e9e comment_imgs' >" +
+							"<div class='fr color_9e9e9e comment_imgs' style='margin:0.2rem 0rem;'>" +
 							dianz +
-//							"<div class='thumb' ></div>"+
 							"<div  class='thumb_num' data-id='" + str[i].id + "'>" + str[i].agree_num + "</div>" +
 							"<div  class='comment_img_strategy'  data-id='" + str[i].id + "'   ></div>" +
 							"<div  class='comment_num'  style='margin-right:0.8rem;'>" + str[i].comment_num + "</div>" +
@@ -615,7 +619,7 @@ function detail_strategy() {
 		var strategyId = $(this).attr("data-id");
 		mui.openWindow({
 			url: "../strategy/strategy_details.html",
-			id: "../strategy/strategy_details.html",
+			id: "strategy_details.html",
 			extras: {
 				strategyId: strategyId
 			}
@@ -636,6 +640,8 @@ function check_assess() {
 			success: function(data) {
 				if(data.state != 1) {
 					$(".goToscore").css("display", "none");
+				} else {
+					$(".goToscore").css("display", "block");
 				}
 			}
 		});
@@ -821,7 +827,8 @@ function detail_main() {
 							mui.toast("删除成功")
 							indexCommit()
 							getAccess()
-							check_assess()
+							//							check_assess()
+							detail_assess()
 						} else {
 							mui.toast("删除失败")
 						}
@@ -830,6 +837,66 @@ function detail_main() {
 			}
 		})
 	})
+
+	//	游戏攻略点赞
+
+	$('body').on('tap', '.thumb_game,.thumb_num_game', function(e) {
+		e.stopPropagation();
+		if(userId) {
+			var ts = $(this);
+			if(ts.attr('data-state') !== 'null' && ts.attr('data-state')) {
+				ts.css('background-image', 'url("../../Public/image/good.png")')
+				ts.siblings('.thumb_num_game').text(parseInt(ts.siblings('.thumb_num_game').text()) - 1)
+				ts.attr('data-state', 'null');
+				$.ajax({
+					type: "get",
+					url: config.data + "game/unLikeComment",
+					async: true,
+					data: {
+						commentId: ts.siblings('.comment_img').attr('data-id'),
+						userId: userId
+					},
+					success: function(data) {
+						if(data.state) {
+							mui.toast("取消点赞成功")
+						} else {
+							mui.toast("取消点赞失败，请重试")
+						}
+					}
+				});
+			} else {
+				ts.css('background-image', 'url("../../Public/image/diangoodone.png")')
+				ts.siblings('.thumb_num_game').text(parseInt(ts.siblings('.thumb_num_game').text()) + 1)
+				ts.attr('data-state', 1)
+				$.ajax({
+					type: "get",
+					url: config.data + "game/likeComment",
+					async: true,
+					data: {
+						commentId: ts.siblings('.comment_img').attr('data-id'),
+						userId: userId
+					},
+					success: function(data) {
+
+						if(data.state) {
+							mui.toast("点赞成功")
+
+						} else {
+							mui.toast("点赞失败，请重试")
+						}
+					}
+				});
+			}
+		} else {
+			mui.openWindow({
+				url: "../user/login.html",
+				id: "../user/login.html",
+
+			})
+		}
+	})
+
+	//	游戏点赞结束
 
 	$('body').on('tap', '.game_relatedInfocontent', function() {
 		mui.openWindow({
@@ -945,8 +1012,8 @@ function indexCommit() {
 						"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
 						comment_dele +
 						"<div class='fr color_9e9e9e comment_imgs'>" +
-						"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "'></span>" +
-						"<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
+						"<span class='thumb_game " + ifGood + "' data-state='" + com[i].state + "'></span>" +
+						"<span class='thumb_num_game font_14'>" + com[i].agree + "</span>" +
 						"<span class='comment_img' data-id='" + com[i].id + "'></span>" +
 						"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
 						"</div>" +
@@ -974,7 +1041,8 @@ function detail_assess() {
 			gameId: gameId
 		},
 		success: function(data) {
-
+			//          alert(JSON.stringify(data))
+			$(".bar0,.bar1,.bar2,.bar3,.bar4").css('width', "0rem");
 			mui('#game_detailContent').pullRefresh().endPulldown(true);
 			if(data.state) {
 				var s = data.scoreList;
@@ -1101,8 +1169,8 @@ function getAccess() {
 						"<div class='font_12 color_9e9e9e fl'>" + com[i].add_time + "</div>" +
 						comment_dele +
 						"<div class='fr color_9e9e9e comment_imgs'>" +
-						"<span class='thumb " + ifGood + "' data-state='" + com[i].state + "'></span>" +
-						"<span class='thumb_num font_14'>" + com[i].agree + "</span>" +
+						"<span class='thumb_game " + ifGood + "' data-state='" + com[i].state + "'></span>" +
+						"<span class='thumb_num_game font_14'>" + com[i].agree + "</span>" +
 						"<span class='comment_img' data-id='" + com[i].id + "' data-uid ='" + com[i].uid + "'></span>" +
 						"<span class='comment_num font_14'>" + com[i].comment_num + "</span>" +
 						"</div>" +

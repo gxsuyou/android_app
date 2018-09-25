@@ -7,7 +7,7 @@
 	"id": "H5C62934A",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "ONE游戏",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.31",/*应用版本名称*/
+		"name": "1.0.39",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "",/*应用描述信息*/
@@ -264,10 +264,11 @@
 					"Public/image/wode2.png",
 					"js/mui.min.js",
 					"Public/js/public.js",
-					"Public/js/jquery-3.2.1.min.js"
+					"Public/js/jquery-3.2.1.min.js",
+					"html/strategy/strategy.html"
 				],
 				"refer": [
-					"html/strategy/strategy.html"
+					"html/user/upload.html"
 				],
 				"priority": 0
 			},
@@ -288,7 +289,8 @@
 					"html/news/news_post.html",
 					"html/game/game_detail.html",
 					"html/news/news_center.html",
-					"html/user/login.html"
+					"html/user/login.html",
+					"html/user/upload.html"
 				],
 				"priority": 0
 			},
@@ -328,7 +330,8 @@
 					"html/strategy/strategy_details.html",
 					"html/user/login.html",
 					"html/game/game_more_list.html",
-					"html/game/game_classify_list.html"
+					"html/game/game_classify_list.html",
+					"html/strategy/strategy_search_result.html"
 				],
 				"priority": 0
 			},
@@ -407,7 +410,8 @@
 					"html/user/personal_data.html",
 					"html/news/news_center.html",
 					"html/user/share.html",
-					"html/user/qrcode.html"
+					"html/user/qrcode.html",
+					"html/user/me_voucher.html"
 				],
 				"priority": 0
 			},
@@ -488,7 +492,8 @@
 				"resources": [],
 				"refer": [
 					"html/news/news_post.html",
-					"html/strategy/strategy_details.html"
+					"html/strategy/strategy_details.html",
+					"html/strategy/strategy_search_result.html"
 				],
 				"priority": 0
 			},
@@ -570,7 +575,8 @@
 			"html/game/game_search_result_list.html": {
 				"resources": [],
 				"refer": [
-					"html/game/game_detail.html"
+					"html/game/game_detail.html",
+					"html/game/game_classify_list.html"
 				],
 				"priority": 0
 			},
@@ -578,7 +584,8 @@
 				"resources": [],
 				"refer": [
 					"html/game/game_classify_list.html",
-					"html/game/game_detail.html"
+					"html/game/game_detail.html",
+					"html/game/game_getvoucher.html"
 				],
 				"priority": 0
 			},
@@ -604,6 +611,13 @@
 					"Public/image/pengyouquan_share.png"
 				],
 				"refer": [],
+				"priority": 0
+			},
+			"html/strategy/strategy_search_result_list.html": {
+				"resources": [],
+				"refer": [
+					"html/strategy/strategy_details.html"
+				],
 				"priority": 0
 			}
 		},

@@ -68,9 +68,22 @@ input{
 }
 .me_username{
 	font-size: 18px;
+	width:6rem;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow:ellipsis;
+}
+.me_level{
+	font-size:14px;
+	border:1px solid #fff;
+	height:1rem;
+	line-height: 1rem;
+	border-radius:0.2rem;
+	padding:0 0.1rem;
+	color:#fff;	
 }
 .me_desc{
-	width: 50%;
+	width: 70%;
 	padding-left: 1.25rem;
 }
 .me_name{
@@ -80,43 +93,6 @@ input{
 .mui-table-view{
 	margin-top: 1rem;
 }
-/*.me_name > input{
-	height: 0.8rem;
-	width: 3rem;
-	margin-left: 1rem;
-	line-height: 0.8rem;
-	border-radius: 10px;
-	background-color: black;
-}*/
-
-/*.me_money > div{
-	width: 5.4rem;
-}*/
-/*.me_input1{
-	background-image: url(../../Public/image/coin.png);
-	background-repeat:no-repeat;
-	background-position: left;
-	background-size: 1rem 1rem;
-}
-.me_input2{
-	margin-left: 1rem;
-	background-image: url(../../Public/image/ticket.png);
-	background-repeat:no-repeat;
-	background-position: left;
-	background-size: 1rem 1rem;
-}*/
-/*.me_scorenum{
-	margin-right: 0.6rem;
-}*/
-/*.mui-content>.mui-table-view:first-child{
-	margin-top: 0;
-}
-.mui-grid-view.mui-grid-9{
-	background-color: white;
-}
-.mui-table-view.mui-grid-view .mui-table-view-cell .mui-media-body{
-	color: rgb(170,170,170);
-}*/
 
 .mui-table-view:before{
 	height: 0;
@@ -168,16 +144,53 @@ input{
 	background-image: url(../../Public/image/xiaoxizhongxin.png);
 }
 .mui-table-view-cell>a:not(.mui-btn){
-	margin:-0.875rem -0.6rem ;
+	margin:-0.875rem -0.6rem;
 }
-/*.mui-navigate-right::before{
-	content: "";
-	width: 26px;
-	height: 26px;
-	left: 10px;
-	background-color: red;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: contain;
-}*/
+
+/* middlebox*/
+.me_middlebox{
+	display: flex;
+	padding:0.7rem 0rem 0.3rem 0rem;
+	border-top:1px solid #e2e2e3;
+	border-bottom:1px solid #e2e2e3;
+	background-color:#ffffff;
+	font-size:14px;
+}
+.me_gold img{
+	width:2rem;
+}
+.me_gold{
+	margin-left:5%;
+}
+.me_voucher{
+	margin-left:11%;
+}
+.me_qiandao{
+	margin-left: auto;
+	margin-right:11%;
+}
+.me_voucher img{
+	width:2.55rem;
+}
+
+.me_qiandao>div:first-child,.me_voucher>div:first-child,.me_gold>div:first-child{
+	height:1.75rem;
+}
+.me_qiandao,.me_voucher,.me_gold{
+	text-align:center;
+	font-weight:normal;
+	
+}
+.me_qiandao img{
+	width:2.2rem;
+}
+.me_getgold{
+	color:#e2e2e4;
+	font-weight:600;
+	width:4.5rem;
+	overflow: hidden;
+	word-wrap:nowrap;
+	text-overflow: ellipsis;
+}
+
 
