@@ -32,11 +32,19 @@
 			border-bottom: 2px solid #7fcadf;
 		}
 		
-		.voucher_content {
-			background: #fff;
-			margin-top: 0.5rem;
+		.voucher_content{
+			background:#fff;
+			width:100%;
+			position:absolute;
+			top:3.5rem;
 		}
-		
+		#voucher_use{
+			display:none;
+			width:95%;
+			left:0px;
+			right:0px;
+			margin:auto;
+		}
 		.mui-table-view-cell:after {
 			left: 0px !important;
 		}
@@ -63,8 +71,10 @@
 		.voucher_contents {
 			display: none;
 		}
-		
-		.voucher_contents li {
+		.voucher_uselist li:first-child{
+			margin-top: 0rem !important;
+		}
+		.voucher_contents li,.voucher_uselist li{
 			margin-top: 0.5rem;
 			width: 100%;
 			height: 5.5rem;
@@ -72,6 +82,11 @@
 			display: flex;
 			justify-content: space-between;
 		}
+		.voucher_uselist li{
+			background-image: url(../../Public/image/voucher_useimg.png) !important;
+		}
+		
+		
 		
 		.voucher_val {
 			color: #00a2c8;
@@ -263,7 +278,6 @@
 		.me_downcontent{
 			width:60%;
 			height:5rem;
-			/*position:fixed;*/
 			z-index:9999;
 			background:#fff;
 			top:0;

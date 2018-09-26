@@ -411,7 +411,8 @@
 					"html/news/news_center.html",
 					"html/user/share.html",
 					"html/user/qrcode.html",
-					"html/user/me_voucher.html"
+					"html/user/me_voucher.html",
+					"html/user/me_pocket.html"
 				],
 				"priority": 0
 			},
@@ -624,6 +625,13 @@
 				"resources": [],
 				"refer": [
 					"html/user/me_checkvoucher.html"
+				],
+				"priority": 0
+			},
+			"html/game/game_getvoucher.html": {
+				"resources": [],
+				"refer": [
+					"html/user/me_voucher.html"
 				],
 				"priority": 0
 			}

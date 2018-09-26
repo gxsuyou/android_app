@@ -38,7 +38,7 @@ $(function() {
 
 					$(".me_img").css("background-image", "url(" + img + ")")
 					$('.me_username').text(data.user.nick_name);
-					$("#username_box").append('<div class="me_level">LV.3</div>')
+//					$("#username_box").append('<div class="me_level">LV.3</div>')
 				} else {
 
 				}
@@ -94,6 +94,14 @@ $(function() {
 			mui.openWindow({
 				url: "set_list.html",
 				id: "set_list.html"
+			})
+		})
+		
+		
+		$("body").on("tap",".me_gold",function(){
+			mui.openWindow({
+				url:"me_pocket.html",
+				id:"me_pocket.html"
 			})
 		})
 

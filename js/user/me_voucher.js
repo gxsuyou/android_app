@@ -16,4 +16,27 @@ mui.plusReady(function() {
 			id: "me_checkvoucher.html"
 		})
 	})
+	
+	/* 未使用的优惠券  */
+	$("body").on("tap",".voucher_nav>div:first-child",function(){
+		$(".voucher_nav>div:last-child").removeClass("border_bottom color_green")
+		$(this).addClass("border_bottom color_green")
+		$("#voucher_nouse").css("display","block")
+		$("#voucher_use").css("display","none")
+		
+	})
+	
+	/* 使用的优惠券  */
+	$("body").on("tap",".voucher_nav>div:last-child",function(){
+		$(".voucher_nav>div:first-child").removeClass("border_bottom color_green")
+		$(this).addClass("border_bottom color_green")
+		$("#voucher_nouse").css("display","none")
+		$("#voucher_use").css("display","block")
+	})
+	
+	
+	
+	
+	
+	
 })

@@ -60,18 +60,13 @@ input{
 	 margin: 0.7rem auto;
     width: 4rem;
     height: 4rem;
-   
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
 	
 }
 .me_username{
-	font-size: 18px;
-	width:6rem;
-	overflow: hidden;
-	white-space: nowrap;
-	text-overflow:ellipsis;
+	font-size:18px;
 }
 .me_level{
 	font-size:14px;
@@ -81,6 +76,8 @@ input{
 	border-radius:0.2rem;
 	padding:0 0.1rem;
 	color:#fff;	
+	margin-left:0.2rem;
+	
 }
 .me_desc{
 	width: 70%;
@@ -88,7 +85,7 @@ input{
 }
 .me_name{
 	width: 100%;
-	padding-top: 1rem;
+	padding-top: 0.5rem;
 }
 .mui-table-view{
 	margin-top: 1rem;
@@ -99,8 +96,7 @@ input{
 }
 .mui-table-view-cell{
 	height: 2.5rem;
-	padding: 0.75rem 0.8125rem;
-	
+	padding: 0.75rem 0.8125rem;	
 }
 .mui-navigate-right >div{
 	width: 1.625rem;
@@ -185,14 +181,14 @@ input{
 	width:2.2rem;
 }
 .me_getgold{
-	color:#e2e2e4;
+	color:#f7c238;
 	font-weight:600;
 	width:4rem;
 	margin-left:0.5rem;
 	text-align:left;
 	overflow: hidden;
 	word-wrap:nowrap;
-	text-overflow: ellipsis;
+	text-overflow: ellipsis;	
 }
 
 
