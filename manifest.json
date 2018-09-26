@@ -624,7 +624,8 @@
 			"html/user/me_voucher.html": {
 				"resources": [],
 				"refer": [
-					"html/user/me_checkvoucher.html"
+					"html/user/me_checkvoucher.html",
+					"html/user/voucher_userule.html"
 				],
 				"priority": 0
 			},

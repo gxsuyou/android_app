@@ -34,8 +34,13 @@ mui.plusReady(function() {
 		$("#voucher_use").css("display","block")
 	})
 	
-	
-	
+	/*到使用规则*/
+	$("body").on("tap",".userule",function(){
+		mui.openWindow({
+			url:"voucher_userule.html",
+			id:"voucher_userule.html"
+		})
+	})
 	
 	
 	
