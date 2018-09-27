@@ -1,0 +1,50 @@
+body{
+	background:#fff;
+}
+.me_getMonyContents{
+	height:6.5rem;
+	border-bottom:2px solid #e7ebed;
+}
+.me_withdrawMethod{
+	border-bottom:2px solid #e7ebed;
+}
+.me_withdrawButtonContents{
+	width:100%;
+	border-top:2px solid #e7ebed;
+	position: absolute;
+	bottom:0px;
+	height:3.3rem;
+	display:flex;
+	align-items:center;
+	justify-content: center;
+}
+.me_withdrawButton{
+	width:70%;
+	height:2.4rem;
+	background:#fab645;
+	line-height: 2.4rem;
+	text-align: center;
+	border-radius:1.2rem;
+	color:#fff;
+}
+.me_getMonyContents{
+	padding-top:4%;
+	padding-left:5%;
+}
+.me_getMonyContents>div:first-child{
+	font-size:12px;
+	color:#7a7a7a;
+}
+
+.me_getMonyContents>div:last-child{	
+	margin-top:0.7rem;
+	margin-left:0.7rem;
+	font-size:36px;
+	color:#282828;
+	font-weight:600;
+}
+.me_getMonyContents>div>span{
+	font-size:14px;
+	margin-left:0.5rem;
+	font-weight:500;
+}

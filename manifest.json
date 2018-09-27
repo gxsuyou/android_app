@@ -635,6 +635,13 @@
 					"html/user/me_voucher.html"
 				],
 				"priority": 0
+			},
+			"html/user/me_pocket.html": {
+				"resources": [],
+				"refer": [
+					"html/user/me_withdraw.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {

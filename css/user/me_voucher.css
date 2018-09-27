@@ -94,6 +94,13 @@
 			margin-left: 1.3rem;
 			width: 32%;
 		}
+		.voucher_get>span{
+			color:#7fcadf;
+			font-size:13px;
+			display: block;
+			margin-top:auto;
+			margin-bottom:1.2rem;
+		}
 		
 		.voucher_val>div:last-child {
 			font-size: 12px;
