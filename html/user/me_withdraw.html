@@ -31,19 +31,44 @@
 			 </div>
 		</div>
 		<div class="me_withdrawMethod">
-			<div id="">
+			<div >
 				提现方式
 			</div>
 			<div class="me_withdrawMethodBox">
-				
+				<div style="background-image:url(../../Public/image/withdraw_off.png)"  class="alipay" data-id="1">
+					<img src="../../Public/image/alipay.png"/>
+					支付宝
+				</div>
+				<div class="wechat" data-id="2">
+					<img src="../../Public/image/weixin.png"/>
+					微信
+				</div>
+				<div class="bank" data-id="3">
+					<img src="../../Public/image/bank.png"/>
+					银行卡
+				</div>
 			</div>
 		</div>
 		<div class="me_withdrawNum">
-			<div id="">
+			<div>
 				提现金额
 			</div>
 			<div class="me_withdrawNumBox">
-				
+				<div style="background-image:url(../../Public/image/withdrawnum_off.png">
+					100元
+				</div>
+				<div>
+					150元
+				</div>
+				<div>
+					200元
+				</div>
+				<div>
+					300元
+				</div>
+				<div>
+					500元
+				</div>
 			</div>
 		</div>
 		<div class="me_withdrawButtonContents">
@@ -54,7 +79,25 @@
 	</body>
 	<script type="text/javascript">
 		mui.plusReady(function(){
-			
+			var withdrawfun=1;
+			var withdranum="100元";
+			$("body").on("tap",".me_withdrawMethodBox>div",function(){
+				var id=$(this).attr("data-id");
+				withdrawfun=id;
+				$(".me_withdrawMethodBox>div").css("background-image","url(../../Public/image/withdraw_on.png)")
+				$(this).css("background-image","url(../../Public/image/withdraw_off.png)")
+			})
+			$("body").on("tap",".me_withdrawNumBox>div",function(){
+				var money=$(this).text()
+				withdranum=money
+				$(".me_withdrawNumBox>div").css("background-image","url(../../Public/image/withdrawnum_on.png)")
+				$(this).css("background-image","url(../../Public/image/withdrawnum_off.png)")
+			})
+			$("body").on("tap",".me_withdrawButton",function(){
+				alert(withdrawfun)
+				alert(withdranum)
+				
+			})
 		})
 	</script>
 </html>
