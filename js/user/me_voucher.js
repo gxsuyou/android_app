@@ -8,7 +8,7 @@ mui.plusReady(function() {
 			uid: userId
 		},
 		success: function(data) {
-			//			alert(JSON.stringify(data))
+//						alert(JSON.stringify(data))
 			var content = ""
 			for(var i = 0; i < data.length; i++) {
 
@@ -23,7 +23,7 @@ mui.plusReady(function() {
 					} else {
 						var use = "<div>去使用</div>"
 					}
-					mytickets += "<ul data-tu_id='" + ticket[n].tu_id + "' data-icon_href='" + config.img + data[i].icon + "'  data-game_name='" + data[i].game_name + "' class='voucher_contents'>" + "<li>" +
+					mytickets += "<ul data-game_id='"+data[i].game_id+"'   data-tu_id='" + ticket[n].tu_id + "' data-icon_href='" + config.img + data[i].icon + "'  data-game_name='" + data[i].game_name + "' class='voucher_contents'>" + "<li>" +
 						"<div class='voucher_val' >" +
 						"<div>" +
 						"￥ <span>" + ticket[n].coin + "</span>" +
@@ -72,21 +72,24 @@ mui.plusReady(function() {
 	$("body").on("tap", ".voucher_contents", function(e) {
 		e.stopPropagation()
 		var name = $(this).find(".voucher_get").children("div:last-child").text()
-		if(name != "去使用") {
-			mui.toast("正在审核中")
-			return;
-		}
+//		if(name != "去使用") {
+//			mui.toast("正在审核中")
+//			return;
+//		}
 
 		var tu_id = $(this).attr("data-tu_id")
 		var icon_href = $(this).attr("data-icon_href")
 		var game_name = $(this).attr("data-game_name")
+		var game_id=$(this).attr("data-game_id")
+
 		mui.openWindow({
 			url: "me_checkvoucher.html",
 			id: "me_checkvoucher.html",
 			extras: {
 				tu_id: tu_id,
 				icon_href: icon_href,
-				game_name: game_name
+				game_name: game_name,
+				game_id:game_id
 			}
 		})
 	})

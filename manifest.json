@@ -656,6 +656,13 @@
 					"html/user/me_withdrawapply.html"
 				],
 				"priority": 0
+			},
+			"html/user/me_checkvoucher.html": {
+				"resources": [],
+				"refer": [
+					"html/game/game_detail.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {

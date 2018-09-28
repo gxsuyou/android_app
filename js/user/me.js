@@ -132,6 +132,8 @@ $(function() {
 		}
 	})
 	$(".me_qiandao").click(function() {
+		alert(1)
+		return ;
 		var text = $(this).children("div:last-child").text()
 		if(userId && text == "签到") {
 
