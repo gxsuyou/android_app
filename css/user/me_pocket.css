@@ -43,7 +43,12 @@ body {
 	margin-left:2rem;
 	font-weight:600;
 	letter-spacing:3px;
-	
+	width:12rem;
+	height:2rem;
+	line-height: 2rem;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	word-wrap:nowrap;
 }
 .me_goldInfoLeft span{
 	font-size:14px;

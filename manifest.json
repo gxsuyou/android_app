@@ -637,9 +637,23 @@
 				"priority": 0
 			},
 			"html/user/me_pocket.html": {
+				"resources": [
+					"Public/image/me_pocket_sign.png",
+					"Public/image/me_pocket_chaptergood.png",
+					"Public/image/me_pocket_chaptersee.png",
+					"Public/image/me_pocket_firend.png",
+					"Public/image/me_pocket_chapter.png"
+				],
+				"refer": [
+					"html/user/me_withdraw.html",
+					"html/user/me_dealrecord.html"
+				],
+				"priority": 0
+			},
+			"html/user/me_withdraw.html": {
 				"resources": [],
 				"refer": [
-					"html/user/me_withdraw.html"
+					"html/user/me_withdrawapply.html"
 				],
 				"priority": 0
 			}
