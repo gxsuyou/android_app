@@ -4649,6 +4649,7 @@ Function.prototype.bind = Function.prototype.bind || function(to) {
 			callback && callback.call(this);
 		},
 		endPullupToRefresh: function(finished) {
+		
 			var self = this;
 			if (self.bottomPocket) { // && self.loading && !this.pulldown
 				self.loading = false;

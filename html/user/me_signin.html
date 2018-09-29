@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>交易记录</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../../css/user/me_signin.css" />
+		<script src="../../Public/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.js"></script>
+		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body style="background:#e7ebed">
+		<div class="header_box">
+			<div class="before_header"></div>
+			<header class="ui_flex_wrapper ui_flex_h backgroundColor_green color_white tac" id='header'>
+				<div class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></div>
+				<div style="width:100%;text-align:center;">
+					每日签到
+				</div>
+			</header>
+		</div>
+		<div class="me_signin">
+			<div class="me_signinInfo">
+				<div>
+					金币
+				</div>
+				<div>
+					9999
+				</div>
+			</div>
+		</div>
+		<div class="me_dateSignContents">
+			<div class="circle cir_1">
+				<div class="circlefont">
+					+5
+				</div>
+				<div class="circle_content">
+					<div class="on_circle">
+
+					</div>
+				</div>
+			</div>
+			<div class="land lan_1">
+
+			</div>
+			<div class="circle cir_2">
+				<div class="circlefont">
+					+5
+				</div>
+				<div class="circle_content">
+					<div class="on_circle">
+
+					</div>
+				</div>
+			</div>
+			<div class="land lan_1">
+
+			</div>
+			<div class="circle cir_3">
+				<div class="circlefont">
+					+5
+				</div>
+				<div class="circle_content">
+					<div class="on_circle">
+
+					</div>
+				</div>
+			</div>
+			<div class="land lan_3">
+
+			</div>
+			<div class="circle cir_4">
+				<div class="circlefont">
+					+5
+				</div>
+				<div class="circle_content">
+					<div class="on_circle">
+
+					</div>
+				</div>
+			</div>
+			<div class="land lan_4">
+
+			</div>
+			<div class="circle cir_5">
+				<div class="circlefont">
+					+5
+				</div>
+				<div class="circle_content">
+					<div class="on_circle">
+
+					</div>
+				</div>
+			</div>
+			<div class="land lan_5">
+
+			</div>
+			<div class="circle cir_6">
+				<div class="circlefont">
+					+5
+				</div>
+				<div class="circle_content">
+					<div class="on_circle">
+
+					</div>
+				</div>
+			</div>
+			<div class="land lan_6">
+
+			</div>
+			<div class="circle cir_7">
+				<div class="circlefont">
+					+30
+				</div>
+				<div class="circle_content">
+					<div class="on_circle">
+
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</body>
+	<script type="text/javascript">
+		var signData = 0;
+		$.ajax({
+			type: "get",
+			url: config.data + "users/getUserMsgById",
+			async: true,
+			data: {
+				id: userId
+			},
+			success: function(data) {
+				//					alert(JSON.stringify(data))
+				$(".me_signinInfo>div:last-child").text(data.user.coin);
+				signData = data.user.sign;
+				//					alert(signData)
+			}
+		})
+
+		$("body").on("tap", "signin", function() {
+			$.ajax({
+				type: "get",
+				url: config.data + "users/getSign",
+				async: true,
+				data: {
+					uid: userId
+				},
+				success: function(data) {
+					if(data.state == 1) {
+						$(this).children("div:last-child").text("已签到")
+						$(this).children("div:first-child").find("img").css("display", "none")
+						$(this).children("div:first-child").append('<img src="../../Public/image/me_alrdao.png"/>')
+					} else if(data.state == 2) {
+						//不允许重复签到
+					} else {
+
+					}
+					mui.toast(data.info)
+				}
+			})
+		})
+	</script>
+
+</html>

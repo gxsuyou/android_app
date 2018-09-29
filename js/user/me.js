@@ -27,7 +27,7 @@ $(function() {
 			timeout: 20000,
 			success: function(data) {
 				if(data.state) {
-
+					$(".me_getgold").text(data.user.coin)
 					$('.onlyId').text("ID:" + data.user.only_id);
 					if(data.user.portrait != 0) {
 						img = data.user.portrait;
@@ -38,6 +38,7 @@ $(function() {
 
 					$(".me_img").css("background-image", "url(" + img + ")")
 					$('.me_username').text(data.user.nick_name);
+//					$("#username_box").append('<div class="me_level">LV.3</div>')
 				} else {
 
 				}
@@ -95,6 +96,14 @@ $(function() {
 				id: "set_list.html"
 			})
 		})
+		
+		
+		$("body").on("tap",".me_gold",function(){
+			mui.openWindow({
+				url:"me_pocket.html",
+				id:"me_pocket.html"
+			})
+		})
 
 	}
 	//if结束
@@ -111,26 +120,26 @@ $(function() {
 			$(".me_headerset").removeClass("move")
 		}, 400)
 	})
-	
 
 	$('.me_voucher').click(function() {
-		if(userId){
+		if(userId) {
 			mui.openWindow({
 				url: "me_voucher.html",
 				id: "me_voucher.html"
 			})
-		}else{
-				mui.toast("请登录")
-		}
-	})
-	$(".me_qiandao").click(function(){
-		var text=$(this).children("div:last-child").text()
-		if(userId&&text=="签到"){
-            $(this).children("div:last-child").text("已签到")
-            $(this).children("div:first-child").find("img").css("display","none")
-			$(this).children("div:first-child").append('<img src="../../Public/image/me_alrdao.png"/>')
-		}else{
+		} else {
 			mui.toast("请登录")
 		}
+	})
+	$(".me_qiandao").click(function() {
+		if(userId) {
+			mui.openWindow({
+				url: "me_signin.html",
+				id: "me_signin.html"
+			})
+		} else {
+			mui.toast("请登录")
+		}
+	
 	})
 })

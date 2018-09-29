@@ -37,7 +37,7 @@ function up() {
 							"<div class='font_14 overflow'>" + g[i].game_name + "</div>" +
 							"<div class='font_12'>" +
 							"</div>" +
-							"<div class='font_12 color_green all_voucher_show'  data-name='"+g[i].game_name+"' >" +
+							"<div class='font_12 color_green all_voucher_show'  data-name='"+g[i].game_name+"'  data-id='" + g[i].id + "'>" +
 							"<img style='width:6.5rem;' src='../../Public/image/voucher_icon.png'  />" +
 							"<div class='open_voucher'>领取更多抵用券<span>></span></div>" +
 							"</div>" +
@@ -73,7 +73,11 @@ function up() {
 			}
 		}
 	})
+}
 
+$(function(){
+	var sharew;
+	var h;	
 	$('body').on('tap', '.game_list,.game_listDownload', function() {
 		mui.openWindow({
 			url: "game_detail.html",
@@ -83,14 +87,12 @@ function up() {
 			}
 		});
 	})
-	$('body').on('tap', '.all_voucher_show', function(event) {
-		
-		
-		
-		event.stopPropagation()
+	$('body').on('tap','.all_voucher_show', function(event) {
+		event.stopPropagation()	
+		var gameId=$(this).attr("data-id")   
 	    var name=$(this).attr("data-name")
 		var href = "game_getvoucher.html"
-		var sharew = plus.webview.create(href, "game_getvoucher.html", {
+		sharew = plus.webview.create(href, "game_getvoucher.html", {
 			width: '100%',
 			height: '100%',
 			top: 0,
@@ -102,29 +104,24 @@ function up() {
 			popGesture: 'none',
 		}, {
 			info: {
-				gameName:name
+				gameName:name,
+				gameId:gameId
 			}
 		});
 		sharew.addEventListener("loaded", function() {
 			sharew.show('fade-in', 0);
 		}, false);
 
-		var h = plus.webview.currentWebview();
+		h = plus.webview.currentWebview();
 		h.setStyle({
 			mask: "rgba(0,0,0,0.5)"
 		});
-		//		var tagId = $(this).attr("data-id");
-		//		var tagName = $(this).text();
-		//		mui.openWindow({
-		//			url: "game_classify_list.html",
-		//			id: "game_classify_list.html",
-		//			extras: {
-		//				tagId: tagId,
-		//				tagName: tagName
-		//			}
-		//		})
 	})
-}
+	
+
+})
+
+
 
 function down() {
 	location.reload()

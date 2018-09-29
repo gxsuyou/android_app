@@ -12,7 +12,8 @@
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 	</head>
-	<body>		
+
+	<body>
 		<div class="bell"></div>
 		<div class="search"></div>
 		<div class="one"></div>
@@ -247,12 +248,14 @@
 								}
 								item.img.src = item.src
 							})
+
 							if(n.length < 5) {
 								mui('#news_content').pullRefresh().endPullupToRefresh(true);
 
 							} else {
 								mui('#news_content').pullRefresh().endPullupToRefresh(false);
 							}
+
 						} else {
 
 						}
