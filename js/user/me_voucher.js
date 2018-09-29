@@ -5,7 +5,8 @@ mui.plusReady(function() {
 		url: config.data + "users/getMyTicket",
 		async: true,
 		data: {
-			uid: userId
+			uid:userId,
+			sys:2
 		},
 		success: function(data) {
 //						alert(JSON.stringify(data))
@@ -63,8 +64,12 @@ mui.plusReady(function() {
 		var show = $(this).find(".voucher_contents").css("display")
 		if(show == "none") {
 			$(this).find(".voucher_contents").css("display", "block")
+			$(this).find(".mui-icon").removeClass("mui-icon-arrowdown")
+			$(this).find(".mui-icon").addClass("mui-icon-arrowup")
 		} else {
 			$(this).find(".voucher_contents").css("display", "none")
+			$(this).find(".mui-icon").addClass("mui-icon-arrowdown")
+			$(this).find(".mui-icon").removeClass("mui-icon-arrowup")
 		}
 
 	})
@@ -72,10 +77,10 @@ mui.plusReady(function() {
 	$("body").on("tap", ".voucher_contents", function(e) {
 		e.stopPropagation()
 		var name = $(this).find(".voucher_get").children("div:last-child").text()
-//		if(name != "去使用") {
-//			mui.toast("正在审核中")
-//			return;
-//		}
+		if(name != "去使用") {
+			mui.toast("正在审核中")
+			return;
+		}
 
 		var tu_id = $(this).attr("data-tu_id")
 		var icon_href = $(this).attr("data-icon_href")
@@ -137,7 +142,6 @@ mui.plusReady(function() {
 					var ticket = data[i].mytickets
 
 					for(var n = 0; n < ticket.length; n++) {
-						alert(ticket[n].state)
 						if(ticket[n].state == 2) {
 							content += "<li >" +
 								"<div class='voucher_val' style='color:#7a7a7a'>" +

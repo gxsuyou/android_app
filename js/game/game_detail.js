@@ -1176,7 +1176,6 @@ function getAccess() {
 						"</div>" +
 						"</div>" +
 						"</div>" +
-
 						"</div>"
 				}
 				$('.news_post_commentContents').empty().append(div)
