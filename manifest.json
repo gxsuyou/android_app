@@ -412,7 +412,8 @@
 					"html/user/share.html",
 					"html/user/qrcode.html",
 					"html/user/me_voucher.html",
-					"html/user/me_pocket.html"
+					"html/user/me_pocket.html",
+					"html/user/me_signin.html"
 				],
 				"priority": 0
 			},

@@ -132,34 +132,14 @@ $(function() {
 		}
 	})
 	$(".me_qiandao").click(function() {
-		alert(1)
-		return ;
-		var text = $(this).children("div:last-child").text()
-		if(userId && text == "签到") {
-
-			$.ajax({
-				type: "get",
-				url: config.data + "users/getSign",
-				async: true,
-				data: {
-					uid: userId
-				},
-				success: function(data) {
-					if(data.state == 1) {
-						$(this).children("div:last-child").text("已签到")
-						$(this).children("div:first-child").find("img").css("display", "none")
-						$(this).children("div:first-child").append('<img src="../../Public/image/me_alrdao.png"/>')
-					} else if(data.state == 2) {
-						//不允许重复签到
-					} else {
-
-					}
-					mui.toast(data.info)
-				}
+		if(userId) {
+			mui.openWindow({
+				url: "me_signin.html",
+				id: "me_signin.html"
 			})
-
 		} else {
 			mui.toast("请登录")
 		}
+	
 	})
 })
