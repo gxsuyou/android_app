@@ -2,14 +2,73 @@ mui.plusReady(function() {
 
 	$.ajax({
 		type: "get",
+		url: config.data + "users/getMyTicketCommon",
+		async: true,
+		data: {
+			uid: userId,
+			sys: 2
+		},
+		success: function(data) {
+			alert(JSON.stringify(data))
+			//	<li>
+			//							<div class="voucher_val">
+			//								<div>
+			//									￥ <span>50</span>
+			//								</div>
+			//								<div>
+			//									满200元可用
+			//								</div>
+			//							</div>
+			//							<div class="voucher_get">
+			//								<div>
+			//									活动专区任意游戏充值满500元可返还100元
+			//								</div>
+			//								<div>去使用</div>
+			//							</div>
+			//						</li>
+			var commendTicket = "";
+			if(data.length > 0) {
+				$(".commendTicket").css("display", "block")
+				for(var i = 0; i < data.length; i++) {
+					if(data[i].state == 3) {
+						var use = "<span>正在审核...</span>"
+					} else {
+						var use = "<div>去使用</div>"
+					}
+					commendTicket += "<li data-tu_id='" + data[i].tu_id + "' class='commendTicketUse'>" +
+						"<div class='voucher_val'>" +
+						"<div>" +
+						"￥ <span>" + data[i].coin + "</span>" +
+						"</div>" +
+						"<div>" +
+						"满" + data[i].a_coin + "元可用" +
+						"</div>" +
+						"</div>" +
+						"<div class='voucher_get'>" +
+						"<div>" +
+						"活动专区任意游戏充值满" + data[i].a_coin + "元可返还" + data[i].coin + "元" +
+						"</div>" +
+						use +
+						"</div>" +
+						"</li>"
+				}
+				$(".commendTicketContents").append(commendTicket)
+			} else {
+				$(".commendTicket").css("display", "none")
+			}
+		}
+	})
+
+	$.ajax({
+		type: "get",
 		url: config.data + "users/getMyTicket",
 		async: true,
 		data: {
-			uid:userId,
-			sys:2
+			uid: userId,
+			sys: 2
 		},
 		success: function(data) {
-//						alert(JSON.stringify(data))
+			//						alert(JSON.stringify(data))
 			var content = ""
 			for(var i = 0; i < data.length; i++) {
 
@@ -24,7 +83,7 @@ mui.plusReady(function() {
 					} else {
 						var use = "<div>去使用</div>"
 					}
-					mytickets += "<ul data-game_id='"+data[i].game_id+"'   data-tu_id='" + ticket[n].tu_id + "' data-icon_href='" + config.img + data[i].icon + "'  data-game_name='" + data[i].game_name + "' class='voucher_contents'>" + "<li>" +
+					mytickets += "<ul data-game_id='" + data[i].game_id + "'   data-tu_id='" + ticket[n].tu_id + "' data-icon_href='" + config.img + data[i].icon + "'  data-game_name='" + data[i].game_name + "' class='voucher_contents'>" + "<li>" +
 						"<div class='voucher_val' >" +
 						"<div>" +
 						"￥ <span>" + ticket[n].coin + "</span>" +
@@ -74,7 +133,7 @@ mui.plusReady(function() {
 
 	})
 
-	$("body").on("tap", ".voucher_contents", function(e) {
+	$("body").on("tap", ".voucher_contents,.commendTicketUse", function(e) {
 		e.stopPropagation()
 		var name = $(this).find(".voucher_get").children("div:last-child").text()
 		if(name != "去使用") {
@@ -85,7 +144,7 @@ mui.plusReady(function() {
 		var tu_id = $(this).attr("data-tu_id")
 		var icon_href = $(this).attr("data-icon_href")
 		var game_name = $(this).attr("data-game_name")
-		var game_id=$(this).attr("data-game_id")
+		var game_id = $(this).attr("data-game_id")
 
 		mui.openWindow({
 			url: "me_checkvoucher.html",
@@ -94,7 +153,7 @@ mui.plusReady(function() {
 				tu_id: tu_id,
 				icon_href: icon_href,
 				game_name: game_name,
-				game_id:game_id
+				game_id: game_id
 			}
 		})
 	})
@@ -136,7 +195,7 @@ mui.plusReady(function() {
 			},
 			success: function(data) {
 				var content = ""
-//				alert(JSON.stringify(data))
+				//				alert(JSON.stringify(data))
 				for(var i = 0; i < data.length; i++) {
 
 					var ticket = data[i].mytickets
@@ -145,11 +204,11 @@ mui.plusReady(function() {
 						if(ticket[n].state == 2) {
 							content += "<li >" +
 								"<div class='voucher_val' style='color:#7a7a7a'>" +
-								"<div>" + "￥ <span>"+ticket[n].coin+"</span>" + "</div>" +
-								"<div>满"+ticket[n].a_coin+"元可用</div>" +
+								"<div>" + "￥ <span>" + ticket[n].coin + "</span>" + "</div>" +
+								"<div>满" + ticket[n].a_coin + "元可用</div>" +
 								"</div>" +
 								"<div class='voucher_get'>" +
-								"<div><span>" + "【"+data[i].game_name+"】" + "</span>" + "充值满"+ticket[n].a_coin+"元可返还"+ticket[n].coin+"元" + "</div>" +
+								"<div><span>" + "【" + data[i].game_name + "】" + "</span>" + "充值满" + ticket[n].a_coin + "元可返还" + ticket[n].coin + "元" + "</div>" +
 								"<img style='width:3.3rem;height:2.7rem;margin-left:0.5rem;' src='../../Public/image/voucher_aluse.png' />" +
 								"</div>" +
 								"</li>"

@@ -5,34 +5,38 @@ mui.plusReady(function() {
 	tu_id = n.tu_id
 	var gameId = n.game_id
 	var packagename;
-	//	alert(game_id)
 	var hasno
-	$.ajax({
-		type: "get",
-		url: config.data + "game/getGameById",
-		async: true,
-		data: {
-			gameId: gameId,
-			sys: 2
-		},
-		success: function(data) {
-			//			alert(JSON.stringify(data))
-			var game = data.gameDetail;
-			 packagename = game.game_packagename
-			hasno = plus.runtime.isApplicationExist({
-				pname: game.game_packagename,
-				action: ''
-			})
-			//			alert(hasno)
+    initGame()
+	function initGame() {
+		if(gameId==undefined){
+			alert("是通用券")
+			return false
 		}
-	})
+		$.ajax({
+			type: "get",
+			url: config.data + "game/getGameById",
+			async: true,
+			data: {
+				gameId: gameId,
+				sys: 2
+			},
+			success: function(data) {
+				var game = data.gameDetail;
+				packagename = game.game_packagename
+				hasno = plus.runtime.isApplicationExist({
+					pname: game.game_packagename,
+					action: ''
+				})
+			}
+		})
+	}
 
 	$(".me_voulan img").attr("src", n.icon_href)
 	$(".me_voulan span").text(n.game_name)
 	var mask = mui.createMask(function() {
 		//		return false
 	}); //callback为用户点击蒙版时自动执行的回调；
-    alert(3)
+	alert(3)
 	$("body").on("tap", ".me_tochar", function() {
 		alert(hasno)
 		if(hasno == false) {
@@ -80,18 +84,18 @@ mui.plusReady(function() {
 			success: function(data) {
 				if(data.state == 1) {
 					mui.toast("提交，正在审核中。")
-					setTimeout(function(){
-//						if(plus.os.name == "Android") {
-//							plus.runtime.launchApplication({
-//								pname: packagename,
-//								extra: {
-//									//									url: "http://www.html5plus.org"
-//								}
-//							}, function(e) {
-//								//								installApp('_downloads/' + game.game_name + '.apk')
-//							});
-//						}
-					},4000)
+					setTimeout(function() {
+						//						if(plus.os.name == "Android") {
+						//							plus.runtime.launchApplication({
+						//								pname: packagename,
+						//								extra: {
+						//									//									url: "http://www.html5plus.org"
+						//								}
+						//							}, function(e) {
+						//								//								installApp('_downloads/' + game.game_name + '.apk')
+						//							});
+						//						}
+					}, 4000)
 				}
 			}
 		})
