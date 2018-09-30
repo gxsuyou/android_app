@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/user/me_signin.css" />
 		<script src="../../Public/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/mui.js"></script>
+		<script src="../../js/mui.min.js"></script>
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
@@ -34,7 +34,7 @@
 			</div>
 		</div>
 		<div class="me_dateSignContents">
-			<div class="circle cir_0">
+			<div class="circle cir_0 ">
 				<div class="circlefont">
 					+5
 				</div>
@@ -47,7 +47,7 @@
 					一天
 				</div>
 			</div>
-			<div class="land lan_0">
+			<div class="land lan_0 ">
 
 			</div>
 			<div class="circle cir_1">
@@ -111,7 +111,7 @@
 					五天
 				</div>
 			</div>
-			<div class="land lan_4">
+			<div class="land lan_4" style="left:13.5rem;">
 
 			</div>
 			<div class="circle cir_5">
@@ -127,7 +127,7 @@
 					六天
 				</div>
 			</div>
-			<div class="land lan_5" style="left:13.5rem;">
+			<div class="land lan_5" style="left:16.5rem;">
 
 			</div>
 			<div class="circle cir_6">
@@ -144,9 +144,9 @@
 				</div>
 
 			</div>
-			<div class="land lan_6" style="left:16.5rem;">
+			<!--<div class="land lan_6" style="left:16.5rem;">
 
-			</div>
+			</div>-->
 		</div>
 		<div class="me_siginbutton">
 			签到
@@ -174,15 +174,22 @@
 					id: userId
 				},
 				success: function(data) {
+
 					$(".me_signinInfo>div:last-child").text(data.user.coin);
 					signData = data.user.sign;
-//					signData
-//alert(signData)
-//					alert(signData)
+					var date=new Date()
+					var h=date.setHours(0,0,0,0)
+
+                    var nowTime =Number(h)/1000-86400
+                    var lastTime =data.user.new_sign
+                     if(nowTime==lastTime&&signData==7){
+                     	signData=0
+                     }
+
 					for(var i = 0; i < signData; i++) {
 						$(".cir_" + i + ">div:nth-child(2)").addClass("on_circle_content")
 						$(".cir_" + i + ">div>div").addClass("on_circle_bg")
-						$(".lan_" + i).addClass("on_lan")
+						$(".lan_" + (i-1)).addClass("on_lan")
 					}
 
 				}

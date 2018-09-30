@@ -9,23 +9,7 @@ mui.plusReady(function() {
 			sys: 2
 		},
 		success: function(data) {
-			alert(JSON.stringify(data))
-			//	<li>
-			//							<div class="voucher_val">
-			//								<div>
-			//									￥ <span>50</span>
-			//								</div>
-			//								<div>
-			//									满200元可用
-			//								</div>
-			//							</div>
-			//							<div class="voucher_get">
-			//								<div>
-			//									活动专区任意游戏充值满500元可返还100元
-			//								</div>
-			//								<div>去使用</div>
-			//							</div>
-			//						</li>
+
 			var commendTicket = "";
 			if(data.length > 0) {
 				$(".commendTicket").css("display", "block")
@@ -35,7 +19,7 @@ mui.plusReady(function() {
 					} else {
 						var use = "<div>去使用</div>"
 					}
-					commendTicket += "<li data-tu_id='" + data[i].tu_id + "' class='commendTicketUse'>" +
+					commendTicket += "<li data-tu_id='" + data[i].id + "' class='commendTicketUse'>" +
 						"<div class='voucher_val'>" +
 						"<div>" +
 						"￥ <span>" + data[i].coin + "</span>" +
@@ -220,4 +204,9 @@ mui.plusReady(function() {
 		})
 	}
 
+})
+
+
+window.addEventListener('reload',function(){
+	window.reload()
 })

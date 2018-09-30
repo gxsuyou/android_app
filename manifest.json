@@ -661,7 +661,15 @@
 			"html/user/me_checkvoucher.html": {
 				"resources": [],
 				"refer": [
-					"html/game/game_detail.html"
+					"html/game/game_detail.html",
+					"html/user/me_commonvoucherchoose.html"
+				],
+				"priority": 0
+			},
+			"html/user/me_commonvoucherchoose.html": {
+				"resources": [],
+				"refer": [
+					"html/user/me_checkvoucher.html"
 				],
 				"priority": 0
 			}

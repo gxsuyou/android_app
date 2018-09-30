@@ -153,6 +153,7 @@ $(function() {
 	})
 
 	$('.backImg').click(function() {
+
 		mui.back()
 	})
 	$('.comment_content').each(function() {
@@ -447,12 +448,10 @@ function downloding(download) {
 			//			$(".ldownload_btn_text").text('等待');
 			break;
 		case 3:
-
 			loading((download.downloadedSize / download.totalSize * 100).toFixed(0))
-
 			break;
 		case 4:
-			//			$(".ldownload_btn_text").text("打开");
+			//$(".ldownload_btn_text").text("打开");
 			loading(0)
 			break;
 	}
@@ -651,7 +650,6 @@ function check_assess() {
 
 // 首页详情开始
 function detail_main() {
-
 	$.ajax({
 		type: "get",
 		url: config.data + "game/getGameById",
@@ -682,10 +680,11 @@ function detail_main() {
 					plus.downloader.enumerate(function(tasks) {
 
 						var state = false;
-
 						for(var i = 0; i < tasks.length; i++) {
-
+//                             alert(tasks[i].filename == fileName)
+//								return false;
 							if(tasks[i].filename == fileName) {
+								
 								dtask_app = tasks[i];
 								$("#game_detail_download").addClass("hidden")
 								$(".download,.border").addClass("hidden")
@@ -949,6 +948,7 @@ function detail_main() {
 // 首页详情解释
 
 function indexCommit() {
+
 	$.ajax({
 		type: "get",
 		url: config.data + "game/getGameHotComment",

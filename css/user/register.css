@@ -13,9 +13,10 @@ body{
 .mui-input-row {
 	margin: 0 1.375rem;
 	margin-top: 1.125rem;
-	border-radius: 10px;
+    height:auto !important;
 }
 .mui-input-row >input{
+	border-radius: 10px;
 	position: relative;
 	height: 2.8125rem;
 	line-height: 2.8125rem;
@@ -75,4 +76,24 @@ body{
     height: 2.8125rem;
     line-height: 2.8125rem;
     border-radius: 10px;
+}
+.recommend-user{
+	width:70% !important;
+	border-radius:10px !important;
+	display:block;
+	margin-left:auto;
+}
+.recommend_contents{
+	border-bottom:1.8px solid #d9dbdc;
+	padding-bottom:1rem;
+	margin-top:-0.15rem;
+}
+.recommend_contents>div:first-child{
+	margin-left:0.2rem;
+	font-size:14px;
+	line-height:1.1rem;
+	width:20%;
+	position:relative;
+	top:1.75rem;
+	text-align:center;
 }

@@ -6,12 +6,18 @@ mui.plusReady(function() {
 	var gameId = n.game_id
 	var packagename;
 	var hasno
-    initGame()
+	initGame()
+
 	function initGame() {
-		if(gameId==undefined){
-			alert("是通用券")
-			return false
+		if(gameId == undefined) {
+			$(".me_voulan").html("<span class='chooseOneGame' style='color:#282828'>选择要使用的游戏</span><span  style='font-size:16px;color:#c9c9c9;font-weight:600;margin-left:auto;margin-right:10%;' class='mui-icon mui-icon-arrowright chooseOneGame'></span>")
+			return false;
 		}
+
+		if(n.onerankchoose == "choose") {
+			$(".me_voulan").append("<span class='chooseOneGame' style='margin-left:auto;margin-right:10%;font-size:12px;color:#c9c9c9;'  >更换游戏<span  class='mui-icon mui-icon-arrowright ' style='font-weight:600;font-size:16px;margin-left:-0.1rem' ></span></span>")
+		}
+
 		$.ajax({
 			type: "get",
 			url: config.data + "game/getGameById",
@@ -21,6 +27,7 @@ mui.plusReady(function() {
 				sys: 2
 			},
 			success: function(data) {
+
 				var game = data.gameDetail;
 				packagename = game.game_packagename
 				hasno = plus.runtime.isApplicationExist({
@@ -31,17 +38,15 @@ mui.plusReady(function() {
 		})
 	}
 
-	$(".me_voulan img").attr("src", n.icon_href)
-	$(".me_voulan span").text(n.game_name)
+	$(".me_voulan>img").attr("src", n.icon_href)
+	$(".me_voulan>span:first-of-type").text(n.game_name)
 	var mask = mui.createMask(function() {
-		//		return false
+
 	}); //callback为用户点击蒙版时自动执行的回调；
-	alert(3)
 	$("body").on("tap", ".me_tochar", function() {
-		alert(hasno)
+
 		if(hasno == false) {
-			//			"下载游戏"
-			mask.show()
+			mask.show() //"下载游戏"
 			$(".me_downcontents").css("display", "block")
 			return false
 		}
@@ -49,7 +54,7 @@ mui.plusReady(function() {
 		var playerId = $(".playerId").val()
 		var phoneNum = $(".phoneNum").val()
 		var playDir = $(".playDir").val()
-		if(playerId == "" || phoneNum == "") {
+		if(playerId == "" || phoneNum == ""){
 			mui.toast("请输入必要信息")
 			return false;
 		}
@@ -57,18 +62,10 @@ mui.plusReady(function() {
 			mui.toast("请输入准确号码")
 			return false;
 		}
-		alert(packagename)
-		if(plus.os.name == "Android") {
-			plus.runtime.launchApplication({
-				pname: packagename,
-				extra: {
-					//									url: "http://www.html5plus.org"
-				}
-			}, function(e) {
-				//								installApp('_downloads/' + game.game_name + '.apk')
-			});
+         
+		if(gameId == undefined) {
+			return false;
 		}
-		return false;
 
 		$.ajax({
 			type: "post",
@@ -85,16 +82,16 @@ mui.plusReady(function() {
 				if(data.state == 1) {
 					mui.toast("提交，正在审核中。")
 					setTimeout(function() {
-						//						if(plus.os.name == "Android") {
-						//							plus.runtime.launchApplication({
-						//								pname: packagename,
-						//								extra: {
-						//									//									url: "http://www.html5plus.org"
-						//								}
-						//							}, function(e) {
-						//								//								installApp('_downloads/' + game.game_name + '.apk')
-						//							});
-						//						}
+						if(plus.os.name == "Android") {
+							plus.runtime.launchApplication({
+								pname: packagename,
+								extra: {
+									//									url: "http://www.html5plus.org"
+								}
+							}, function(e) {
+								//								installApp('_downloads/' + game.game_name + '.apk')
+							});
+						}
 					}, 4000)
 				}
 			}
@@ -116,4 +113,27 @@ mui.plusReady(function() {
 		mask.close(); //关闭遮罩
 		$(".me_downcontents").css("display", "none")
 	})
+
+	$("body").on("tap", ".chooseOneGame", function() {
+		mui.openWindow({
+			url: "me_commonvoucherchoose.html",
+			id: "me_commonvoucherchoose.html",
+			extras: {
+				tu_id: tu_id
+			}
+		})
+	})
+
+
+
+    $("body").on("tap",".mui-action",function(){
+        var list = plus.webview.getWebviewById("me_voucher.html");
+        mui.fire(list, 'reload');
+    	mui.openWindow({
+    		url:"me_voucher.html",
+    		id:"me_voucher.html"
+    	})
+    })
+
+
 })
