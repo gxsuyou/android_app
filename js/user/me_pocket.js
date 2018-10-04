@@ -52,5 +52,21 @@ mui.plusReady(function() {
 		}
 
 	})
+    
+    
+    $("body").on("tap",".voucher_getgoldto",function(){
+
+    	var mean=$(this).attr("data-mean")
+    	switch(mean){
+    		case "signin":
+    		  mui.openWindow({
+    		  	url:"me_signin.html",
+    		  	id:"me_signin.html"
+    		  })
+    	}
+    })
+
+
+
 
 })

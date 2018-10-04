@@ -41,13 +41,13 @@ mui.plusReady(function() {
 	$(".me_voulan>img").attr("src", n.icon_href)
 	$(".me_voulan>span:first-of-type").text(n.game_name)
 	var mask = mui.createMask(function() {
-
+        $(".me_downcontents").css("display", "none")
 	}); //callback为用户点击蒙版时自动执行的回调；
 	$("body").on("tap", ".me_tochar", function() {
 
 		if(hasno == false) {
 			mask.show() //"下载游戏"
-			$(".me_downcontents").css("display", "block")
+			 $(".me_downcontents").css("display", "block")
 			return false
 		}
 
@@ -66,7 +66,6 @@ mui.plusReady(function() {
 		if(gameId == undefined) {
 			return false;
 		}
-
 		$.ajax({
 			type: "post",
 			url: config.data + "game/getUseTicket",
@@ -124,16 +123,21 @@ mui.plusReady(function() {
 		})
 	})
 
-
+    mui.back = function(){
+    	back()
+    }
 
     $("body").on("tap",".mui-action",function(){
-        var list = plus.webview.getWebviewById("me_voucher.html");
+       back()
+    })
+     
+     function back(){
+     	 var list = plus.webview.getWebviewById("me_voucher.html");
         mui.fire(list, 'reload');
     	mui.openWindow({
     		url:"me_voucher.html",
     		id:"me_voucher.html"
     	})
-    })
-
+     }
 
 })
