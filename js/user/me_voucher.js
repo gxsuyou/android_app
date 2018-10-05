@@ -207,13 +207,13 @@ function init() {
 					mytickets +
 					"</li>"
 			}
-			$("#voucher_nouse>.mui-table-view:not(:first-child)").empty()
+			$("#voucher_nouse>.mui-table-view>li:not(:first-child)").remove()
+//          $("#voucher_nouse .mui-table-view-cell:not(:first-child)").empty()
 			$("#voucher_nouse>.mui-table-view").append(content)
 		}
 	})
 }
 
 window.addEventListener('reload', function() {
-	//	window.location.reload()
 	init()
 })

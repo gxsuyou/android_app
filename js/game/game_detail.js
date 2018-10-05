@@ -406,19 +406,19 @@ function createDownload(name, src) {
 	});
 }
 
-var downloader_toggle = 1
-$("body").on("tap", ".con", function() {
-	if(downloader_toggle == 1) {
-		dtask_app.pause();
-		mui.toast("已经暂停下载");
-		downloader_toggle = 0
-	} else {
-		dtask_app.resume();
-		mui.toast("已经恢复下载");
-		downloader_toggle = 1
-	}
-
-})
+//var downloader_toggle = 1
+//$("body").on("tap", ".con", function() {
+//	if(downloader_toggle == 1) {
+//		dtask_app.pause();
+//		mui.toast("已经暂停下载");
+//		downloader_toggle = 0
+//	} else {
+//		dtask_app.resume();
+//		mui.toast("已经恢复下载");
+//		downloader_toggle = 1
+//	}
+//
+//})
 
 function onStateChanged(download, status) {
 
@@ -451,7 +451,6 @@ function downloding(download) {
 			loading((download.downloadedSize / download.totalSize * 100).toFixed(0))
 			break;
 		case 4:
-			//$(".ldownload_btn_text").text("打开");
 			loading(0)
 			break;
 	}
@@ -460,7 +459,8 @@ var angle = 0;
 
 function loading(num) {
 	angle = num * 3.6;
-	console.log(angle)
+	console.log(num)
+//	console.log(angle)
 	if(angle > 180) {
 		$(".right-content").css("transform", "rotate(180deg)")
 		$(".left-content").css("transform", "rotate(" + (angle - 180) + "deg)")
@@ -681,11 +681,9 @@ function detail_main() {
 
 						var state = false;
 						for(var i = 0; i < tasks.length; i++) {
-//                             alert(tasks[i].filename == fileName)
-//								return false;
 							if(tasks[i].filename == fileName) {
 								
-								dtask_app = tasks[i];
+								var dtask_app = tasks[i];
 								$("#game_detail_download").addClass("hidden")
 								$(".download,.border").addClass("hidden")
 								$(".con").removeClass("hidden")

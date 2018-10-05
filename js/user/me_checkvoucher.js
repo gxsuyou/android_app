@@ -81,6 +81,7 @@ mui.plusReady(function() {
 				if(data.state == 1) {
 					mui.toast("提交，正在审核中。")
 					setTimeout(function() {
+						
 						if(plus.os.name == "Android") {
 							plus.runtime.launchApplication({
 								pname: packagename,
@@ -91,7 +92,8 @@ mui.plusReady(function() {
 								//								installApp('_downloads/' + game.game_name + '.apk')
 							});
 						}
-					}, 4000)
+						back()
+					}, 2000)
 				}
 			}
 		})

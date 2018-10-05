@@ -426,7 +426,12 @@
 				"priority": 0
 			},
 			"html/user/login.html": {
-				"resources": [],
+				"resources": [
+					"Public/image/logo2.png",
+					"Public/image/back.png",
+					"Public/js/public.js",
+					"Public/js/jquery-3.2.1.min.js"
+				],
 				"refer": [
 					"html/user/register.html",
 					"index.html",
