@@ -29,9 +29,9 @@ $(function() {
 				if(data.state) {
 					$(".me_getgold").text(data.user.coin)
 					$('.onlyId').text("ID:" + data.user.only_id);
+					only_id=data.user.only_id;
 					if(data.user.portrait != 0) {
 						img = data.user.portrait;
-						alert
 					} else {
 						img = "../../Public/image/morentouxiang.png";
 					}

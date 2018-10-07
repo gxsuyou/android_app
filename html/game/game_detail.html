@@ -445,7 +445,11 @@
 			</div>
 
 		</div>
+		<script src="../../js/game/game_detail.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../js/mui.zoom.js"></script>
+		<script src="../../js/mui.previewimage.js"></script>
 		<script type="text/javascript">
+			mui.previewImage();
 			var page = 1,
 				pageIndex = "detail";
 			strategyPage = 1;
@@ -463,9 +467,9 @@
 
 			mui.init({
 				beforeback: function() {
-					if(dtask_app) {
-						dtask_app.resume();
-					}
+//					if(dtask_app) {
+//						dtask_app.resume();
+//					}
 					var list = plus.webview.getWebviewById("html/game/game_recommend.html"); //触发父页面的自定义事件(refresh),从而进行刷新	
 					mui.fire(list, 'reload');
 				},
@@ -701,12 +705,6 @@
 				}, 1000);
 			}
 		</script>
-		<script src="../../js/game/game_detail.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/mui.zoom.js"></script>
-		<script src="../../js/mui.previewimage.js"></script>
-		<script>
-			mui.previewImage();
-		</script>
+		
 	</body>
-
 </html>

@@ -59,6 +59,11 @@ function activeBell() {
 	}
 }
 
+
+
+
+
+
 var wgtVer = null;
 var total_height;
 var totalSize;
@@ -71,6 +76,5 @@ $(function() {
 			"width": "100%"
 		});
 		$('.header_box').next().css("margin-top", total_height + "px");
-
 	})
 });

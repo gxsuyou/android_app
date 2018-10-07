@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/user/me_dealrecord.css" />
 		<script src="../../Public/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="../../js/mui.js"></script>
+		<script src="../../js/mui.min.js"></script>
 		<script src="../../Public/js/public.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
@@ -23,7 +23,7 @@
 				</div>
 			</header>
 		</div>
-		<div class="dealrecordContent">
+		<div class="dealrecord">
 			<ul class="dealrecordContents">
 				<!--<li>
 				<div class="recordContents_left">
@@ -57,7 +57,7 @@
 			var page = 1
 			mui.init({
 				pullRefresh: {
-					container: ".dealrecordContent", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					container: ".dealrecord", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
 					up: {
 						height: 50, //可选.默认50.触发上拉加载拖动距离
 						auto: true, //可选,默认false.自动上拉加载一次
@@ -119,10 +119,10 @@
 						}
 						$(".dealrecordContents").append(content);
 
-						if(data.length <= 10) {
-							mui('.dealrecordContents').pullRefresh().endPullupToRefresh(true);
+						if(data.length < 10) {
+							mui('.dealrecord').pullRefresh().endPullupToRefresh(true);
 						} else {
-							mui('.dealrecordContents').pullRefresh().endPullupToRefresh(false);
+							mui('.dealrecord').pullRefresh().endPullupToRefresh(false);
 						}
 
 					}

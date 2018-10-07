@@ -153,6 +153,7 @@ $(function() {
 	})
 
 	$('.backImg').click(function() {
+
 		mui.back()
 	})
 	$('.comment_content').each(function() {
@@ -405,19 +406,19 @@ function createDownload(name, src) {
 	});
 }
 
-var downloader_toggle = 1
-$("body").on("tap", ".con", function() {
-	if(downloader_toggle == 1) {
-		dtask_app.pause();
-		mui.toast("已经暂停下载");
-		downloader_toggle = 0
-	} else {
-		dtask_app.resume();
-		mui.toast("已经恢复下载");
-		downloader_toggle = 1
-	}
-
-})
+//var downloader_toggle = 1
+//$("body").on("tap", ".con", function() {
+//	if(downloader_toggle == 1) {
+//		dtask_app.pause();
+//		mui.toast("已经暂停下载");
+//		downloader_toggle = 0
+//	} else {
+//		dtask_app.resume();
+//		mui.toast("已经恢复下载");
+//		downloader_toggle = 1
+//	}
+//
+//})
 
 function onStateChanged(download, status) {
 
@@ -447,12 +448,9 @@ function downloding(download) {
 			//			$(".ldownload_btn_text").text('等待');
 			break;
 		case 3:
-
 			loading((download.downloadedSize / download.totalSize * 100).toFixed(0))
-
 			break;
 		case 4:
-			//			$(".ldownload_btn_text").text("打开");
 			loading(0)
 			break;
 	}
@@ -461,7 +459,8 @@ var angle = 0;
 
 function loading(num) {
 	angle = num * 3.6;
-	console.log(angle)
+	console.log(num)
+//	console.log(angle)
 	if(angle > 180) {
 		$(".right-content").css("transform", "rotate(180deg)")
 		$(".left-content").css("transform", "rotate(" + (angle - 180) + "deg)")
@@ -651,7 +650,6 @@ function check_assess() {
 
 // 首页详情开始
 function detail_main() {
-
 	$.ajax({
 		type: "get",
 		url: config.data + "game/getGameById",
@@ -682,11 +680,10 @@ function detail_main() {
 					plus.downloader.enumerate(function(tasks) {
 
 						var state = false;
-
 						for(var i = 0; i < tasks.length; i++) {
-
 							if(tasks[i].filename == fileName) {
-								dtask_app = tasks[i];
+								
+								var dtask_app = tasks[i];
 								$("#game_detail_download").addClass("hidden")
 								$(".download,.border").addClass("hidden")
 								$(".con").removeClass("hidden")
@@ -949,6 +946,7 @@ function detail_main() {
 // 首页详情解释
 
 function indexCommit() {
+
 	$.ajax({
 		type: "get",
 		url: config.data + "game/getGameHotComment",
@@ -1176,7 +1174,6 @@ function getAccess() {
 						"</div>" +
 						"</div>" +
 						"</div>" +
-
 						"</div>"
 				}
 				$('.news_post_commentContents').empty().append(div)

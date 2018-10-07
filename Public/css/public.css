@@ -83,7 +83,7 @@ header{
     backface-visibility: hidden;
     position: relative;
 }
-.mui-action-back{
+.mui-action-back,.mui-action{
 	line-height: 45px;
 	width: 3rem;
 	font-size: 20px;
