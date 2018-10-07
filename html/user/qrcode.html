@@ -40,6 +40,9 @@
 	<script type="text/javascript">
 		var bod=document.querySelector("body");
 		bod.addEventListener("tap",back,false)
+		mui.back = function() {
+		   back()
+		}
 		function back() {
 			var sourcePage = plus.webview.getWebviewById("html/user/me.html");
 			if(sourcePage) {

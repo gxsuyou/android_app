@@ -11,9 +11,9 @@ body {
 	align-items:center;
 	justify-content:center;
 	background:#e7ebed;
-	/*position:fixed;
-	top:3rem;
-	z-index: 10;*/
+	position:fixed;
+	top:0px;
+	z-index:10000;
 }
 .me_goldInfoContent{
 	width:90%;
@@ -84,6 +84,8 @@ body {
 
 .me_getGoldContents{
 	font-size:14px;
+	position:relative;
+	top:15rem;
 }
 
 .mui-table-view:before,.mui-table-view:after{
@@ -176,6 +178,5 @@ body {
 }
 .mui-table-view{
 	height:20rem;
-	overflow:scroll;
 }
 

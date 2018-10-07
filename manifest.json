@@ -653,7 +653,8 @@
 				"refer": [
 					"html/user/me_withdraw.html",
 					"html/user/me_dealrecord.html",
-					"html/user/me_signin.html"
+					"html/user/me_signin.html",
+					"html/strategy/strategy_add.html"
 				],
 				"priority": 0
 			},

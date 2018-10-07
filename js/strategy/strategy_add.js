@@ -150,6 +150,9 @@ $(function() {
 						$("#strategy_textarea").html("");
 						$(".strategy_title").val("");
 						$(".choose_game").val("");
+						window.localStorage.setItem("strategy_title", "")
+					    window.localStorage.setItem("strategy_game", "")
+					    window.localStorage.setItem("strategy_content", "")
 						setTimeout(function() {
 							mui.back();
 						}, 3000);

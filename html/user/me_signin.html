@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title>交易记录</title>
+		<title>每日签到</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
@@ -163,8 +163,19 @@
 		</div>
 	</body>
 	<script type="text/javascript">
+		mui.init({
+			swipeBack: false,
+			beforeback: function() {
+				var list = plus.webview.getWebviewById("html/user/me.html");
+				mui.fire(list, 'getNowMoney', {
+					coin: coin
+				});
+			}
+		})
 		var signData = 0;
-         initgold()
+		var coin = 0;
+		initgold()
+
 		function initgold() {
 			$.ajax({
 				type: "get",
@@ -174,22 +185,22 @@
 					id: userId
 				},
 				success: function(data) {
-
-					$(".me_signinInfo>div:last-child").text(data.user.coin);
+					coin = data.user.coin
+					$(".me_signinInfo>div:last-child").text(coin);
 					signData = data.user.sign;
-					var date=new Date()
-					var h=date.setHours(0,0,0,0)
+					var date = new Date()
+					var h = date.setHours(0, 0, 0, 0)
 
-                    var nowTime =Number(h)/1000-86400
-                    var lastTime =data.user.new_sign
-                     if(nowTime==lastTime&&signData==7){
-                     	signData=0
-                     }
+					var nowTime = Number(h) / 1000 - 86400
+					var lastTime = data.user.new_sign
+					if(nowTime == lastTime && signData == 7) {
+						signData = 0
+					}
 
 					for(var i = 0; i < signData; i++) {
 						$(".cir_" + i + ">div:nth-child(2)").addClass("on_circle_content")
 						$(".cir_" + i + ">div>div").addClass("on_circle_bg")
-						$(".lan_" + (i-1)).addClass("on_lan")
+						$(".lan_" + (i - 1)).addClass("on_lan")
 					}
 
 				}
@@ -207,15 +218,9 @@
 				},
 				success: function(data) {
 					if(data.state == 1) {
-						 initgold()
+						initgold()
 
 					}
-					//					else if(data.state == 2) {
-					//						//不允许重复签到
-					//						
-					//					} else {
-					//
-					//					}
 					mui.toast(data.info)
 				}
 			})

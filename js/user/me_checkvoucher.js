@@ -134,7 +134,7 @@ mui.plusReady(function() {
     })
      
      function back(){
-     	 var list = plus.webview.getWebviewById("me_voucher.html");
+     	var list = plus.webview.getWebviewById("me_voucher.html");
         mui.fire(list, 'reload');
     	mui.openWindow({
     		url:"me_voucher.html",

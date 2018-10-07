@@ -19,7 +19,7 @@ $(function() {
 	var startX, startY;
 	$("body").on("touchstart", function(e) {
 		startX = e.originalEvent.changedTouches[0].pageX,
-			startY = e.originalEvent.changedTouches[0].pageY;
+		startY = e.originalEvent.changedTouches[0].pageY;
 	})
 
 	$("body").on("touchmove", function(e) {
@@ -227,7 +227,6 @@ $('body').on('tap', '.thumb,.thumb_num', function(e) {
 		})
 	}
 })
-
 //添加浏览,点赞,评论数结束
 
 //	获取顶部搜索

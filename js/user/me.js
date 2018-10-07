@@ -140,6 +140,9 @@ $(function() {
 		} else {
 			mui.toast("请登录")
 		}
-	
 	})
+	window.addEventListener("getNowMoney",function(e){
+		$(".me_getgold").text(e.detail.coin)
+	})
+	
 })
