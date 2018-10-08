@@ -35,7 +35,6 @@
 		}
 		
 		.voucher_content {
-		/*	background: #fff;*/
 			width: 100%;
 			position: absolute;
 			top: 3.5rem;
@@ -106,13 +105,12 @@
 			margin-top: 0.5rem;
 			width: 100%;
 			height: 5.5rem;
-			/*background: url(../../Public/image/me_voucherbg.png) no-repeat center /100% 100%;*/
 			display: flex;
 			justify-content: space-between;
 		}
 		
 		.voucher_uselist li {
-			background-image: url(../../Public/image/voucher_useimg.png) !important;
+			background: url(../../Public/image/voucher_useimg.png) no-repeat center /100% 100% !important;			
 		}
 		
 		.voucher_val {
@@ -121,7 +119,6 @@
 			margin-left: 1.3rem;
 			width: 32%;
 		}
-		
 		.voucher_get>span {
 			color: #7fcadf;
 			font-size: 13px;
@@ -202,6 +199,7 @@
 			font-size: 10px;
 			width: 90%;
 			margin: 0 auto;
+			margin-top:0.5rem;
 		}
 		
 		.me_getvouinfo>li:first-child {
@@ -247,8 +245,9 @@
 			margin-top: 1rem;
 			width: 100%;
 			display: flex;
-			justify-content: center;
-			align-items: center;
+			justify-content:center;
+			align-items:center;
+			margin-bottom:1.5rem;
 		}
 		
 		.me_vouinput input {
@@ -258,6 +257,7 @@
 			padding-left: 0.5rem;
 			width: 65%;
 			margin-left: 0.8rem;
+			margin-bottom:0px !important;
 		}
 		
 		.me_tochar {
@@ -270,14 +270,12 @@
 			border-radius: 15px;
 			margin-left: auto;
 			margin-right: 2rem;
-			margin-top: 0.8rem;
 		}
 		
 		.fontst {
-			color: #7fcadf;
-			font-size: 14px;
-		}
-		
+			color: #f04c4c;
+		/*	font-size: 14px;*/
+		}	
 		.me_downclose {
 			width: 2.0rem;
 			line-height: 2.0rem;

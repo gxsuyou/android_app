@@ -35,10 +35,10 @@ $(function() {
 					} else {
 						img = "../../Public/image/morentouxiang.png";
 					}
-
 					$(".me_img").css("background-image", "url(" + img + ")")
 					$('.me_username').text(data.user.nick_name);
-//					$("#username_box").append('<div class="me_level">LV.3</div>')
+//					$(".me_name").append('<div class="to_qiandao">签到</div>')
+                    $(".to_qiandao").removeClass("hidden")
 				} else {
 
 				}
@@ -131,7 +131,7 @@ $(function() {
 			mui.toast("请登录")
 		}
 	})
-	$(".me_qiandao").click(function() {
+	$(".to_qiandao").click(function() {
 		if(userId) {
 			mui.openWindow({
 				url: "me_signin.html",

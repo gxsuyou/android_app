@@ -23,16 +23,7 @@ mui.plusReady(function() {
 		}
 	})
 
-	//	alert(3)
-	//	mui.back=function(){
-	////		alert(0)
-	//		var list=plus.webview.getWebviewById("html/user/me.html");
-	//		mui.fire(list, 'getNowMoney');
-	//		alert(112)
-	//		return true
-	//		
-	//	}
-	//	
+
 
 	$("body").on("tap", ".topheadright", function() {
 		mui.openWindow({

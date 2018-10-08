@@ -6,6 +6,7 @@ var activeTab = subpages[Index];
 //选项卡点击事件
 var self;
 var dbQuit = 0; //用于记录点击次数
+
 mui.plusReady(function() {
 	if(window.plus) {
 		plusReady();
@@ -20,10 +21,9 @@ mui.plusReady(function() {
 			//	检测更新
 			$.ajax({
 				type: "get",
-				url: config.data + "/H5/update",
+				url: config.data + "H5/update",
 				async: true,
 				success: function(data) {
-					//						alert(JSON.stringify(data))
 					if(data.state) {
 						newVer = data.mark
 						totalSize = data.totalSize
@@ -261,18 +261,3 @@ mui.plusReady(function() {
 	}
 });
 
-// 更新应用资源
-//function installWgt(path) {
-//  plus.nativeUI.showWaiting("安装wgt文件...");
-//  plus.runtime.install(path, {}, function () {
-//      plus.nativeUI.closeWaiting();
-//      console.log("安装wgt文件成功！");
-//      plus.nativeUI.alert("应用资源更新完成！", function () {
-//          plus.runtime.restart();
-//      });
-//  }, function (e) {
-//      plus.nativeUI.closeWaiting();
-//      console.log("安装wgt文件失败[" + e.code + "]：" + e.message);
-//      plus.nativeUI.alert("安装wgt文件失败[" + e.code + "]：" + e.message);
-//  });
-//}

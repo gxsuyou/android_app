@@ -460,7 +460,6 @@ var angle = 0;
 function loading(num) {
 	angle = num * 3.6;
 	console.log(num)
-//	console.log(angle)
 	if(angle > 180) {
 		$(".right-content").css("transform", "rotate(180deg)")
 		$(".left-content").css("transform", "rotate(" + (angle - 180) + "deg)")

@@ -109,7 +109,7 @@ $(function() {
 		} else {
 			mui.openWindow({
 				url: "../user/login.html",
-				id: "../user/login.html",
+				id: "login.html",
 
 			})
 		}

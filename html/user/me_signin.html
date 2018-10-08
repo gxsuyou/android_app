@@ -163,6 +163,9 @@
 		</div>
 	</body>
 	<script type="text/javascript">
+		var signData = 0;
+		var coin = 0;
+		initgold()
 		mui.init({
 			swipeBack: false,
 			beforeback: function() {
@@ -171,11 +174,7 @@
 					coin: coin
 				});
 			}
-		})
-		var signData = 0;
-		var coin = 0;
-		initgold()
-
+		})	
 		function initgold() {
 			$.ajax({
 				type: "get",

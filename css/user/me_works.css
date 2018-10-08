@@ -156,11 +156,8 @@ body{
 }
 
 
-.thumb_num,.comment_num{
-	
-	width: 1.8rem;
-	
-	
+.thumb_num,.comment_num{	
+	width: 1.8rem;	
 }
 .comment_imgs > span{
 	display: inline-block;

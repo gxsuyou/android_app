@@ -162,6 +162,16 @@
 				var v = $(this).text()
 				var id = $(this).attr("data-id")
 				var n = $(this)
+				
+				
+				if(userId == 0) {
+					mui.openWindow({
+						url: "../user/login.html",
+						id: "login.html",
+					})
+				}   
+				
+				
 				if(v == "领取") {
 					$.ajax({
 						type: "get",

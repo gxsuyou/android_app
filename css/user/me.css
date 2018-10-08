@@ -146,41 +146,57 @@ input{
 /* middlebox*/
 .me_middlebox{
 	display: flex;
-	padding:0.7rem 0rem 0.3rem 0rem;
+	padding:0.7rem 3% 0.3rem 6%;
 	border-top:1px solid #e2e2e3;
 	border-bottom:1px solid #e2e2e3;
-	background-color:#ffffff;
+	background-color:#fff;
 	font-size:14px;
+	justify-content: space-around;
+}
+.to_qiandao{
+    width:4.2rem;
+    height:1.45rem;
+    line-height:1.55rem;
+    color:#fff;
+    border-radius:0.8rem;
+    text-align: center;
+    background:#facd89;
+    letter-spacing:0.1rem;
+    margin-top:0.3rem;
+}
+.me_middlebox>div{
+	width:33.3%;
 }
 .me_gold img{
 	width:2rem;
 }
 .me_gold{
-	margin-left:5%;
+	/*margin-left:5%;*/
 }
 .me_voucher{
-	margin-left:11%;
+/*	margin-left:11%;*/
 }
 .me_qiandao{
-	margin-left: auto;
-	margin-right:11%;
+	/*margin-left: auto;
+	margin-right:11%;*/
 }
 .me_voucher img{
 	width:2.55rem;
 }
 
-.me_qiandao>div:first-child,.me_voucher>div:first-child,.me_gold>div:first-child{
+.me_friend>div:first-child,.me_voucher>div:first-child,.me_gold>div:first-child{
 	height:1.75rem;
 }
-.me_qiandao,.me_voucher,.me_gold{
+.me_friend,.me_voucher,.me_gold{
 	text-align:center;
 	font-weight:normal;
 	
 }
-.me_qiandao img{
+.me_friend img{
 	width:2.2rem;
 }
 .me_getgold{
+	font-size:16px;
 	color:#f7c238;
 	font-weight:600;
 	width:4rem;
