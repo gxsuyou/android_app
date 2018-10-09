@@ -40,7 +40,7 @@ body {
 }
 .me_goldInfoLeft>div:last-child{
 	font-size:36px;
-	margin-top:1rem;
+	margin-top:0.7rem;
 	margin-left:2rem;
 	font-weight:600;
 	letter-spacing:3px;
@@ -57,9 +57,9 @@ body {
 	margin-left:0.3rem;
 }
 .me_goldInforight{
-	width:5rem;
+	width:5.5rem;
 	height:1.8rem;
-	background:url(../../Public/image/withdrawbutton.png) no-repeat center /contain;
+	background:url(../../Public/image/withdrawbutton.png) no-repeat center /cover;
 	margin-right:0.6rem;
 }
 
@@ -68,13 +68,13 @@ body {
 	line-height: 1rem;
 	color:#fff;
 	background:#fab645;
-	width:55%;
+	width:58%;
 	text-align:right;
 	padding:0.3rem 0.2rem  0.3rem 0.5rem;
 	border-top-left-radius:2rem;
 	border-bottom-left-radius:2rem;
 	margin-left:auto;
-	margin-top:0.5rem;
+	margin-top:0.8rem;
 }
 
 .me_getGoldContents{

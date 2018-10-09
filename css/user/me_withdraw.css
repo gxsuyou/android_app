@@ -135,13 +135,12 @@ body {
 }
 
 .me_popp>div:last-child {
-	/*width:100%;*/
 	font-size: 14px;
 	width: 7.8rem;
-	height: 2.4rem;
-	line-height: 2.4rem;
+	height: 2.1rem;
+	line-height: 2.1rem;
 	margin: 0 auto;
-	text-align: center;
+	text-align:center;
 	color: #7fcadf;
 	border: 2px solid #7FCADF;
 	border-radius: 1rem;

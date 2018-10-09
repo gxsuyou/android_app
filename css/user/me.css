@@ -40,6 +40,7 @@ input{
 }
 .me_info{
 	margin: 0 auto;
+	/*width:100%;*/
 	width: 95%;
 	height: 5rem;
 }
@@ -80,7 +81,7 @@ input{
 	
 }
 .me_desc{
-	width: 70%;
+	width: 60%;
 	padding-left: 1.25rem;
 }
 .me_name{
@@ -152,6 +153,7 @@ input{
 	background-color:#fff;
 	font-size:14px;
 	justify-content: space-around;
+	width:100%;
 }
 .to_qiandao{
     width:4.2rem;

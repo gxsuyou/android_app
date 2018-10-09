@@ -74,7 +74,8 @@ mui.plusReady(function() {
 			async: true,
 			data: {
 				uid: userId,
-				stateType: 2
+				stateType:2,
+				sys:2
 			},
 			success: function(data) {
 

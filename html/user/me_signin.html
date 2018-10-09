@@ -34,119 +34,124 @@
 			</div>
 		</div>
 		<div class="me_dateSignContents">
-			<div class="circle cir_0 ">
-				<div class="circlefont">
-					+5
+			<div class="lan_dataSign">
+				<div class="move_lan_dataSign">
+					
 				</div>
-				<div class="circle_content">
-					<div class="on_circle">
+			</div>
+			<div class="me_dateSignContent">
+				<div class="circle cir_0">
+					<div class="circlefont">
+						+5
+					</div>
+					<div class="circle_content">
+						<div class="on_circle">
 
+						</div>
+					</div>
+					<div>
+						一天
 					</div>
 				</div>
-				<div>
-					一天
-				</div>
-			</div>
-			<div class="land lan_0 ">
+				<!--<div class="land lan_0 ">
+				</div>-->
+				<!--0阶段结束-->
+				<div class="circle cir_1">
+					<div class="circlefont">
+						+5
+					</div>
+					<div class="circle_content">
+						<div class="on_circle">
 
-			</div>
-			<div class="circle cir_1">
-				<div class="circlefont">
-					+5
-				</div>
-				<div class="circle_content">
-					<div class="on_circle">
-
+						</div>
+					</div>
+					<div>
+						二天
 					</div>
 				</div>
-				<div>
-					二天
-				</div>
-			</div>
-			<div class="land lan_1" style="left:4.5rem;">
+				<!--<div class="land lan_1">
+			</div>-->
+				<div class="circle cir_2">
+					<div class="circlefont">
+						+5
+					</div>
+					<div class="circle_content">
+						<div class="on_circle">
 
-			</div>
-			<div class="circle cir_2">
-				<div class="circlefont">
-					+5
-				</div>
-				<div class="circle_content">
-					<div class="on_circle">
-
+						</div>
+					</div>
+					<div>
+						三天
 					</div>
 				</div>
-				<div>
-					三天
-				</div>
-			</div>
-			<div class="land lan_2" style="left:7.5rem;">
-
-			</div>
-			<div class="circle cir_3">
-				<div class="circlefont">
-					+5
-				</div>
-				<div class="circle_content">
-					<div class="on_circle">
-
-					</div>
-				</div>
-				<div>
-					四天
-				</div>
-			</div>
-			<div class="land lan_3" style="left:10.5rem;">
-
-			</div>
-			<div class="circle cir_4">
-				<div class="circlefont">
-					+5
-				</div>
-				<div class="circle_content">
-					<div class="on_circle">
-
-					</div>
-				</div>
-				<div>
-					五天
-				</div>
-			</div>
-			<div class="land lan_4" style="left:13.5rem;">
-
-			</div>
-			<div class="circle cir_5">
-				<div class="circlefont">
-					+5
-				</div>
-				<div class="circle_content ">
-					<div class="on_circle ">
-
-					</div>
-				</div>
-				<div>
-					六天
-				</div>
-			</div>
-			<div class="land lan_5" style="left:16.5rem;">
-
-			</div>
-			<div class="circle cir_6">
-				<div class="circlefont">
-					+30
-				</div>
-				<div class="circle_content" style="width:1.5rem;height:1.5rem;">
-					<div class="on_circle " style="width:1.5rem;height:1.5rem;">
-						<img src="../../Public/image/me_lihe.png" style="width:0.75rem;" />
-					</div>
-				</div>
-				<div>
-					七天
-				</div>
-
-			</div>
-			<!--<div class="land lan_6" style="left:16.5rem;">
+				<!--<div class="land lan_2" style="left:7.5rem;">
 
 			</div>-->
+				<div class="circle cir_3">
+					<div class="circlefont">
+						+5
+					</div>
+					<div class="circle_content">
+						<div class="on_circle">
+
+						</div>
+					</div>
+					<div>
+						四天
+					</div>
+				</div>
+				<!--<div class="land lan_3" style="left:10.5rem;">
+
+			</div>-->
+				<div class="circle cir_4">
+					<div class="circlefont">
+						+5
+					</div>
+					<div class="circle_content">
+						<div class="on_circle">
+
+						</div>
+					</div>
+					<div>
+						五天
+					</div>
+				</div>
+				<!--<div class="land lan_4" style="left:13.5rem;">
+
+			</div>-->
+				<div class="circle cir_5">
+					<div class="circlefont">
+						+5
+					</div>
+					<div class="circle_content ">
+						<div class="on_circle ">
+
+						</div>
+					</div>
+					<div>
+						六天
+					</div>
+				</div>
+				<!--<div class="land lan_5" style="left:16.5rem;">
+
+			</div>-->
+				<div class="circle cir_6">
+					<div class="circlefont">
+						+30
+					</div>
+					<div class="circle_content" style="width:1.5rem;height:1.5rem;">
+						<div class="on_circle " style="width:1.5rem;height:1.5rem;">
+							<img src="../../Public/image/me_lihe.png" style="width:0.75rem;" />
+						</div>
+					</div>
+					<div>
+						七天
+					</div>
+				</div>
+				<!--<div class="land lan_6" style="left:16.5rem;">
+
+			</div>-->
+			</div>
 		</div>
 		<div class="me_siginbutton">
 			签到
@@ -174,8 +179,10 @@
 					coin: coin
 				});
 			}
-		})	
+		})
+
 		function initgold() {
+//			return false;
 			$.ajax({
 				type: "get",
 				url: config.data + "users/getUserMsgById",
@@ -190,17 +197,26 @@
 					var date = new Date()
 					var h = date.setHours(0, 0, 0, 0)
 
-					var nowTime = Number(h) / 1000 - 86400
+					var nowTime_1 = Number(h) / 1000 - 86400
+					var nowTime = Number(h) / 1000
+
 					var lastTime = data.user.new_sign
-					if(nowTime == lastTime && signData == 7) {
+
+					if(nowTime == lastTime) {
+						$(".me_siginbutton").css("background-color", "#c3c3c3")
+					}
+
+					if(nowTime_1 == lastTime && signData == 7) {
 						signData = 0
 					}
 
 					for(var i = 0; i < signData; i++) {
 						$(".cir_" + i + ">div:nth-child(2)").addClass("on_circle_content")
 						$(".cir_" + i + ">div>div").addClass("on_circle_bg")
-						$(".lan_" + (i - 1)).addClass("on_lan")
+						$(".cir_" + i + " .circlefont").css("color", "#ffc712")                  
 					}
+					var lan_load=(i-1)*16.6;
+					$(".move_lan_dataSign").css("width",lan_load+"%")
 
 				}
 			})

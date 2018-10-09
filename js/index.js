@@ -242,6 +242,27 @@ mui.plusReady(function() {
 
 	});
 
+
+   window.addEventListener("toStrategy", function() {
+		activeTab="html/strategy/strategy.html"
+		var h = plus.webview.getWebviewById(subpages[2])
+		document.getElementsByClassName("mui-icon")[4].classList.remove('me_active')
+		document.getElementsByClassName("mui-icon")[2].classList.add('strategy_active')
+		if(!h) {
+			var sub = plus.webview.create(
+				"html/strategy/strategy.html", //子页url
+				"html/strategy/strategy.html", //子页id
+				{
+					top: '0px', //设置距离顶部的距离
+					bottom: '50px' //设置距离底部的距离
+				}
+			);
+			self.append(sub);
+		}
+		plus.webview.show("html/strategy/strategy.html");
+	})
+
+
 	mui.back = function() {
 		dbQuit++
 		if(dbQuit == 1) {

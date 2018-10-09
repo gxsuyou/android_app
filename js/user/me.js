@@ -144,5 +144,8 @@ $(function() {
 	window.addEventListener("getNowMoney",function(e){
 		$(".me_getgold").text(e.detail.coin)
 	})
+	window.addEventListener("showShare",function(){
+	   shareWebview()
+     })
 	
 })
