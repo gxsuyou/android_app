@@ -70,10 +70,10 @@
 					<img src="../../Public/image/me_voucher.png" />
 				</div>
 				<div>
-					折扣券
+					优惠券
 				</div>
 			</div>
-			<div class="me_friend" onclick="openShare()">
+			<div class="me_friend" >
 				<div>
 					<img src="../../Public/image/me_friend.png" />
 				</div>
@@ -233,18 +233,19 @@
 				}, false);
 				// 显示遮罩层    
 
-				var h = plus.webview.getLaunchWebview();
-				h.setStyle({
-					mask: "rgba(0,0,0,0.5)"
-				});
-
-				// 点击关闭遮罩层  
+//				var h = plus.webview.getLaunchWebview();
+				var h = plus.webview.getWebviewById("H5C62934A");
+				  h.setStyle({
+					  mask: "rgba(0,0,0,0.5)"
+				  });
+				  
+                // 点击关闭遮罩层  
 				ws.addEventListener("maskClickShare", closeMaskShare, false);
 
 			});
 
 			function closeMaskShare() {
-				plus.webview.getLaunchWebview().setStyle({
+				plus.webview.getWebviewById("H5C62934A").setStyle({
 					mask: "none"
 				});
 				//避免出现特殊情况，确保分享页面在初始化时关闭   

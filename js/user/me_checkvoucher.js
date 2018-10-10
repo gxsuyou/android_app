@@ -31,10 +31,9 @@ mui.plusReady(function() {
 				gameId: gameId,
 				sys: 2
 			},
-			success: function(data) {
-
+			success: function(data){
 				var game = data.gameDetail;
-				packagename = game.game_packagename
+				packagename = $.trim(game.game_packagename)
 				hasno = plus.runtime.isApplicationExist({
 					pname: game.game_packagename,
 					action: ''

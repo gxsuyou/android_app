@@ -37,6 +37,7 @@ body {
 .me_goldInfoLeft{
 	color:#fff;
 	font-size:13px;
+	width:60%;
 }
 .me_goldInfoLeft>div:last-child{
 	font-size:36px;
@@ -57,8 +58,8 @@ body {
 	margin-left:0.3rem;
 }
 .me_goldInforight{
-	width:5.5rem;
-	height:1.8rem;
+	width:4.5rem;
+	height:1.5rem;
 	background:url(../../Public/image/withdrawbutton.png) no-repeat center /cover;
 	margin-right:0.6rem;
 }

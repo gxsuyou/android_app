@@ -278,7 +278,6 @@ mui.plusReady(function() {
 		setTimeout(function() {
 			dbQuit = 0;
 		}, 10000)
-		// return false;
 	}
 });
 

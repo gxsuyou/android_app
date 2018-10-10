@@ -104,6 +104,12 @@ $(function() {
 				id:"me_pocket.html"
 			})
 		})
+		
+		$("body").on("tap",".me_friend",function(){
+			openShare()
+		})
+		
+		
 
 	}
 	//if结束
@@ -127,8 +133,6 @@ $(function() {
 				url: "me_voucher.html",
 				id: "me_voucher.html"
 			})
-		} else {
-			mui.toast("请登录")
 		}
 	})
 	$(".to_qiandao").click(function() {
@@ -137,8 +141,6 @@ $(function() {
 				url: "me_signin.html",
 				id: "me_signin.html"
 			})
-		} else {
-			mui.toast("请登录")
 		}
 	})
 	window.addEventListener("getNowMoney",function(e){
@@ -146,6 +148,8 @@ $(function() {
 	})
 	window.addEventListener("showShare",function(){
 	   shareWebview()
-     })
-	
+    })
+	window.addEventListener("reload",function(){
+		location.reload()
+	})
 })

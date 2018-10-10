@@ -126,6 +126,15 @@ $(function() {
 		//		攻略页结束
 
 		$("#game_detail_download,.border").click(function(ev) {
+
+			if(!userId) {
+				mui.openWindow({
+					url: '../user/login.html',
+					id: 'login.html'
+				})
+				return false;
+			}
+
 			event = ev || window.event;
 			event.stopPropagation();
 			var text = $(this).prev().text() || $(this).find(".download_btn_text").text()
@@ -681,7 +690,7 @@ function detail_main() {
 						var state = false;
 						for(var i = 0; i < tasks.length; i++) {
 							if(tasks[i].filename == fileName) {
-								
+
 								var dtask_app = tasks[i];
 								$("#game_detail_download").addClass("hidden")
 								$(".download,.border").addClass("hidden")
@@ -805,7 +814,7 @@ function detail_main() {
 	/*
 	 点击删除游戏评论
 	 */
-	$("body").on("tap", ".game_dele_com", function(e) {
+	$("body").on("tap", ".dele_com_access,.dele_com_index", function(e) {
 		e.stopPropagation()
 		var id = $(this).attr("data-id")
 		plus.nativeUI.confirm("删除评论", function(e) {
@@ -975,7 +984,7 @@ function indexCommit() {
 					}
 
 					if(com[i].user_id == userId) {
-						var comment_dele = "<div class='font_12 fl color_7fcadf game_dele_com' data-id='" + com[i].id + "'>删除</div>"
+						var comment_dele = "<div class='font_12 fl color_7fcadf game_dele_com  dele_com_index' data-id='" + com[i].id + "'>删除</div>"
 					} else {
 						var comment_dele = "&nbsp;"
 					}
@@ -1132,7 +1141,7 @@ function getAccess() {
 					}
 
 					if(com[i].user_id == userId) {
-						var comment_dele = "<div class='font_12 fl color_7fcadf game_dele_com' data-id='" + com[i].id + "'>删除</div>"
+						var comment_dele = "<div class='font_12 fl color_7fcadf game_dele_com dele_com_access' data-id='" + com[i].id + "'>删除</div>"
 					} else {
 						var comment_dele = "&nbsp;"
 					}

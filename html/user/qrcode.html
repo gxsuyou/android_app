@@ -19,8 +19,8 @@
 			justify-content: center;
 		}	
 		.content {
-		    width:14.5rem;
-			height: 16rem;
+		  	width: 14.5rem;
+			height: 17.5rem;
 			background: #fff;
 			border-radius: 1rem;
 			display: flex;
@@ -28,16 +28,22 @@
 			justify-content: center;
 			position: relative;
 			flex-direction: column;
-			z-index: 9999;
+			z-index:9999;
 		}
 		.content>div{
+			/*-webkit-user-select:text;
+			-moz-user-select:text;
+            -khtml-user-select:text;
+            user-select:text;*/
+            font-size:14px;
+            color:#767676;
+            margin-top:0.35rem;
+		}
+		.content>div>span{
 			-webkit-user-select:text;
 			-moz-user-select:text;
             -khtml-user-select:text;
             user-select:text;
-            font-size:14px;
-            color:#767676;
-            margin-top:0.35rem;
 		}
 	</style>
 
@@ -45,7 +51,10 @@
 		<div class="content" >
 			<img style='width:10rem'  src="../../Public/image/qrcode_img.jpg" />
 			<div >
-				我的ID:【<span class="only_id"></span>】一起赢金币吧
+				填写我的ID:【<span class="only_id"></span>】
+			</div>
+			<div style="font-size:16px;font-weight:600;margin-top:none">
+				一起赢金币吧
 			</div>
 		</div>
 	</body>

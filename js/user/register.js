@@ -85,32 +85,20 @@ $(function() {
 				},
 				success: function(data) {
 					switch(data.state) {
-						case 0:
-							mui.toast("注册失败");
-
+						case 0:						    
+							mui.toast(data.info);			
 							break;
 						case 1:
 							mui.toast("注册成功");
-							//												$('.register').addClass("hidden").siblings().removeClass("hidden");
+							//$('.register').addClass("hidden").siblings().removeClass("hidden");
 							mui.openWindow({
 								url: "personal_data.html",
 								id: "personal_data.html",
 								extras: {
 									userId: data.id
 								}
-
 							})
 							break;
-						case 2:
-							mui.toast("手机号已被注册");
-							break;
-						case 3:
-							mui.toast("验证码错误");
-							break;
-						case 99:
-							mui.toast("参数缺失");
-							break;
-
 					}
 				}
 
