@@ -201,12 +201,12 @@ input{
 	font-size:16px;
 	color:#f7c238;
 	font-weight:600;
-	width:4rem;
-	margin-left:0.3rem;
+	width:3.2rem;
 	text-align:left;
 	overflow: hidden;
 	word-wrap:nowrap;
 	text-overflow: ellipsis;	
+	text-align:center;
 }
 
 

@@ -46,6 +46,14 @@
 					<input class="me_confirmaccount" type="text" value="" placeholder="请确认您的账号" />
 				</div>
 			</div>
+			<div class="bank_lan" style="display:none;">
+				<div>
+					银行
+				</div>
+				<div>
+					<input class="me_confirmaccount" type="text" value="" placeholder="储蓄卡所属银行" />
+				</div>
+			</div>
 		</div>
 		<div class="me_applyinfo">
 			<div class="me_applytop">
@@ -70,13 +78,21 @@
 			var coin, types = "ALIPAY";
 			var i = plus.webview.currentWebview();
 			types = i.withdrawFunId;
+//			alert(types)
 			coin = i.coin;
 			$(".coinnum").text(coin + "元")
 			$(".me_counter").text(i.withdrawMetFunFont + "账户")
 			var mask = mui.createMask(function() {
 				//				$(".me_popp").css("display", "none")
 			})
-
+        
+           if(types=="BANK"){
+           	  $(".bank_lan").css("display","flex")
+//         	  $(".me_counter").text()
+           }
+        
+        
+        
 			$("body").on("tap", ".withdraw_botton", function() {
 				var account = $(".me_account").val()
 				var confirmaccount = $(".me_confirmaccount").val()

@@ -33,8 +33,7 @@ body{
 	position: absolute;
 	top: 50%;
 	margin-top: -0.625rem;
-	left: 1rem;
-	
+	left: 1rem;	
 	background-position: center;
 	background-repeat:no-repeat;
 	background-size: contain;
@@ -86,14 +85,13 @@ body{
 .recommend_contents{
 	border-bottom:1.8px solid #d9dbdc;
 	padding-bottom:1rem;
-	margin-top:-0.15rem;
 }
 .recommend_contents>div:first-child{
 	margin-left:0.2rem;
 	font-size:14px;
-	line-height:1.1rem;
 	width:20%;
-	position:relative;
-	top:1.75rem;
+	position:absolute;
+	top:0.75rem;
 	text-align:center;
 }
+
