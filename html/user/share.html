@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
@@ -10,9 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="../../Public/css/public.css" />
 		<link rel="stylesheet" type="text/css" href="../../css/user/share.css" />
 	</head>
-
 	<!-- <body onclick="closeShare();">  -->
-
 	<body>
 		<div onclick="back()" class="share-back mui-icon mui-icon-left-nav mui-pull-left">
 			<
@@ -154,12 +151,7 @@
 			document.addEventListener("plusready", plusReady, false);
 		}
 
-//		function copy() {
-//			var Url2 = document.querySelector(".share_copy");
-//			Url2.select(); // 选择对象
-//			document.execCommand("Copy"); // 执行浏览器复制命令
-//			mui.toast("复制成功！");
-//		}
+
 
 		/**  
 		 *   
@@ -271,23 +263,16 @@
 			shareAction(shareBts[index], true)
 		}
 
-		 function back(){
-			mui.back()
+        mui.back=function(){
 			var sourcePage = plus.webview.getWebviewById("html/user/me.html");
 			sourcePage.evalJS("closeMask()");
+        }
+
+
+		 function back(){
+			mui.back()
 		}
 
-//		function back(p) {
-//
-//			var sourcePage = plus.webview.getWebviewById("html/user/me.html");
-//
-//			if(sourcePage) {
-//				sourcePage.evalJS("closeMask()");
-//				if(p) {
-//					mui.fire(sourcePage, 'qrcode_share');
-//				}
-//			}
-//		}
 
 		function closeShare() {
 			console.log("e:" + event.target.name);
@@ -336,7 +321,6 @@
 
 				});
 				dtask.start();
-
 			}
 	</script>
 

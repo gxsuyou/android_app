@@ -9,6 +9,7 @@ function up() {
 		data: {
 			sys: 2,
 			page: page,
+			type:"one",
 		},
 		success: function(data) {
 

@@ -37,16 +37,7 @@ $(function() {
 							window.localStorage.setItem("rememberUser", "true");
 							window.localStorage.setItem("userInfo", userInfo);
 							window.localStorage.setItem("userId", userId);
-//						    mui.back()
-//							var p = plus.webview.getWebviewById("html/user/me.html");
-//													mui.fire(p, "reload")
-//							
-//						   for(var i = 0, len = all.length; i < len; i++) {
-//								//alert(all[i].id)
-//								if(all[i].id !== current && all[i].id !== "HBuilder") {
-//							         all[i].close();
-//								}
-//							}
+
 
 							var all = plus.webview.all();
 							var current = plus.webview.currentWebview().id;
