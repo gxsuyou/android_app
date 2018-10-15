@@ -5,7 +5,7 @@
 	font-size: 18px;
 }
 .comment_contentOne img,.comment_content img{
-	width:1.8rem;
+	width:1.4rem;
 	margin:0 0.1rem;
 }
 
@@ -16,8 +16,8 @@
 	border-bottom: 0.75rem solid #e6ebec;
 }
 .news_post_commentContent_head{
-	width: 2.9375rem;
-	height: 2.9375rem;
+	width: 2.0625rem;
+	height: 2.0625rem;
 	margin-top: 0.9375rem;
 	margin-left: 0.9375rem;
 	margin-right: 0.75rem;
@@ -110,7 +110,7 @@ input:-ms-input-placeholder { /* Internet Explorer 10-11 */
 	margin: 0;
 	padding: 0;
 	height: 3rem;
-	line-height: 3rem;
+	line-height:3rem;
 }
 .face{
 	width:1.8rem;

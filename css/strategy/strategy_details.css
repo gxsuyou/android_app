@@ -13,7 +13,7 @@ a{
 	
 }
 .comment_content img,.comment_secondComment img{
-	width: 1.8rem;
+	width: 1.4rem;
 	margin: 0 0.2rem;
 }
 .lord_image{
@@ -213,8 +213,8 @@ h4{
 	margin-bottom: 0.9rem;
 }
 .news_post_commentContent_head{
-	width: 2.9375rem;
-	height: 2.9375rem;
+	width: 2.0625rem;
+	height: 2.0625rem;
 	margin-top: 0.9375rem;
 	margin-left: 0.9375rem;
 	margin-right: 0.75rem;

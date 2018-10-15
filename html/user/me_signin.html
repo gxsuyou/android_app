@@ -206,6 +206,10 @@
 						$(".me_siginbutton").css("background-color", "#c3c3c3")
 					}
 
+					if(nowTime_1>lastTime){
+                    	signData=0
+                    }
+
 					if(nowTime_1 == lastTime && signData == 7) {
 						signData = 0
 					}
