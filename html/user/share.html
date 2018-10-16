@@ -121,8 +121,8 @@
 			File = null,
 			Uri = null,
 			main = null,
-			only_id = null,
-			pageSourceId = null;
+			only_id = null;
+//			pageSourceId = null;
 
 		// H5 plus事件处理  
 		function plusReady() {
@@ -140,8 +140,8 @@
 			sharehrefDes.value = shareInfo.content;
 			shareInfo.appkey = "H5C62934A";
 			only_id = shareInfo.only_id
-			pageSourceId = shareInfo.pageSourceId;
-			console.log("pageSource:" + pageSourceId);
+//			pageSourceId = shareInfo.pageSourceId;
+//			console.log("pageSource:" + pageSourceId);
 			document.querySelector(".getid").innerText = only_id;
 
 		}
@@ -176,6 +176,8 @@
 		 * @param {Boolean} bh 是否分享链接  
 		 */
 		function shareAction(sb, bh) {
+//			alert(sb)
+//			return false;
 			if(!sb || !sb.s) {
 				console.log("无效的分享服务！");
 				return;
@@ -192,13 +194,14 @@
 				}
 			};
 			if(bh) {
-				msg.href = sharehref.value;
+				
 				if(sharehrefTitle && sharehrefTitle.value != "") {
 					msg.title = sharehrefTitle.value;
 				}
 				if(sharehrefDes && sharehrefDes.value != "") {
 					msg.content = sharehrefDes.value;
 				}
+				msg.href = sharehref.value;
 				msg.thumbs = ["https://oneyouxi.com.cn/pc/img/oneicon.png"];
 				msg.pictures = ["https://oneyouxi.com.cn/pc/img/oneicon.png"];
 			} else {
@@ -206,10 +209,14 @@
 					msg.pictures = [pic.realUrl];
 				}
 			}
+			
+			
+			
+//			alert(JSON.stringify(sb.s))
+//			return;
 			// 发送分享  
 			if(sb.s.authenticated) {
 				console.log(msg, sb.s)
-				//              	return false;
 				shareMessage(msg, sb.s);
 			} else {
 				sb.s.authorize(function() {
@@ -230,6 +237,9 @@
 		 */
 
 		function shareMessage(msg, s) {
+//			alert(JSON.stringify(s))
+//			alert(JSON.stringify(msg))
+//			return false;
 			s.send(msg, function() {
 				//            alert("分享到\""+s.description+"\"成功！ " );  
 
@@ -245,6 +255,7 @@
 
 			// 更新分享列表         
 			var ss = shares['weixin'];
+		
 			ss && (shareBts.push({
 					title: '微信朋友圈',
 					s: ss,
@@ -260,6 +271,8 @@
 				title: 'QQ',
 				s: ss
 			})
+//				alert(JSON.stringify(shareBts))
+//			return false;
 			shareAction(shareBts[index], true)
 		}
 
