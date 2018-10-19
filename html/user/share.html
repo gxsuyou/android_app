@@ -140,8 +140,6 @@
 			sharehrefDes.value = shareInfo.content;
 			shareInfo.appkey = "H5C62934A";
 			only_id = shareInfo.only_id
-//			pageSourceId = shareInfo.pageSourceId;
-//			console.log("pageSource:" + pageSourceId);
 			document.querySelector(".getid").innerText = only_id;
 
 		}
@@ -164,7 +162,6 @@
 					var t = s[i];
 					shares[t.id] = t;
 				}
-				//              console.log(JSON.stringify(shares))
 			}, function(e) {
 				outSet("获取分享服务列表失败：" + e.message);
 			});
@@ -176,8 +173,6 @@
 		 * @param {Boolean} bh 是否分享链接  
 		 */
 		function shareAction(sb, bh) {
-//			alert(sb)
-//			return false;
 			if(!sb || !sb.s) {
 				console.log("无效的分享服务！");
 				return;
@@ -211,9 +206,7 @@
 			}
 			
 			
-			
-//			alert(JSON.stringify(sb.s))
-//			return;
+
 			// 发送分享  
 			if(sb.s.authenticated) {
 				console.log(msg, sb.s)
@@ -237,9 +230,7 @@
 		 */
 
 		function shareMessage(msg, s) {
-//			alert(JSON.stringify(s))
-//			alert(JSON.stringify(msg))
-//			return false;
+
 			s.send(msg, function() {
 				//            alert("分享到\""+s.description+"\"成功！ " );  
 
@@ -271,8 +262,7 @@
 				title: 'QQ',
 				s: ss
 			})
-//				alert(JSON.stringify(shareBts))
-//			return false;
+
 			shareAction(shareBts[index], true)
 		}
 

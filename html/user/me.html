@@ -39,17 +39,6 @@
 					<div class="me_share">
 
 					</div>
-					<!--<div class="me_money font_12 font_bold" style="margin-top: 0.4rem;">
-						<div class="fl">
-							<div class="fl color_white">平台币：</div>
-							<div class="fr me_moneynum">000</div>
-						</div>
-						<div class="fl" style="margin-left: 2rem;">
-							<div class="fl color_white">积分：</div>
-							<div class="fr me_scorenum">000</div>
-						</div>
-					</div>-->
-
 				</div>
 			</div>
 		</div>
@@ -153,12 +142,10 @@
 				if(sharew) { // 避免快速多次点击创建多个窗口  
 					return;
 				}
-				var top = 0;
 				var href = "share.html";
 				sharew = plus.webview.create(href, "share.html", {
 					width: '100%',
 					height: '100%',
-					//					top:top,
 					bottom: 0,
 					zindex: 999,
 					scrollIndicator: 'none',
@@ -167,8 +154,8 @@
 				}, {
 					shareInfo: {
 						"href": "https://oneyouxi.com.cn/qrcode.html",
-						"title": "随时随地，乐享游戏",
-						"content": "我正在使用ONE游戏平台，赶紧跟我一起来体验！",
+						"title": "糟糕，是心动的感觉！",
+						"content": "我正在使用ONE游戏平台，快来和我一起赚钱吧！",
 						"pageSourceId": ws.id,
 						only_id: only_id
 					}
@@ -200,64 +187,7 @@
 				}
 			}
 
-//			var qrcodeshare;
-//			window.addEventListener('qrcode_share', function(event) {
-//
-//				var ws = null;
-//				/**  
-//				 *分享窗口  
-//				 */
-//				//				function shareWebview() {
-//				ws = plus.webview.currentWebview();
-//				if(qrcodeshare) { // 避免快速多次点击创建多个窗口  
-//					return;
-//				}
-//				var href = "qrcode.html";
-//				qrcodeshare = plus.webview.create(href, "qrcode.html", {
-//					width: '100%',
-//					height: '100%',
-//					top: 0,
-//					zindex: 0,
-//					opacity: 1,
-//					background: 'transparent',
-//					scrollIndicator: 'none',
-//					scalable: false,
-//					popGesture: 'none',
-//				},{
-//					info:{
-//						only_id: only_id
-//				 }
-//				});
-//				qrcodeshare.addEventListener("loaded", function() {
-//					qrcodeshare.show('slide-in-bottom', 300);
-//				}, false);
-//				// 显示遮罩层    
-//
-////				var h = plus.webview.getLaunchWebview();
-//				var h = plus.webview.getWebviewById("H5C62934A");
-//				  h.setStyle({
-//					  mask: "rgba(0,0,0,0.5)"
-//				  });
-//				  
-//              // 点击关闭遮罩层  
-//				ws.addEventListener("maskClickShare", closeMaskShare, false);
-//
-//			});
-//
-//			function closeMaskShare() {
-//				plus.webview.getWebviewById("H5C62934A").setStyle({
-//					mask: "none"
-//				});
-//				//避免出现特殊情况，确保分享页面在初始化时关闭   
-//				if(!qrcodeshare) {
-//					qrcodeshare = plus.webview.getWebviewById("qrcode.html");
-//				}
-//				if(qrcodeshare) {
-//					qrcodeshare.close();
-//					qrcodeshare = null;
-//				}
-//
-//			}
+
 		</script>
 	</body>
 

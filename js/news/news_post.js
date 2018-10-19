@@ -7,199 +7,64 @@ var type = 'hot';
 var firstImg;
 var title;
 $(function() {
-	toface()
-
-	function toface() {
-		var face = [{
-				src: "a_what.png",
-				id: "<好奇怪>"
-			}, {
-				src: "alas.png",
-				id: "<哎呀>"
-			}, {
-				src: "angry.png",
-				id: "<怒>"
-			},
-			{
-				src: "ass.png",
-				id: "<屎>"
-			}, {
-				src: "bad_smile.png",
-				id: "<坏笑>"
-			}, {
-				src: "beer_brown.png",
-				id: "<棕啤>"
-			}, {
-				src: "beer_yellow.png",
-				id: "<黄啤>"
-			},
-			{
-				src: "black.png",
-				id: "<黑头>"
-			}, {
-				src: "but.png",
-				id: "<无奈>"
-			}, {
-				src: "butcry.png",
-				id: "<无奈哭>"
-			}, {
-				src: "bye.png",
-				id: "<再见>"
-			}, {
-				src: "cool.png",
-				id: "<酷>"
-			}, {
-				src: "cry.png",
-				id: "<哭>"
-			}, {
-				src: "cry_hand.png",
-				id: "<手扶脸>"
-			}, {
-				src: "cry_smile.png",
-				id: "<哭笑>"
-			}, {
-				src: "cut.png",
-				id: "<可爱>"
-			},
-			{
-				src: "dog.png",
-				id: "<狗>"
-			}, {
-				src: "doughnut.png",
-				id: "<甜甜圈>"
-			}, {
-				src: "duck.png",
-				id: "<鸭子>"
-			}, {
-				src: "eat_wat.png",
-				id: "<吃西瓜>"
-			}, {
-				src: "eee.png",
-				id: "<额>"
-			}, {
-				src: "halo.png",
-				id: "<晕>"
-			}, {
-				src: "heart.png",
-				id: "<心>"
-			}, {
-				src: "heart_break.png",
-				id: "<心碎>"
-			}, {
-				src: "impatine.png",
-				id: "<不耐烦>"
-			}, {
-				src: "kiss.png",
-				id: "<亲亲>"
-			}, {
-				src: "laugl.png",
-				id: "<偷笑>"
-			}, {
-				src: "leaf.png",
-				id: "<树叶>"
-			}, {
-				src: "lemon.png",
-				id: "<柠檬>"
-			}, {
-				src: "notsobad.png",
-				id: "<好无奈>"
-			}, {
-				src: "ooo.png",
-				id: "<噢噢>"
-			}, {
-				src: "pig.png",
-				id: "<猪>"
-			}, {
-				src: "punch_face.png",
-				id: "<打脸>"
-			}, {
-				src: "rigid.png",
-				id: "<僵硬>"
-			}, {
-				src: "see_smile.png",
-				id: "<看坏笑>"
-			}, {
-				src: "she.png",
-				id: "<喜欢>"
-			},
-			{
-				src: "shine.png",
-				id: "<闪耀>"
-			}, {
-				src: "shock.png",
-				id: "<惊呆>"
-			}, {
-				src: "shutup.png",
-				id: "<闭嘴>"
-			}, {
-				src: "shy.png",
-				id: "<害羞>"
-			}, {
-				src: "sleep.png",
-				id: "<睡觉>"
-			}, {
-				src: "slience.png",
-				id: "<沉默>"
-			}, {
-				src: "split.png",
-				id: "<吐>"
-			}, {
-				src: "strange.png",
-				id: "<奇怪>"
-			}, {
-				src: "smile_big.png",
-				id: "<大笑>"
-			}, {
-				src: "smile_little.png",
-				id: "<害羞无奈>"
-			}, {
-				src: "soangry.png",
-				id: "<超生气>"
-			}, {
-				src: "surprised.png",
-				id: "<惊讶>"
-			}, {
-				src: "unhappy.png",
-				id: "<不高兴>"
-			}, {
-				src: "wa.png",
-				id: "<青蛙>"
-			}, {
-				src: "watermelon.png",
-				id: "<西瓜>"
-			}, {
-				src: "what.png",
-				id: "<啥>"
-			}, {
-				src: "wired.png",
-				id: "<奇怪咯>"
-			}, {
-				src: "yes.png",
-				id: "<好的>"
+	mui.previewImage();
+	window.addEventListener('refresh', function(event) {
+		mui('.new_post_contents').pullRefresh().refresh(true);
+		$(".news_post_commentContents").empty();
+		page = 0;
+		up();
+	});
+	mui.init({
+		gestureConfig: {
+			tap: true, //默认为true
+			longtap: true, //默认为false
+		},
+		beforeback: function() {
+			var input_val = $(".news_secondComment_input").val();
+			if(input_val != "") {
+				var id = "strategy_title_" + newsId
+				window.localStorage.setItem(id, input_val)
 			}
-		]
-		var faceContent = ""
-		face.forEach(function(item) {
-			faceContent += "<div  data-id='" + item.id + "' style='background-image:url(../../Public/image/face/" + item.src + ")'></div>"
-		})
-		$(".faceContent").append(faceContent)
-	}
+			var list = plus.webview.getWebviewById("html/news/news.html"); //触发父页面的自定义事件(refresh),从而进行刷新	
+			mui.fire(list, 'reload');
+		},
+		pullRefresh: {
+			container: ".new_post_contents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+			up: {
+				height: 50, //可选.默认50.触发上拉加载拖动距离
+				auto: true, //可选,默认false.自动上拉加载一次
+				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
+				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
+				callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+			},
+			down: {
+				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
+				color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
+				height: '50px', //可选,默认50px.下拉刷新控件的高度,
+				range: '100px', //可选 默认100px,控件可下拉拖拽的范围
+				offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
+				auto: false, //可选,默认false.首次加载自动上拉刷新一次
+				callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+			}
+		}
+	})
+	face_contents.get()
 	var face_to = 1
 	$("body").on("mousedown", ".face", function(e) {
 		e.preventDefault()
-		setTimeout(function(){
-				$(".news_secondComment").css("display", "block")
-				$(".news_userInfo_reply").css("display", "none")
-			 if(face_to == 1) {
-			 	face_to = 0				
-			 	$(".new_post_contents").css("padding-bottom","8.2rem")
+		setTimeout(function() {
+			$(".news_secondComment").css("display", "block")
+			$(".news_userInfo_reply").css("display", "none")
+			if(face_to == 1) {
+				face_to = 0
+				$(".new_post_contents").css("padding-bottom", "8.2rem")
 				$(".faceContent").css("display", "block")
-			  }else{
-			  	face_to = 1
-			  	$(".new_post_contents").css("padding-bottom","0rem")
-			  	$(".faceContent").css("display", "none")
-			  }
-			}, 300)
+			} else {
+				face_to = 1
+				$(".new_post_contents").css("padding-bottom", "0rem")
+				$(".faceContent").css("display", "none")
+			}
+		}, 300)
 
 	})
 	$("body").on("mousedown", ".faceContent div", function(e) {
@@ -246,43 +111,7 @@ $(function() {
 			}
 		})
 	})
-	
-	mui.init({
-		//swipeBack: true, //启用右滑关闭功能
-		gestureConfig: {
-			tap: true, //默认为true
-			longtap: true, //默认为false
-		},
-		beforeback: function() {
-			
-			var input_val = $(".news_secondComment_input").val();
-			if(input_val != "") {
-				var id = "strategy_title_" + newsId
-				window.localStorage.setItem(id, input_val)
-			}
-			var list = plus.webview.getWebviewById("html/news/news.html");//触发父页面的自定义事件(refresh),从而进行刷新	
-			mui.fire(list, 'reload');	
-		},
-		pullRefresh: {
-			container: ".new_post_contents", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
-			up: {
-				height: 50, //可选.默认50.触发上拉加载拖动距离
-				auto: true, //可选,默认false.自动上拉加载一次
-				contentrefresh: "正在加载...", //可选，正在加载状态时，上拉加载控件上显示的标题内容
-				contentnomore: '没有更多评论了', //可选，请求完毕若没有更多数据时显示的提醒内容；
-				callback: up //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-			},
-			down: {
-				style: 'circle', //必选，下拉刷新样式，目前支持原生5+ ‘circle’ 样式
-				color: '#2BD009', //可选，默认“#2BD009” 下拉刷新控件颜色
-				height: '50px', //可选,默认50px.下拉刷新控件的高度,
-				range: '100px', //可选 默认100px,控件可下拉拖拽的范围
-				offset: '0px', //可选 默认0px,下拉刷新控件的起始位置
-				auto: false, //可选,默认false.首次加载自动上拉刷新一次
-				callback: down //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
-			}
-		}
-	})
+
 	mui.plusReady(function() {
 		total_height = plus.navigator.getStatusbarHeight() + 45;
 		var self = plus.webview.currentWebview();
@@ -607,7 +436,7 @@ $(function() {
 
 		$('body').on('tap', '.publish', function(e) {
 			e.preventDefault();
-			
+
 			if(userId) {
 				var content = $(this).prev().prev().val();
 				if(content) {
@@ -627,7 +456,7 @@ $(function() {
 						success: function(data) {
 							if(data.state == "1") {
 								mui.toast("评论成功")
-								window.localStorage.setItem("strategy_title_" + newsId,"")
+								window.localStorage.setItem("strategy_title_" + newsId, "")
 								$('.news_secondComment_input').val(""); //不刷新	
 
 								var reviewNum = $('.news_reviewNum').text()
@@ -638,13 +467,13 @@ $(function() {
 									reviewNum = reviewNum + 1;
 								}
 								/* 收回 */
-								$(".news_secondComment,.faceContent").css("display","none")
-								$(".news_userInfo_reply").css("display","block")
-								$(".new_post_contents").css("padding-bottom","0rem")							
-								$('.news_reviewNum').text(reviewNum);							
-//								mui('.new_post_contents').pullRefresh().enablePullupToRefresh();
+								$(".news_secondComment,.faceContent").css("display", "none")
+								$(".news_userInfo_reply").css("display", "block")
+								$(".new_post_contents").css("padding-bottom", "0rem")
+								$('.news_reviewNum').text(reviewNum);
+								//								mui('.new_post_contents').pullRefresh().enablePullupToRefresh();
 								$(".news_post_commentContents").empty()
-							    mui('.new_post_contents').pullRefresh().refresh(true);
+								mui('.new_post_contents').pullRefresh().refresh(true);
 								page = 0;
 								up();
 							} else {
@@ -681,16 +510,16 @@ $(function() {
 							if(data.state == 1) {
 								mui.toast("删除成功")
 
-	                            $(".news_post_commentContents").empty()
-							    mui('.new_post_contents').pullRefresh().refresh(true);
+								$(".news_post_commentContents").empty()
+								mui('.new_post_contents').pullRefresh().refresh(true);
 								page = 0;
 								up();
-				
-							    var reviewNum = $('.news_reviewNum').text()
-							    reviewNum = Number(reviewNum)	
-							    reviewNum = reviewNum - 1;
-								$('.news_reviewNum').text(reviewNum);	
-								
+
+								var reviewNum = $('.news_reviewNum').text()
+								reviewNum = Number(reviewNum)
+								reviewNum = reviewNum - 1;
+								$('.news_reviewNum').text(reviewNum);
+
 							} else {
 								mui.toast("删除失败")
 							}
