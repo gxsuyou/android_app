@@ -21,6 +21,7 @@ a {
 
 .detail p {
 	color: #282828;
+	font-size:16px;
 }
 
 .share {
@@ -37,8 +38,27 @@ a {
 	background-size: contain;
 }
 
-.detail p {
-	color: #282828;
+.head_title{
+	text-align:center;
+	line-height:30px;
+}
+
+.detail{
+	line-height:28px;
+	font-family:Microsoft Yahei,Simsun,Gotham-Medium,Arial; 
+}
+.detail p{
+	font-size:18px;
+	text-align:justify;	
+	color:#333 !important;
+}
+.detail h1,.detail h2,.detail h3,.detail h4,.detail h5,.detail h6{	
+	margin:0.5rem 0;
+	font-size:20px !important;
+	color:#282828 !important;
+}
+.detail strong{
+	font-size:15px;
 }
 
 .news_post_list {
@@ -55,7 +75,6 @@ a {
 .news_post_listImg {
 	width: 1.8125rem;
 	height: 1.8125rem;
-	/*background-image: url("../../Public/image/share.png");*/
 	border-radius: 10px;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -343,7 +362,7 @@ input[type=text] {
 }
 
 .comment_content img,
-.comment_secondComment img {
+.comment_secondComment img{
 	width: 1.4rem;
 	margin: 0 0.1rem;
 }

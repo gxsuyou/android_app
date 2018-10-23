@@ -18,7 +18,6 @@ $(function() {
 		success: function(data) {
 			if(data.state) {
 				var n = data.news;
-
 				if(n[0].game_id) {
 					$('.news_artAlone > .news_art').attr(
 						"data-gameId", n[0].game_id
@@ -167,8 +166,6 @@ $(function() {
 				}
 				$('.news_newGame_contents').append(h)
 
-			} else {
-
 			}
 		}
 	});
@@ -261,17 +258,12 @@ function getHeaderimg() {
 				img.onload = function() {
 					$('.game').css("background-image", "url(" + img.src + ")")
 				}
-
 				img.src = config.img + g.img
-
 				$('.game_header').css("background-image", "url(" + config.img + encodeURI(g.icon) + ")")
-
 				$('.game_name').text(g.game_name)
 				$('.game_datail').text(g.game_recommend)
 				$('.new_score').text(g.grade)
 				$('.game').attr("data-id", g.id)
-
-			} else {
 
 			}
 		}

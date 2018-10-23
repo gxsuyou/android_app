@@ -69,7 +69,7 @@ a{
 	margin-left: 2.5625rem;
 }
 .news_post_download{
-	position: absolute;
+	position:absolute;
 	top: 50%;
 	margin-top: -0.75rem;
 	right: 0.9375rem;
@@ -86,8 +86,7 @@ a{
 	border-bottom: 12px solid #E7EAEC;
 }
 
-h4{	
-	
+h4{		
 	font-size: 20px;
 	line-height:175%;
 	margin-top: 0;
@@ -99,8 +98,6 @@ h4{
 .news_userInfo_img{
 	width: 2.0625rem;
 	height: 2.0625rem;
-	/*background-image: url("../../Public/image/share.png");*/
-	/*background-color: red;*/
 	border-radius: 50%;
 	background-position: center;
 	background-repeat:no-repeat;
@@ -148,12 +145,26 @@ h4{
 	top: 50%;
 	margin-top: -0.5rem;
 }
+.head_title{
+	text-align:center;
+	line-height:30px;
+}
 .news_post_content_detail{
-	line-height: 1.5rem;
+	line-height:28px !important;
+	font-family:Microsoft Yahei,Simsun,Gotham-Medium,Arial; 
 }
 .news_post_content_detail p{
+	font-size:18px;
+	text-align:justify;	
+	color:#333 !important;
+}
+
+.news_post_content_detail h1,.news_post_content_detail h2,.news_post_content_detail h3,.news_post_content_detail h4,.news_post_content_detail h5,.news_post_content_detail h6{
+	font-size:20px !important;
+	margin:0.5rem 0;
 	color:#282828;
 }
+
 .news_review{
 	width: 1.4rem;
 	height: 1.4rem;

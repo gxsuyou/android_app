@@ -6,6 +6,13 @@ var sort = "add_time";
 var target_img;
 var target_title;
 var lord_id;
+mui.previewImage();
+window.addEventListener('refresh', function(event) {
+	page = 0
+	$('.news_post_commentContents').empty()
+	getNum()
+	up()
+});
 $(function() {
 	$('body').on('click', 'a', function(event) {
 		event.preventDefault();
@@ -266,8 +273,7 @@ $(function() {
 		$('body').on('tap', '.more_secondComment,.comment_img', function(event) {
 
 			event.stopPropagation();
-			
-			
+
 			if(userId == 0) {
 				mui.toast("请先登录");
 				return false;
@@ -630,7 +636,7 @@ function detail() {
 					nickName = str.nick_name;
 				}
 				$('.news_reviewNum').text(comment_num);
-				$('h4').text(str.title);
+				$('.news_post_content>h4').text(str.title);
 				$('.news_userInfo_img').css("background-image", "url(" + encodeURI(portrait) + ")");
 				$('.news_userInfo_name').text(nickName);
 				$('.news_userInfo_date').text(str.add_time);

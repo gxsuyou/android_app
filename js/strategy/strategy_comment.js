@@ -167,9 +167,10 @@ $(function() {
 		})
 
 		$('.publish').click(function() {
-			mui.toast("正在发送，请稍候")
+
 			var content = $('#strategy_textarea').val();
 			if(content) {
+				//			mui.toast("正在发送，请稍候")
 				$.ajax({
 					type: "post",
 					url: config.data + "strategy/strategyComment",

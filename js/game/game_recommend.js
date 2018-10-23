@@ -569,7 +569,7 @@ $('.game_rank').children().click(function() {
 	var name = $(this).attr('data-name')
 	$(this).children().addClass('border_green color_green').css('background-color', 'white')
 	$(this).siblings().children().removeClass('backgroundColor_white border_green color_green').css('background-color', '#E7EAEC')
-	$('.hot_rank').css('background-image', 'url(../../Public/image/' + name + '.png)')
+	$('.hot_rank').css('background-image', 'url(../../Public/image/' + name + '.jpg)')
 	$('.game_lists').children().remove();
 	$(".first_three").css("display", "none");
 	getRank(sort);
@@ -609,7 +609,6 @@ function getRank(sort) {
 					var list = '';
 					for(var i = 0; i < g.length; i++) {
 						if(i < 3) {
-
 							var b1 = getDownloadStatus(g[0].game_packagename)
 							$('.first .y_listDownload').text(b1)
 							$('.first').attr('data-id', g[0].id)
@@ -623,7 +622,7 @@ function getRank(sort) {
 							$('.second .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[1].icon) + ')')
 							$('.second .y_listName').text(g[1].game_name)
 							$('.second .game_recommend_starScore').text(g[1].grade)
-
+                            
 							var b3 = getDownloadStatus(g[2].game_packagename)
 							$('.third .y_listDownload').text(b3)
 							$('.third ').attr('data-id', g[2].id)

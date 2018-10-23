@@ -90,7 +90,6 @@
 		<footer style="position:absolute;bottom: 1rem; width:100%;background: white;">
 			<!-- mui-table-view mui-grid-view mui-grid-9	<div style="height: 30px; line-height: 30px ;font-family: '黑体'; margin-left:40%;margin-top: 50%;">&nbsp;&nbsp;分享到</div>-->
 			<ul class="share_contents">
-				<!--  class="mui-table-view-cell mui-media mui-col-xs-3"-->
 				<li onclick="shareHref(2);">
 					<img class="mui-media-object" src="../../Public/image/qq_share.png">
 					<div class="share_contents_font">QQ</div>
@@ -103,11 +102,6 @@
 					<img class="mui-media-object" src="../../Public/image/pengyouquan_share.png">
 					<div class="share_contents_font">朋友圈</div>
 				</li>
-
-				<!--<li class="mui-table-view-cell mui-media mui-col-xs-3">
-					<img onclick="back(1)" class="mui-media-object" src="../../Public/image/qrcode_share.png">
-					<div class="mui-media-body">二维码</div>
-				</li>-->
 			</ul>
 		</footer>
 		<input id="sharehref" style="display: none;" class="sharehref" type="url" value="https://oneyouxi.com.cn/qrcode.html" placeholder="请输入要分享的链接地址" />
@@ -122,7 +116,6 @@
 			Uri = null,
 			main = null,
 			only_id = null;
-//			pageSourceId = null;
 
 		// H5 plus事件处理  
 		function plusReady() {
@@ -197,8 +190,8 @@
 					msg.content = sharehrefDes.value;
 				}
 				msg.href = sharehref.value;
-				msg.thumbs = ["https://oneyouxi.com.cn/pc/img/oneicon.png"];
-				msg.pictures = ["https://oneyouxi.com.cn/pc/img/oneicon.png"];
+				msg.thumbs = ["https://oneyouxi.com.cn/pc/img/oneicon.png?v01"];
+				msg.pictures = ["https://oneyouxi.com.cn/pc/img/oneicon.png?v01"];
 			} else {
 				if(pic && pic.realUrl) {
 					msg.pictures = [pic.realUrl];
