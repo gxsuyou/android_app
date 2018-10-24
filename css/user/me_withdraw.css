@@ -135,13 +135,12 @@ body {
 }
 
 .me_popp>div:last-child {
-	/*width:100%;*/
 	font-size: 14px;
 	width: 7.8rem;
-	height: 2.4rem;
-	line-height: 2.4rem;
+	height: 2.1rem;
+	line-height: 2.1rem;
 	margin: 0 auto;
-	text-align: center;
+	text-align:center;
 	color: #7fcadf;
 	border: 2px solid #7FCADF;
 	border-radius: 1rem;
@@ -205,8 +204,8 @@ body {
 	padding:1.5rem;
 	font-size: 12px;
 }
-.me_applyInfoContents {
-	/*font-size: 12px;*/
+.me_applyInfoContents,.me_info_bank{
+	font-size: 12px;
 	color:#7a7a7a;
 	line-height:1.5rem;
 }

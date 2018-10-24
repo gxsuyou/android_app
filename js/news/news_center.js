@@ -11,8 +11,7 @@ $(function(){
 			page = 0;
 			sort = selfSort;
 			readed(sort)
-			up();
-			
+			up();			
 		});
 		$('body').on('tap','.notice_list',function(){
 			var commentId = $(this).attr("data-id");

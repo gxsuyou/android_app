@@ -6,6 +6,7 @@ var activeTab = subpages[Index];
 //选项卡点击事件
 var self;
 var dbQuit = 0; //用于记录点击次数
+mui.init();
 mui.plusReady(function() {
 	if(window.plus) {
 		plusReady();
@@ -20,10 +21,9 @@ mui.plusReady(function() {
 			//	检测更新
 			$.ajax({
 				type: "get",
-				url: config.data + "/H5/update",
+				url: config.data + "H5/update",
 				async: true,
 				success: function(data) {
-					//						alert(JSON.stringify(data))
 					if(data.state) {
 						newVer = data.mark
 						totalSize = data.totalSize
@@ -77,68 +77,7 @@ mui.plusReady(function() {
 		});
 	}
 
-	// 检测更新
-	//		checkUpdate();
-	//		function checkUpdate() {
-	//			plus.nativeUI.showWaiting("检测更新...");
-	//			var xhr = new XMLHttpRequest();
-	//			xhr.onreadystatechange = function() {
-	//				switch(xhr.readyState) {
-	//					case 4:
-	//						plus.nativeUI.closeWaiting();
-	//						alert(xhr.status)
-	//						if(xhr.status == 200) {
-	//							console.log("检测更新成功");
-	//							var newVer = JSON.parse(xhr.responseText);
-	//	
-	//						} else {
-	//							
-	//						}
-	//						break;
-	//					default:
-	//						break;
-	//				}
-	//			}
-	//	
-	//		}
 
-	// 下载wgt文件
-	//	var wgtUrl = "https://182.61.26.179:8878/www/APK/H5C62934A.wgt";
-	//  var wgtUrl = "https://admin.oneyouxi.com.cn/www/APK/H5C62934A.wgt";
-	//
-	//  function downWgt() {
-	//      plus.nativeUI.showWaiting("正在更新中");
-	//      plus.downloader.createDownload(wgtUrl, {
-	//          filename: "_doc/update/"
-	//      }, function (d, status) {
-	//          if (status == 200) {
-	//              console.log("下载wgt成功：" + d.filename);
-	//              installWgt(d.filename); // 安装wgt包
-	//          } else {
-	//              console.log("下载wgt失败！");
-	//              plus.nativeUI.alert("下载wgt失败！");
-	//          }
-	//          plus.nativeUI.closeWaiting();
-	//      }).start();
-	//  }
-
-	//	var h1 = plus.webview.getLaunchWebview()
-	//
-	//	var height = document.documentElement.clientHeight || document.body.clientHeight;
-	//	window.onresize = function() {
-	//		var heightView = document.documentElement.clientHeight || document.body.clientHeight;
-	//		if(heightView < height) {
-	//			plus.webview.currentWebview().setStyle({
-	//				height: height
-	//			});
-	//			//			//修改父页面高度的时候，也要修改子页面的高度  因为子页面距离父页面底部始终是51px  所以这里只需要用父页面的高度减去51px,就是子页面的高度
-	//			//			plus.webview.getWebviewById('html/store/store.html').setStyle({
-	//			//				height: (height * 1 - 51)
-	//			//			});
-	//		} else {
-	//
-	//		}
-	//	}
 	var h1 = plus.webview.getLaunchWebview()
 
 	var height = document.documentElement.clientHeight || document.body.clientHeight;
@@ -242,6 +181,27 @@ mui.plusReady(function() {
 
 	});
 
+
+   window.addEventListener("toStrategy", function() {
+		activeTab="html/strategy/strategy.html"
+		var h = plus.webview.getWebviewById(subpages[2])
+		document.getElementsByClassName("mui-icon")[4].classList.remove('me_active')
+		document.getElementsByClassName("mui-icon")[2].classList.add('strategy_active')
+		if(!h) {
+			var sub = plus.webview.create(
+				"html/strategy/strategy.html", //子页url
+				"html/strategy/strategy.html", //子页id
+				{
+					top: '0px', //设置距离顶部的距离
+					bottom: '50px' //设置距离底部的距离
+				}
+			);
+			self.append(sub);
+		}
+		plus.webview.show("html/strategy/strategy.html");
+	})
+
+
 	mui.back = function() {
 		dbQuit++
 		if(dbQuit == 1) {
@@ -257,22 +217,6 @@ mui.plusReady(function() {
 		setTimeout(function() {
 			dbQuit = 0;
 		}, 10000)
-		// return false;
 	}
 });
 
-// 更新应用资源
-//function installWgt(path) {
-//  plus.nativeUI.showWaiting("安装wgt文件...");
-//  plus.runtime.install(path, {}, function () {
-//      plus.nativeUI.closeWaiting();
-//      console.log("安装wgt文件成功！");
-//      plus.nativeUI.alert("应用资源更新完成！", function () {
-//          plus.runtime.restart();
-//      });
-//  }, function (e) {
-//      plus.nativeUI.closeWaiting();
-//      console.log("安装wgt文件失败[" + e.code + "]：" + e.message);
-//      plus.nativeUI.alert("安装wgt文件失败[" + e.code + "]：" + e.message);
-//  });
-//}

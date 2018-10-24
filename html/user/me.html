@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,6 +14,7 @@
 		<script src="../../js/mui.min.js"></script>
 		<script src="../../js/qiniu.min.js" type="text/javascript" charset="utf-8"></script>
 	</head>
+
 	<body>
 		<div class="me_header">
 			<div class="me_info">
@@ -23,12 +25,13 @@
 					<div class="me_name">
 						<div id="username_box" style='display:flex;align-items:center;'>
 							<div class="me_username  color_white"><strong></strong></div>
-							
-						</div>
-						
-						
-						<div class="color_white" style="margin-top: 0.6rem;">
+
+						   </div>
+						<div class="color_white" style="margin-top:0.45rem;">
 							<span class="onlyId"></span>
+						</div>
+						<div class="to_qiandao hidden" >
+							签到
 						</div>
 						<!--<input class=" font_12 tac color_white" value="VIP0" style="height: 1rem;" disabled="disabled"></input>-->
 					</div>
@@ -36,47 +39,36 @@
 					<div class="me_share">
 
 					</div>
-					<!--<div class="me_money font_12 font_bold" style="margin-top: 0.4rem;">
-						<div class="fl">
-							<div class="fl color_white">平台币：</div>
-							<div class="fr me_moneynum">000</div>
-						</div>
-						<div class="fl" style="margin-left: 2rem;">
-							<div class="fl color_white">积分：</div>
-							<div class="fr me_scorenum">000</div>
-						</div>
-					</div>-->
-
 				</div>
 			</div>
 		</div>
-        <div class="me_middlebox">
-        	<div class="me_gold">
-        		<div style='display:flex;align-items:center;'>
-        			<img src="../../Public/image/me_gold.png"/>
-        			<span class="me_getgold">
+		<div class="me_middlebox">
+			<div class="me_gold">
+				<div style='display:flex;align-items:center;'>
+					<img src="../../Public/image/me_gold.png" />
+					<span class="me_getgold">
         				0
         			</span>
-        		</div>
-        		<div >
-        		 我的钱包
-        		</div>
-        	</div>
-        	<div class="me_voucher">
-        		<div >
-        			<img src="../../Public/image/me_voucher.png" />       			
-        		</div>
-        		<div>
-        			折扣券
-        		</div>
-        	</div>
-        	<div class="me_qiandao">
-        		<div >
-        			<img src="../../Public/image/me_dao.png"/>
-        		</div>
-        		<div style='margin-left:0.25rem'>签到</div>
-        	</div>
-        </div>
+				</div>
+				<div>
+					我的钱包
+				</div>
+			</div>
+			<div class="me_voucher">
+				<div>
+					<img src="../../Public/image/me_voucher.png" />
+				</div>
+				<div>
+					优惠券
+				</div>
+			</div>
+			<div class="me_friend" >
+				<div>
+					<img src="../../Public/image/me_friend.png" />
+				</div>
+				<div style='margin-left:0.25rem'>邀请好友</div>
+			</div>
+		</div>
 		<ul class="mui-table-view me_newscenter">
 			<li class="mui-table-view-cell ">
 
@@ -130,7 +122,8 @@
 		<script src="../../js/user/me.js" type="text/javascript" charset="utf-8"></script>
 		<script type="text/javascript">
 			mui.init();
-            var only_id=0;
+			var only_id = 0;
+
 			function openShare() {
 				shareWebview();
 			}
@@ -149,13 +142,11 @@
 				if(sharew) { // 避免快速多次点击创建多个窗口  
 					return;
 				}
-				var top = 0;
 				var href = "share.html";
 				sharew = plus.webview.create(href, "share.html", {
 					width: '100%',
-					height: '210px',
-//					top:top,
-					bottom:0,
+					height: '100%',
+					bottom: 0,
 					zindex: 999,
 					scrollIndicator: 'none',
 					scalable: false,
@@ -163,29 +154,25 @@
 				}, {
 					shareInfo: {
 						"href": "https://oneyouxi.com.cn/qrcode.html",
-						"title": "随时随地，乐享游戏",
-						"content": "我正在使用ONE游戏平台，赶紧跟我一起来体验！",
+						"title": "糟糕，是心动的感觉！",
+						"content": "我正在使用ONE游戏平台，快来和我一起赚钱吧！",
 						"pageSourceId": ws.id,
-						only_id:only_id
+						only_id: only_id
 					}
 				});
 				sharew.addEventListener("loaded", function() {
 					sharew.show('fade-in', 0);
 				}, false);
 				// 显示遮罩层    
-				ws.setStyle({
-					mask: "rgba(0,0,0,0.5)"
-				});
 				// 点击关闭遮罩层  
 				ws.addEventListener("maskClick", closeMask, false);
 
 			}
 
 			function closeMask() {
-
-				ws.setStyle({
-					mask: "none"
-				});
+//				ws.setStyle({
+//					mask: "none"
+//				});
 				//避免出现特殊情况，确保分享页面在初始化时关闭   
 
 				if(!sharew) {
@@ -196,64 +183,6 @@
 					sharew = null;
 				}
 			}
-
-
-
-
-				var qrcodeshare;
-				window.addEventListener('qrcode_share', function(event) {
-
-					var ws = null;
-					/**  
-					 *分享窗口  
-					 */
-					//				function shareWebview() {
-					ws = plus.webview.currentWebview();
-					if(qrcodeshare) { // 避免快速多次点击创建多个窗口  
-						return;
-					}
-					var href = "qrcode.html";
-					qrcodeshare = plus.webview.create(href, "qrcode.html", {
-						width: '100%',
-						height: '100%',
-						top: 0,
-						zindex: 0,
-						opacity: 1,
-						background: 'transparent',
-						scrollIndicator: 'none',
-						scalable: false,
-						popGesture: 'none',
-					});
-					qrcodeshare.addEventListener("loaded", function() {
-						qrcodeshare.show('slide-in-bottom', 300);
-					}, false);
-					// 显示遮罩层    
-
-
-					var	h = plus.webview.getLaunchWebview();
-					h.setStyle({
-						mask: "rgba(0,0,0,0.5)"
-					});
-
-					// 点击关闭遮罩层  
-					ws.addEventListener("maskClickShare", closeMaskShare, false);
-
-				});
-
-				function closeMaskShare() {
-					plus.webview.getLaunchWebview().setStyle({
-						mask: "none"
-					});
-					//避免出现特殊情况，确保分享页面在初始化时关闭   
-					if(!qrcodeshare) {
-						qrcodeshare = plus.webview.getWebviewById("qrcode.html");
-					}
-					if(qrcodeshare) {
-						qrcodeshare.close();
-						qrcodeshare = null;
-					}
-
-				}
 
 
 		</script>

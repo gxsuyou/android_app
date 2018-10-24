@@ -30,11 +30,33 @@
 .me_dateSignContents {
 	width: 95%;
 	margin: 0 auto;
-	display: flex;
+	/*display: flex;
 	align-items: center;
 	justify-content: space-around;
 	position: relative;
-	top: -1.9rem;
+	top: -1.9rem;*/
+    position: relative;
+	top: -2.1rem;
+}
+.me_dateSignContent{
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	
+}
+.lan_dataSign{
+	width:90%;
+	height:0.25rem;
+	background: #c3c3c3;
+	position:relative;
+	top:2rem;
+	margin:0 auto;
+}
+
+.move_lan_dataSign{
+	width:0%;
+	height:100%;
+	background-color:#ffc712;
 }
 
 .circle {
@@ -78,14 +100,13 @@
 }
 
 .land {
-	width: 3rem;
-	height: 0.25rem;
+	width:2.5rem;
+	height:0.25rem;
 	background: #c3c3c3;
-	position: absolute;
-	top: -0.15rem;
-	bottom: 0;
-	left: 1.5rem;
-	margin: auto;
+	position:relative;
+	left:-0.5rem;
+	top:-0.1rem;
+	margin:auto;
 	z-index: 8;
 }
 
@@ -113,8 +134,8 @@
 }
 .me_siginbutton{
 	width:8rem;
-	height:2.2rem;
-	line-height:2.2rem;
+	height:2.3rem;
+	line-height:2.5rem;
 	background:#f9c554;
 	color:#fff;
 	font-size:14px;

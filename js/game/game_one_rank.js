@@ -9,6 +9,7 @@ function up() {
 		data: {
 			sys: 2,
 			page: page,
+			type:"one",
 		},
 		success: function(data) {
 
@@ -35,8 +36,8 @@ function up() {
 					"<div class='font_14 overflow'>" + g[i].game_name + "</div>" +
 					"<div class='font_12'>" +
 					"</div>" +
-					"<div class='font_12 color_green all_voucher_show'  data-name='" + g[i].game_name + "'  data-id='" + g[i].game_id + "'>" +
-					"<img style='width:6.5rem;' src='../../Public/image/voucher_icon.png'  />" +
+					"<div class=' color_green all_voucher_show'  data-name='" + g[i].game_name + "'  data-id='" + g[i].game_id + "'>" +
+					"<img style='width:6.3rem;' src='../../Public/image/voucher_icon.png' />" +
 					"<div class='open_voucher'>领取更多抵用券<span>></span></div>" +
 					"</div>" +
 					"</div>" +

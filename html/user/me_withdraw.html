@@ -115,8 +115,10 @@
 			})
 
 			$("body").on("tap", ".me_popp>div:last-child", function() {
-
 				mask.close()
+				setTimeout(function(){
+					mui.back()
+				},500)
 			})
 		})
 	</script>

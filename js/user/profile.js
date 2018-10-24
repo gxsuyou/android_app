@@ -116,7 +116,7 @@ $(function() {
 	$('.publish').click(function() {
 		$(this).addClass("move")
 		setTimeout(function() {
-			$("..publish").removeClass("move")
+			$(".publish").removeClass("move")
 		}, 400)
 		var name = $('.personal_name').val().trim()
 		var bir = $('.personal_bir').val()
@@ -168,6 +168,8 @@ $(function() {
 					} else {
 						mui.back()
 					}
+					 var me=plus.webview.getWebviewById("html/user/me.html")
+                    mui.fire(me,"reload")
 				} else {
 					mui.toast('昵称不能重名');
 					return false;

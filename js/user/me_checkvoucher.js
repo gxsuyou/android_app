@@ -1,5 +1,10 @@
 var tu_id = null;
+ 
 mui.plusReady(function() {
+	
+	window.addEventListener("init", function() {
+				initGame()
+	})
 
 	var n = plus.webview.currentWebview();
 	tu_id = n.tu_id
@@ -26,10 +31,9 @@ mui.plusReady(function() {
 				gameId: gameId,
 				sys: 2
 			},
-			success: function(data) {
-
+			success: function(data){
 				var game = data.gameDetail;
-				packagename = game.game_packagename
+				packagename = $.trim(game.game_packagename)
 				hasno = plus.runtime.isApplicationExist({
 					pname: game.game_packagename,
 					action: ''
@@ -54,7 +58,7 @@ mui.plusReady(function() {
 		var playerId = $(".playerId").val()
 		var phoneNum = $(".phoneNum").val()
 		var playDir = $(".playDir").val()
-		if(playerId == "" || phoneNum == ""){
+		if(phoneNum == ""){
 			mui.toast("请输入必要信息")
 			return false;
 		}
@@ -75,7 +79,7 @@ mui.plusReady(function() {
 				tu_id: tu_id,
 				game_user: playerId,
 				game_area: playDir,
-				tel: phoneNum
+				tel:phoneNum
 			},
 			success: function(data) {
 				if(data.state == 1) {
@@ -84,10 +88,7 @@ mui.plusReady(function() {
 						
 						if(plus.os.name == "Android") {
 							plus.runtime.launchApplication({
-								pname: packagename,
-								extra: {
-									//									url: "http://www.html5plus.org"
-								}
+								pname: packagename
 							}, function(e) {
 								//								installApp('_downloads/' + game.game_name + '.apk')
 							});
@@ -134,7 +135,7 @@ mui.plusReady(function() {
     })
      
      function back(){
-     	 var list = plus.webview.getWebviewById("me_voucher.html");
+     	var list = plus.webview.getWebviewById("me_voucher.html");
         mui.fire(list, 'reload');
     	mui.openWindow({
     		url:"me_voucher.html",

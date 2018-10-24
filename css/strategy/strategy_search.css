@@ -50,8 +50,8 @@ input[type=text] {
 	width: 100%;
 	height: 3.4rem;
 	line-height: 3.4rem;
-	background-color: white;
-	border-bottom: 1.5px solid #e7eaec;
+	background-color:#fff;
+	border-bottom: 1px solid #e7eaec;
 }
 
 .search_close {

@@ -11,9 +11,9 @@ body {
 	align-items:center;
 	justify-content:center;
 	background:#e7ebed;
-	/*position:fixed;
-	top:3rem;
-	z-index: 10;*/
+	position:fixed;
+	top:0px;
+	z-index:10000;
 }
 .me_goldInfoContent{
 	width:90%;
@@ -24,6 +24,7 @@ body {
 }
 .me_goldInfoTop{
 	display: flex;
+    justify-content: space-between;
 }
 .me_goldInfoLeft>div:first-child{
 	display: flex;
@@ -36,14 +37,15 @@ body {
 .me_goldInfoLeft{
 	color:#fff;
 	font-size:13px;
+	width:60%;
 }
 .me_goldInfoLeft>div:last-child{
 	font-size:36px;
-	margin-top:1rem;
+	margin-top:0.7rem;
 	margin-left:2rem;
 	font-weight:600;
 	letter-spacing:3px;
-	width:12rem;
+	width:11rem;
 	height:2rem;
 	line-height: 2rem;
 	overflow:hidden;
@@ -56,34 +58,30 @@ body {
 	margin-left:0.3rem;
 }
 .me_goldInforight{
-	font-size:12px;
-	width:5rem;
-	height:1.6rem;
-	line-height: 1.7rem;
-	background:#fff;
-	color:#fab645;
-	text-align:center;
-	border-radius:1rem;
-	font-weight:600;
-	margin-left:auto;
-	margin-right:1rem;
+	width:4.5rem;
+	height:1.5rem;
+	background:url(../../Public/image/withdrawbutton.png) no-repeat center /cover;
+	margin-right:0.6rem;
 }
+
 .me_goldInfoBottom{
 	font-size:12px;
 	line-height: 1rem;
 	color:#fff;
 	background:#fab645;
-	width:55%;
+	width:58%;
 	text-align:right;
 	padding:0.3rem 0.2rem  0.3rem 0.5rem;
 	border-top-left-radius:2rem;
 	border-bottom-left-radius:2rem;
 	margin-left:auto;
-	margin-top:0.5rem;
+	margin-top:0.8rem;
 }
 
 .me_getGoldContents{
 	font-size:14px;
+	position:relative;
+	top:15rem;
 }
 
 .mui-table-view:before,.mui-table-view:after{
@@ -176,6 +174,5 @@ body {
 }
 .mui-table-view{
 	height:20rem;
-	overflow:scroll;
 }
 

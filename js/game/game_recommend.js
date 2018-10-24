@@ -47,11 +47,6 @@ $(function() {
 
 				$('.main_slider .mui-slider-group').append(div);
 				$('.main_slider .mui-slider-indicator').append(indicator);
-				//				var gallery = mui('.main_slider');
-				//				gallery.slider({
-				//					interval: 2000 //自动轮播周期，若为0则不自动播放，默认为0；
-				//				});
-
 				$("." + aa).css("background-image", "url(" + config.img + encodeURI(c[i].active_img) + ")");
 				//				$("." + aa).attr('data-id', c[i].game_id);
 
@@ -64,7 +59,7 @@ $(function() {
 			$(".home0").css("background-image", "url(" + config.img + encodeURI(c[0].active_img) + ")");
 			var gallery = mui('.main_slider');
 			gallery.slider({
-				interval: 0 //自动轮播周期，若为0则不自动播放，默认为0；
+				interval: 5000 //自动轮播周期，若为0则不自动播放，默认为0；
 			});
 
 		}
@@ -280,16 +275,7 @@ $(function() {
 					var g = data.game;
 					var list = '';
 					for(var i = 0; i < g.length; i++) {
-
-						var downloadToggle = plus.runtime.isApplicationExist({
-							pname: g[i].game_packagename,
-							action: ''
-						});
-						if(downloadToggle) {
-							var buttonDown = "打开";
-						} else {
-							var buttonDown = "下载";
-						}
+						var buttonDown=getDownloadStatus(g[i].game_packagename)			
 						var signs = '';
 
 						if(g[i].tagList && g[i].tagList !== "null") {
@@ -327,7 +313,6 @@ $(function() {
 							"</div>" +
 							"<div class='font_12 color_green'>" +
 							signs +
-
 							"</div>" +
 							"</div>" +
 							"<div class='fr game_listDownload font_14 color_white backgroundColor_green tac'>" + buttonDown + "</div>" +
@@ -381,12 +366,10 @@ $(function() {
 			sys: 2
 		},
 		success: function(data) {
-			if(data.state) {
+			if(data.state) {		
 				var g = data.game;
 				$('.remommend_imgFirst').css('background-image', 'url(' + config.img + encodeURI(g[0].game_title_img) + ')').attr("data-id", g[0].id)
 				$('.remommend_imgSecond').css('background-image', 'url(' + config.img + encodeURI(g[1].game_title_img) + ')').attr("data-id", g[1].id)
-
-			} else {
 
 			}
 		}
@@ -586,7 +569,7 @@ $('.game_rank').children().click(function() {
 	var name = $(this).attr('data-name')
 	$(this).children().addClass('border_green color_green').css('background-color', 'white')
 	$(this).siblings().children().removeClass('backgroundColor_white border_green color_green').css('background-color', '#E7EAEC')
-	$('.hot_rank').css('background-image', 'url(../../Public/image/' + name + '.png)')
+	$('.hot_rank').css('background-image', 'url(../../Public/image/' + name + '.jpg)')
 	$('.game_lists').children().remove();
 	$(".first_three").css("display", "none");
 	getRank(sort);
@@ -594,7 +577,6 @@ $('.game_rank').children().click(function() {
 })
 
 function getDownloadStatus(packagename) {
-
 	var downloadToggle = plus.runtime.isApplicationExist({
 		pname: packagename,
 		action: ''
@@ -627,7 +609,6 @@ function getRank(sort) {
 					var list = '';
 					for(var i = 0; i < g.length; i++) {
 						if(i < 3) {
-
 							var b1 = getDownloadStatus(g[0].game_packagename)
 							$('.first .y_listDownload').text(b1)
 							$('.first').attr('data-id', g[0].id)
@@ -641,7 +622,7 @@ function getRank(sort) {
 							$('.second .y_listImg').css('background-image', 'url(' + config.img + encodeURI(g[1].icon) + ')')
 							$('.second .y_listName').text(g[1].game_name)
 							$('.second .game_recommend_starScore').text(g[1].grade)
-
+                            
 							var b3 = getDownloadStatus(g[2].game_packagename)
 							$('.third .y_listDownload').text(b3)
 							$('.third ').attr('data-id', g[2].id)
@@ -673,15 +654,7 @@ function getRank(sort) {
 
 							}
 
-							var downloadToggle = plus.runtime.isApplicationExist({
-								pname: g[i].game_packagename,
-								action: ''
-							});
-							if(downloadToggle) {
-								var buttonDown = "打开";
-							} else {
-								var buttonDown = "下载";
-							}
+							var buttonDown=getDownloadStatus(g[i].game_packagename)	
 
 							list +=
 								"<li class='game_list ofh' data-id='" + g[i].id + "'>" +
@@ -771,19 +744,9 @@ function getRankup(page, sort) {
 									"<div class='fl tag font_12 border_green border_radius_twenty' data-id='" + tagId[j] + "'>" + result[j] + "</div>"
 							}
 						}
-					} else {
-
 					}
 
-					var downloadToggle = plus.runtime.isApplicationExist({
-						pname: g[i].game_packagename,
-						action: ''
-					});
-					if(downloadToggle) {
-						var buttonDown = "打开";
-					} else {
-						var buttonDown = "下载";
-					}
+					var buttonDown=getDownloadStatus(g[i].game_packagename)	
 
 					list +=
 						"<li class='game_list ofh' data-id='" + g[i].id + "'>" +
@@ -827,13 +790,9 @@ function getRankup(page, sort) {
 					}
 				})
 				if(g.length < 20) {
-
 					mui('.nav_cls_contains').pullRefresh().endPullupToRefresh(true);
-
 				} else {
-
 					mui('.nav_cls_contains').pullRefresh().endPullupToRefresh(false);
-
 				}
 
 			} else {

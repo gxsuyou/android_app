@@ -467,11 +467,16 @@
 
 			mui.init({
 				beforeback: function() {
-//					if(dtask_app) {
-//						dtask_app.resume();
-//					}
-					var list = plus.webview.getWebviewById("html/game/game_recommend.html"); //触发父页面的自定义事件(refresh),从而进行刷新	
-					mui.fire(list, 'reload');
+					var game_recommend = plus.webview.getWebviewById("html/game/game_recommend.html"); //触发父页面的自定义事件(refresh),从而进行刷新	
+					var me_checkvoucher = plus.webview.getWebviewById("me_checkvoucher.html");
+
+					if(me_checkvoucher) {
+						mui.fire(me_checkvoucher, 'init')
+					}
+					if(game_recommend) {
+						mui.fire(game_recommend, 'reload');
+					}
+
 				},
 				pullRefresh: {
 					container: "#game_detailContent", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
@@ -512,13 +517,13 @@
 					data: {
 						gameName: gameName,
 						page: strategyPage,
-						user_id:userId
+						user_id: userId
 					},
 					success: function(data) {
 						if(data.state) {
 							var str = data.strategy;
 							var div = '';
-							
+
 							for(var i = 0; i < str.length; i++) {
 								if(str[i].src) {
 									var src = "src"
@@ -705,6 +710,7 @@
 				}, 1000);
 			}
 		</script>
-		
+
 	</body>
+
 </html>

@@ -35,10 +35,10 @@ $(function() {
 					} else {
 						img = "../../Public/image/morentouxiang.png";
 					}
-
 					$(".me_img").css("background-image", "url(" + img + ")")
 					$('.me_username').text(data.user.nick_name);
-//					$("#username_box").append('<div class="me_level">LV.3</div>')
+//					$(".me_name").append('<div class="to_qiandao">签到</div>')
+                    $(".to_qiandao").removeClass("hidden")
 				} else {
 
 				}
@@ -104,6 +104,12 @@ $(function() {
 				id:"me_pocket.html"
 			})
 		})
+		
+		$("body").on("tap",".me_friend",function(){
+			openShare()
+		})
+		
+		
 
 	}
 	//if结束
@@ -127,19 +133,23 @@ $(function() {
 				url: "me_voucher.html",
 				id: "me_voucher.html"
 			})
-		} else {
-			mui.toast("请登录")
 		}
 	})
-	$(".me_qiandao").click(function() {
+	$(".to_qiandao").click(function() {
 		if(userId) {
 			mui.openWindow({
 				url: "me_signin.html",
 				id: "me_signin.html"
 			})
-		} else {
-			mui.toast("请登录")
 		}
-	
+	})
+	window.addEventListener("getNowMoney",function(e){
+		$(".me_getgold").text(e.detail.coin)
+	})
+	window.addEventListener("showShare",function(){
+	   shareWebview()
+    })
+	window.addEventListener("reload",function(){
+		location.reload()
 	})
 })

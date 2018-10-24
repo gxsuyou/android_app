@@ -38,30 +38,23 @@ $(function() {
 							window.localStorage.setItem("userInfo", userInfo);
 							window.localStorage.setItem("userId", userId);
 
-							//                         plus.webview.close("html/user/me.html");
-							//                         plus.webview.close("html/news/news.html");
-							//                         plus.webview.close("html/game/game_recommend.html");
-							//                         plus.webview.close("html/strategy/strategy.html");
-							//                         plus.webview.close("html/play/play.html");
+
 							var all = plus.webview.all();
 							var current = plus.webview.currentWebview().id;
 							for(var i = 0, len = all.length; i < len; i++) {
 								if(all[i].id !== current) {
-									all[i].close();
+							         all[i].close();
 								}
 							}
 
 							mui.openWindow({
 								url: '../../index.html',
-								id: 'H5C62934A',
-								//								id:'HBuilder',
+								id:'H5C62934A',
 								createNew: true,
 								show: {
 									autoShow: true, //页面loaded事件发生后自动显示，默认为true
 									aniShow: "none" //页面显示动画，默认为”slide-in-right“；
-
 								}
-
 							})
 
 						}
@@ -92,5 +85,4 @@ $(function() {
 		})
 	})
 	/*记住用户名和密码*/
-
 })

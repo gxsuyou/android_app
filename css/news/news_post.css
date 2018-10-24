@@ -21,6 +21,7 @@ a {
 
 .detail p {
 	color: #282828;
+	font-size:16px;
 }
 
 .share {
@@ -37,8 +38,27 @@ a {
 	background-size: contain;
 }
 
-.detail p {
-	color: #282828;
+.head_title{
+	text-align:center;
+	line-height:30px;
+}
+
+.detail{
+	line-height:28px;
+	font-family:Microsoft Yahei,Simsun,Gotham-Medium,Arial; 
+}
+.detail p{
+	font-size:18px;
+	text-align:justify;	
+	color:#333 !important;
+}
+.detail h1,.detail h2,.detail h3,.detail h4,.detail h5,.detail h6{	
+	margin:0.5rem 0;
+	font-size:20px !important;
+	color:#282828 !important;
+}
+.detail strong{
+	font-size:15px;
 }
 
 .news_post_list {
@@ -55,7 +75,6 @@ a {
 .news_post_listImg {
 	width: 1.8125rem;
 	height: 1.8125rem;
-	/*background-image: url("../../Public/image/share.png");*/
 	border-radius: 10px;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -105,11 +124,11 @@ h4 {
 	width: 2.0625rem;
 	height: 2.0625rem;
 	background-image: url(../../Public/image/touxiang.png);
-	/*background-color: red;*/
 	border-radius: 50%;
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
+	box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, 0.15);
 }
 
 .news_userInfo_name {
@@ -217,8 +236,8 @@ h4 {
 }
 
 .news_post_commentContent_head {
-	width: 2.9375rem;
-	height: 2.9375rem;
+	width: 2.0625rem;
+	height: 2.0625rem;
 	margin-top: 0.9375rem;
 	margin-left: 0.9375rem;
 	margin-right: 0.75rem;
@@ -256,6 +275,7 @@ h4 {
 	background-size: contain;
 	vertical-align: middle;
 	margin-bottom: 0.2rem;
+	
 }
 
 .comment_imgs {
@@ -342,8 +362,8 @@ input[type=text] {
 }
 
 .comment_content img,
-.comment_secondComment img {
-	width: 1.8rem;
+.comment_secondComment img{
+	width: 1.4rem;
 	margin: 0 0.1rem;
 }
 
