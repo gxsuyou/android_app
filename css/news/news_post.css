@@ -48,6 +48,7 @@ a {
 }
 
 .detail p, .detail span {
+
     font-size: 18px;
     text-align: justify;
     color: #333 !important;

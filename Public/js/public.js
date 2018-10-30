@@ -1,12 +1,12 @@
-var ENV = "h";
+var ENV = "dev";
 //测试环境
 if(ENV == "dev") {
 	//发开模式
 	var config = {
 		img: "http://img.oneyouxi.com.cn/",
 		apk: "http://apk.oneyouxi.com.cn/",
-		//	data:"http://192.168.0.207:8877/",
-		data: "http://182.61.26.179:8877/",
+        data:"http://192.168.0.114:8877/",
+		// data: "http://182.61.26.179:8877/",
 		base64: "http://base64.oneyouxi.com.cn/",
 		url_upload:"https://admin.oneyouxi.com.cn/",
 		wgtUrl: "https://admin.oneyouxi.com.cn/www/test/APK/H5C62934A.wgt"
